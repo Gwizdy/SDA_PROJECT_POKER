@@ -9,5 +9,9 @@ public class Main {
 
         OknoPowitalne oknoPowitalne = new OknoPowitalne();
 
+        Talia talia = new Talia();
+        talia.wyswietlTalie();
+
+
     }
 }

@@ -1,23 +1,24 @@
 package com.taliakart;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Talia {
 
-    private Karta[] talia;
-
-    {
-        talia = new Karta[52];
-    }
+    private List<Karta> talia;
 
     public Talia() {
-        int i = 0;
+    }
 
+    public void stworzTalie() {
+        talia = new ArrayList<Karta>();
         for (Kolor k : Kolor.values())
             for (Figura f : Figura.values())
-                talia[i++] = new Karta(k, f);
+                talia.add(new Karta(k, f));
     }
 
     public void wyswietlTalie() {
-
+        stworzTalie();
         for (Karta k : talia)
             System.out.println(k);
 
