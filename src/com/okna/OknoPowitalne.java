@@ -1,4 +1,4 @@
-package com.taliakart;
+package com.okna;
 
 
 import javax.swing.*;
@@ -54,7 +54,7 @@ public class OknoPowitalne {
         });
         fieldHowManyPlayers.setBounds(340, 200, 140, 20);
 
-        welcomeText = new JLabel("WELCOME TO \n TEXAS HOLDEN POKER");
+        welcomeText = new JLabel();
 
         backgroundLabel = new JLabel(new ImageIcon("tlo.jpg"), JLabel.CENTER);
         backgroundLabel.setLayout(null);
@@ -80,7 +80,7 @@ public class OknoPowitalne {
             }
         });
         window.setVisible(true);
-        window.setSize(626, 365);
+        window.setSize(895, 519);
         window.setLocationRelativeTo(null); // wyświetlenie okna na środku ekranu monitora
     }
 

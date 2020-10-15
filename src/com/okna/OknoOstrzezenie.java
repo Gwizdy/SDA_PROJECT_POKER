@@ -1,4 +1,4 @@
-package com.taliakart;
+package com.okna;
 
 import javax.swing.*;
 
