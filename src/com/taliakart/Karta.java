@@ -1,6 +1,7 @@
 package com.taliakart;
 
 public class Karta {
+
     private Kolor kolor;
     private Figura figura;
 
