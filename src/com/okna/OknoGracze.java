@@ -8,10 +8,18 @@ public class OknoGracze extends Ramka {
 
     private JTextField[] player;
 
+    int liczbaTemp = 0;
+
     private int w1;
     private int w2;
     private int w3;
     private int h;
+
+    public void liczbaGraczy() {
+
+        liczbaTemp = new Ramka().getLiczbaGraczy();
+        System.out.println(liczbaTemp);
+    }
 
     public OknoGracze() {
 
@@ -24,7 +32,7 @@ public class OknoGracze extends Ramka {
         w2 = 0;
         w3 = 0;
 
-        for (int i = 0; i < getLiczbaGraczy(); i++) {
+        for (int i = 0; i < liczbaTemp; i++) {
             if (i < 3) {
                 player[i].setBounds(350 + w1, 300, 120, 30);
                 panelPlayers.add(player[i]);

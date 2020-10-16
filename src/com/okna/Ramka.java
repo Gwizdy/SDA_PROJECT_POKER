@@ -32,10 +32,11 @@ public class Ramka {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (textField.getText().equals("") || textField.getText().charAt(0) < 49 || textField.getText().charAt(0) > 56 || textField.getText().length() > 1)
+                if (textField.getText().equals("") || textField.getText().charAt(0) < 50 || textField.getText().charAt(0) > 56 || textField.getText().length() > 1)
                     new OknoOstrzezenie();
                 else {
                     setLiczbaGraczy(liczbaGraczy = Integer.parseInt(textField.getText()));
+                    System.out.println(getLiczbaGraczy());
                     window.dispose();
                     new OknoGracze();
                     window.revalidate();
