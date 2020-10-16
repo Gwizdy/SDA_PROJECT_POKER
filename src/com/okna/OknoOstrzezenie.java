@@ -8,7 +8,7 @@ public class OknoOstrzezenie {
 
     public OknoOstrzezenie() {
         window = new JFrame();
-        JOptionPane.showMessageDialog(window, "Podaj liczbę graczy większą od 0 !", "Alert", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(window, "Podaj liczbę graczy od 1 do 8 !", "Alert", JOptionPane.WARNING_MESSAGE);
     }
 
 }

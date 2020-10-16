@@ -8,23 +8,31 @@ public class OknoPowitalne {
 
     private int liczbaGraczy = 0;
 
-    JFrame window;
-    JLabel backgroundLabel;
-    JLabel welcomeText;
-    JButton buttonConfirm;
-    JTextField fieldHowManyPlayers;
+    private JFrame window;
+    private JLabel backgroundLabel;
+    private JLabel panelPlayers;
+    private JButton buttonConfirm;
+    private JTextField fieldHowManyPlayers;
 
-    public OknoPowitalne() {
+    private JTextField pole1;
+    private JTextField pole2;
+    private JTextField pole3;
+    private JTextField pole4;
+    private JTextField pole5;
+    private JTextField pole6;
+    private JTextField pole7;
+    private JTextField pole8;
 
-        window = new JFrame("POKER Texas Holden");
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public void poleIPrzycisk() {
 
         buttonConfirm = new JButton(new ImageIcon("confirm.jpg"));
-        buttonConfirm.setBounds(360, 250, 98, 41);
+        buttonConfirm.setBounds(575, 350, 98, 41);
         buttonConfirm.setHorizontalTextPosition(SwingConstants.CENTER);
-        buttonConfirm.setHorizontalTextPosition(SwingConstants.CENTER);
+        buttonConfirm.setVerticalAlignment(SwingConstants.CENTER);
 
-        fieldHowManyPlayers = new JTextField("Podaj liczbę graczy");
+        fieldHowManyPlayers = new JTextField();
+        fieldHowManyPlayers.setText("Podaj liczbę graczy");
+        fieldHowManyPlayers.setHorizontalAlignment(SwingConstants.CENTER);
         fieldHowManyPlayers.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -52,9 +60,7 @@ public class OknoPowitalne {
 
             }
         });
-        fieldHowManyPlayers.setBounds(340, 200, 140, 20);
-
-        welcomeText = new JLabel();
+        fieldHowManyPlayers.setBounds(540, 290, 160, 30);
 
         backgroundLabel = new JLabel(new ImageIcon("tlo.jpg"), JLabel.CENTER);
         backgroundLabel.setLayout(null);
@@ -62,26 +68,82 @@ public class OknoPowitalne {
         backgroundLabel.add(buttonConfirm);
         backgroundLabel.add(fieldHowManyPlayers);
 
-        window.add(backgroundLabel);
-
         buttonConfirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (fieldHowManyPlayers.getText().equals(""))
+                if (fieldHowManyPlayers.getText().equals("") || fieldHowManyPlayers.getText().charAt(0) < 49 || fieldHowManyPlayers.getText().charAt(0) > 56 || fieldHowManyPlayers.getText().length() > 1)
                     new OknoOstrzezenie();
                 else {
                     liczbaGraczy = Integer.parseInt(fieldHowManyPlayers.getText());
-                    if (liczbaGraczy == 0) {
-                        new OknoOstrzezenie();
-                    } else
-                        System.out.println();
-                    //  new OknoZGraczami();
+                    backgroundLabel.setVisible(false);
+                    oknoGracze();
+                    window.revalidate();
+                    window.repaint();
+
                 }
             }
         });
+    }
+
+    public OknoPowitalne() {
+
+        window = new JFrame("POKER Texas Holden");
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        poleIPrzycisk();
+
+        window.add(backgroundLabel);
         window.setVisible(true);
         window.setSize(895, 519);
         window.setLocationRelativeTo(null); // wyświetlenie okna na środku ekranu monitora
     }
 
+    public void oknoGracze() {
+        panelPlayers = new JLabel(new ImageIcon("tlo.jpg"), JLabel.CENTER);
+        window.add(panelPlayers);
+
+        //if (liczbaGraczy == 1)
+
+
+    }
+
+    public int getLiczbaGraczy() {
+        return liczbaGraczy;
+    }
+
+    public void setLiczbaGraczy(int liczbaGraczy) {
+        this.liczbaGraczy = liczbaGraczy;
+    }
+
+    public JFrame getWindow() {
+        return window;
+    }
+
+    public void setWindow(JFrame window) {
+        this.window = window;
+    }
+
+    public JLabel getBackgroundLabel() {
+        return backgroundLabel;
+    }
+
+    public void setBackgroundLabel(JLabel backgroundLabel) {
+        this.backgroundLabel = backgroundLabel;
+    }
+
+    public JButton getButtonConfirm() {
+        return buttonConfirm;
+    }
+
+    public void setButtonConfirm(JButton buttonConfirm) {
+        this.buttonConfirm = buttonConfirm;
+    }
+
+    public JTextField getFieldHowManyPlayers() {
+        return fieldHowManyPlayers;
+    }
+
+    public void setFieldHowManyPlayers(JTextField fieldHowManyPlayers) {
+        this.fieldHowManyPlayers = fieldHowManyPlayers;
+    }
 }
