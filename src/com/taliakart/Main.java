@@ -9,8 +9,11 @@ import com.okna.Ramka;
 public class Main {
     public static void main(String[] args) {
 
-        Ramka ramka = new Ramka();
-        OknoGracze oknoGracze = new OknoGracze(ramka);
+//        Ramka ramka = new Ramka();
+//        OknoGracze oknoGracze = new OknoGracze(ramka);
+
+        Talia talia = new Talia();
+        GUITalia guiTalia = new GUITalia(talia);
 
 
     }
