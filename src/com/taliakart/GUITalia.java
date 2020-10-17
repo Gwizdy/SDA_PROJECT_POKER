@@ -8,8 +8,8 @@ public class GUITalia {
 
     public GUITalia(Talia talia) {
         this.talia = talia;
-        talia.getTalia();
         System.out.println(talia);
+
 
         JFrame window = new JFrame("Test GUI");
         JPanel testPanel = new JPanel();
@@ -17,7 +17,7 @@ public class GUITalia {
 
         testPanel.setLayout(null);
 
-        testLabel.setIcon(new ImageIcon("C:\\Users\\Wojciech\\Desktop\\poker tables\\BulkResizePhotos\\2S.jpg"));
+        testLabel.setIcon(new ImageIcon("2S.jpg"));
         testLabel.setBounds(200,200,50,50);
 
         testPanel.add(testLabel);
