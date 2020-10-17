@@ -2,62 +2,53 @@ package com.okna;
 
 import javax.swing.*;
 
-public class OknoGracze extends Ramka {
+public class OknoGracze {
+
+    private Ramka ramka;
 
     private JPanel panelPlayers;
 
     private JTextField[] player;
 
-    int liczbaTemp = 0;
-
     private int w1;
     private int w2;
     private int w3;
-    private int h;
 
-    public void liczbaGraczy() {
+    private int gracze;
 
-        liczbaTemp = new Ramka().getLiczbaGraczy();
-        System.out.println(liczbaTemp);
-    }
-
-    public OknoGracze() {
+    public OknoGracze(Ramka ramka) {
+        this.ramka = ramka;
 
         panelPlayers = new BackgroundPanel();
         panelPlayers.setLayout(null);
 
-        player = new JTextField[7];
+        player = new JTextField[ramka.getLiczbaGraczy()];
 
         w1 = 0;
         w2 = 0;
         w3 = 0;
 
-        for (int i = 0; i < liczbaTemp; i++) {
+        for (int i = 0; i < ramka.getLiczbaGraczy(); i++) {
             if (i < 3) {
-                player[i].setBounds(350 + w1, 300, 120, 30);
+                player[i] = new JTextField("Podaj nick");
+                player[i].setBounds(400 + w1, 280, 120, 30);
                 panelPlayers.add(player[i]);
                 w1 += 140;
             }
             if (i >= 3 && i < 6) {
-                player[i].setBounds(350 + w2, 350, 120, 30);
+                player[i] = new JTextField("Podaj nick");
+                player[i].setBounds(400 + w2, 330, 120, 30);
                 panelPlayers.add(player[i]);
                 w2 += 140;
             }
-            if (i >= 6 && i < 9) {
-                player[i].setBounds(350 + w3, 400, 120, 30);
+            if (i >= 6 && i < 8) {
+                player[i] = new JTextField("Podaj nick");
+                player[i].setBounds(400 + w3, 380, 120, 30);
                 panelPlayers.add(player[i]);
                 w3 += 140;
             }
         }
-        getWindow().add(panelPlayers);
+        ramka.getWindow().add(panelPlayers);
 
-    }
-
-    public JPanel getPanelPlayers() {
-        return panelPlayers;
-    }
-
-    public void setPanelPlayers(JPanel panelPlayers) {
-        this.panelPlayers = panelPlayers;
     }
 }

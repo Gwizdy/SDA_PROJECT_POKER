@@ -13,9 +13,12 @@ public class Ramka {
     private JButton button;
     private JTextField textField;
 
+    private Ramka me;
+
     private int liczbaGraczy;
 
     public Ramka() {
+        me = this;
 
         window = new JFrame("POKER Texas Holden");
         panel = new BackgroundPanel();
@@ -36,13 +39,10 @@ public class Ramka {
                     new OknoOstrzezenie();
                 else {
                     setLiczbaGraczy(liczbaGraczy = Integer.parseInt(textField.getText()));
-                    System.out.println(getLiczbaGraczy());
-                    window.dispose();
-                    new OknoGracze();
+                    panel.removeAll();
+                    new OknoGracze(me);
                     window.revalidate();
-                    window.repaint();
-
-                }
+            }
             }
         });
 
@@ -58,22 +58,18 @@ public class Ramka {
 
             @Override
             public void mousePressed(MouseEvent e) {
-
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-
             }
 
             @Override
             public void mouseEntered(MouseEvent e) {
-
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-
             }
         });
 
