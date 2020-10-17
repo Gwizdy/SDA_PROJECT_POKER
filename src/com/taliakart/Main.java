@@ -11,10 +11,7 @@ public class Main {
 
 //        Ramka ramka = new Ramka();
 //        OknoGracze oknoGracze = new OknoGracze(ramka);
-
-        Talia talia = new Talia();
-        GUITalia guiTalia = new GUITalia(talia);
-
+        GUITalia guiTalia = new GUITalia();
 
     }
 }

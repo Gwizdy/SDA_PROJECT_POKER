@@ -2,10 +2,13 @@ package com.taliakart;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Talia {
 
     private List<Karta> talia = new ArrayList<Karta>();
+    private Random losujKarte;
+
 
     public Talia() {
 
@@ -14,7 +17,8 @@ public class Talia {
                 talia.add(new Karta(k, f));
             }
         }
-        getTalia();
+
+        losujKarte = new Random();
     }
 
 //    public void stworzTalie() {
@@ -24,14 +28,23 @@ public class Talia {
 //                talia.add(new Karta(k, f));
 //    }
 
-    public List<Karta> getTalia(){
+//    public void pokazLosowaKarte() {
+//        if(talia.size() > 1){
+//            Karta pobierzKarte = talia.get(losujKarte.nextInt(talia.size()));
+//            System.out.println(pobierzKarte);
+//        }
+//    }
+//
+//    public void iteracjaTalii(){
+//        System.out.println("Iteracja talii");
+//        for (Karta k : talia){
+//            System.out.println(k);
+//        }
+//    }
+
+    public List<Karta> getTalia() {
         return talia;
     }
-//    public void wyswietlTalie() {
-//        stworzTalie();
-//        for (Karta k : talia)
-//            System.out.println(k);
-//
-//    }
+
 
 }
