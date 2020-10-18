@@ -137,4 +137,12 @@ public class OknoGracze {
     public void setGracze(int gracze) {
         this.gracze = gracze;
     }
+
+    public JTextField[] getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(JTextField[] player) {
+        this.player = player;
+    }
 }
