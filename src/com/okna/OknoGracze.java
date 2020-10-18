@@ -98,8 +98,6 @@ public class OknoGracze {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-
                 for (int i = 0; i < gracze; i++) {
                     if (player[i].getText().equals("")) {
                         dobrePuste = false;
