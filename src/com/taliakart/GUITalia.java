@@ -80,6 +80,7 @@ public class GUITalia {
                 }
                 usunZTalii(r, talia);
                 oknoStol.getPanelGame().add(karty);
+                System.out.println("Rozmiar talii " + talia.size());
             }
         }
     }
@@ -93,11 +94,41 @@ public class GUITalia {
                 listaObrazkow.add("images\\" + f.getFigura() + "_" + k.getWartosc() + ".jpg");
             }
         }
+
     }
 
     //usuwanie z listy przy pozniejszym dobieraniu reki
     public void usunZTalii(int liczba, List list) {
         list.remove(liczba);
+    }
+
+    //rozdanie trzech pierwszych kart na stole, nie robilem petli dla latwiejszego dostepu
+    public void rozdajFlop(List list){
+        rand = new Random();
+        int rOut = rand.nextInt(list.size());
+        list.remove(rOut);
+
+        int r1 = rand.nextInt(list.size());
+        list.get(r1);
+        list.remove(r1);
+        int r2 = rand.nextInt(list.size());
+        list.get(r2);
+        list.remove(r2);
+        int r3 = rand.nextInt(list.size());
+        list.get(r3);
+        list.remove(r3);
+
+    }
+
+    //rozdanie 4 i 5 karty
+    public void rozdajTurnorRiver(List list){
+        rand = new Random();
+        int rOut = rand.nextInt(list.size());
+        list.remove(rOut);
+
+        int rTurnOrRiver = rand.nextInt(list.size());
+        list.get(rTurnOrRiver);
+        list.remove(rTurnOrRiver);
     }
 
     public Talia getTaliaGUI() {

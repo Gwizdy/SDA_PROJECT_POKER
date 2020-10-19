@@ -115,7 +115,9 @@ public class OknoStol {
 
     public void rozdanieKart() {
 
-        new GUITalia(me);
+        new GUITalia(me); // new ? za kazdym razy bedzie nowa
+        System.out.println("Rozdanie kart |"); //zwroc uwage ze przy Run'ie Maina (ramki), sout wypisuje sie z kazdym obrotem petli,
+                                                // moim zdaniem powinien pojsc raz, po | rozmiar tablicy z w soucie z GUITalia.java losowanieKart();
 
     }
 

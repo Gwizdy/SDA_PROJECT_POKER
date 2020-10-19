@@ -7,7 +7,6 @@ import java.util.Random;
 public class Talia {
 
     private List<Karta> talia = new ArrayList<Karta>();
-    private Random losujKarte;
 
 
     public Talia() {
@@ -18,7 +17,6 @@ public class Talia {
             }
         }
 
-        losujKarte = new Random();
     }
 
 //    public void stworzTalie() {
