@@ -1,6 +1,6 @@
 package com.taliakart;
 
-public class Karta {
+public class Karta implements Comparable<Karta>{
 
     private Kolor kolor;
     private Figura figura;
@@ -28,7 +28,15 @@ public class Karta {
 
     @Override
     public String toString() {
-        return "Karta [kolor=" + kolor + ", figura=" + figura + "]";
+        return "[kolor= " + kolor + " figura= " + figura + "]";
     }
 
+    @Override
+    public int compareTo(Karta karta) {
+        int compare = kolor.compareTo(karta.kolor);
+        if (compare == 0){
+            compare = figura.compareTo(karta.figura);
+        }
+        return compare;
+    }
 }
