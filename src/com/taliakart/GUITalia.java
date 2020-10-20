@@ -18,7 +18,7 @@ public class GUITalia {
     private List<String> listaObrazkow;
     private List<Karta> talia;
 
-    private Random rand = new Random();;
+    private Random rand = new Random();
 
     private JLabel karty;
     private JLabel kartyFlop;
@@ -37,11 +37,11 @@ public class GUITalia {
         listaKart();
 
         losowanieKart();
-        System.out.println(talia.size());
+
         rozdajFlop(talia);
-        System.out.println(talia.size());
-        rozdajTurnorRiver(talia);
-        System.out.println(talia.size());
+
+        rozdajTurnOrRiver(talia);
+
     }
 
     public void losowanieKart() {
@@ -123,6 +123,7 @@ public class GUITalia {
         for (int i = 0; i < 3; i++) {
 
             r1 = rand.nextInt(list.size());
+            System.out.println();
 
             kartyFlop = new JLabel();
             kartyFlop.setIcon(new ImageIcon(listaObrazkow.get(r1)));
@@ -139,7 +140,7 @@ public class GUITalia {
     }
 
     //rozdanie 4 i 5 karty
-    public void rozdajTurnorRiver(List list) {
+    public void rozdajTurnOrRiver(List list) {
 
         rOut = rand.nextInt(list.size());
 
@@ -151,7 +152,7 @@ public class GUITalia {
             rTurnOrRiver = rand.nextInt(list.size());
 
             kartyTurnOrRiver = new JLabel();
-            kartyTurnOrRiver.setIcon(new ImageIcon(listaObrazkow.get(r1)));
+            kartyTurnOrRiver.setIcon(new ImageIcon(listaObrazkow.get(rTurnOrRiver)));
             kartyTurnOrRiver.setLayout(null);
             kartyTurnOrRiver.setBounds(380 + f, 231, 41, 63);
 
