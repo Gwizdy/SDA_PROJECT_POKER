@@ -4,6 +4,7 @@ package com.taliakart;
 
 
 import com.okna.OknoGracze;
+import com.okna.OknoStol;
 import com.okna.Ramka;
 
 
@@ -12,8 +13,7 @@ public class Main {
     public static void main(String[] args) {
 
         Ramka ramka = new Ramka();
-//        OknoGracze oknoGracze = new OknoGracze(ramka);
-//        GUITalia guiTalia = new GUITalia();
+
 
 
     }

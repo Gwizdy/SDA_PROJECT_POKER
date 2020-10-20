@@ -24,8 +24,8 @@ public class OknoStol {
 
     private int gracze;
 
-    private int w1, w2, w3;
-    private int a1, a2, a3;
+    private int w1, w2;
+    private int a1, a2;
     private int aw;
 
 
@@ -63,16 +63,18 @@ public class OknoStol {
             label.setText(oknoGracze.getPlayer()[i].getText());
 
             if (i < 3) {
-                label.setBounds(240 + w1, 360, 200, 100);
+                label.setBounds(640 - w1, 360, 200, 100);
                 w1 += 200;
             }
-            if (i > 2 && i < 6) {
+            if (i == 3) {
+                label.setBounds(20, 150, 200, 100);
+            }
+            if (i > 3 && i < 7) {
                 label.setBounds(240 + w2, 68, 200, 100);
                 w2 += 200;
             }
-            if (i > 5) {
-                label.setBounds(20 + w3, 150, 200, 100);
-                w3 += 800;
+            if (i == 7) {
+                label.setBounds(820, 150, 200, 100);
             }
 
             label.setFont(new Font("Verdana", Font.BOLD, 24));
@@ -93,20 +95,24 @@ public class OknoStol {
         }
 
         for (int i = 0; i < oknoGracze.getGracze(); i++) {
+
             avatar = new JLabel();
             avatar.setIcon(new ImageIcon("avatar\\avatar" + i + ".jpg"));
             avatar.setLayout(null);
+
             if (i < 3) {
-                avatar.setBounds(242 + a1, 420, 100, 100);
+                avatar.setBounds(642 - a1, 420, 100, 100);
                 a1 += 200;
             }
-            if (i > 2 && i < 6) {
+            if (i == 3) {
+                avatar.setBounds(22, 97, 100, 100);
+            }
+            if (i > 3 && i < 7) {
                 avatar.setBounds(242 + a2, 14, 100, 100);
                 a2 += 200;
             }
-            if (i > 5) {
-                avatar.setBounds(22 + a3, 97, 100, 100);
-                a3 += 800;
+            if (i == 7) {
+                avatar.setBounds(822, 97, 100, 100);
             }
             panelGame.add(avatar);
 
@@ -115,9 +121,7 @@ public class OknoStol {
 
     public void rozdanieKart() {
 
-        new GUITalia(me); // new ? za kazdym razy bedzie nowa
-        System.out.println("Rozdanie kart |"); //zwroc uwage ze przy Run'ie Maina (ramki), sout wypisuje sie z kazdym obrotem petli,
-                                                // moim zdaniem powinien pojsc raz, po | rozmiar tablicy z w soucie z GUITalia.java losowanieKart();
+        new GUITalia(me);
 
     }
 
