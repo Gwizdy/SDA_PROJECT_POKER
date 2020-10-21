@@ -1,8 +1,6 @@
 package com.taliakart;
 
-import com.okna.OknoGracze;
 import com.okna.OknoStol;
-import com.okna.Ramka;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -17,6 +15,18 @@ public class GUITalia {
 
     private List<String> listaObrazkow;
     private List<Karta> talia;
+
+    private List<Karta> listaPlayer1 = new ArrayList<Karta>();
+    private List<Karta> listaPlayer2 = new ArrayList<Karta>();
+    private List<Karta> listaPlayer3 = new ArrayList<Karta>();
+    private List<Karta> listaPlayer4 = new ArrayList<Karta>();
+    private List<Karta> listaPlayer5 = new ArrayList<Karta>();
+    private List<Karta> listaPlayer6 = new ArrayList<Karta>();
+    private List<Karta> listaPlayer7 = new ArrayList<Karta>();
+    private List<Karta> listaPlayer8 = new ArrayList<Karta>();
+
+    private List<Karta> listaFlop;
+    private List<Karta> listaTurnOrRiver;
 
     private Random rand = new Random();
 
@@ -44,54 +54,9 @@ public class GUITalia {
 
     }
 
-    public void losowanieKart() {
+    public void usunZTalii(List list, int liczba) {
 
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < oknoStol.getGracze(); j++) {
-
-                r = rand.nextInt(talia.size());
-
-                karty = new JLabel();
-                karty.setIcon(new ImageIcon(listaObrazkow.get(r)));
-                karty.setLayout(null);
-
-                if (i == 0) {
-                    if (j < 3) {
-                        karty.setBounds(640 - k1_1, 320, 41, 63);
-                        k1_1 += 200;
-                    }
-                    if (j == 3) {
-                        karty.setBounds(30, 230, 41, 63);
-                    }
-                    if (j > 3 && j < 7) {
-                        karty.setBounds(240 + k2_1, 150, 41, 63);
-                        k2_1 += 200;
-                    }
-                    if (j == 7) {
-                        karty.setBounds(840, 230, 41, 63);
-                    }
-                }
-                if (i == 1) {
-                    if (j < 3) {
-                        karty.setBounds(690 - k1_2, 320, 41, 63);
-                        k1_2 += 200;
-                    }
-                    if (j == 3) {
-                        karty.setBounds(80, 230, 41, 63);
-                    }
-                    if (j > 3 && j < 7) {
-                        karty.setBounds(290 + k2_2, 150, 41, 63);
-                        k2_2 += 200;
-                    }
-                    if (j == 7) {
-                        karty.setBounds(890, 230, 41, 63);
-                    }
-                }
-                usunZTalii(r, talia);
-                usunZTalii(r, listaObrazkow);
-                oknoStol.getPanelGame().add(karty);
-            }
-        }
+        list.remove(list.get(liczba));
     }
 
     public void listaKart() {
@@ -103,22 +68,98 @@ public class GUITalia {
                 listaObrazkow.add("images\\" + f.getFigura() + "_" + k.getWartosc() + ".jpg");
             }
         }
-
     }
 
-    //usuwanie z listy przy pozniejszym dobieraniu reki
-    public void usunZTalii(int liczba, List list) {
+    public void losowanieKart() {
 
-        list.remove(list.get(liczba));
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < oknoStol.getGracze(); j++) {
+
+                r = rand.nextInt(talia.size());
+
+                karty = new JLabel();
+                karty.setIcon(new ImageIcon(listaObrazkow.get(r)));
+                karty.setLayout(null);
+                if (i == 0) {
+                    if (j < 3) {
+                        karty.setBounds(640 - k1_1, 320, 41, 63);
+                        k1_1 += 200;
+                        if (j == 0)
+                            listaPlayer1.add(talia.get(r));
+                        if (j == 1)
+                            listaPlayer2.add(talia.get(r));
+                        if (j == 2)
+                            listaPlayer3.add(talia.get(r));
+                    }
+                    if (j == 3) {
+                        karty.setBounds(30, 230, 41, 63);
+                        if (j == 3)
+                            listaPlayer4.add(talia.get(r));
+                    }
+                    if (j > 3 && j < 7) {
+                        karty.setBounds(240 + k2_1, 150, 41, 63);
+                        k2_1 += 200;
+                        if (j == 4)
+                            listaPlayer5.add(talia.get(r));
+                        if (j == 5)
+                            listaPlayer6.add(talia.get(r));
+                        if (j == 6)
+                            listaPlayer7.add(talia.get(r));
+                    }
+                    if (j == 7) {
+                        karty.setBounds(840, 230, 41, 63);
+                        if (j == 7)
+                            listaPlayer8.add(talia.get(r));
+                    }
+                }
+                if (i == 1) {
+                    if (j < 3) {
+                        karty.setBounds(690 - k1_2, 320, 41, 63);
+                        k1_2 += 200;
+                        if (j == 0)
+                            listaPlayer1.add(talia.get(r));
+                        if (j == 1)
+                            listaPlayer2.add(talia.get(r));
+                        if (j == 2)
+                            listaPlayer3.add(talia.get(r));
+                    }
+                    if (j == 3) {
+                        karty.setBounds(80, 230, 41, 63);
+                        if (j == 3)
+                            listaPlayer4.add(talia.get(r));
+                    }
+                    if (j > 3 && j < 7) {
+                        karty.setBounds(290 + k2_2, 150, 41, 63);
+                        k2_2 += 200;
+                        if (j == 4)
+                            listaPlayer5.add(talia.get(r));
+                        if (j == 5)
+                            listaPlayer6.add(talia.get(r));
+                        if (j == 6)
+                            listaPlayer7.add(talia.get(r));
+                    }
+                    if (j == 7) {
+                        karty.setBounds(890, 230, 41, 63);
+                        if (j == 7)
+                            listaPlayer8.add(talia.get(r));
+                    }
+                }
+                usunZTalii(talia, r);
+                usunZTalii(listaObrazkow, r);
+
+                oknoStol.getPanelGame().add(karty);
+            }
+        }
     }
 
-    //rozdanie trzech pierwszych kart na stole, nie robilem petli dla latwiejszego dostepu
     public void rozdajFlop(List list) {
+
+        listaFlop = new ArrayList<Karta>();
 
         rOut = rand.nextInt(list.size());
 
-        list.remove(list.get(rOut));
-        listaObrazkow.remove(listaObrazkow.get(rOut));
+        usunZTalii(talia, rOut);
+        usunZTalii(listaObrazkow, rOut);
 
         for (int i = 0; i < 3; i++) {
 
@@ -132,20 +173,23 @@ public class GUITalia {
 
             f += 50;
 
-            list.remove(list.get(r1));
-            listaObrazkow.remove(listaObrazkow.get(r1));
+            listaFlop.add(talia.get(r1));
+
+            usunZTalii(talia, r1);
+            usunZTalii(listaObrazkow, r1);
 
             oknoStol.getPanelGame().add(kartyFlop);
         }
     }
 
-    //rozdanie 4 i 5 karty
     public void rozdajTurnOrRiver(List list) {
+
+        listaTurnOrRiver = new ArrayList<Karta>();
 
         rOut = rand.nextInt(list.size());
 
-        list.remove(list.get(rOut));
-        listaObrazkow.remove(listaObrazkow.get(rOut));
+        usunZTalii(talia, rOut);
+        usunZTalii(listaObrazkow, rOut);
 
         for (int i = 0; i < 2; i++) {
 
@@ -158,8 +202,10 @@ public class GUITalia {
 
             f += 50;
 
-            list.remove(list.get(rTurnOrRiver));
-            listaObrazkow.remove(listaObrazkow.get(rTurnOrRiver));
+            listaTurnOrRiver.add(talia.get(rTurnOrRiver));
+
+            usunZTalii(talia, rTurnOrRiver);
+            usunZTalii(listaObrazkow, rTurnOrRiver);
 
             oknoStol.getPanelGame().add(kartyTurnOrRiver);
         }

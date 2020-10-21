@@ -1,6 +1,8 @@
 package com.okna;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -11,6 +13,7 @@ public class Ramka {
     private JFrame window;
     private JPanel panel;
     private JButton button;
+    private Border empty;
     private JTextField textField;
 
     private Ramka me;
@@ -23,6 +26,7 @@ public class Ramka {
         window = new JFrame("POKER Texas Holden");
         panel = new BackgroundPanel();
         button = new JButton(new ImageIcon("confirm.jpg"));
+        empty = BorderFactory.createEmptyBorder();
         textField = new JTextField();
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,6 +36,7 @@ public class Ramka {
         button.setBounds(575, 350, 98, 41);
         button.setHorizontalTextPosition(SwingConstants.CENTER);
         button.setVerticalAlignment(SwingConstants.CENTER);
+        button.setBorder(empty);
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -42,7 +47,7 @@ public class Ramka {
                     panel.removeAll();
                     new OknoGracze(me);
                     window.revalidate();
-            }
+                }
             }
         });
 
@@ -79,6 +84,7 @@ public class Ramka {
 
         window.add(panel);
         window.setSize(910, 555);
+
     }
 
     public JFrame getWindow() {

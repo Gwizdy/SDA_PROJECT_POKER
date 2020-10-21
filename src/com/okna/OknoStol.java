@@ -2,6 +2,7 @@ package com.okna;
 
 import com.baza.BazaGracze;
 import com.taliakart.GUITalia;
+import com.taliakart.Zetony;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,6 +50,8 @@ public class OknoStol {
         dodanieAvatara();
 
         rozdanieKart();
+
+        new Zetony(me);
 
         windowGame.add(panelGame);
     }
