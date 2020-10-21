@@ -1,6 +1,7 @@
 package com.okna;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -17,20 +18,23 @@ public class OknoGracze {
 
     private JTextField[] player;
 
-    private int w1;
-    private int w2;
-    private int w3;
+    private int w1, w2, w3;
 
     private int gracze;
 
     private boolean dobrePuste = true;
     private boolean dobreNazwa = true;
 
+    private Border empty;
+
     public OknoGracze(Ramka ramka) {
         this.ramka = ramka;
         me = this;
 
         gracze = ramka.getLiczbaGraczy();
+
+        empty = BorderFactory.createEmptyBorder();
+
         panelPlayers = new BackgroundPanel();
         panelPlayers.setLayout(null);
 
@@ -95,6 +99,7 @@ public class OknoGracze {
         button.setBounds(550, 440, 98, 41);
         button.setHorizontalTextPosition(SwingConstants.CENTER);
         button.setVerticalAlignment(SwingConstants.CENTER);
+        button.setBorder(empty);
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
