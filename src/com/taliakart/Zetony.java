@@ -28,21 +28,21 @@ public class Zetony {
             zetony.setLayout(null);
 
             if (i < 3) {
-                zetony.setBounds(840 - k1, 320, 41, 63);
+                zetony.setBounds(725 - k1, 462, 41, 63);
                 k1 += 200;
             }
             if (i == 3) {
-                zetony.setBounds(30, 230, 41, 63);
+                zetony.setBounds(105, 140, 41, 63);
             }
             if (i > 3 && i < 7) {
-                zetony.setBounds(240 + k2, 150, 41, 63);
+                zetony.setBounds(334 + k2, 166, 41, 63);
                 k2 += 200;
             }
             if (i == 7) {
-                zetony.setBounds(840, 230, 41, 63);
+                zetony.setBounds(905, 140, 41, 63);
             }
+            oknoStol.getPanelGame().add(zetony);
         }
-        oknoStol.getPanelGame().add(zetony);
     }
 
 }

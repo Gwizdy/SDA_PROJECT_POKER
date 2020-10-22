@@ -1,6 +1,7 @@
 package com.taliakart;
 
 import com.okna.OknoStol;
+import com.sprawdzanie.RoyalFlush;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -37,9 +38,15 @@ public class GUITalia {
     private int k1_1, k1_2, k2_1, k2_2;
     private int r, r1, rOut, rTurnOrRiver;
     private int f;
+    private int iloscGraczy;
+
+    private GUITalia me;
 
     public GUITalia(OknoStol oknoStol) {
         this.oknoStol = oknoStol;
+        me = this;
+
+        iloscGraczy = oknoStol.getGracze();
 
         taliaGUI = new Talia();
         talia = taliaGUI.getTalia();
@@ -51,6 +58,8 @@ public class GUITalia {
         rozdajFlop(talia);
 
         rozdajTurnOrRiver(talia);
+
+        new RoyalFlush(me);
 
     }
 
@@ -225,5 +234,93 @@ public class GUITalia {
 
     public void setKarty(JLabel karty) {
         this.karty = karty;
+    }
+
+    public int getIloscGraczy() {
+        return iloscGraczy;
+    }
+
+    public void setIloscGraczy(int iloscGraczy) {
+        this.iloscGraczy = iloscGraczy;
+    }
+
+    public List<Karta> getListaPlayer1() {
+        return listaPlayer1;
+    }
+
+    public void setListaPlayer1(List<Karta> listaPlayer1) {
+        this.listaPlayer1 = listaPlayer1;
+    }
+
+    public List<Karta> getListaPlayer2() {
+        return listaPlayer2;
+    }
+
+    public void setListaPlayer2(List<Karta> listaPlayer2) {
+        this.listaPlayer2 = listaPlayer2;
+    }
+
+    public List<Karta> getListaPlayer3() {
+        return listaPlayer3;
+    }
+
+    public void setListaPlayer3(List<Karta> listaPlayer3) {
+        this.listaPlayer3 = listaPlayer3;
+    }
+
+    public List<Karta> getListaPlayer4() {
+        return listaPlayer4;
+    }
+
+    public void setListaPlayer4(List<Karta> listaPlayer4) {
+        this.listaPlayer4 = listaPlayer4;
+    }
+
+    public List<Karta> getListaPlayer5() {
+        return listaPlayer5;
+    }
+
+    public void setListaPlayer5(List<Karta> listaPlayer5) {
+        this.listaPlayer5 = listaPlayer5;
+    }
+
+    public List<Karta> getListaPlayer6() {
+        return listaPlayer6;
+    }
+
+    public void setListaPlayer6(List<Karta> listaPlayer6) {
+        this.listaPlayer6 = listaPlayer6;
+    }
+
+    public List<Karta> getListaPlayer7() {
+        return listaPlayer7;
+    }
+
+    public void setListaPlayer7(List<Karta> listaPlayer7) {
+        this.listaPlayer7 = listaPlayer7;
+    }
+
+    public List<Karta> getListaPlayer8() {
+        return listaPlayer8;
+    }
+
+    public void setListaPlayer8(List<Karta> listaPlayer8) {
+        this.listaPlayer8 = listaPlayer8;
+    }
+
+    public List<Karta> getListaFlop() {
+        return listaFlop;
+    }
+
+    public void setListaFlop(List<Karta> listaFlop) {
+        this.listaFlop = listaFlop;
+    }
+
+    public List<Karta> getListaTurnOrRiver() {
+        return listaTurnOrRiver;
+    }
+
+    public void setListaTurnOrRiver(List<Karta> listaTurnOrRiver) {
+        this.listaTurnOrRiver = listaTurnOrRiver;
     }
 }

@@ -95,7 +95,7 @@ public class OknoGracze {
             });
         }
 
-        button = new JButton(new ImageIcon("confirm.jpg"));
+        button = new JButton(new ImageIcon("confirmButton.jpg"));
         button.setBounds(550, 440, 98, 41);
         button.setHorizontalTextPosition(SwingConstants.CENTER);
         button.setVerticalAlignment(SwingConstants.CENTER);
