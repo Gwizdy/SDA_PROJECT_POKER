@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
 
         Ramka ramka = new Ramka();
-        //ukladKart uk = new ukladKart();
+        ukladKart uk = new ukladKart();
 
 
 

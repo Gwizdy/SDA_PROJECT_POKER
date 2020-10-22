@@ -26,6 +26,8 @@ public class GUITalia {
     private List<Karta> listaPlayer7 = new ArrayList<Karta>();
     private List<Karta> listaPlayer8 = new ArrayList<Karta>();
 
+
+
     private List<Karta> listaFlop;
     private List<Karta> listaTurnOrRiver;
 
