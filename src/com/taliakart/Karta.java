@@ -33,9 +33,11 @@ public class Karta implements Comparable<Karta>{
 
     @Override
     public int compareTo(Karta karta) {
-        int compare = kolor.compareTo(karta.kolor);
+        int compare = figura.compareTo(karta.figura);
+
         if (compare == 0){
-            compare = figura.compareTo(karta.figura);
+            compare = kolor.compareTo(karta.kolor);
+
         }
         return compare;
     }
