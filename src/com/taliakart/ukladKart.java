@@ -8,6 +8,7 @@ public class ukladKart {
     private List<Karta> rekaPlusStol2;
 
     private List<Karta> listOfHighestFive;
+    private List<Karta> TESTOWATALIA;
 
     private List<List<Karta>> listaRakPlusStol; //deklaracja listy listy
 
@@ -28,7 +29,16 @@ public class ukladKart {
         taliaDoPrzypisaniaTestu = new Talia();
         rand = new Random();
 
+
         listOfHighestFive = new ArrayList<Karta>();
+        TESTOWATALIA = new ArrayList<Karta>();
+        TESTOWATALIA.add(new Karta(Kolor.KIER, Figura.OSEMKA));
+        TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.SIODEMKA));
+        TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.AS));
+        TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.PIATKA));
+        TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.CZWORKA));
+        TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.OSEMKA));
+
 
         listaRakPlusStol = new ArrayList<List<Karta>>(); // inicjacja listy list
 
@@ -74,11 +84,54 @@ public class ukladKart {
         Collections.sort(rekaPlusStol);
         System.out.println("potasowana reka " + rekaPlusStol);
 
-        sprawdzUkladPokerKrolewski(taliaDoTestu); // tutaj wpisalem pozostala talie kart,by sprawdzic czy dziala
-                                                    // (wieksza talia wieksza prawdopodobnienstwo)
+//        sprawdzUkladPokerKrolewski(rekaPlusStol);
+        checkStraightFlush(TESTOWATALIA);
 
         System.out.println("PIK " + listPIK.size() + "TREFL " + listTREFL.size() + "KARO " + listKARO.size() + "KIER " + listKIER.size());
 
+    }
+
+    public void checkStraightFlush(List<Karta> listaKartGraczaDoSprawdzenia){
+
+        for (Karta k : listaKartGraczaDoSprawdzenia) {
+            if(k.getKolor().equals(Kolor.PIK)){
+                listPIK.add(k);
+            }else if(k.getKolor().equals(Kolor.TREFL)){
+                listTREFL.add(k);
+            }else if(k.getKolor().equals(Kolor.KARO)){
+                listKARO.add(k);
+            }else if(k.getKolor().equals(Kolor.KIER)){
+                listKIER.add(k);
+            }
+        }
+        if(checkIfStraight(listPIK)){
+            System.out.println("PIK POKER");
+        }
+        if(checkIfStraight(listTREFL)){
+            System.out.println("TREFL POKER");
+        }
+        if(checkIfStraight(listKARO)){
+            System.out.println("KARO POKER");
+        }
+        if(checkIfStraight(listKIER)){
+            System.out.println("KIER POKER");
+        }
+    }
+
+    public boolean checkIfStraight(List<Karta> listaUnikalnychFigur){
+
+        Collections.sort(listaUnikalnychFigur);
+        if(listaUnikalnychFigur.size() >= 5) {
+            for (int i = listaUnikalnychFigur.size() - 1; i>=listaUnikalnychFigur.size()-3; i--){
+                if(listaUnikalnychFigur.get(i).getFigura() == listaUnikalnychFigur.get(i-1).getFigura()+1
+                && listaUnikalnychFigur.get(i).getFigura() == listaUnikalnychFigur.get(i-2).getFigura()+2
+                && listaUnikalnychFigur.get(i).getFigura() == listaUnikalnychFigur.get(i-3).getFigura()+3
+                && listaUnikalnychFigur.get(i).getFigura() == listaUnikalnychFigur.get(i-4).getFigura()+4)
+                {
+                    return true;
+                }
+            }
+        }return false;
     }
 
     public void sprawdzUkladPokerKrolewski(List<Karta> listaKartDoSprawdzenia){
@@ -94,22 +147,22 @@ public class ukladKart {
                 listKIER.add(k);
             }
         }
-        if(sprawdzOdDziesiatkiDoAsa(listPIK, listOfHighestFive)){
+        if(listPIK.size() >=5 && sprawdzOdDziesiatkiDoAsa(listPIK, listOfHighestFive)){
             System.out.println("PIK KROLEWSKI");
         }
 
         listOfHighestFive = new ArrayList<Karta>();
-        if(sprawdzOdDziesiatkiDoAsa(listTREFL,listOfHighestFive)){
+        if(listTREFL.size() >=5 && sprawdzOdDziesiatkiDoAsa(listTREFL,listOfHighestFive)){
             System.out.println("TREFL KROLEWSKI");
         }
 
         listOfHighestFive = new ArrayList<Karta>();
-        if(sprawdzOdDziesiatkiDoAsa(listKARO,listOfHighestFive)){
+        if(listKARO.size() >=5 && sprawdzOdDziesiatkiDoAsa(listKARO,listOfHighestFive)){
             System.out.println("KARO KROLEWSKI");
         }
 
         listOfHighestFive = new ArrayList<Karta>();
-        if(sprawdzOdDziesiatkiDoAsa(listKIER,listOfHighestFive)){
+        if(listKIER.size() >=5 && sprawdzOdDziesiatkiDoAsa(listKIER,listOfHighestFive)){
             System.out.println("KIER KROLEWSKI");
         }
 

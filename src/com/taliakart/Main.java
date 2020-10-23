@@ -13,8 +13,8 @@ import com.sprawdzanie.Sprawdzenie;
 public class Main {
     public static void main(String[] args) {
 
-        Ramka ramka = new Ramka();
-        //ukladKart uk = new ukladKart();
+//        Ramka ramka = new Ramka();
+        ukladKart uk = new ukladKart();
 
 
 
