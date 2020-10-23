@@ -19,7 +19,7 @@ public class RoyalFlush {
 
     public RoyalFlush(GUITalia guiTalia) {
         this.guiTalia = guiTalia;
-        
+
     }
 
     public void kartyRekaPlusStol(List<Karta> listaKartGracza, List<Karta> listaKartyFlop, List<Karta> listaKartyTurnOrRiver) {
