@@ -26,8 +26,6 @@ public class GUITalia {
     private List<Karta> listaPlayer7 = new ArrayList<Karta>();
     private List<Karta> listaPlayer8 = new ArrayList<Karta>();
 
-
-
     private List<Karta> listaFlop;
     private List<Karta> listaTurnOrRiver;
 
@@ -55,7 +53,7 @@ public class GUITalia {
 
         listaKart();
 
-        losowanieKart();
+        losowanieKart(iloscGraczy);
 
         rozdajFlop(talia);
 
@@ -81,16 +79,17 @@ public class GUITalia {
         }
     }
 
-    public void losowanieKart() {
+    public void losowanieKart(int liczbaGraczy) {
 
         for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < oknoStol.getGracze(); j++) {
+            for (int j = 0; j < liczbaGraczy; j++) {
 
                 r = rand.nextInt(talia.size());
 
                 karty = new JLabel();
                 karty.setIcon(new ImageIcon(listaObrazkow.get(r)));
                 karty.setLayout(null);
+
                 if (i == 0) {
                     if (j < 3) {
                         karty.setBounds(640 - k1_1, 320, 41, 63);
@@ -175,7 +174,6 @@ public class GUITalia {
         for (int i = 0; i < 3; i++) {
 
             r1 = rand.nextInt(list.size());
-            System.out.println();
 
             kartyFlop = new JLabel();
             kartyFlop.setIcon(new ImageIcon(listaObrazkow.get(r1)));
@@ -222,6 +220,14 @@ public class GUITalia {
         }
     }
 
+    public List<Karta> getTalia() {
+        return talia;
+    }
+
+    public void setTalia(List<Karta> talia) {
+        this.talia = talia;
+    }
+
     public Talia getTaliaGUI() {
         return taliaGUI;
     }
@@ -246,70 +252,6 @@ public class GUITalia {
         this.iloscGraczy = iloscGraczy;
     }
 
-    public List<Karta> getListaPlayer1() {
-        return listaPlayer1;
-    }
-
-    public void setListaPlayer1(List<Karta> listaPlayer1) {
-        this.listaPlayer1 = listaPlayer1;
-    }
-
-    public List<Karta> getListaPlayer2() {
-        return listaPlayer2;
-    }
-
-    public void setListaPlayer2(List<Karta> listaPlayer2) {
-        this.listaPlayer2 = listaPlayer2;
-    }
-
-    public List<Karta> getListaPlayer3() {
-        return listaPlayer3;
-    }
-
-    public void setListaPlayer3(List<Karta> listaPlayer3) {
-        this.listaPlayer3 = listaPlayer3;
-    }
-
-    public List<Karta> getListaPlayer4() {
-        return listaPlayer4;
-    }
-
-    public void setListaPlayer4(List<Karta> listaPlayer4) {
-        this.listaPlayer4 = listaPlayer4;
-    }
-
-    public List<Karta> getListaPlayer5() {
-        return listaPlayer5;
-    }
-
-    public void setListaPlayer5(List<Karta> listaPlayer5) {
-        this.listaPlayer5 = listaPlayer5;
-    }
-
-    public List<Karta> getListaPlayer6() {
-        return listaPlayer6;
-    }
-
-    public void setListaPlayer6(List<Karta> listaPlayer6) {
-        this.listaPlayer6 = listaPlayer6;
-    }
-
-    public List<Karta> getListaPlayer7() {
-        return listaPlayer7;
-    }
-
-    public void setListaPlayer7(List<Karta> listaPlayer7) {
-        this.listaPlayer7 = listaPlayer7;
-    }
-
-    public List<Karta> getListaPlayer8() {
-        return listaPlayer8;
-    }
-
-    public void setListaPlayer8(List<Karta> listaPlayer8) {
-        this.listaPlayer8 = listaPlayer8;
-    }
-
     public List<Karta> getListaFlop() {
         return listaFlop;
     }
@@ -325,4 +267,5 @@ public class GUITalia {
     public void setListaTurnOrRiver(List<Karta> listaTurnOrRiver) {
         this.listaTurnOrRiver = listaTurnOrRiver;
     }
+
 }

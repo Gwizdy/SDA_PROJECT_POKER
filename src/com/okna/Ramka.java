@@ -1,8 +1,6 @@
 package com.okna;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -13,7 +11,6 @@ public class Ramka {
     private JFrame window;
     private JPanel panel;
     private JButton button;
-    private Border empty;
     private JTextField textField;
 
     private Ramka me;
@@ -23,20 +20,43 @@ public class Ramka {
     public Ramka() {
         me = this;
 
+        dodanieRamki();
+    }
+
+    public void dodanieRamki() {
         window = new JFrame("POKER Texas Holden");
-        panel = new BackgroundPanel();
-        button = new JButton(new ImageIcon("confirm.jpg"));
-        empty = BorderFactory.createEmptyBorder();
-        textField = new JTextField();
 
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setVisible(true);
         window.pack();
 
+        dodaniePanela();
+
+        window.add(panel);
+        window.setSize(910, 555);
+    }
+
+    public void dodaniePanela() {
+
+        panel = new BackgroundPanel();
+
+        dodaniePrzycisku();
+
+        dodaniePolaTekstowego();
+
+        panel.setLayout(null);
+        panel.add(button);
+        panel.add(textField);
+    }
+
+    public void dodaniePrzycisku() {
+
+        button = new JButton(new ImageIcon("confirm.jpg"));
+
         button.setBounds(575, 350, 98, 41);
         button.setHorizontalTextPosition(SwingConstants.CENTER);
         button.setVerticalAlignment(SwingConstants.CENTER);
-        button.setBorder(empty);
+        button.setBorder(null);
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -50,6 +70,11 @@ public class Ramka {
                 }
             }
         });
+    }
+
+    public void dodaniePolaTekstowego() {
+
+        textField = new JTextField();
 
         textField.setText("Podaj liczbę graczy");
         textField.setBounds(540, 290, 160, 30);
@@ -77,15 +102,8 @@ public class Ramka {
             public void mouseExited(MouseEvent e) {
             }
         });
-
-        panel.setLayout(null);
-        panel.add(button);
-        panel.add(textField);
-
-        window.add(panel);
-        window.setSize(910, 555);
-
     }
+
 
     public JFrame getWindow() {
         return window;

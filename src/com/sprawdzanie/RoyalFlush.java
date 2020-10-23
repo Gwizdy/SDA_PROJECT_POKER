@@ -2,736 +2,106 @@ package com.sprawdzanie;
 
 import com.taliakart.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class RoyalFlush {
 
     private GUITalia guiTalia;
 
-    private List<Karta> lista;
+    private List<Karta> listPIK;
+    private List<Karta> listTREFL;
+    private List<Karta> listKARO;
+    private List<Karta> listKIER;
 
-    private List<Karta> royalFlushPik;
-    private List<Karta> royalFlushKier;
-    private List<Karta> royalFlushKaro;
-    private List<Karta> royalFlushTrefl;
+    private List<Karta> listOfHighestFive;
 
-    private List<Karta> kartyGraczStol;
-
-    private int[] licznik;
-
+    private List<Karta> handPlusTableCards;
 
     public RoyalFlush(GUITalia guiTalia) {
         this.guiTalia = guiTalia;
-
-        royalFlush();
-
-        kartyGraczStol();
+        
     }
 
-    public void royalFlush() {
+    public void kartyRekaPlusStol(List<Karta> listaKartGracza, List<Karta> listaKartyFlop, List<Karta> listaKartyTurnOrRiver) {
 
-        royalFlushPik = new ArrayList<Karta>();
-        royalFlushKier = new ArrayList<Karta>();
-        royalFlushKaro = new ArrayList<Karta>();
-        royalFlushTrefl = new ArrayList<Karta>();
+        handPlusTableCards = new ArrayList<Karta>();
 
-        royalFlushPik.add(new Karta(Kolor.PIK, Figura.DZIESIATKA));
-        royalFlushPik.add(new Karta(Kolor.PIK, Figura.WALET));
-        royalFlushPik.add(new Karta(Kolor.PIK, Figura.DAMA));
-        royalFlushPik.add(new Karta(Kolor.PIK, Figura.KROL));
-        royalFlushPik.add(new Karta(Kolor.PIK, Figura.AS));
+        handPlusTableCards.addAll(listaKartGracza);
+        handPlusTableCards.addAll(listaKartyFlop);
+        handPlusTableCards.addAll(listaKartyTurnOrRiver);
 
-        royalFlushKier.add(new Karta(Kolor.KIER, Figura.DZIESIATKA));
-        royalFlushKier.add(new Karta(Kolor.KIER, Figura.WALET));
-        royalFlushKier.add(new Karta(Kolor.KIER, Figura.DAMA));
-        royalFlushKier.add(new Karta(Kolor.KIER, Figura.KROL));
-        royalFlushKier.add(new Karta(Kolor.KIER, Figura.AS));
-
-        royalFlushKaro.add(new Karta(Kolor.KARO, Figura.DZIESIATKA));
-        royalFlushKaro.add(new Karta(Kolor.KARO, Figura.WALET));
-        royalFlushKaro.add(new Karta(Kolor.KARO, Figura.DAMA));
-        royalFlushKaro.add(new Karta(Kolor.KARO, Figura.KROL));
-        royalFlushKaro.add(new Karta(Kolor.KARO, Figura.AS));
-
-        royalFlushTrefl.add(new Karta(Kolor.TREFL, Figura.DZIESIATKA));
-        royalFlushTrefl.add(new Karta(Kolor.TREFL, Figura.WALET));
-        royalFlushTrefl.add(new Karta(Kolor.TREFL, Figura.DAMA));
-        royalFlushTrefl.add(new Karta(Kolor.TREFL, Figura.KROL));
-        royalFlushTrefl.add(new Karta(Kolor.TREFL, Figura.AS));
+        Collections.sort(handPlusTableCards);
     }
 
-    public void kartyGraczStol() {
+    public void sprawdzanieRoyalFlush(List<Karta> listaKartyGracza) {
 
-        licznik = new int[4];
+        listaKolorowKartyGracza(listaKartyGracza);
 
-        kartyGraczStol = new ArrayList<Karta>();
+        listOfHighestFive = new ArrayList<Karta>();
 
-        if (guiTalia.getListaPlayer1() != null) {
-            graczPierwszy();
-        }
-        if (guiTalia.getListaPlayer2() != null) {
-            graczDrugi();
-        }
-        if (guiTalia.getListaPlayer3() != null) {
-            graczTrzeci();
-        }
-        if (guiTalia.getListaPlayer4() != null) {
-            graczCzwarty();
-        }
-        if (guiTalia.getListaPlayer5() != null) {
-            graczPiaty();
-        }
-        if (guiTalia.getListaPlayer6() != null) {
-            graczSzosty();
-        }
-        if (guiTalia.getListaPlayer7() != null) {
-            graczSiodmy();
-        }
-        if (guiTalia.getListaPlayer8() != null) {
-            graczOsmy();
+        if (sprawdzOdDziesiatkiDoAsa(listPIK, listOfHighestFive)) {
+            System.out.println("PIK KROLEWSKI");
         }
 
+        listOfHighestFive = new ArrayList<Karta>();
+        if (sprawdzOdDziesiatkiDoAsa(listTREFL, listOfHighestFive)) {
+            System.out.println("TREFL KROLEWSKI");
+        }
+
+        listOfHighestFive = new ArrayList<Karta>();
+        if (sprawdzOdDziesiatkiDoAsa(listKARO, listOfHighestFive)) {
+            System.out.println("KARO KROLEWSKI");
+        }
+
+        listOfHighestFive = new ArrayList<Karta>();
+        if (sprawdzOdDziesiatkiDoAsa(listKIER, listOfHighestFive)) {
+            System.out.println("KIER KROLEWSKI");
+        }
+    }
+
+    public boolean sprawdzOdDziesiatkiDoAsa(List<Karta> listaKartyGracza, List<Karta> listaPieciuNajwyższychKart) {
+
+        getFiveHighestCards(listaKartyGracza, listaPieciuNajwyższychKart);
+
+        Collections.sort(listaPieciuNajwyższychKart);
+
+        if (Arrays.asList(listaPieciuNajwyższychKart.get(0).getFigura()).contains(Figura.DZIESIATKA.getFigura()) &&
+                Arrays.asList(listaPieciuNajwyższychKart.get(1).getFigura()).contains(Figura.WALET.getFigura()) &&
+                Arrays.asList(listaPieciuNajwyższychKart.get(2).getFigura()).contains(Figura.DAMA.getFigura()) &&
+                Arrays.asList(listaPieciuNajwyższychKart.get(3).getFigura()).contains(Figura.KROL.getFigura()) &&
+                Arrays.asList(listaPieciuNajwyższychKart.get(4).getFigura()).contains(Figura.AS.getFigura())) {
+            return true;
+        }
+        return false;
+    }
+
+    public void getFiveHighestCards(List<Karta> listaKartyGracza, List<Karta> listaPieciuNajwyższychKart) {
+
+        for (int i = listaKartyGracza.size() - 1; i >= listaKartyGracza.size() - 5; i--) {
+            listaPieciuNajwyższychKart.add(listaKartyGracza.get(i));
+        }
+    }
+
+    public void listaKolorowKartyGracza(List<Karta> listaKartyGracza) {
+
+        listPIK = new ArrayList<Karta>();
+        listTREFL = new ArrayList<Karta>();
+        listKARO = new ArrayList<Karta>();
+        listKIER = new ArrayList<Karta>();
+
+        for (Karta k : listaKartyGracza) {
+            if (k.getKolor().equals(Kolor.PIK)) {
+                listPIK.add(k);
+            } else if (k.getKolor().equals(Kolor.TREFL)) {
+                listTREFL.add(k);
+            } else if (k.getKolor().equals(Kolor.KARO)) {
+                listKARO.add(k);
+            } else if (k.getKolor().equals(Kolor.KIER)) {
+                listKIER.add(k);
+            }
+        }
 
     }
 
-    public void graczPierwszy() {
-
-        kartyGraczStol.addAll(guiTalia.getListaFlop());
-        kartyGraczStol.addAll(guiTalia.getListaTurnOrRiver());
-        kartyGraczStol.addAll(guiTalia.getListaPlayer1());
-
-        for (Karta k : kartyGraczStol) {
-            if (k.equals(Kolor.PIK)) {
-                licznik[0] += 1;
-            } else if (k.equals(Kolor.KIER)) {
-                licznik[1] += 1;
-            } else if (k.equals(Kolor.KARO)) {
-                licznik[2] += 1;
-            } else if (k.equals(Kolor.TREFL))
-                licznik[3] += 1;
-        }
-        if (licznik[0] >= 5) {
-
-            licznik[0] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushPik) {
-                    if (k.equals(r)) {
-                        licznik[0] += 1;
-                    }
-                }
-            }
-            if (licznik[0] == 5)
-                System.out.println("Gracz pierwszy Royal Flush PIK");
-
-        } else if (licznik[1] >= 5) {
-
-            licznik[1] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKier) {
-                    if (k.equals(r)) {
-                        licznik[1] += 1;
-                    }
-                }
-            }
-            if (licznik[1] == 5)
-                System.out.println("Gracz pierwszy Royal Flush Kier");
-
-        } else if (licznik[2] >= 5) {
-
-            licznik[2] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKaro) {
-                    if (k.equals(r)) {
-                        licznik[2] += 1;
-                    }
-                }
-            }
-            if (licznik[2] == 5)
-                System.out.println("Gracz pierwszy Royal Flush Karo");
-
-        } else if (licznik[3] >= 5) {
-
-            licznik[3] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKaro) {
-                    if (k.equals(r)) {
-                        licznik[3] += 1;
-                    }
-                }
-            }
-            if (licznik[3] == 5)
-                System.out.println("Gracz pierwszy Royal Flush Trefl");
-
-        }
-        for (Karta kar : kartyGraczStol)
-            kartyGraczStol.remove(kar);
-
-        for (int i = 0; i < licznik.length; i++)
-            licznik[i] = 0;
-    }
-
-    public void graczDrugi() {
-
-        kartyGraczStol.addAll(guiTalia.getListaFlop());
-        kartyGraczStol.addAll(guiTalia.getListaTurnOrRiver());
-        kartyGraczStol.addAll(guiTalia.getListaPlayer2());
-
-        for (Karta k : kartyGraczStol) {
-            if (k.equals(Kolor.PIK)) {
-                licznik[0] += 1;
-            } else if (k.equals(Kolor.KIER)) {
-                licznik[1] += 1;
-            } else if (k.equals(Kolor.KARO)) {
-                licznik[2] += 1;
-            } else if (k.equals(Kolor.TREFL))
-                licznik[3] += 1;
-        }
-        if (licznik[0] >= 5) {
-
-            licznik[0] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushPik) {
-                    if (k.equals(r)) {
-                        licznik[0] += 1;
-                    }
-                }
-            }
-            if (licznik[0] == 5)
-                System.out.println("Gracz drugi Royal Flush PIK");
-
-        } else if (licznik[1] >= 5) {
-
-            licznik[1] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKier) {
-                    if (k.equals(r)) {
-                        licznik[1] += 1;
-                    }
-                }
-            }
-            if (licznik[1] == 5)
-                System.out.println("Gracz drugi Royal Flush Kier");
-
-        } else if (licznik[2] >= 5) {
-
-            licznik[2] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKaro) {
-                    if (k.equals(r)) {
-                        licznik[2] += 1;
-                    }
-                }
-            }
-            if (licznik[2] == 5)
-                System.out.println("Gracz drugi Royal Flush Karo");
-
-        } else if (licznik[3] >= 5) {
-
-            licznik[3] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKaro) {
-                    if (k.equals(r)) {
-                        licznik[3] += 1;
-                    }
-                }
-            }
-            if (licznik[3] == 5)
-                System.out.println("Gracz drugi Royal Flush Trefl");
-
-        }
-        for (Karta kar : kartyGraczStol)
-            kartyGraczStol.remove(kar);
-
-        for (int i = 0; i < licznik.length; i++)
-            licznik[i] = 0;
-    }
-
-    public void graczTrzeci() {
-
-        kartyGraczStol.addAll(guiTalia.getListaFlop());
-        kartyGraczStol.addAll(guiTalia.getListaTurnOrRiver());
-        kartyGraczStol.addAll(guiTalia.getListaPlayer3());
-
-        for (Karta k : kartyGraczStol) {
-            if (k.equals(Kolor.PIK)) {
-                licznik[0] += 1;
-            } else if (k.equals(Kolor.KIER)) {
-                licznik[1] += 1;
-            } else if (k.equals(Kolor.KARO)) {
-                licznik[2] += 1;
-            } else if (k.equals(Kolor.TREFL))
-                licznik[3] += 1;
-        }
-        if (licznik[0] >= 5) {
-
-            licznik[0] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushPik) {
-                    if (k.equals(r)) {
-                        licznik[0] += 1;
-                    }
-                }
-            }
-            if (licznik[0] == 5)
-                System.out.println("Gracz trzeci Royal Flush PIK");
-
-        } else if (licznik[1] >= 5) {
-
-            licznik[1] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKier) {
-                    if (k.equals(r)) {
-                        licznik[1] += 1;
-                    }
-                }
-            }
-            if (licznik[1] == 5)
-                System.out.println("Gracz trzeci Royal Flush Kier");
-
-        } else if (licznik[2] >= 5) {
-
-            licznik[2] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKaro) {
-                    if (k.equals(r)) {
-                        licznik[2] += 1;
-                    }
-                }
-            }
-            if (licznik[2] == 5)
-                System.out.println("Gracz trzeci Royal Flush Karo");
-
-        } else if (licznik[3] >= 5) {
-
-            licznik[3] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKaro) {
-                    if (k.equals(r)) {
-                        licznik[3] += 1;
-                    }
-                }
-            }
-            if (licznik[3] == 5)
-                System.out.println("Gracz trzeci Royal Flush Trefl");
-
-        }
-        for (Karta kar : kartyGraczStol)
-            kartyGraczStol.remove(kar);
-
-        for (int i = 0; i < licznik.length; i++)
-            licznik[i] = 0;
-    }
-
-    public void graczCzwarty() {
-
-        kartyGraczStol.addAll(guiTalia.getListaFlop());
-        kartyGraczStol.addAll(guiTalia.getListaTurnOrRiver());
-        kartyGraczStol.addAll(guiTalia.getListaPlayer4());
-
-        for (Karta k : kartyGraczStol) {
-            if (k.equals(Kolor.PIK)) {
-                licznik[0] += 1;
-            } else if (k.equals(Kolor.KIER)) {
-                licznik[1] += 1;
-            } else if (k.equals(Kolor.KARO)) {
-                licznik[2] += 1;
-            } else if (k.equals(Kolor.TREFL))
-                licznik[3] += 1;
-        }
-        if (licznik[0] >= 5) {
-
-            licznik[0] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushPik) {
-                    if (k.equals(r)) {
-                        licznik[0] += 1;
-                    }
-                }
-            }
-            if (licznik[0] == 5)
-                System.out.println("Gracz czwarty Royal Flush PIK");
-
-        } else if (licznik[1] >= 5) {
-
-            licznik[1] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKier) {
-                    if (k.equals(r)) {
-                        licznik[1] += 1;
-                    }
-                }
-            }
-            if (licznik[1] == 5)
-                System.out.println("Gracz czwarty Royal Flush Kier");
-
-        } else if (licznik[2] >= 5) {
-
-            licznik[2] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKaro) {
-                    if (k.equals(r)) {
-                        licznik[2] += 1;
-                    }
-                }
-            }
-            if (licznik[2] == 5)
-                System.out.println("Gracz czwarty Royal Flush Karo");
-
-        } else if (licznik[3] >= 5) {
-
-            licznik[3] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKaro) {
-                    if (k.equals(r)) {
-                        licznik[3] += 1;
-                    }
-                }
-            }
-            if (licznik[3] == 5)
-                System.out.println("Gracz czwarty Royal Flush Trefl");
-
-        }
-        for (Karta kar : kartyGraczStol)
-            kartyGraczStol.remove(kar);
-
-        for (int i = 0; i < licznik.length; i++)
-            licznik[i] = 0;
-    }
-
-    public void graczPiaty() {
-
-        kartyGraczStol.addAll(guiTalia.getListaFlop());
-        kartyGraczStol.addAll(guiTalia.getListaTurnOrRiver());
-        kartyGraczStol.addAll(guiTalia.getListaPlayer4());
-
-        for (Karta k : kartyGraczStol) {
-            if (k.equals(Kolor.PIK)) {
-                licznik[0] += 1;
-            } else if (k.equals(Kolor.KIER)) {
-                licznik[1] += 1;
-            } else if (k.equals(Kolor.KARO)) {
-                licznik[2] += 1;
-            } else if (k.equals(Kolor.TREFL))
-                licznik[3] += 1;
-        }
-        if (licznik[0] >= 5) {
-
-            licznik[0] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushPik) {
-                    if (k.equals(r)) {
-                        licznik[0] += 1;
-                    }
-                }
-            }
-            if (licznik[0] == 5)
-                System.out.println("Gracz piąty Royal Flush PIK");
-
-        } else if (licznik[1] >= 5) {
-
-            licznik[1] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKier) {
-                    if (k.equals(r)) {
-                        licznik[1] += 1;
-                    }
-                }
-            }
-            if (licznik[1] == 5)
-                System.out.println("Gracz piąty Royal Flush Kier");
-
-        } else if (licznik[2] >= 5) {
-
-            licznik[2] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKaro) {
-                    if (k.equals(r)) {
-                        licznik[2] += 1;
-                    }
-                }
-            }
-            if (licznik[2] == 5)
-                System.out.println("Gracz piąty Royal Flush Karo");
-
-        } else if (licznik[3] >= 5) {
-
-            licznik[3] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKaro) {
-                    if (k.equals(r)) {
-                        licznik[3] += 1;
-                    }
-                }
-            }
-            if (licznik[3] == 5)
-                System.out.println("Gracz piąty Royal Flush Trefl");
-
-        }
-        for (Karta kar : kartyGraczStol)
-            kartyGraczStol.remove(kar);
-
-        for (int i = 0; i < licznik.length; i++)
-            licznik[i] = 0;
-    }
-
-    public void graczSzosty() {
-
-        kartyGraczStol.addAll(guiTalia.getListaFlop());
-        kartyGraczStol.addAll(guiTalia.getListaTurnOrRiver());
-        kartyGraczStol.addAll(guiTalia.getListaPlayer4());
-
-        for (Karta k : kartyGraczStol) {
-            if (k.equals(Kolor.PIK)) {
-                licznik[0] += 1;
-            } else if (k.equals(Kolor.KIER)) {
-                licznik[1] += 1;
-            } else if (k.equals(Kolor.KARO)) {
-                licznik[2] += 1;
-            } else if (k.equals(Kolor.TREFL))
-                licznik[3] += 1;
-        }
-        if (licznik[0] >= 5) {
-
-            licznik[0] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushPik) {
-                    if (k.equals(r)) {
-                        licznik[0] += 1;
-                    }
-                }
-            }
-            if (licznik[0] == 5)
-                System.out.println("Gracz szósty Royal Flush PIK");
-
-        } else if (licznik[1] >= 5) {
-
-            licznik[1] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKier) {
-                    if (k.equals(r)) {
-                        licznik[1] += 1;
-                    }
-                }
-            }
-            if (licznik[1] == 5)
-                System.out.println("Gracz szósty Royal Flush Kier");
-
-        } else if (licznik[2] >= 5) {
-
-            licznik[2] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKaro) {
-                    if (k.equals(r)) {
-                        licznik[2] += 1;
-                    }
-                }
-            }
-            if (licznik[2] == 5)
-                System.out.println("Gracz szósty Royal Flush Karo");
-
-        } else if (licznik[3] >= 5) {
-
-            licznik[3] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKaro) {
-                    if (k.equals(r)) {
-                        licznik[3] += 1;
-                    }
-                }
-            }
-            if (licznik[3] == 5)
-                System.out.println("Gracz szósty Royal Flush Trefl");
-
-        }
-        for (Karta kar : kartyGraczStol)
-            kartyGraczStol.remove(kar);
-
-        for (int i = 0; i < licznik.length; i++)
-            licznik[i] = 0;
-    }
-
-    public void graczSiodmy() {
-
-        kartyGraczStol.addAll(guiTalia.getListaFlop());
-        kartyGraczStol.addAll(guiTalia.getListaTurnOrRiver());
-        kartyGraczStol.addAll(guiTalia.getListaPlayer4());
-
-        for (Karta k : kartyGraczStol) {
-            if (k.equals(Kolor.PIK)) {
-                licznik[0] += 1;
-            } else if (k.equals(Kolor.KIER)) {
-                licznik[1] += 1;
-            } else if (k.equals(Kolor.KARO)) {
-                licznik[2] += 1;
-            } else if (k.equals(Kolor.TREFL))
-                licznik[3] += 1;
-        }
-        if (licznik[0] >= 5) {
-
-            licznik[0] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushPik) {
-                    if (k.equals(r)) {
-                        licznik[0] += 1;
-                    }
-                }
-            }
-            if (licznik[0] == 5)
-                System.out.println("Gracz siódmy Royal Flush PIK");
-
-        } else if (licznik[1] >= 5) {
-
-            licznik[1] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKier) {
-                    if (k.equals(r)) {
-                        licznik[1] += 1;
-                    }
-                }
-            }
-            if (licznik[1] == 5)
-                System.out.println("Gracz siódmy Royal Flush Kier");
-
-        } else if (licznik[2] >= 5) {
-
-            licznik[2] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKaro) {
-                    if (k.equals(r)) {
-                        licznik[2] += 1;
-                    }
-                }
-            }
-            if (licznik[2] == 5)
-                System.out.println("Gracz siódmy Royal Flush Karo");
-
-        } else if (licznik[3] >= 5) {
-
-            licznik[3] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKaro) {
-                    if (k.equals(r)) {
-                        licznik[3] += 1;
-                    }
-                }
-            }
-            if (licznik[3] == 5)
-                System.out.println("Gracz siódmy Royal Flush Trefl");
-
-        }
-        for (Karta kar : kartyGraczStol)
-            kartyGraczStol.remove(kar);
-
-        for (int i = 0; i < licznik.length; i++)
-            licznik[i] = 0;
-    }
-
-    public void graczOsmy() {
-
-        kartyGraczStol.addAll(guiTalia.getListaFlop());
-        kartyGraczStol.addAll(guiTalia.getListaTurnOrRiver());
-        kartyGraczStol.addAll(guiTalia.getListaPlayer4());
-
-        for (Karta k : kartyGraczStol) {
-            if (k.equals(Kolor.PIK)) {
-                licznik[0] += 1;
-            } else if (k.equals(Kolor.KIER)) {
-                licznik[1] += 1;
-            } else if (k.equals(Kolor.KARO)) {
-                licznik[2] += 1;
-            } else if (k.equals(Kolor.TREFL))
-                licznik[3] += 1;
-        }
-        if (licznik[0] >= 5) {
-
-            licznik[0] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushPik) {
-                    if (k.equals(r)) {
-                        licznik[0] += 1;
-                    }
-                }
-            }
-            if (licznik[0] == 5)
-                System.out.println("Gracz ósmy Royal Flush PIK");
-
-        } else if (licznik[1] >= 5) {
-
-            licznik[1] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKier) {
-                    if (k.equals(r)) {
-                        licznik[1] += 1;
-                    }
-                }
-            }
-            if (licznik[1] == 5)
-                System.out.println("Gracz ósmy Royal Flush Kier");
-
-        } else if (licznik[2] >= 5) {
-
-            licznik[2] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKaro) {
-                    if (k.equals(r)) {
-                        licznik[2] += 1;
-                    }
-                }
-            }
-            if (licznik[2] == 5)
-                System.out.println("Gracz ósmy Royal Flush Karo");
-
-        } else if (licznik[3] >= 5) {
-
-            licznik[3] = 0;
-
-            for (Karta k : kartyGraczStol) {
-                for (Karta r : royalFlushKaro) {
-                    if (k.equals(r)) {
-                        licznik[3] += 1;
-                    }
-                }
-            }
-            if (licznik[3] == 5)
-                System.out.println("Gracz ósmy Royal Flush Trefl");
-
-        }
-        for (Karta kar : kartyGraczStol)
-            kartyGraczStol.remove(kar);
-
-        for (int i = 0; i < licznik.length; i++)
-            licznik[i] = 0;
-    }
 }
+

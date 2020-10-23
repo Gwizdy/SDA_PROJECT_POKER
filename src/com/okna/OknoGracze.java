@@ -1,7 +1,6 @@
 package com.okna;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -25,24 +24,35 @@ public class OknoGracze {
     private boolean dobrePuste = true;
     private boolean dobreNazwa = true;
 
-    private Border empty;
-
     public OknoGracze(Ramka ramka) {
         this.ramka = ramka;
         me = this;
 
-        gracze = ramka.getLiczbaGraczy();
+        dodanieNowegoPanela();
+    }
 
-        empty = BorderFactory.createEmptyBorder();
+    public void dodanieNowegoPanela() {
 
         panelPlayers = new BackgroundPanel();
         panelPlayers.setLayout(null);
 
-        player = new JTextField[gracze];
+        dodaniePolTekstowych();
+
+        dodaniePrzyciskuPotwierdzajacego();
+
+        panelPlayers.add(button);
+        ramka.getWindow().add(panelPlayers);
+    }
+
+    public void dodaniePolTekstowych() {
 
         w1 = 0;
         w2 = 0;
         w3 = 0;
+
+        gracze = ramka.getLiczbaGraczy();
+
+        player = new JTextField[gracze];
 
         for (int i = 0; i < gracze; i++) {
             if (i < 3) {
@@ -94,12 +104,17 @@ public class OknoGracze {
                 }
             });
         }
+    }
+
+    public void dodaniePrzyciskuPotwierdzajacego() {
 
         button = new JButton(new ImageIcon("confirmButton.jpg"));
+
         button.setBounds(550, 440, 98, 41);
         button.setHorizontalTextPosition(SwingConstants.CENTER);
         button.setVerticalAlignment(SwingConstants.CENTER);
-        button.setBorder(empty);
+        button.setBorder(null);
+
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -124,14 +139,11 @@ public class OknoGracze {
 
                 if (dobrePuste == true && dobreNazwa == true)
                     ramka.getWindow().dispose();
-                    new OknoStol(me);
-
+                new OknoStol(me);
             }
         });
-
-        panelPlayers.add(button);
-        ramka.getWindow().add(panelPlayers);
     }
+
 
     public int getGracze() {
         return gracze;

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Sprawdzenie {
 
-    private RoyalFlush royalFlush;
+    //private RoyalFlush royalFlush;
 
     public Sprawdzenie() {
 

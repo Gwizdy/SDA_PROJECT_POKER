@@ -1,9 +1,6 @@
 package com.okna;
 
-import com.baza.BazaGracze;
 import com.taliakart.GUITalia;
-import com.taliakart.Zetony;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -20,6 +17,7 @@ public class OknoStol {
 
     private JLabel label;
     private JLabel avatar;
+    private JLabel zetony;
 
     private List<String> listaAvatarow;
 
@@ -27,6 +25,7 @@ public class OknoStol {
 
     private int w1, w2;
     private int a1, a2;
+    private int k1, k2;
     private int aw;
 
 
@@ -35,6 +34,14 @@ public class OknoStol {
         me = this;
 
         //new BazaGracze(me);
+
+        nowaRamka();
+
+        rozdanieKart();
+
+    }
+
+    public void nowaRamka() {
 
         windowGame = new JFrame("POKER Texas Holden Game");
         windowGame.setVisible(true);
@@ -45,22 +52,20 @@ public class OknoStol {
         panelGame = new BackgroundPanelGame();
         panelGame.setLayout(null);
 
-        dodanieGraczy();
+        dodanieGraczy(oknoGracze.getGracze());
 
-        dodanieAvatara();
+        dodanieAvatara(oknoGracze.getGracze());
 
-        rozdanieKart();
-
-        new Zetony(me);
+        dodanieZetonow(oknoGracze.getGracze());
 
         windowGame.add(panelGame);
     }
 
-    private void dodanieGraczy() {
+    private void dodanieGraczy(int liczbaGraczy) {
 
-        gracze = oknoGracze.getGracze();
+        gracze = liczbaGraczy;
 
-        for (int i = 0; i < oknoGracze.getGracze(); i++) {
+        for (int i = 0; i < gracze; i++) {
 
             label = new JLabel();
             label.setText(oknoGracze.getPlayer()[i].getText());
@@ -82,11 +87,13 @@ public class OknoStol {
 
             label.setFont(new Font("Verdana", Font.BOLD, 24));
             label.setForeground(Color.WHITE);
+
             panelGame.add(label);
         }
+
     }
 
-    private void dodanieAvatara() {
+    private void dodanieAvatara(int liczbaGraczy) {
 
         listaAvatarow = new ArrayList<String>();
 
@@ -97,7 +104,7 @@ public class OknoStol {
             aw++;
         }
 
-        for (int i = 0; i < oknoGracze.getGracze(); i++) {
+        for (int i = 0; i < liczbaGraczy; i++) {
 
             avatar = new JLabel();
             avatar.setIcon(new ImageIcon("avatar\\avatar" + i + ".jpg"));
@@ -118,7 +125,32 @@ public class OknoStol {
                 avatar.setBounds(822, 97, 100, 100);
             }
             panelGame.add(avatar);
+        }
+    }
 
+    public void dodanieZetonow(int liczbaGraczy) {
+
+        for (int i = 0; i < liczbaGraczy; i++) {
+
+            zetony = new JLabel();
+            zetony.setIcon(new ImageIcon("images\\zetony.jpg"));
+            zetony.setLayout(null);
+
+            if (i < 3) {
+                zetony.setBounds(725 - k1, 462, 41, 63);
+                k1 += 200;
+            }
+            if (i == 3) {
+                zetony.setBounds(105, 140, 41, 63);
+            }
+            if (i > 3 && i < 7) {
+                zetony.setBounds(334 + k2, 166, 41, 63);
+                k2 += 200;
+            }
+            if (i == 7) {
+                zetony.setBounds(905, 140, 41, 63);
+            }
+            panelGame.add(zetony);
         }
     }
 
