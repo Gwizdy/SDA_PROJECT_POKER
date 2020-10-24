@@ -35,10 +35,10 @@ public class ukladKart {
         listOfHighestFive = new ArrayList<Karta>();
         tempStraightList = new ArrayList<Karta>();
         TESTOWATALIA = new ArrayList<Karta>();
-        TESTOWATALIA.add(new Karta(Kolor.KIER, Figura.DAMA));
+        TESTOWATALIA.add(new Karta(Kolor.KIER, Figura.OSEMKA));
         TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.TROJKA));
         TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.SZOSTKA));
-        TESTOWATALIA.add(new Karta(Kolor.KARO, Figura.PIATKA));
+        TESTOWATALIA.add(new Karta(Kolor.KARO, Figura.AS));
         TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.CZWORKA));
         TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.SIODEMKA));
         TESTOWATALIA.add(new Karta(Kolor.TREFL, Figura.TROJKA));
@@ -90,9 +90,11 @@ public class ukladKart {
 
 //        sprawdzUkladPokerKrolewski(rekaPlusStol);
 //        checkStraightFlush(TESTOWATALIA);
-        System.out.println("TESTOWA TALIA"+ TESTOWATALIA);
-        removeDuplicateFigures(TESTOWATALIA,tempStraightList);
+        System.out.println("TESTOWA TALIA"+ taliaDoTestu);
+        removeDuplicateFigures(taliaDoTestu,tempStraightList);
         System.out.println("LISTA STRITA" + tempStraightList);
+//        if(checkIfStraight(tempStraightList))
+//            System.out.println("STRIT" + tempStraightList);
 
 
         System.out.println("PIK " + listPIK.size() + "TREFL " + listTREFL.size() + "KARO " + listKARO.size() + "KIER " + listKIER.size());
@@ -155,12 +157,23 @@ public class ukladKart {
     public void removeDuplicateFigures(List<Karta> listaKartGraczaDosprawdzenia, List<Karta> tempStraightList){
 
         Collections.sort(listaKartGraczaDosprawdzenia);
-        for(int i = 0 ;i < listaKartGraczaDosprawdzenia.size()-1 ; i++){
-            if(listaKartGraczaDosprawdzenia.get(i).getFigura() == listaKartGraczaDosprawdzenia.get(i+1).getFigura()){
-                tempStraightList.add(listaKartGraczaDosprawdzenia.get(i));
-            }
+
+        tempStraightList.add(listaKartGraczaDosprawdzenia.get(0));
+
+        for (int i = 0; i < listaKartGraczaDosprawdzenia.size()-1; i++){
+            if(listaKartGraczaDosprawdzenia.get(i).getFigura() != listaKartGraczaDosprawdzenia.get(i+1).getFigura())
+                tempStraightList.add(listaKartGraczaDosprawdzenia.get(i+1));
         }
-        tempStraightList.add(listaKartGraczaDosprawdzenia.get(listaKartGraczaDosprawdzenia.size()-1));
+
+//        for(int i = 0 ;i < listaKartGraczaDosprawdzenia.size()-1 ; i++){
+//            if(listaKartGraczaDosprawdzenia.get(i).getFigura() == listaKartGraczaDosprawdzenia.get(i+1).getFigura()-1){
+//                tempStraightList.add(listaKartGraczaDosprawdzenia.get(i));
+//            }
+//        }
+//        tempStraightList.add(listaKartGraczaDosprawdzenia.get(listaKartGraczaDosprawdzenia.size()-1));
+//        if(listaKartGraczaDosprawdzenia.get(listaKartGraczaDosprawdzenia.size()-1).getFigura() ==
+//        listaKartGraczaDosprawdzenia.get(listaKartGraczaDosprawdzenia.size()-2).getFigura()+1)
+//            tempStraightList.add(listaKartGraczaDosprawdzenia.get(listaKartGraczaDosprawdzenia.size()-1));
     }
 
     public void sprawdzUkladPokerKrolewski(List<Karta> listaKartDoSprawdzenia){
