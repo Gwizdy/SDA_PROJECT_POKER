@@ -18,6 +18,7 @@ public class Sprawdzenie {
     private GUITalia guiTalia;
     private RoyalFlush royalFlush = new RoyalFlush();
     private FourOfKind fourOfKind = new FourOfKind();
+    private FullHouse fullHouse = new FullHouse();
 
     private List<Karta> handPlusTableCards;
 
@@ -28,9 +29,11 @@ public class Sprawdzenie {
 
             kartyRekaPlusStol(guiTalia.getListPlayerCards(), guiTalia.getListaFlop(), guiTalia.getListaTurnOrRiver());
 
-           // royalFlush.sprawdzanieRoyalFlush(handPlusTableCards);
+            // royalFlush.sprawdzanieRoyalFlush(handPlusTableCards);
 
-            fourOfKind.sprawdzanieFourOfKind(handPlusTableCards);
+            // fourOfKind.sprawdzanieFourOfKind(handPlusTableCards);
+
+            fullHouse.sprawdzanieFullHouse(handPlusTableCards);
         }
 
 
