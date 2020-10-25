@@ -2,6 +2,7 @@ package com.taliakart;
 
 import com.okna.OknoStol;
 import com.sprawdzanie.RoyalFlush;
+import com.sprawdzanie.Sprawdzenie;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ public class GUITalia {
     private List<Karta> listaPlayer6 = new ArrayList<Karta>();
     private List<Karta> listaPlayer7 = new ArrayList<Karta>();
     private List<Karta> listaPlayer8 = new ArrayList<Karta>();
+
+    private List<List<Karta>> listPlayerCards = new ArrayList<List<Karta>>();
 
     private List<Karta> listaFlop;
     private List<Karta> listaTurnOrRiver;
@@ -59,7 +62,7 @@ public class GUITalia {
 
         rozdajTurnOrRiver(talia);
 
-        new RoyalFlush(me);
+        new Sprawdzenie(me);
 
     }
 
@@ -126,32 +129,48 @@ public class GUITalia {
                     if (j < 3) {
                         karty.setBounds(690 - k1_2, 320, 41, 63);
                         k1_2 += 200;
-                        if (j == 0)
+                        if (j == 0) {
                             listaPlayer1.add(talia.get(r));
-                        if (j == 1)
+                            listPlayerCards.add(listaPlayer1);
+                        }
+                        if (j == 1) {
                             listaPlayer2.add(talia.get(r));
-                        if (j == 2)
+                            listPlayerCards.add(listaPlayer2);
+                        }
+                        if (j == 2) {
                             listaPlayer3.add(talia.get(r));
+                            listPlayerCards.add(listaPlayer3);
+                        }
                     }
                     if (j == 3) {
                         karty.setBounds(80, 230, 41, 63);
-                        if (j == 3)
+                        if (j == 3) {
                             listaPlayer4.add(talia.get(r));
+                            listPlayerCards.add(listaPlayer4);
+                        }
                     }
                     if (j > 3 && j < 7) {
                         karty.setBounds(290 + k2_2, 150, 41, 63);
                         k2_2 += 200;
-                        if (j == 4)
+                        if (j == 4) {
                             listaPlayer5.add(talia.get(r));
-                        if (j == 5)
+                            listPlayerCards.add(listaPlayer5);
+                        }
+                        if (j == 5) {
                             listaPlayer6.add(talia.get(r));
-                        if (j == 6)
+                            listPlayerCards.add(listaPlayer6);
+                        }
+                        if (j == 6) {
                             listaPlayer7.add(talia.get(r));
+                            listPlayerCards.add(listaPlayer7);
+                        }
                     }
                     if (j == 7) {
                         karty.setBounds(890, 230, 41, 63);
-                        if (j == 7)
+                        if (j == 7) {
                             listaPlayer8.add(talia.get(r));
+                            listPlayerCards.add(listaPlayer8);
+                        }
                     }
                 }
                 usunZTalii(talia, r);
@@ -268,4 +287,11 @@ public class GUITalia {
         this.listaTurnOrRiver = listaTurnOrRiver;
     }
 
+    public List<List<Karta>> getListPlayerCards() {
+        return listPlayerCards;
+    }
+
+    public void setListPlayerCards(List<List<Karta>> listPlayerCards) {
+        this.listPlayerCards = listPlayerCards;
+    }
 }

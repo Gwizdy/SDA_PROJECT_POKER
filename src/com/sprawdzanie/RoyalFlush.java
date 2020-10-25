@@ -6,8 +6,6 @@ import java.util.*;
 
 public class RoyalFlush {
 
-    private GUITalia guiTalia;
-
     private List<Karta> listPIK;
     private List<Karta> listTREFL;
     private List<Karta> listKARO;
@@ -15,22 +13,8 @@ public class RoyalFlush {
 
     private List<Karta> listOfHighestFive;
 
-    private List<Karta> handPlusTableCards;
+    public RoyalFlush() {
 
-    public RoyalFlush(GUITalia guiTalia) {
-        this.guiTalia = guiTalia;
-
-    }
-
-    public void kartyRekaPlusStol(List<Karta> listaKartGracza, List<Karta> listaKartyFlop, List<Karta> listaKartyTurnOrRiver) {
-
-        handPlusTableCards = new ArrayList<Karta>();
-
-        handPlusTableCards.addAll(listaKartGracza);
-        handPlusTableCards.addAll(listaKartyFlop);
-        handPlusTableCards.addAll(listaKartyTurnOrRiver);
-
-        Collections.sort(handPlusTableCards);
     }
 
     public void sprawdzanieRoyalFlush(List<Karta> listaKartyGracza) {
@@ -41,44 +25,53 @@ public class RoyalFlush {
 
         if (sprawdzOdDziesiatkiDoAsa(listPIK, listOfHighestFive)) {
             System.out.println("PIK KROLEWSKI");
+        } else {
+            System.out.println("NIE PIK KROLEWSKI");
         }
 
-        listOfHighestFive = new ArrayList<Karta>();
         if (sprawdzOdDziesiatkiDoAsa(listTREFL, listOfHighestFive)) {
             System.out.println("TREFL KROLEWSKI");
+        } else {
+            System.out.println("NIE TREFL KROLEWSKI");
         }
 
-        listOfHighestFive = new ArrayList<Karta>();
         if (sprawdzOdDziesiatkiDoAsa(listKARO, listOfHighestFive)) {
             System.out.println("KARO KROLEWSKI");
+        } else {
+            System.out.println("NIE KARO KROLEWSKI");
         }
 
-        listOfHighestFive = new ArrayList<Karta>();
         if (sprawdzOdDziesiatkiDoAsa(listKIER, listOfHighestFive)) {
             System.out.println("KIER KROLEWSKI");
+        } else {
+            System.out.println("NIE KIER KROLEWSKI");
         }
     }
 
-    public boolean sprawdzOdDziesiatkiDoAsa(List<Karta> listaKartyGracza, List<Karta> listaPieciuNajwyższychKart) {
+    public boolean sprawdzOdDziesiatkiDoAsa(List<Karta> listaKolorowKart, List<Karta> listOfHighestFive) {
 
-        getFiveHighestCards(listaKartyGracza, listaPieciuNajwyższychKart);
+        getFiveHighestCards(listaKolorowKart, listOfHighestFive);
 
-        Collections.sort(listaPieciuNajwyższychKart);
+        Collections.sort(listOfHighestFive);
 
-        if (Arrays.asList(listaPieciuNajwyższychKart.get(0).getFigura()).contains(Figura.DZIESIATKA.getFigura()) &&
-                Arrays.asList(listaPieciuNajwyższychKart.get(1).getFigura()).contains(Figura.WALET.getFigura()) &&
-                Arrays.asList(listaPieciuNajwyższychKart.get(2).getFigura()).contains(Figura.DAMA.getFigura()) &&
-                Arrays.asList(listaPieciuNajwyższychKart.get(3).getFigura()).contains(Figura.KROL.getFigura()) &&
-                Arrays.asList(listaPieciuNajwyższychKart.get(4).getFigura()).contains(Figura.AS.getFigura())) {
-            return true;
+        if (listOfHighestFive.size() >= 5) {
+            if (Arrays.asList(listOfHighestFive.get(0).getFigura()).contains(Figura.DZIESIATKA.getFigura()) &&
+                    Arrays.asList(listOfHighestFive.get(1).getFigura()).contains(Figura.WALET.getFigura()) &&
+                    Arrays.asList(listOfHighestFive.get(2).getFigura()).contains(Figura.DAMA.getFigura()) &&
+                    Arrays.asList(listOfHighestFive.get(3).getFigura()).contains(Figura.KROL.getFigura()) &&
+                    Arrays.asList(listOfHighestFive.get(4).getFigura()).contains(Figura.AS.getFigura())) {
+                return true;
+            }
         }
         return false;
     }
 
-    public void getFiveHighestCards(List<Karta> listaKartyGracza, List<Karta> listaPieciuNajwyższychKart) {
+    public void getFiveHighestCards(List<Karta> listaKolorowKart, List<Karta> listOfHighestFive) {
 
-        for (int i = listaKartyGracza.size() - 1; i >= listaKartyGracza.size() - 5; i--) {
-            listaPieciuNajwyższychKart.add(listaKartyGracza.get(i));
+        if (listaKolorowKart.size() >= 5) {
+            for (int i = listaKolorowKart.size() - 1; i >= listaKolorowKart.size() - 5; i--) {
+                listOfHighestFive.add(listaKolorowKart.get(i));
+            }
         }
     }
 
@@ -100,6 +93,10 @@ public class RoyalFlush {
                 listKIER.add(k);
             }
         }
+        System.out.println(listPIK);
+        System.out.println(listTREFL);
+        System.out.println(listKARO);
+        System.out.println(listKIER);
 
     }
 
