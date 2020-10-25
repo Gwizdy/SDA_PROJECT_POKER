@@ -93,11 +93,6 @@ public class RoyalFlush {
                 listKIER.add(k);
             }
         }
-        System.out.println(listPIK);
-        System.out.println(listTREFL);
-        System.out.println(listKARO);
-        System.out.println(listKIER);
-
     }
 
 }
