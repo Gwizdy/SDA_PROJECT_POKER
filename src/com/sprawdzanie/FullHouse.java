@@ -10,8 +10,6 @@ import java.util.List;
 
 public class FullHouse {
 
-    private List<Karta> listaTestowa;
-
     public FullHouse() {
 
     }
@@ -23,7 +21,6 @@ public class FullHouse {
         } else {
             System.out.println("Brak Full House");
         }
-
     }
 
     private boolean szukanieTrzechIDwochJednakowychKart(List<Karta> listaKartyGracza) {
@@ -55,7 +52,6 @@ public class FullHouse {
                 }
             }
         }
-
         return false;
     }
 
@@ -63,5 +59,5 @@ public class FullHouse {
 
         Collections.sort(listaKartyGracza);
     }
-
+    
 }
