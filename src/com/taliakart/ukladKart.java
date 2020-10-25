@@ -7,7 +7,9 @@ public class ukladKart {
     private List<Karta> rekaPlusStol;
     private List<Karta> rekaPlusStol2;
 
+//    taliedotestowania
     private List<Karta> listOfHighestFive;
+    private List<Karta> tempStraightList;
     private List<Karta> TESTOWATALIA;
 
     private List<List<Karta>> listaRakPlusStol; //deklaracja listy listy
@@ -31,13 +33,15 @@ public class ukladKart {
 
 
         listOfHighestFive = new ArrayList<Karta>();
+        tempStraightList = new ArrayList<Karta>();
         TESTOWATALIA = new ArrayList<Karta>();
         TESTOWATALIA.add(new Karta(Kolor.KIER, Figura.OSEMKA));
-        TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.SIODEMKA));
-        TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.AS));
-        TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.PIATKA));
+        TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.TROJKA));
+        TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.SZOSTKA));
+        TESTOWATALIA.add(new Karta(Kolor.KARO, Figura.AS));
         TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.CZWORKA));
-        TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.OSEMKA));
+        TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.SIODEMKA));
+        TESTOWATALIA.add(new Karta(Kolor.TREFL, Figura.TROJKA));
 
 
         listaRakPlusStol = new ArrayList<List<Karta>>(); // inicjacja listy list
@@ -85,7 +89,13 @@ public class ukladKart {
         System.out.println("potasowana reka " + rekaPlusStol);
 
 //        sprawdzUkladPokerKrolewski(rekaPlusStol);
-        checkStraightFlush(TESTOWATALIA);
+//        checkStraightFlush(TESTOWATALIA);
+        System.out.println("TESTOWA TALIA"+ taliaDoTestu);
+        removeDuplicateFigures(taliaDoTestu,tempStraightList);
+        System.out.println("LISTA STRITA" + tempStraightList);
+//        if(checkIfStraight(tempStraightList))
+//            System.out.println("STRIT" + tempStraightList);
+
 
         System.out.println("PIK " + listPIK.size() + "TREFL " + listTREFL.size() + "KARO " + listKARO.size() + "KIER " + listKIER.size());
 
@@ -105,33 +115,65 @@ public class ukladKart {
             }
         }
         if(checkIfStraight(listPIK)){
-            System.out.println("PIK POKER");
+            System.out.println("PIK POKER" + listPIK);
         }
         if(checkIfStraight(listTREFL)){
-            System.out.println("TREFL POKER");
+            System.out.println("TREFL POKER" + listTREFL);
         }
         if(checkIfStraight(listKARO)){
-            System.out.println("KARO POKER");
+            System.out.println("KARO POKER" + listKARO);
         }
         if(checkIfStraight(listKIER)){
-            System.out.println("KIER POKER");
+            System.out.println("KIER POKER" + listKIER);
         }
     }
 
     public boolean checkIfStraight(List<Karta> listaUnikalnychFigur){
 
         Collections.sort(listaUnikalnychFigur);
+
         if(listaUnikalnychFigur.size() >= 5) {
-            for (int i = listaUnikalnychFigur.size() - 1; i>=listaUnikalnychFigur.size()-3; i--){
-                if(listaUnikalnychFigur.get(i).getFigura() == listaUnikalnychFigur.get(i-1).getFigura()+1
-                && listaUnikalnychFigur.get(i).getFigura() == listaUnikalnychFigur.get(i-2).getFigura()+2
-                && listaUnikalnychFigur.get(i).getFigura() == listaUnikalnychFigur.get(i-3).getFigura()+3
-                && listaUnikalnychFigur.get(i).getFigura() == listaUnikalnychFigur.get(i-4).getFigura()+4)
-                {
+            for (int i = listaUnikalnychFigur.size() - 1; i >= 4; i--) {
+                if (listaUnikalnychFigur.get(i).getFigura() == listaUnikalnychFigur.get(i - 1).getFigura() + 1
+                        && listaUnikalnychFigur.get(i).getFigura() == listaUnikalnychFigur.get(i - 2).getFigura() + 2
+                        && listaUnikalnychFigur.get(i).getFigura() == listaUnikalnychFigur.get(i - 3).getFigura() + 3
+                        && listaUnikalnychFigur.get(i).getFigura() == listaUnikalnychFigur.get(i - 4).getFigura() + 4) {
                     return true;
+
                 }
             }
-        }return false;
+            if(Arrays.asList(listaUnikalnychFigur.get(0).getFigura()).contains(Figura.DWOJKA.getFigura()) &&
+                    Arrays.asList(listaUnikalnychFigur.get(1).getFigura()).contains(Figura.TROJKA.getFigura()) &&
+                    Arrays.asList(listaUnikalnychFigur.get(2).getFigura()).contains(Figura.CZWORKA.getFigura()) &&
+                    Arrays.asList(listaUnikalnychFigur.get(3).getFigura()).contains(Figura.PIATKA.getFigura()) &&
+                    Arrays.asList(listaUnikalnychFigur.get(listaUnikalnychFigur.size()-1).getFigura()).contains(Figura.AS.getFigura())){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void removeDuplicateFigures(List<Karta> listaKartGraczaDosprawdzenia, List<Karta> tempStraightList){
+
+        Collections.sort(listaKartGraczaDosprawdzenia);
+
+        tempStraightList.add(listaKartGraczaDosprawdzenia.get(0));
+
+        for (int i = 0; i < listaKartGraczaDosprawdzenia.size()-1; i++){
+            if(listaKartGraczaDosprawdzenia.get(i).getFigura() != listaKartGraczaDosprawdzenia.get(i+1).getFigura())
+                tempStraightList.add(listaKartGraczaDosprawdzenia.get(i+1));
+        }
+
+//        for(int i = 0 ;i < listaKartGraczaDosprawdzenia.size()-1 ; i++){
+//            if(listaKartGraczaDosprawdzenia.get(i).getFigura() == listaKartGraczaDosprawdzenia.get(i+1).getFigura()-1){
+//                tempStraightList.add(listaKartGraczaDosprawdzenia.get(i));
+//            }
+//        }
+//        tempStraightList.add(listaKartGraczaDosprawdzenia.get(listaKartGraczaDosprawdzenia.size()-1));
+//        if(listaKartGraczaDosprawdzenia.get(listaKartGraczaDosprawdzenia.size()-1).getFigura() ==
+//        listaKartGraczaDosprawdzenia.get(listaKartGraczaDosprawdzenia.size()-2).getFigura()+1)
+//            tempStraightList.add(listaKartGraczaDosprawdzenia.get(listaKartGraczaDosprawdzenia.size()-1));
     }
 
     public void sprawdzUkladPokerKrolewski(List<Karta> listaKartDoSprawdzenia){
