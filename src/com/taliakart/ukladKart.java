@@ -40,8 +40,9 @@ public class ukladKart {
         TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.SZOSTKA));
         TESTOWATALIA.add(new Karta(Kolor.KARO, Figura.AS));
         TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.CZWORKA));
-        TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.SIODEMKA));
-        TESTOWATALIA.add(new Karta(Kolor.TREFL, Figura.TROJKA));
+        TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.TROJKA));
+        TESTOWATALIA.add(new Karta(Kolor.TREFL, Figura.SZOSTKA));
+        TESTOWATALIA.add(new Karta(Kolor.TREFL, Figura.DWOJKA));
 
 
         listaRakPlusStol = new ArrayList<List<Karta>>(); // inicjacja listy list
@@ -88,20 +89,14 @@ public class ukladKart {
         Collections.sort(rekaPlusStol);
         System.out.println("potasowana reka " + rekaPlusStol);
 
-//        sprawdzUkladPokerKrolewski(rekaPlusStol);
-//        checkStraightFlush(TESTOWATALIA);
-        System.out.println("TESTOWA TALIA"+ taliaDoTestu);
-        removeDuplicateFigures(taliaDoTestu,tempStraightList);
-        System.out.println("LISTA STRITA" + tempStraightList);
-//        if(checkIfStraight(tempStraightList))
-//            System.out.println("STRIT" + tempStraightList);
-
+        if(checkIfDoublePair(TESTOWATALIA))
+            System.out.println("PODWOJNA PARA");
 
         System.out.println("PIK " + listPIK.size() + "TREFL " + listTREFL.size() + "KARO " + listKARO.size() + "KIER " + listKIER.size());
 
     }
 
-    public void checkStraightFlush(List<Karta> listaKartGraczaDoSprawdzenia){
+    public void checkIfStraightFlush(List<Karta> listaKartGraczaDoSprawdzenia){
 
         for (Karta k : listaKartGraczaDoSprawdzenia) {
             if(k.getKolor().equals(Kolor.PIK)){
@@ -129,8 +124,9 @@ public class ukladKart {
     }
 
     public boolean checkIfStraight(List<Karta> listaUnikalnychFigur){
-
+                
         Collections.sort(listaUnikalnychFigur);
+
 
         if(listaUnikalnychFigur.size() >= 5) {
             for (int i = listaUnikalnychFigur.size() - 1; i >= 4; i--) {
@@ -165,16 +161,46 @@ public class ukladKart {
                 tempStraightList.add(listaKartGraczaDosprawdzenia.get(i+1));
         }
 
-//        for(int i = 0 ;i < listaKartGraczaDosprawdzenia.size()-1 ; i++){
-//            if(listaKartGraczaDosprawdzenia.get(i).getFigura() == listaKartGraczaDosprawdzenia.get(i+1).getFigura()-1){
-//                tempStraightList.add(listaKartGraczaDosprawdzenia.get(i));
-//            }
-//        }
-//        tempStraightList.add(listaKartGraczaDosprawdzenia.get(listaKartGraczaDosprawdzenia.size()-1));
-//        if(listaKartGraczaDosprawdzenia.get(listaKartGraczaDosprawdzenia.size()-1).getFigura() ==
-//        listaKartGraczaDosprawdzenia.get(listaKartGraczaDosprawdzenia.size()-2).getFigura()+1)
-//            tempStraightList.add(listaKartGraczaDosprawdzenia.get(listaKartGraczaDosprawdzenia.size()-1));
     }
+
+    public boolean checkIfThreeOfKind(List<Karta> listaKartGraczaDoSprawdzenia){
+        Collections.sort(listaKartGraczaDoSprawdzenia);
+
+        for (int i = listaKartGraczaDoSprawdzenia.size()-1 ; i>=2 ; i--){
+            if(listaKartGraczaDoSprawdzenia.get(i).getFigura() == listaKartGraczaDoSprawdzenia.get(i-1).getFigura() &&
+            listaKartGraczaDoSprawdzenia.get(i).getFigura() == listaKartGraczaDoSprawdzenia.get(i-2).getFigura()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkIfDoublePair(List<Karta> listaKartGraczaDoSprawdzenia){
+        Collections.sort(listaKartGraczaDoSprawdzenia);
+
+        for (int i = listaKartGraczaDoSprawdzenia.size()-1 ; i>=3 ; i--){
+            if(listaKartGraczaDoSprawdzenia.get(i).getFigura() == listaKartGraczaDoSprawdzenia.get(i-1).getFigura()){
+                for (int j = i ;j>=1; j--){
+                    if(listaKartGraczaDoSprawdzenia.get(j).getFigura() == listaKartGraczaDoSprawdzenia.get(j-1).getFigura()){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean checkIfPair(List<Karta> listaKartGraczaDoSprawdzenia){
+        Collections.sort(listaKartGraczaDoSprawdzenia);
+
+        for (int i = listaKartGraczaDoSprawdzenia.size()-1 ; i>=1 ; i--){
+            if(listaKartGraczaDoSprawdzenia.get(i).getFigura() == listaKartGraczaDoSprawdzenia.get(i-1).getFigura()){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public void sprawdzUkladPokerKrolewski(List<Karta> listaKartDoSprawdzenia){
         listOfHighestFive = new ArrayList<Karta>();
