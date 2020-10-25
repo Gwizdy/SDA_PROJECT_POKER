@@ -1,14 +1,7 @@
 package com.sprawdzanie;
 
-import com.okna.OknoGracze;
-import com.okna.OknoStol;
-import com.okna.Ramka;
-import com.taliakart.Figura;
 import com.taliakart.GUITalia;
 import com.taliakart.Karta;
-import com.taliakart.Kolor;
-
-import java.security.Guard;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,14 +22,12 @@ public class Sprawdzenie {
 
             kartyRekaPlusStol(guiTalia.getListPlayerCards(), guiTalia.getListaFlop(), guiTalia.getListaTurnOrRiver());
 
-            // royalFlush.sprawdzanieRoyalFlush(handPlusTableCards);
+            royalFlush.sprawdzanieRoyalFlush(handPlusTableCards);
 
-            // fourOfKind.sprawdzanieFourOfKind(handPlusTableCards);
+            fourOfKind.sprawdzanieFourOfKind(handPlusTableCards);
 
             fullHouse.sprawdzanieFullHouse(handPlusTableCards);
         }
-
-
     }
 
     public List<Karta> kartyRekaPlusStol(List<List<Karta>> listaGraczy, List<Karta> listaKartyFlop, List<Karta> listaKartyTurnOrRiver) {

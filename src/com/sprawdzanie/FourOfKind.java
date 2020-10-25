@@ -2,7 +2,6 @@ package com.sprawdzanie;
 
 import com.taliakart.Karta;
 
-import java.util.Collections;
 import java.util.List;
 
 public class FourOfKind {
@@ -20,29 +19,19 @@ public class FourOfKind {
         } else {
             System.out.println("Brak karety");
         }
-
     }
 
     public boolean szukanieCzterechJednakowychKart(List<Karta> listaKartyGracza) {
-
-        sortowanieKartGracza(listaKartyGracza);
 
         for (int i = 0; i < listaKartyGracza.size() - 3; i++) {
             if (listaKartyGracza.get(i).getFigura() == listaKartyGracza.get(i + 1).getFigura() &&
                     listaKartyGracza.get(i).getFigura() == listaKartyGracza.get(i + 2).getFigura() &&
                     listaKartyGracza.get(i).getFigura() == listaKartyGracza.get(i + 3).getFigura()) {
-                return true;
-            }
-            if (true) {
                 figura = listaKartyGracza.get(i);
+                return true;
             }
         }
         return false;
-    }
-
-    public void sortowanieKartGracza(List<Karta> listaKartyGracza) {
-
-        Collections.sort(listaKartyGracza);
     }
 
 }

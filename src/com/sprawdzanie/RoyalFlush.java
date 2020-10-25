@@ -1,7 +1,6 @@
 package com.sprawdzanie;
 
 import com.taliakart.*;
-
 import java.util.*;
 
 public class RoyalFlush {

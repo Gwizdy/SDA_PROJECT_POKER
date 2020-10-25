@@ -1,11 +1,6 @@
 package com.sprawdzanie;
 
-import com.taliakart.Figura;
 import com.taliakart.Karta;
-import com.taliakart.Kolor;
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class FullHouse {
@@ -26,8 +21,6 @@ public class FullHouse {
     private boolean szukanieTrzechIDwochJednakowychKart(List<Karta> listaKartyGracza) {
 
         boolean sprawdzenie = false;
-
-        sortowanieKartGracza(listaKartyGracza);
 
         for (int i = listaKartyGracza.size() - 1; i > 3; i--) {
             if (listaKartyGracza.get(i).getFigura() == listaKartyGracza.get(i - 1).getFigura() &&
@@ -53,11 +46,6 @@ public class FullHouse {
             }
         }
         return false;
-    }
-
-    public void sortowanieKartGracza(List<Karta> listaKartyGracza) {
-
-        Collections.sort(listaKartyGracza);
     }
     
 }
