@@ -36,7 +36,7 @@ public class ukladKart {
         tempStraightList = new ArrayList<Karta>();
         TESTOWATALIA = new ArrayList<Karta>();
         TESTOWATALIA.add(new Karta(Kolor.KIER, Figura.OSEMKA));
-        TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.TROJKA));
+        TESTOWATALIA.add(new Karta(Kolor.KARO, Figura.TROJKA));
         TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.SZOSTKA));
         TESTOWATALIA.add(new Karta(Kolor.KARO, Figura.AS));
         TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.CZWORKA));
@@ -89,8 +89,10 @@ public class ukladKart {
         Collections.sort(rekaPlusStol);
         System.out.println("potasowana reka " + rekaPlusStol);
 
-        if(checkIfDoublePair(TESTOWATALIA))
-            System.out.println("PODWOJNA PARA");
+//        if(checkIfDoublePair(TESTOWATALIA))
+//            System.out.println("PODWOJNA PARA");
+        System.out.println("WYPISANIE TESTOWEJ TALII" + TESTOWATALIA);
+        System.out.println("WYWALANIE METODY PODWOJNEJ PARY" + getDoublePair(TESTOWATALIA));
 
         System.out.println("PIK " + listPIK.size() + "TREFL " + listTREFL.size() + "KARO " + listKARO.size() + "KIER " + listKIER.size());
 
@@ -180,7 +182,7 @@ public class ukladKart {
 
         for (int i = listaKartGraczaDoSprawdzenia.size()-1 ; i>=3 ; i--){
             if(listaKartGraczaDoSprawdzenia.get(i).getFigura() == listaKartGraczaDoSprawdzenia.get(i-1).getFigura()){
-                for (int j = i ;j>=1; j--){
+                for (int j = i-2 ;j>=1; j--){
                     if(listaKartGraczaDoSprawdzenia.get(j).getFigura() == listaKartGraczaDoSprawdzenia.get(j-1).getFigura()){
                         return true;
                     }
@@ -188,6 +190,34 @@ public class ukladKart {
             }
         }
         return false;
+    }
+
+    public List<Karta> getDoublePair(List<Karta> listaKartGraczaDoSprawdzenia){
+        Collections.sort(listaKartGraczaDoSprawdzenia);
+
+        List<Karta> tempList = new ArrayList<Karta>();
+
+        for (int i = listaKartGraczaDoSprawdzenia.size()-1 ; i>=3 ; i--){
+            if(listaKartGraczaDoSprawdzenia.get(i).getFigura() == listaKartGraczaDoSprawdzenia.get(i-1).getFigura()){
+                for (int j = i-2 ;j>=1; j--){
+                    if(listaKartGraczaDoSprawdzenia.get(j).getFigura() == listaKartGraczaDoSprawdzenia.get(j-1).getFigura()){
+                        tempList.add(listaKartGraczaDoSprawdzenia.get(i));
+                        tempList.add(listaKartGraczaDoSprawdzenia.get(i-1));
+                        tempList.add(listaKartGraczaDoSprawdzenia.get(j));
+                        tempList.add(listaKartGraczaDoSprawdzenia.get(j-1));
+
+                        listaKartGraczaDoSprawdzenia.remove(i);
+                        listaKartGraczaDoSprawdzenia.remove(i-1);
+                        listaKartGraczaDoSprawdzenia.remove(j);
+                        listaKartGraczaDoSprawdzenia.remove(j-1);
+                        tempList.add(listaKartGraczaDoSprawdzenia.get(listaKartGraczaDoSprawdzenia.size()-1));
+
+                        return tempList;
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     public boolean checkIfPair(List<Karta> listaKartGraczaDoSprawdzenia){
