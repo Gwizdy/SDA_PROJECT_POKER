@@ -1,6 +1,7 @@
 package com.sprawdzanie;
 
 import com.taliakart.*;
+
 import java.util.*;
 
 public class RoyalFlush {
@@ -22,38 +23,30 @@ public class RoyalFlush {
 
         listOfHighestFive = new ArrayList<Karta>();
 
-        if (sprawdzOdDziesiatkiDoAsa(listPIK, listOfHighestFive)) {
+        if (checkIfRoyalFlush(listPIK, listOfHighestFive)) {
             System.out.println("PIK KROLEWSKI");
-        } else {
-            System.out.println("NIE PIK KROLEWSKI");
         }
 
-        if (sprawdzOdDziesiatkiDoAsa(listTREFL, listOfHighestFive)) {
+        if (checkIfRoyalFlush(listTREFL, listOfHighestFive)) {
             System.out.println("TREFL KROLEWSKI");
-        } else {
-            System.out.println("NIE TREFL KROLEWSKI");
         }
 
-        if (sprawdzOdDziesiatkiDoAsa(listKARO, listOfHighestFive)) {
+        if (checkIfRoyalFlush(listKARO, listOfHighestFive)) {
             System.out.println("KARO KROLEWSKI");
-        } else {
-            System.out.println("NIE KARO KROLEWSKI");
         }
 
-        if (sprawdzOdDziesiatkiDoAsa(listKIER, listOfHighestFive)) {
+        if (checkIfRoyalFlush(listKIER, listOfHighestFive)) {
             System.out.println("KIER KROLEWSKI");
-        } else {
-            System.out.println("NIE KIER KROLEWSKI");
         }
     }
 
-    public boolean sprawdzOdDziesiatkiDoAsa(List<Karta> listaKolorowKart, List<Karta> listOfHighestFive) {
+    public boolean checkIfRoyalFlush(List<Karta> listaKolorowKart, List<Karta> listOfHighestFive) {
 
         getFiveHighestCards(listaKolorowKart, listOfHighestFive);
 
         Collections.sort(listOfHighestFive);
 
-        if (listOfHighestFive.size() >= 5) {
+        if (listOfHighestFive.size() == 5) {
             if (Arrays.asList(listOfHighestFive.get(0).getFigura()).contains(Figura.DZIESIATKA.getFigura()) &&
                     Arrays.asList(listOfHighestFive.get(1).getFigura()).contains(Figura.WALET.getFigura()) &&
                     Arrays.asList(listOfHighestFive.get(2).getFigura()).contains(Figura.DAMA.getFigura()) &&
@@ -66,6 +59,8 @@ public class RoyalFlush {
     }
 
     public void getFiveHighestCards(List<Karta> listaKolorowKart, List<Karta> listOfHighestFive) {
+
+        Collections.sort(listaKolorowKart);
 
         if (listaKolorowKart.size() >= 5) {
             for (int i = listaKolorowKart.size() - 1; i >= listaKolorowKart.size() - 5; i--) {

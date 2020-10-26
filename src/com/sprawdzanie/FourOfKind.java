@@ -14,14 +14,12 @@ public class FourOfKind {
 
     public void sprawdzanieFourOfKind(List<Karta> listaKartyGracza) {
 
-        if (szukanieCzterechJednakowychKart(listaKartyGracza)) {
-            System.out.println("Kareta");
-        } else {
-            System.out.println("Brak karety");
+        if (checkIfFourOfKind(listaKartyGracza)) {
+            System.out.println("Kareta " + figura);
         }
     }
 
-    public boolean szukanieCzterechJednakowychKart(List<Karta> listaKartyGracza) {
+    public boolean checkIfFourOfKind(List<Karta> listaKartyGracza) {
 
         for (int i = 0; i < listaKartyGracza.size() - 3; i++) {
             if (listaKartyGracza.get(i).getFigura() == listaKartyGracza.get(i + 1).getFigura() &&
