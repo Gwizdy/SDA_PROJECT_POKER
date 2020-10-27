@@ -27,7 +27,7 @@ public class HightCard {
         int licznik = 0;
 
         for (int i = 0; i < listaKartGraczaDoSprawdzenia.size() - 1; i++) {
-            for (int j = i + 1; j < listaKartGraczaDoSprawdzenia.size() ; j++) {
+            for (int j = i + 1; j < listaKartGraczaDoSprawdzenia.size(); j++) {
                 if (listaKartGraczaDoSprawdzenia.get(i).getFigura() != listaKartGraczaDoSprawdzenia.get(j).getFigura()) {
                     licznik += 1;
                 }
@@ -40,4 +40,13 @@ public class HightCard {
             return false;
     }
 
+    public List<Karta> getFiveCardsHighCard(List<Karta> listaKartGraczaDoSprawdzenia) {
+
+        Collections.sort(listaKartGraczaDoSprawdzenia);
+
+        listaKartGraczaDoSprawdzenia.remove(listaKartGraczaDoSprawdzenia.get(0));
+        listaKartGraczaDoSprawdzenia.remove(listaKartGraczaDoSprawdzenia.get(1));
+
+        return listaKartGraczaDoSprawdzenia;
+    }
 }
