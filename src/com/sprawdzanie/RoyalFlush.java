@@ -63,7 +63,7 @@ public class RoyalFlush {
         Collections.sort(listaKolorowKart);
 
         if (listaKolorowKart.size() >= 5) {
-            for (int i = listaKolorowKart.size() - 1; i >= listaKolorowKart.size() - 5; i--) {
+            for (int i = listaKolorowKart.size() - 1; i > 3; i--) {
                 listOfHighestFive.add(listaKolorowKart.get(i));
             }
         }

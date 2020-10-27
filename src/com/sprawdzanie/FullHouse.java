@@ -2,6 +2,7 @@ package com.sprawdzanie;
 
 import com.taliakart.Karta;
 
+import java.util.Collections;
 import java.util.List;
 
 public class FullHouse {
@@ -18,6 +19,8 @@ public class FullHouse {
     }
 
     private boolean checkIfFullHouse(List<Karta> listaKartyGracza) {
+
+        Collections.sort(listaKartyGracza);
 
         for (int i = listaKartyGracza.size() - 1; i > 3; i--) {
             if (listaKartyGracza.get(i).getFigura() == listaKartyGracza.get(i - 1).getFigura() &&

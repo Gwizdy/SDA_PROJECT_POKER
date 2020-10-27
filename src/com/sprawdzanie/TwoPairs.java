@@ -23,7 +23,7 @@ public class TwoPairs {
 
         for (int i = listaKartGraczaDoSprawdzenia.size() - 1; i >= 3; i--) {
             if (listaKartGraczaDoSprawdzenia.get(i).getFigura() == listaKartGraczaDoSprawdzenia.get(i - 1).getFigura()) {
-                for (int j = i; j >= 1; j--) {
+                for (int j = i - 2; j >= 1; j--) {
                     if (listaKartGraczaDoSprawdzenia.get(j).getFigura() == listaKartGraczaDoSprawdzenia.get(j - 1).getFigura()) {
                         return true;
                     }
@@ -32,4 +32,6 @@ public class TwoPairs {
         }
         return false;
     }
+
+
 }

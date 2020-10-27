@@ -2,6 +2,7 @@ package com.sprawdzanie;
 
 import com.taliakart.Karta;
 
+import java.util.Collections;
 import java.util.List;
 
 public class FourOfKind {
@@ -20,6 +21,8 @@ public class FourOfKind {
     }
 
     public boolean checkIfFourOfKind(List<Karta> listaKartyGracza) {
+
+        Collections.sort(listaKartyGracza);
 
         for (int i = 0; i < listaKartyGracza.size() - 3; i++) {
             if (listaKartyGracza.get(i).getFigura() == listaKartyGracza.get(i + 1).getFigura() &&
