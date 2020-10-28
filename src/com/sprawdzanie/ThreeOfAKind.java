@@ -10,18 +10,24 @@ public class ThreeOfAKind {
 
     private List<Karta> tempListOfThreeOfKind;
 
+    private int liczbaGry;
+
     public ThreeOfAKind() {
 
     }
 
-    public void sprawdzanieThreeOfAKind(List<Karta> listaKartyGracza) {
+    public int sprawdzanieThreeOfAKind(List<Karta> listaKartyGracza) {
+
+        liczbaGry = 0;
 
         if (checkIfThreeOfKind(listaKartyGracza)) {
-            System.out.println("Three of a kind");
+            liczbaGry = 4;
         }
+        return liczbaGry;
     }
 
     public boolean checkIfThreeOfKind(List<Karta> listaKartGraczaDoSprawdzenia) {
+
         Collections.sort(listaKartGraczaDoSprawdzenia);
 
         for (int i = listaKartGraczaDoSprawdzenia.size() - 1; i >= 2; i--) {
@@ -33,27 +39,36 @@ public class ThreeOfAKind {
         return false;
     }
 
-    public List<Karta> getFiveCardsThreeOfKind(List<Karta> listaKartGraczaDoSprawdzenia){
+    public List<Karta> getFiveCardsThreeOfKind(List<Karta> listaKartGraczaDoSprawdzenia) {
+
         Collections.sort(listaKartGraczaDoSprawdzenia);
 
         tempListOfThreeOfKind = new ArrayList<Karta>();
 
-        for (int i = listaKartGraczaDoSprawdzenia.size()-1 ; i>=2 ; i--){
-            if(listaKartGraczaDoSprawdzenia.get(i).getFigura() == listaKartGraczaDoSprawdzenia.get(i-1).getFigura() &&
-                    listaKartGraczaDoSprawdzenia.get(i).getFigura() == listaKartGraczaDoSprawdzenia.get(i-2).getFigura()){
+        for (int i = listaKartGraczaDoSprawdzenia.size() - 1; i >= 2; i--) {
+            if (listaKartGraczaDoSprawdzenia.get(i).getFigura() == listaKartGraczaDoSprawdzenia.get(i - 1).getFigura() &&
+                    listaKartGraczaDoSprawdzenia.get(i).getFigura() == listaKartGraczaDoSprawdzenia.get(i - 2).getFigura()) {
                 tempListOfThreeOfKind.add(listaKartGraczaDoSprawdzenia.get(i));
-                tempListOfThreeOfKind.add(listaKartGraczaDoSprawdzenia.get(i-1));
-                tempListOfThreeOfKind.add(listaKartGraczaDoSprawdzenia.get(i-2));
+                tempListOfThreeOfKind.add(listaKartGraczaDoSprawdzenia.get(i - 1));
+                tempListOfThreeOfKind.add(listaKartGraczaDoSprawdzenia.get(i - 2));
 
                 listaKartGraczaDoSprawdzenia.remove(i);
-                listaKartGraczaDoSprawdzenia.remove(i-1);
-                listaKartGraczaDoSprawdzenia.remove(i-2);
-                tempListOfThreeOfKind.add(listaKartGraczaDoSprawdzenia.get(listaKartGraczaDoSprawdzenia.size()-1));
-                tempListOfThreeOfKind.add(listaKartGraczaDoSprawdzenia.get(listaKartGraczaDoSprawdzenia.size()-2));
+                listaKartGraczaDoSprawdzenia.remove(i - 1);
+                listaKartGraczaDoSprawdzenia.remove(i - 2);
+                tempListOfThreeOfKind.add(listaKartGraczaDoSprawdzenia.get(listaKartGraczaDoSprawdzenia.size() - 1));
+                tempListOfThreeOfKind.add(listaKartGraczaDoSprawdzenia.get(listaKartGraczaDoSprawdzenia.size() - 2));
 
                 return tempListOfThreeOfKind;
             }
         }
         return null;
+    }
+
+    public List<Karta> getTempListOfThreeOfKind() {
+        return tempListOfThreeOfKind;
+    }
+
+    public void setTempListOfThreeOfKind(List<Karta> tempListOfThreeOfKind) {
+        this.tempListOfThreeOfKind = tempListOfThreeOfKind;
     }
 }

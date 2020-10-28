@@ -12,32 +12,38 @@ public class RoyalFlush {
     private List<Karta> listKIER;
 
     private List<Karta> listOfHighestFive;
+    private List<Karta> tempListOfRoyalFlush;
+
+    private int liczbaGry;
 
     public RoyalFlush() {
 
     }
 
-    public void sprawdzanieRoyalFlush(List<Karta> listaKartyGracza) {
+    public int sprawdzanieRoyalFlush(List<Karta> listaKartyGracza) {
+
+        liczbaGry = 0;
 
         listaKolorowKartyGracza(listaKartyGracza);
 
         listOfHighestFive = new ArrayList<Karta>();
 
         if (checkIfRoyalFlush(listPIK, listOfHighestFive)) {
-            System.out.println("PIK KROLEWSKI");
+            liczbaGry = 10;
         }
 
         if (checkIfRoyalFlush(listTREFL, listOfHighestFive)) {
-            System.out.println("TREFL KROLEWSKI");
+            liczbaGry = 10;
         }
 
         if (checkIfRoyalFlush(listKARO, listOfHighestFive)) {
-            System.out.println("KARO KROLEWSKI");
+            liczbaGry = 10;
         }
 
         if (checkIfRoyalFlush(listKIER, listOfHighestFive)) {
-            System.out.println("KIER KROLEWSKI");
+            liczbaGry = 10;
         }
+        return liczbaGry;
     }
 
     public boolean checkIfRoyalFlush(List<Karta> listaKolorowKart, List<Karta> listOfHighestFive) {
@@ -89,5 +95,78 @@ public class RoyalFlush {
         }
     }
 
+    public List<Karta> getFiveCardsRoyalFlush(List<Karta> listaKartGraczaDoSprawdzenia) {
+
+        tempListOfRoyalFlush = new ArrayList<Karta>();
+
+        listaKolorowKartyGracza(listaKartGraczaDoSprawdzenia);
+
+        if (listPIK.size() >= 5) {
+            getFiveHighestCards(listPIK, tempListOfRoyalFlush);
+
+            Collections.sort(tempListOfRoyalFlush);
+
+            if (tempListOfRoyalFlush.size() == 5) {
+                if (Arrays.asList(tempListOfRoyalFlush.get(0).getFigura()).contains(Figura.DZIESIATKA.getFigura()) &&
+                        Arrays.asList(tempListOfRoyalFlush.get(1).getFigura()).contains(Figura.WALET.getFigura()) &&
+                        Arrays.asList(tempListOfRoyalFlush.get(2).getFigura()).contains(Figura.DAMA.getFigura()) &&
+                        Arrays.asList(tempListOfRoyalFlush.get(3).getFigura()).contains(Figura.KROL.getFigura()) &&
+                        Arrays.asList(tempListOfRoyalFlush.get(4).getFigura()).contains(Figura.AS.getFigura())) {
+                    return tempListOfRoyalFlush;
+                }
+            }
+        }else if (listTREFL.size() >= 5){
+            getFiveHighestCards(listTREFL, tempListOfRoyalFlush);
+
+            Collections.sort(tempListOfRoyalFlush);
+
+            if (tempListOfRoyalFlush.size() == 5) {
+                if (Arrays.asList(tempListOfRoyalFlush.get(0).getFigura()).contains(Figura.DZIESIATKA.getFigura()) &&
+                        Arrays.asList(tempListOfRoyalFlush.get(1).getFigura()).contains(Figura.WALET.getFigura()) &&
+                        Arrays.asList(tempListOfRoyalFlush.get(2).getFigura()).contains(Figura.DAMA.getFigura()) &&
+                        Arrays.asList(tempListOfRoyalFlush.get(3).getFigura()).contains(Figura.KROL.getFigura()) &&
+                        Arrays.asList(tempListOfRoyalFlush.get(4).getFigura()).contains(Figura.AS.getFigura())) {
+                    return tempListOfRoyalFlush;
+                }
+            }
+        }else if (listKARO.size() >= 5){
+            getFiveHighestCards(listKARO, tempListOfRoyalFlush);
+
+            Collections.sort(tempListOfRoyalFlush);
+
+            if (tempListOfRoyalFlush.size() == 5) {
+                if (Arrays.asList(tempListOfRoyalFlush.get(0).getFigura()).contains(Figura.DZIESIATKA.getFigura()) &&
+                        Arrays.asList(tempListOfRoyalFlush.get(1).getFigura()).contains(Figura.WALET.getFigura()) &&
+                        Arrays.asList(tempListOfRoyalFlush.get(2).getFigura()).contains(Figura.DAMA.getFigura()) &&
+                        Arrays.asList(tempListOfRoyalFlush.get(3).getFigura()).contains(Figura.KROL.getFigura()) &&
+                        Arrays.asList(tempListOfRoyalFlush.get(4).getFigura()).contains(Figura.AS.getFigura())) {
+                    return tempListOfRoyalFlush;
+                }
+            }
+        }else if (listKIER.size() >= 5){
+            getFiveHighestCards(listKIER, tempListOfRoyalFlush);
+
+            Collections.sort(tempListOfRoyalFlush);
+
+            if (tempListOfRoyalFlush.size() == 5) {
+                if (Arrays.asList(tempListOfRoyalFlush.get(0).getFigura()).contains(Figura.DZIESIATKA.getFigura()) &&
+                        Arrays.asList(tempListOfRoyalFlush.get(1).getFigura()).contains(Figura.WALET.getFigura()) &&
+                        Arrays.asList(tempListOfRoyalFlush.get(2).getFigura()).contains(Figura.DAMA.getFigura()) &&
+                        Arrays.asList(tempListOfRoyalFlush.get(3).getFigura()).contains(Figura.KROL.getFigura()) &&
+                        Arrays.asList(tempListOfRoyalFlush.get(4).getFigura()).contains(Figura.AS.getFigura())) {
+                    return tempListOfRoyalFlush;
+                }
+            }
+        }
+        return null;
+    }
+
+    public List<Karta> getTempListOfRoyalFlush() {
+        return tempListOfRoyalFlush;
+    }
+
+    public void setTempListOfRoyalFlush(List<Karta> tempListOfRoyalFlush) {
+        this.tempListOfRoyalFlush = tempListOfRoyalFlush;
+    }
 }
 

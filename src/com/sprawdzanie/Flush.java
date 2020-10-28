@@ -17,31 +17,36 @@ public class Flush {
     private List<Karta> listOfHighestFive;
     private List<Karta> tempListOfFlush;
 
+    private int liczbaGry;
+
     public Flush() {
 
     }
 
-    public void sprawdzanieFlush(List<Karta> listaKartyGracza) {
+    public int sprawdzanieFlush(List<Karta> listaKartyGracza) {
+
+        liczbaGry = 0;
 
         listaKolorowKartyGracza(listaKartyGracza);
 
         listOfHighestFive = new ArrayList<Karta>();
 
         if (checkIfFlush(listPIK, listOfHighestFive)) {
-            System.out.println("PIK FLUSH");
+            liczbaGry = 6;
         }
 
         if (checkIfFlush(listTREFL, listOfHighestFive)) {
-            System.out.println("TREFL FLUSH");
+            liczbaGry = 6;
         }
 
         if (checkIfFlush(listKARO, listOfHighestFive)) {
-            System.out.println("KARO FLUSH");
+            liczbaGry = 6;
         }
 
         if (checkIfFlush(listKIER, listOfHighestFive)) {
-            System.out.println("KIER FLUSH");
+            liczbaGry = 6;
         }
+        return liczbaGry;
     }
 
     public boolean checkIfFlush(List<Karta> listaKolorowKart, List<Karta> listOfHighestFive) {
@@ -61,7 +66,7 @@ public class Flush {
         Collections.sort(listaKolorowKart);
 
         if (listaKolorowKart.size() >= 5) {
-            for (int i = listaKolorowKart.size() - 1; i > listaKolorowKart.size()-6; i--) {
+            for (int i = listaKolorowKart.size() - 1; i > listaKolorowKart.size() - 6; i--) {
                 listOfHighestFive.add(listaKolorowKart.get(i));
             }
         }
@@ -109,4 +114,11 @@ public class Flush {
         return null;
     }
 
+    public List<Karta> getTempListOfFlush() {
+        return tempListOfFlush;
+    }
+
+    public void setTempListOfFlush(List<Karta> tempListOfFlush) {
+        this.tempListOfFlush = tempListOfFlush;
+    }
 }

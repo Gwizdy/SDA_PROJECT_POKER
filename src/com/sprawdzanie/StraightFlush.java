@@ -16,26 +16,33 @@ public class StraightFlush {
     private List<Karta> listKARO;
     private List<Karta> listKIER;
 
+    private List<Karta> tempListOfStraightFlush;
+
+    private int liczbaGry;
+
     public StraightFlush() {
 
     }
 
-    public void sprawdzanieIfStraightFlush(List<Karta> listaKartGraczaDoSprawdzenia) {
+    public int sprawdzanieIfStraightFlush(List<Karta> listaKartGraczaDoSprawdzenia) {
+
+        liczbaGry = 0;
 
         listaKolorowKartyGracza(listaKartGraczaDoSprawdzenia);
 
         if (checkIfStraightFlush(listPIK)) {
-            System.out.println("STRAIGHT FLUSH" + listPIK);
+            liczbaGry = 9;
         }
         if (checkIfStraightFlush(listTREFL)) {
-            System.out.println("STRAIGHT FLUSH" + listTREFL);
+            liczbaGry = 9;
         }
         if (checkIfStraightFlush(listKARO)) {
-            System.out.println("STRAIGHT FLUSH" + listKARO);
+            liczbaGry = 9;
         }
         if (checkIfStraightFlush(listKIER)) {
-            System.out.println("STRAIGHT FLUSH" + listKIER);
+            liczbaGry = 9;
         }
+        return liczbaGry;
     }
 
     public boolean checkIfStraightFlush(List<Karta> listaUnikalnychFigur) {
@@ -82,4 +89,153 @@ public class StraightFlush {
         }
     }
 
+    public List<Karta> getFiveCardsStraightFlush(List<Karta> listaKartGraczaDoSprawdzenia) {
+
+        tempListOfStraightFlush = new ArrayList<Karta>();
+
+        listaKolorowKartyGracza(listaKartGraczaDoSprawdzenia);
+
+        if (listPIK.size() >= 5) {
+
+            Collections.sort(listPIK);
+
+            for (int i = listPIK.size() - 1; i >= 4; i--) {
+                if (listPIK.get(i).getFigura() == listPIK.get(i - 1).getFigura() + 1
+                        && listPIK.get(i).getFigura() == listPIK.get(i - 2).getFigura() + 2
+                        && listPIK.get(i).getFigura() == listPIK.get(i - 3).getFigura() + 3
+                        && listPIK.get(i).getFigura() == listPIK.get(i - 4).getFigura() + 4) {
+
+                    tempListOfStraightFlush.add(listPIK.get(i));
+                    tempListOfStraightFlush.add(listPIK.get(i - 1));
+                    tempListOfStraightFlush.add(listPIK.get(i - 2));
+                    tempListOfStraightFlush.add(listPIK.get(i - 3));
+                    tempListOfStraightFlush.add(listPIK.get(i - 4));
+
+                    return tempListOfStraightFlush;
+                }
+            }
+            if (Arrays.asList(listPIK.get(0).getFigura()).contains(Figura.DWOJKA.getFigura()) &&
+                    Arrays.asList(listPIK.get(1).getFigura()).contains(Figura.TROJKA.getFigura()) &&
+                    Arrays.asList(listPIK.get(2).getFigura()).contains(Figura.CZWORKA.getFigura()) &&
+                    Arrays.asList(listPIK.get(3).getFigura()).contains(Figura.PIATKA.getFigura()) &&
+                    Arrays.asList(listPIK.get(listaKartGraczaDoSprawdzenia.size() - 1).getFigura()).contains(Figura.AS.getFigura())) {
+
+                tempListOfStraightFlush.add(listPIK.get(0));
+                tempListOfStraightFlush.add(listPIK.get(1));
+                tempListOfStraightFlush.add(listPIK.get(2));
+                tempListOfStraightFlush.add(listPIK.get(3));
+                tempListOfStraightFlush.add(listPIK.get(listPIK.size() - 1));
+
+                return tempListOfStraightFlush;
+            }
+        } else if (listTREFL.size() >= 5) {
+
+            Collections.sort(listTREFL);
+
+            for (int i = listTREFL.size() - 1; i >= 4; i--) {
+                if (listTREFL.get(i).getFigura() == listTREFL.get(i - 1).getFigura() + 1
+                        && listTREFL.get(i).getFigura() == listTREFL.get(i - 2).getFigura() + 2
+                        && listTREFL.get(i).getFigura() == listTREFL.get(i - 3).getFigura() + 3
+                        && listTREFL.get(i).getFigura() == listTREFL.get(i - 4).getFigura() + 4) {
+
+                    tempListOfStraightFlush.add(listTREFL.get(i));
+                    tempListOfStraightFlush.add(listTREFL.get(i - 1));
+                    tempListOfStraightFlush.add(listTREFL.get(i - 2));
+                    tempListOfStraightFlush.add(listTREFL.get(i - 3));
+                    tempListOfStraightFlush.add(listTREFL.get(i - 4));
+
+                    return tempListOfStraightFlush;
+                }
+            }
+            if (Arrays.asList(listTREFL.get(0).getFigura()).contains(Figura.DWOJKA.getFigura()) &&
+                    Arrays.asList(listTREFL.get(1).getFigura()).contains(Figura.TROJKA.getFigura()) &&
+                    Arrays.asList(listTREFL.get(2).getFigura()).contains(Figura.CZWORKA.getFigura()) &&
+                    Arrays.asList(listTREFL.get(3).getFigura()).contains(Figura.PIATKA.getFigura()) &&
+                    Arrays.asList(listTREFL.get(listaKartGraczaDoSprawdzenia.size() - 1).getFigura()).contains(Figura.AS.getFigura())) {
+
+                tempListOfStraightFlush.add(listTREFL.get(0));
+                tempListOfStraightFlush.add(listTREFL.get(1));
+                tempListOfStraightFlush.add(listTREFL.get(2));
+                tempListOfStraightFlush.add(listTREFL.get(3));
+                tempListOfStraightFlush.add(listTREFL.get(listTREFL.size() - 1));
+
+                return tempListOfStraightFlush;
+            }
+        } else if (listKARO.size() >= 5) {
+
+            Collections.sort(listKARO);
+
+            for (int i = listKARO.size() - 1; i >= 4; i--) {
+                if (listKARO.get(i).getFigura() == listKARO.get(i - 1).getFigura() + 1
+                        && listKARO.get(i).getFigura() == listKARO.get(i - 2).getFigura() + 2
+                        && listKARO.get(i).getFigura() == listKARO.get(i - 3).getFigura() + 3
+                        && listKARO.get(i).getFigura() == listKARO.get(i - 4).getFigura() + 4) {
+
+                    tempListOfStraightFlush.add(listKARO.get(i));
+                    tempListOfStraightFlush.add(listKARO.get(i - 1));
+                    tempListOfStraightFlush.add(listKARO.get(i - 2));
+                    tempListOfStraightFlush.add(listKARO.get(i - 3));
+                    tempListOfStraightFlush.add(listKARO.get(i - 4));
+
+                    return tempListOfStraightFlush;
+                }
+            }
+            if (Arrays.asList(listKARO.get(0).getFigura()).contains(Figura.DWOJKA.getFigura()) &&
+                    Arrays.asList(listKARO.get(1).getFigura()).contains(Figura.TROJKA.getFigura()) &&
+                    Arrays.asList(listKARO.get(2).getFigura()).contains(Figura.CZWORKA.getFigura()) &&
+                    Arrays.asList(listKARO.get(3).getFigura()).contains(Figura.PIATKA.getFigura()) &&
+                    Arrays.asList(listKARO.get(listaKartGraczaDoSprawdzenia.size() - 1).getFigura()).contains(Figura.AS.getFigura())) {
+
+                tempListOfStraightFlush.add(listKARO.get(0));
+                tempListOfStraightFlush.add(listKARO.get(1));
+                tempListOfStraightFlush.add(listKARO.get(2));
+                tempListOfStraightFlush.add(listKARO.get(3));
+                tempListOfStraightFlush.add(listKARO.get(listKARO.size() - 1));
+
+                return tempListOfStraightFlush;
+            }
+        } else if (listKIER.size() >= 5) {
+
+            Collections.sort(listKIER);
+
+            for (int i = listKIER.size() - 1; i >= 4; i--) {
+                if (listKIER.get(i).getFigura() == listKIER.get(i - 1).getFigura() + 1
+                        && listKIER.get(i).getFigura() == listKIER.get(i - 2).getFigura() + 2
+                        && listKIER.get(i).getFigura() == listKIER.get(i - 3).getFigura() + 3
+                        && listKIER.get(i).getFigura() == listKIER.get(i - 4).getFigura() + 4) {
+
+                    tempListOfStraightFlush.add(listKIER.get(i));
+                    tempListOfStraightFlush.add(listKIER.get(i - 1));
+                    tempListOfStraightFlush.add(listKIER.get(i - 2));
+                    tempListOfStraightFlush.add(listKIER.get(i - 3));
+                    tempListOfStraightFlush.add(listKIER.get(i - 4));
+
+                    return tempListOfStraightFlush;
+                }
+            }
+            if (Arrays.asList(listKIER.get(0).getFigura()).contains(Figura.DWOJKA.getFigura()) &&
+                    Arrays.asList(listKIER.get(1).getFigura()).contains(Figura.TROJKA.getFigura()) &&
+                    Arrays.asList(listKIER.get(2).getFigura()).contains(Figura.CZWORKA.getFigura()) &&
+                    Arrays.asList(listKIER.get(3).getFigura()).contains(Figura.PIATKA.getFigura()) &&
+                    Arrays.asList(listKIER.get(listaKartGraczaDoSprawdzenia.size() - 1).getFigura()).contains(Figura.AS.getFigura())) {
+
+                tempListOfStraightFlush.add(listKIER.get(0));
+                tempListOfStraightFlush.add(listKIER.get(1));
+                tempListOfStraightFlush.add(listKIER.get(2));
+                tempListOfStraightFlush.add(listKIER.get(3));
+                tempListOfStraightFlush.add(listKIER.get(listKIER.size() - 1));
+
+                return tempListOfStraightFlush;
+            }
+        }
+        return null;
+    }
+
+    public List<Karta> getTempListOfStraightFlush() {
+        return tempListOfStraightFlush;
+    }
+
+    public void setTempListOfStraightFlush(List<Karta> tempListOfStraightFlush) {
+        this.tempListOfStraightFlush = tempListOfStraightFlush;
+    }
 }

@@ -2,22 +2,24 @@ package com.sprawdzanie;
 
 import com.taliakart.Karta;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class HightCard {
 
-    private Karta highestCard;
+    private List<Karta> tempListOfHighCard;
 
     public HightCard() {
 
     }
 
-    public void sprawdzanieHighCard(List<Karta> listaKartyGracza) {
+    public int sprawdzanieHighCard(List<Karta> listaKartyGracza) {
 
         if (checkIfHightCard(listaKartyGracza)) {
-            System.out.println("High Card" + highestCard);
+            return 1;
         }
+        return 0;
     }
 
     public boolean checkIfHightCard(List<Karta> listaKartGraczaDoSprawdzenia) {
@@ -34,7 +36,6 @@ public class HightCard {
             }
         }
         if (licznik == 21) {
-            highestCard = listaKartGraczaDoSprawdzenia.get(listaKartGraczaDoSprawdzenia.size() - 1);
             return true;
         } else
             return false;
@@ -44,9 +45,19 @@ public class HightCard {
 
         Collections.sort(listaKartGraczaDoSprawdzenia);
 
-        listaKartGraczaDoSprawdzenia.remove(listaKartGraczaDoSprawdzenia.get(0));
-        listaKartGraczaDoSprawdzenia.remove(listaKartGraczaDoSprawdzenia.get(1));
+        tempListOfHighCard = new ArrayList<Karta>();
 
-        return listaKartGraczaDoSprawdzenia;
+        for (int i = listaKartGraczaDoSprawdzenia.size() - 1; i > 1; i--) {
+            tempListOfHighCard.add(listaKartGraczaDoSprawdzenia.get(i));
+        }
+        return tempListOfHighCard;
+    }
+
+    public List<Karta> getTempListOfHighCard() {
+        return tempListOfHighCard;
+    }
+
+    public void setTempListOfHighCard(List<Karta> tempListOfHighCard) {
+        this.tempListOfHighCard = tempListOfHighCard;
     }
 }
