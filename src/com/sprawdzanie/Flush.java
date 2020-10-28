@@ -15,6 +15,7 @@ public class Flush {
     private List<Karta> listKIER;
 
     private List<Karta> listOfHighestFive;
+    private List<Karta> tempListOfFlush;
 
     public Flush() {
 
@@ -60,7 +61,7 @@ public class Flush {
         Collections.sort(listaKolorowKart);
 
         if (listaKolorowKart.size() >= 5) {
-            for (int i = listaKolorowKart.size() - 1; i > 3; i--) {
+            for (int i = listaKolorowKart.size() - 1; i > listaKolorowKart.size()-6; i--) {
                 listOfHighestFive.add(listaKolorowKart.get(i));
             }
         }
@@ -84,6 +85,28 @@ public class Flush {
                 listKIER.add(k);
             }
         }
+    }
+
+    public List<Karta> getFiveCardsFlush(List<Karta> listaKartGraczaDoSprawdzenia) {
+
+        tempListOfFlush = new ArrayList<Karta>();
+
+        listaKolorowKartyGracza(listaKartGraczaDoSprawdzenia);
+
+        if (listPIK.size() >= 5) {
+            getFiveHighestCards(listPIK,tempListOfFlush);
+            return tempListOfFlush;
+        }else if (listTREFL.size() >= 5){
+            getFiveHighestCards(listTREFL,tempListOfFlush);
+            return tempListOfFlush;
+        }else if (listKARO.size() >= 5){
+            getFiveHighestCards(listKARO,tempListOfFlush);
+            return tempListOfFlush;
+        }else if (listKIER.size() >= 5){
+            getFiveHighestCards(listKIER,tempListOfFlush);
+            return tempListOfFlush;
+        }
+        return null;
     }
 
 }
