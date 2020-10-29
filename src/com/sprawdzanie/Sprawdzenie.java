@@ -101,6 +101,7 @@ public class Sprawdzenie {
                 }
             } else if (liczba == liczbaPomocnicza) {
                 if (liczbaPomocnicza == 9) {
+                    ifCardsEquals(straightFlush,listaPomocnicza);
                     //tutaj porównanie dwóch Pokerów i zwrócenie większego do listy pomocniczej
                 } else if (liczbaPomocnicza == 8) {
                     //tutaj porównanie dwóch karet i zwrócenie większej do listy pomocniczej
@@ -145,5 +146,18 @@ public class Sprawdzenie {
 
         return handPlusTableCards;
     }
+
+    public List<Karta> ifCardsEquals(List<Karta> aktualnyUkladKart,List<Karta> pomocniczyUkladKart) {
+
+        for(int i = 0 ; i<aktualnyUkladKart.size(); i++){
+            if(aktualnyUkladKart.get(i).getFigura() > pomocniczyUkladKart.get(i).getFigura()){
+                return aktualnyUkladKart;
+            }else if (pomocniczyUkladKart.get(i).getFigura() > aktualnyUkladKart.get(i).getFigura()){
+                return pomocniczyUkladKart;
+            }
+        }
+        return aktualnyUkladKart;
+    }
+
 
 }
