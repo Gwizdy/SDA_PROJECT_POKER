@@ -83,13 +83,13 @@ public class FullHouse {
                     if (listaKartGraczaDoSprawdzenia.get(j).getFigura() == listaKartGraczaDoSprawdzenia.get(j - 1).getFigura() &&
                             listaKartGraczaDoSprawdzenia.get(j).getFigura() == listaKartGraczaDoSprawdzenia.get(j - 2).getFigura()) {
 
-                        tempListOfFullHouse.add(listaKartGraczaDoSprawdzenia.get(i));
-                        tempListOfFullHouse.add(listaKartGraczaDoSprawdzenia.get(i - 1));
-
                         tempListOfFullHouse.add(listaKartGraczaDoSprawdzenia.get(j));
                         tempListOfFullHouse.add(listaKartGraczaDoSprawdzenia.get(j - 1));
                         tempListOfFullHouse.add(listaKartGraczaDoSprawdzenia.get(j - 2));
 
+                        tempListOfFullHouse.add(listaKartGraczaDoSprawdzenia.get(i));
+                        tempListOfFullHouse.add(listaKartGraczaDoSprawdzenia.get(i - 1));
+                        
                         return tempListOfFullHouse;
                     }
                 }

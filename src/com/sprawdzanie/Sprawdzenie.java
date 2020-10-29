@@ -25,9 +25,14 @@ public class Sprawdzenie {
 
     private List<Karta> listaPomocnicza;
 
+    private List<String> listaGraczyStreigh;
+    private List<List<Karta>> listalistKartyStreigh;
+
     private int liczba;
     private int liczbaPomocnicza;
     private String gracz;
+    private String gracz1;
+
 
     public Sprawdzenie(GUITalia guiTalia) {
         this.guiTalia = guiTalia;
@@ -35,6 +40,9 @@ public class Sprawdzenie {
         liczba = 0;
 
         listaPomocnicza = new ArrayList<Karta>();
+
+        listaGraczyStreigh = new ArrayList<String>();
+        listalistKartyStreigh = new ArrayList<List<Karta>>();
 
         for (int i = 0; i < guiTalia.getIloscGraczy(); i++) {
 
@@ -100,17 +108,52 @@ public class Sprawdzenie {
                     listaPomocnicza.addAll(hightCard.getTempListOfHighCard());
                 }
             } else if (liczba == liczbaPomocnicza) {
+
+                gracz1 = "Player " + (i + 1);
+
                 if (liczbaPomocnicza == 9) {
-                    ifCardsEquals(straightFlush,listaPomocnicza);
-                    //tutaj porównanie dwóch Pokerów i zwrócenie większego do listy pomocniczej
+                    if (compareCards(straightFlush.getTempListOfStraightFlush(), listaPomocnicza) == 2) {
+
+                        listaPomocnicza.removeAll(listaPomocnicza);
+                        listaPomocnicza.addAll(straightFlush.getTempListOfStraightFlush());
+
+                    }
                 } else if (liczbaPomocnicza == 8) {
-                    //tutaj porównanie dwóch karet i zwrócenie większej do listy pomocniczej
+                    if (compareCards(fourOfKind.getTempListOfFourOfKind(), listaPomocnicza) == 2) {
+
+                        listaPomocnicza.removeAll(listaPomocnicza);
+                        listaPomocnicza.addAll(fourOfKind.getTempListOfFourOfKind());
+
+                    }
                 } else if (liczbaPomocnicza == 7) {
-                    //tutaj porównanie dwóch Full i zwrócenie większego do listy pomocniczej
+                    if (compareCards(fullHouse.getTempListOfFullHouse(), listaPomocnicza) == 2) {
+
+                        listaPomocnicza.removeAll(listaPomocnicza);
+                        listaPomocnicza.addAll(fullHouse.getTempListOfFullHouse());
+
+                    }
                 } else if (liczbaPomocnicza == 6) {
-                    // tutaj porównanie dwóch kolorów i zwrócenie większego do listy pomocniczej
+                    if (compareCards(flush.getTempListOfFlush(), listaPomocnicza) == 2) {
+
+                        listaPomocnicza.removeAll(listaPomocnicza);
+                        listaPomocnicza.addAll(flush.getTempListOfFlush());
+
+                    }
                 } else if (liczbaPomocnicza == 5) {
-                    // tutaj porównanie dwóch stritów i zwrócenie większego do listy pomocniczej
+
+                    if (compareCards(streigh.getTempListOfStreigh(), listaPomocnicza) == 2) {
+
+                        listaGraczyStreigh.removeAll(listaGraczyStreigh);
+                        listalistKartyStreigh.removeAll(listalistKartyStreigh);
+
+                        listaPomocnicza.removeAll(listaPomocnicza);
+                        listaPomocnicza.addAll(streigh.getTempListOfStreigh());
+
+                    } else if (compareCards(streigh.getTempListOfStreigh(), listaPomocnicza) == 0) {
+
+                        listaGraczyStreigh.add(gracz1);
+                        listalistKartyStreigh.add(streigh.getTempListOfStreigh());
+                    }
                 } else if (liczbaPomocnicza == 4) {
                     // tutaj porównanie dwóch trójek i zwrócenie do listy pomocniczej całej piątki kart
                 } else if (liczbaPomocnicza == 3) {
@@ -126,8 +169,7 @@ public class Sprawdzenie {
         System.out.println("Wygrał " + gracz + " z kartami:" + listaPomocnicza);
     }
 
-    public List<Karta> kartyRekaPlusStol
-            (List<List<Karta>> listaGraczy, List<Karta> listaKartyFlop, List<Karta> listaKartyTurnOrRiver) {
+    public List<Karta> kartyRekaPlusStol(List<List<Karta>> listaGraczy, List<Karta> listaKartyFlop, List<Karta> listaKartyTurnOrRiver) {
 
         List<Karta> gracz = listaGraczy.get(0);
 
@@ -147,17 +189,16 @@ public class Sprawdzenie {
         return handPlusTableCards;
     }
 
-    public List<Karta> ifCardsEquals(List<Karta> aktualnyUkladKart,List<Karta> pomocniczyUkladKart) {
+    public int compareCards(List<Karta> aktualnyUkladKart, List<Karta> pomocniczyUkladKart) {
 
-        for(int i = 0 ; i<aktualnyUkladKart.size(); i++){
-            if(aktualnyUkladKart.get(i).getFigura() > pomocniczyUkladKart.get(i).getFigura()){
-                return aktualnyUkladKart;
-            }else if (pomocniczyUkladKart.get(i).getFigura() > aktualnyUkladKart.get(i).getFigura()){
-                return pomocniczyUkladKart;
+        for (int i = 0; i < aktualnyUkladKart.size(); i++) {
+            if (aktualnyUkladKart.get(i).getFigura() > pomocniczyUkladKart.get(i).getFigura()) {
+                return 2;
+            } else if (pomocniczyUkladKart.get(i).getFigura() > aktualnyUkladKart.get(i).getFigura()) {
+                return 1;
             }
         }
-        return aktualnyUkladKart;
+        return 0;
     }
-
 
 }
