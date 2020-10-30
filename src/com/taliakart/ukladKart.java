@@ -14,6 +14,13 @@ public class ukladKart {
     private List<Karta> tempListOfOnePair;
     private List<Karta> tempListOfThreeOfKind;
     private List<Karta> tempListOfFourOfKind;
+    private List<Karta> tempListOfFullHouse;
+    private List<Karta> tempListOfStraightFlush;
+    private List<Karta> tempListOfRoyalFlush;
+    private List<Karta> tempListOfStreigh;
+    private List<Karta> tempStreighList;
+    private List<Karta> tempListOfHighCard;
+
 
 
     private List<Karta> TESTOWATALIA;
@@ -42,15 +49,14 @@ public class ukladKart {
         listOfHighestFive = new ArrayList<Karta>();
         tempStraightList = new ArrayList<Karta>();
         TESTOWATALIA = new ArrayList<Karta>();
-        TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.OSEMKA));
-        TESTOWATALIA.add(new Karta(Kolor.KARO, Figura.TROJKA));
-        TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.SZOSTKA));
-        TESTOWATALIA.add(new Karta(Kolor.TREFL, Figura.OSEMKA));
-        TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.CZWORKA));
-        TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.OSEMKA));
         TESTOWATALIA.add(new Karta(Kolor.KIER, Figura.AS));
-        TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.DWOJKA));
-
+        TESTOWATALIA.add(new Karta(Kolor.TREFL, Figura.SIODEMKA));
+        TESTOWATALIA.add(new Karta(Kolor.KIER, Figura.DWOJKA));
+        TESTOWATALIA.add(new Karta(Kolor.KARO, Figura.WALET));
+//        TESTOWATALIA.add(new Karta(Kolor.KARO, Figura.SZOSTKA));
+        TESTOWATALIA.add(new Karta(Kolor.KIER, Figura.PIATKA));
+        TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.CZWORKA));
+        TESTOWATALIA.add(new Karta(Kolor.TREFL, Figura.TROJKA));
 
         listaRakPlusStol = new ArrayList<List<Karta>>(); // inicjacja listy list
 
@@ -69,21 +75,6 @@ public class ukladKart {
             taliaDoTestu.remove(taliaDoTestu.get(r));
         }
 
-        /*LISTA W LISCIE
-
-        for (int i = 0; i<7;i++){
-            int r = rand.nextInt(taliaDoTestu.size());
-            rekaPlusStol2.add(taliaDoTestu.get(r));
-            taliaDoTestu.remove(taliaDoTestu.get(r));
-        }
-
-        listaRakPlusStol.add(rekaPlusStol);
-        listaRakPlusStol.add(rekaPlusStol2);
-
-        System.out.println("LISTA RAK PLUS STOL" + listaRakPlusStol.get(0).get(0) + " " + listaRakPlusStol.get(1));
-
-         */
-
 //        System.out.println("wylosowana reka" + rekaPlusStol);
 //        System.out.println("wylosowana reka2" + rekaPlusStol2);
 //        System.out.println("pozostala talia" + taliaDoTestu);
@@ -96,8 +87,11 @@ public class ukladKart {
         Collections.sort(rekaPlusStol);
         System.out.println("potasowana reka " + rekaPlusStol);
 
-        if(getFiveCardsThreeOfKind(TESTOWATALIA) != null)
-            System.out.println("THREE OF KIND" + tempListOfThreeOfKind);
+        Collections.sort(TESTOWATALIA);
+        System.out.println(TESTOWATALIA);
+
+        if(getFiveCardsHighCard(TESTOWATALIA) != null)
+            System.out.println("HIGH CARDS" + tempListOfHighCard);
 
 
         System.out.println("PIK " + listPIK.size() + "TREFL " + listTREFL.size() + "KARO " + listKARO.size() + "KIER " + listKIER.size());
@@ -387,21 +381,148 @@ public class ukladKart {
         return null;
     }
 
-//    public List<Karta> checkIfFourOfKind(List<Karta> listaKartGraczaDoSprawdzenia) {
-//
-//        tempListOfFourOfKind = new ArrayList<Karta>();
-//
-//        Collections.sort(listaKartGraczaDoSprawdzenia);
-//
-//        for (int i = 0; i < listaKartGraczaDoSprawdzenia.size() - 3; i++) {
-//            if (listaKartGraczaDoSprawdzenia.get(i).getFigura() == listaKartGraczaDoSprawdzenia.get(i + 1).getFigura() &&
-//                    listaKartGraczaDoSprawdzenia.get(i).getFigura() == listaKartGraczaDoSprawdzenia.get(i + 2).getFigura() &&
-//                    listaKartGraczaDoSprawdzenia.get(i).getFigura() == listaKartGraczaDoSprawdzenia.get(i + 3).getFigura()) {
-//                figura = listaKartyGracza.get(i);
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+    public List<Karta> getFiveCardsFourOfKind(List<Karta> listaKartGraczaDoSprawdzenia) {
+
+        Collections.sort(listaKartGraczaDoSprawdzenia);
+
+        tempListOfFourOfKind = new ArrayList<Karta>();
+
+        for (int i = 0; i < listaKartGraczaDoSprawdzenia.size() - 3; i++) {
+            if (listaKartGraczaDoSprawdzenia.get(i).getFigura() == listaKartGraczaDoSprawdzenia.get(i + 1).getFigura() &&
+                    listaKartGraczaDoSprawdzenia.get(i).getFigura() == listaKartGraczaDoSprawdzenia.get(i + 2).getFigura() &&
+                    listaKartGraczaDoSprawdzenia.get(i).getFigura() == listaKartGraczaDoSprawdzenia.get(i + 3).getFigura()) {
+
+                tempListOfFourOfKind.add(listaKartGraczaDoSprawdzenia.get(i));
+                tempListOfFourOfKind.add(listaKartGraczaDoSprawdzenia.get(i + 1));
+                tempListOfFourOfKind.add(listaKartGraczaDoSprawdzenia.get(i + 2));
+                tempListOfFourOfKind.add(listaKartGraczaDoSprawdzenia.get(i + 3));
+
+                listaKartGraczaDoSprawdzenia.remove(i);
+                listaKartGraczaDoSprawdzenia.remove(i);
+                listaKartGraczaDoSprawdzenia.remove(i);
+                listaKartGraczaDoSprawdzenia.remove(i);
+
+                tempListOfFourOfKind.add(listaKartGraczaDoSprawdzenia.get(listaKartGraczaDoSprawdzenia.size() - 1));
+
+                return tempListOfFourOfKind;
+            }
+        }
+        return null;
+    }
+
+    public List<Karta> getFiveCardsFullHouse(List<Karta> listaKartGraczaDoSprawdzenia) {
+
+        Collections.sort(listaKartGraczaDoSprawdzenia);
+
+        tempListOfFullHouse = new ArrayList<Karta>();
+
+        for (int i = listaKartGraczaDoSprawdzenia.size() - 1; i > 3; i--) {
+            if (listaKartGraczaDoSprawdzenia.get(i).getFigura() == listaKartGraczaDoSprawdzenia.get(i - 1).getFigura() &&
+                    listaKartGraczaDoSprawdzenia.get(i).getFigura() == listaKartGraczaDoSprawdzenia.get(i - 2).getFigura()) {
+                for (int j = i - 3; j > 0; j--) {
+                    if (listaKartGraczaDoSprawdzenia.get(j).getFigura() == listaKartGraczaDoSprawdzenia.get(j - 1).getFigura()) {
+
+                        tempListOfFullHouse.add(listaKartGraczaDoSprawdzenia.get(i));
+                        tempListOfFullHouse.add(listaKartGraczaDoSprawdzenia.get(i - 1));
+                        tempListOfFullHouse.add(listaKartGraczaDoSprawdzenia.get(i - 2));
+
+                        tempListOfFullHouse.add(listaKartGraczaDoSprawdzenia.get(j));
+                        tempListOfFullHouse.add(listaKartGraczaDoSprawdzenia.get(j - 1));
+
+                        return tempListOfFullHouse;
+                    }
+                }
+            }
+        }
+        for (int i = listaKartGraczaDoSprawdzenia.size() - 1; i > 3; i--) {
+            if (listaKartGraczaDoSprawdzenia.get(i).getFigura() == listaKartGraczaDoSprawdzenia.get(i - 1).getFigura()) {
+                for (int j = i - 2; j > 1; j--) {
+                    if (listaKartGraczaDoSprawdzenia.get(j).getFigura() == listaKartGraczaDoSprawdzenia.get(j - 1).getFigura() &&
+                            listaKartGraczaDoSprawdzenia.get(j).getFigura() == listaKartGraczaDoSprawdzenia.get(j - 2).getFigura()) {
+
+                        tempListOfFullHouse.add(listaKartGraczaDoSprawdzenia.get(j));
+                        tempListOfFullHouse.add(listaKartGraczaDoSprawdzenia.get(j - 1));
+                        tempListOfFullHouse.add(listaKartGraczaDoSprawdzenia.get(j - 2));
+
+                        tempListOfFullHouse.add(listaKartGraczaDoSprawdzenia.get(i));
+                        tempListOfFullHouse.add(listaKartGraczaDoSprawdzenia.get(i - 1));
+
+                        return tempListOfFullHouse;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public List<Karta> removeDuplicateFigures(List<Karta> listaKartGraczaDosprawdzenia) {
+
+        tempStreighList = new ArrayList<Karta>();
+
+        Collections.sort(listaKartGraczaDosprawdzenia);
+
+        tempStreighList.add(listaKartGraczaDosprawdzenia.get(0));
+
+        for (int i = 0; i < listaKartGraczaDosprawdzenia.size() - 1; i++) {
+            if (listaKartGraczaDosprawdzenia.get(i).getFigura() != listaKartGraczaDosprawdzenia.get(i + 1).getFigura())
+                tempStreighList.add(listaKartGraczaDosprawdzenia.get(i + 1));
+        }
+        return tempStreighList;
+    }
+
+    public List<Karta> getFiveCardsStreigh(List<Karta> listaKartGraczaDoSprawdzenia) {
+
+        tempListOfStreigh = new ArrayList<Karta>();
+
+        removeDuplicateFigures(listaKartGraczaDoSprawdzenia);
+
+        Collections.sort(tempStreighList);
+
+        if (tempStreighList.size() >= 5) {
+            for (int i = tempStreighList.size() - 1; i >= 4; i--) {
+                if (tempStreighList.get(i).getFigura() == tempStreighList.get(i - 1).getFigura() + 1
+                        && tempStreighList.get(i).getFigura() == tempStreighList.get(i - 2).getFigura() + 2
+                        && tempStreighList.get(i).getFigura() == tempStreighList.get(i - 3).getFigura() + 3
+                        && tempStreighList.get(i).getFigura() == tempStreighList.get(i - 4).getFigura() + 4) {
+
+                    tempListOfStreigh.add(tempStreighList.get(i));
+                    tempListOfStreigh.add(tempStreighList.get(i - 1));
+                    tempListOfStreigh.add(tempStreighList.get(i - 2));
+                    tempListOfStreigh.add(tempStreighList.get(i - 3));
+                    tempListOfStreigh.add(tempStreighList.get(i - 4));
+
+                    return tempListOfStreigh;
+                }
+            }
+            if (Arrays.asList(tempStreighList.get(0).getFigura()).contains(Figura.DWOJKA.getFigura()) &&
+                    Arrays.asList(tempStreighList.get(1).getFigura()).contains(Figura.TROJKA.getFigura()) &&
+                    Arrays.asList(tempStreighList.get(2).getFigura()).contains(Figura.CZWORKA.getFigura()) &&
+                    Arrays.asList(tempStreighList.get(3).getFigura()).contains(Figura.PIATKA.getFigura()) &&
+                    Arrays.asList(tempStreighList.get(tempStreighList.size() - 1).getFigura()).contains(Figura.AS.getFigura())) {
+
+                tempListOfStreigh.add(tempStreighList.get(0));
+                tempListOfStreigh.add(tempStreighList.get(1));
+                tempListOfStreigh.add(tempStreighList.get(2));
+                tempListOfStreigh.add(tempStreighList.get(3));
+                tempListOfStreigh.add(tempStreighList.get(tempStreighList.size() - 1));
+
+                return tempListOfStreigh;
+            }
+        }
+        return null;
+    }
+
+    public List<Karta> getFiveCardsHighCard(List<Karta> listaKartGraczaDoSprawdzenia) {
+
+        Collections.sort(listaKartGraczaDoSprawdzenia);
+
+        tempListOfHighCard = new ArrayList<Karta>();
+
+        for (int i = listaKartGraczaDoSprawdzenia.size() - 1; i > 1; i--) {
+            tempListOfHighCard.add(listaKartGraczaDoSprawdzenia.get(i));
+        }
+        return tempListOfHighCard;
+    }
+
 }
 

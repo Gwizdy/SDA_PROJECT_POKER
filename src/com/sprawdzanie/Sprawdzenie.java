@@ -25,8 +25,28 @@ public class Sprawdzenie {
 
     private List<Karta> listaPomocnicza;
 
-    private List<String> listaGraczyStreigh;
-    private List<List<Karta>> listalistKartyStreigh;
+    private List<String> listaGraczyRoyalFlush;
+    private List<String> listaGraczyStraightFlush;
+    private List<String> listaGraczyFourOfKind;
+    private List<String> listaGraczyFullHouse;
+    private List<String> listaGraczyFlush;
+    private List<String> listaGraczyStraigh;
+    private List<String> listaGraczyThreeOfKind;
+    private List<String> listaGraczyTwoPairs;
+    private List<String> listaGraczyOnePair;
+    private List<String> listaGraczyHighCards;
+
+
+    private List<List<Karta>> listalistKartyRoyalFlush;
+    private List<List<Karta>> listalistKartyStraightFlush;
+    private List<List<Karta>> listalistKartyFourOfKind;
+    private List<List<Karta>> listalistKartyFullHouse;
+    private List<List<Karta>> listalistKartyFlush;
+    private List<List<Karta>> listalistKartyStraigh;
+    private List<List<Karta>> listalistKartyThreeOfKind;
+    private List<List<Karta>> listalistKartyTwoPairs;
+    private List<List<Karta>> listalistKartyOnePair;
+    private List<List<Karta>> listalistKartyHighCards;
 
     private int liczba;
     private int liczbaPomocnicza;
@@ -41,8 +61,27 @@ public class Sprawdzenie {
 
         listaPomocnicza = new ArrayList<Karta>();
 
-        listaGraczyStreigh = new ArrayList<String>();
-        listalistKartyStreigh = new ArrayList<List<Karta>>();
+        listaGraczyRoyalFlush = new ArrayList<String>();
+        listaGraczyStraightFlush = new ArrayList<String>();
+        listaGraczyFourOfKind = new ArrayList<String>();
+        listaGraczyFullHouse = new ArrayList<String>();
+        listaGraczyFlush = new ArrayList<String>();
+        listaGraczyStraigh = new ArrayList<String>();
+        listaGraczyThreeOfKind = new ArrayList<String>();
+        listaGraczyTwoPairs = new ArrayList<String>();
+        listaGraczyOnePair = new ArrayList<String>();
+        listaGraczyHighCards = new ArrayList<String>();
+
+        listalistKartyRoyalFlush = new ArrayList<List<Karta>>();
+        listalistKartyStraightFlush = new ArrayList<List<Karta>>();
+        listalistKartyFourOfKind = new ArrayList<List<Karta>>();
+        listalistKartyFullHouse = new ArrayList<List<Karta>>();
+        listalistKartyFlush = new ArrayList<List<Karta>>();
+        listalistKartyStraigh = new ArrayList<List<Karta>>();
+        listalistKartyThreeOfKind = new ArrayList<List<Karta>>();
+        listalistKartyTwoPairs = new ArrayList<List<Karta>>();
+        listalistKartyOnePair = new ArrayList<List<Karta>>();
+        listalistKartyHighCards = new ArrayList<List<Karta>>();
 
         for (int i = 0; i < guiTalia.getIloscGraczy(); i++) {
 
@@ -111,57 +150,142 @@ public class Sprawdzenie {
 
                 gracz1 = "Player " + (i + 1);
 
-                if (liczbaPomocnicza == 9) {
+                if (liczbaPomocnicza == 10) {
+                    if (compareCards(royalFlush.getTempListOfRoyalFlush(), listaPomocnicza) == 2) {
+
+                        listaGraczyRoyalFlush.removeAll(listaGraczyRoyalFlush);
+                        listalistKartyRoyalFlush.removeAll(listalistKartyRoyalFlush);
+
+                        listaPomocnicza.removeAll(listaPomocnicza);
+                        listaPomocnicza.addAll(royalFlush.getTempListOfRoyalFlush());
+                    } else if (compareCards(royalFlush.getTempListOfRoyalFlush(), listaPomocnicza) == 0) {
+
+                        listaGraczyRoyalFlush.add(gracz1);
+                        listalistKartyRoyalFlush.add(royalFlush.getTempListOfRoyalFlush());
+                    }
+                } else if (liczbaPomocnicza == 9) {
                     if (compareCards(straightFlush.getTempListOfStraightFlush(), listaPomocnicza) == 2) {
+
+                        listaGraczyStraightFlush.removeAll(listaGraczyStraightFlush);
+                        listalistKartyStraightFlush.removeAll(listalistKartyStraightFlush);
 
                         listaPomocnicza.removeAll(listaPomocnicza);
                         listaPomocnicza.addAll(straightFlush.getTempListOfStraightFlush());
 
+                    } else if (compareCards(straightFlush.getTempListOfStraightFlush(), listaPomocnicza) == 0) {
+
+                        listaGraczyStraightFlush.add(gracz1);
+                        listalistKartyStraightFlush.add(straightFlush.getTempListOfStraightFlush());
                     }
                 } else if (liczbaPomocnicza == 8) {
                     if (compareCards(fourOfKind.getTempListOfFourOfKind(), listaPomocnicza) == 2) {
 
+                        listaGraczyFourOfKind.removeAll(listaGraczyFourOfKind);
+                        listalistKartyFourOfKind.removeAll(listalistKartyFourOfKind);
+
                         listaPomocnicza.removeAll(listaPomocnicza);
                         listaPomocnicza.addAll(fourOfKind.getTempListOfFourOfKind());
 
+                    } else if (compareCards(fourOfKind.getTempListOfFourOfKind(), listaPomocnicza) == 0){
+
+                        listaGraczyFourOfKind.add(gracz1);
+                        listalistKartyFourOfKind.add(fourOfKind.getTempListOfFourOfKind());
                     }
                 } else if (liczbaPomocnicza == 7) {
                     if (compareCards(fullHouse.getTempListOfFullHouse(), listaPomocnicza) == 2) {
 
+                        listaGraczyFullHouse.removeAll(listaGraczyFullHouse);
+                        listalistKartyFullHouse.removeAll(listalistKartyFullHouse);
+
                         listaPomocnicza.removeAll(listaPomocnicza);
                         listaPomocnicza.addAll(fullHouse.getTempListOfFullHouse());
 
+                    } else if(compareCards(fullHouse.getTempListOfFullHouse(), listaPomocnicza) == 0){
+
+                        listaGraczyFullHouse.add(gracz1);
+                        listalistKartyFullHouse.add(fullHouse.getTempListOfFullHouse());
                     }
                 } else if (liczbaPomocnicza == 6) {
                     if (compareCards(flush.getTempListOfFlush(), listaPomocnicza) == 2) {
 
+                        listaGraczyFlush.removeAll(listaGraczyFlush);
+                        listalistKartyFlush.removeAll(listalistKartyFlush);
+
                         listaPomocnicza.removeAll(listaPomocnicza);
                         listaPomocnicza.addAll(flush.getTempListOfFlush());
 
+                    } else if (compareCards(flush.getTempListOfFlush(), listaPomocnicza) == 0){
+
+                        listaGraczyFlush.add(gracz1);
+                        listalistKartyFlush.add(flush.getTempListOfFlush());
                     }
                 } else if (liczbaPomocnicza == 5) {
 
                     if (compareCards(streigh.getTempListOfStreigh(), listaPomocnicza) == 2) {
 
-                        listaGraczyStreigh.removeAll(listaGraczyStreigh);
-                        listalistKartyStreigh.removeAll(listalistKartyStreigh);
+                        listaGraczyStraigh.removeAll(listaGraczyStraigh);
+                        listalistKartyStraigh.removeAll(listalistKartyStraigh);
 
                         listaPomocnicza.removeAll(listaPomocnicza);
                         listaPomocnicza.addAll(streigh.getTempListOfStreigh());
 
                     } else if (compareCards(streigh.getTempListOfStreigh(), listaPomocnicza) == 0) {
 
-                        listaGraczyStreigh.add(gracz1);
-                        listalistKartyStreigh.add(streigh.getTempListOfStreigh());
+                        listaGraczyStraigh.add(gracz1);
+                        listalistKartyStraigh.add(streigh.getTempListOfStreigh());
                     }
                 } else if (liczbaPomocnicza == 4) {
-                    // tutaj porównanie dwóch trójek i zwrócenie do listy pomocniczej całej piątki kart
+                    if(compareCards(threeOfAKind.getTempListOfThreeOfKind(),listaPomocnicza) == 2){
+
+                        listaGraczyThreeOfKind.removeAll(listaGraczyThreeOfKind);
+                        listalistKartyThreeOfKind.removeAll(listalistKartyThreeOfKind);
+
+                        listaPomocnicza.removeAll(listaPomocnicza);
+                        listaPomocnicza.addAll(threeOfAKind.getTempListOfThreeOfKind());
+                    } else if(compareCards(threeOfAKind.getTempListOfThreeOfKind(),listaPomocnicza) == 0){
+
+                        listaGraczyThreeOfKind.add(gracz1);
+                        listalistKartyThreeOfKind.add(threeOfAKind.getTempListOfThreeOfKind());
+                    }
                 } else if (liczbaPomocnicza == 3) {
-                    // tutaj porównanie dwóch par i zwrócenie wygrywającej do listy pomocniczej
+                    if(compareCards(twoPairs.getTempListOfTwoPairs(),listaPomocnicza) == 2){
+
+                        listaGraczyTwoPairs.removeAll(listaGraczyTwoPairs);
+                        listalistKartyTwoPairs.removeAll(listalistKartyTwoPairs);
+
+                        listaPomocnicza.removeAll(listaPomocnicza);
+                        listaPomocnicza.addAll(twoPairs.getTempListOfTwoPairs());
+                    } else if (compareCards(twoPairs.getTempListOfTwoPairs(),listaPomocnicza) == 0){
+
+                        listaGraczyTwoPairs.add(gracz1);
+                        listalistKartyTwoPairs.add(twoPairs.getTempListOfTwoPairs());
+                    }
                 } else if (liczbaPomocnicza == 2) {
-                    // tutaj porównanie pojedynczych par i zwrócenie wygrywającej do listy pomocniczej
+                    if(compareCards(onePair.getTempListOfOnePair(),listaPomocnicza) == 2){
+
+                        listaGraczyOnePair.removeAll(listaGraczyOnePair);
+                        listalistKartyOnePair.removeAll(listalistKartyOnePair);
+
+                        listaPomocnicza.removeAll(listaPomocnicza);
+                        listaPomocnicza.addAll(onePair.getTempListOfOnePair());
+                    } else if (compareCards(onePair.getTempListOfOnePair(),listaPomocnicza) == 0){
+
+                        listaGraczyOnePair.add(gracz1);
+                        listalistKartyOnePair.add(onePair.getTempListOfOnePair());
+                    }
                 } else if (liczbaPomocnicza == 1) {
-                    // tutaj porównanie najwyższych kart i zwrócenie ich do listy pomocniczej
+                    if(compareCards(hightCard.getTempListOfHighCard(),listaPomocnicza) == 2){
+
+                        listaGraczyHighCards.removeAll(listaGraczyHighCards);
+                        listalistKartyHighCards.removeAll(listalistKartyHighCards);
+
+                        listaPomocnicza.removeAll(listaPomocnicza);
+                        listaPomocnicza.addAll(hightCard.getTempListOfHighCard());
+                    }else if (compareCards(hightCard.getTempListOfHighCard(),listaPomocnicza) == 0){
+
+                        listaGraczyHighCards.add(gracz1);
+                        listalistKartyHighCards.add(hightCard.getTempListOfHighCard());
+                    }
                 }
             }
         }
