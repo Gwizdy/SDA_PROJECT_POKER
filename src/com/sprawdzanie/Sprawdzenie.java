@@ -10,6 +10,7 @@ import java.util.List;
 public class Sprawdzenie {
 
     private GUITalia guiTalia;
+
     private RoyalFlush royalFlush = new RoyalFlush();
     private StraightFlush straightFlush = new StraightFlush();
     private FourOfKind fourOfKind = new FourOfKind();
@@ -354,7 +355,6 @@ public class Sprawdzenie {
     public void ogloszenieWyniku(int liczba) {
 
         if (liczba == 10) {
-            System.out.println(listaGraczyRoyalFlush);
             if (listaGraczyRoyalFlush.isEmpty()) {
                 System.out.println("Poker Królewski. Wygrał " + gracz + " z kartami:" + listaPomocnicza);
             } else {
@@ -365,7 +365,6 @@ public class Sprawdzenie {
                 }
             }
         } else if (liczba == 9) {
-            System.out.println(listaGraczyStraightFlush);
             if (listaGraczyStraightFlush.isEmpty()) {
                 System.out.println("Poker. Wygrał " + gracz + " z kartami:" + listaPomocnicza);
             } else {
@@ -376,7 +375,6 @@ public class Sprawdzenie {
                 }
             }
         } else if (liczba == 8) {
-            System.out.println(listaGraczyFourOfKind);
             if (listaGraczyFourOfKind.isEmpty()) {
                 System.out.println("Kareta. Wygrał " + gracz + " z kartami:" + listaPomocnicza);
             } else {
@@ -387,7 +385,6 @@ public class Sprawdzenie {
                 }
             }
         } else if (liczba == 7) {
-            System.out.println(listaGraczyFullHouse);
             if (listaGraczyFullHouse.isEmpty()) {
                 System.out.println("Full. Wygrał " + gracz + " z kartami:" + listaPomocnicza);
             } else {
@@ -398,7 +395,6 @@ public class Sprawdzenie {
                 }
             }
         } else if (liczba == 6) {
-            System.out.println(listaGraczyFlush);
             if (listaGraczyFlush.isEmpty()) {
                 System.out.println("Kolor. Wygrał " + gracz + " z kartami:" + listaPomocnicza);
             } else {
@@ -409,7 +405,6 @@ public class Sprawdzenie {
                 }
             }
         } else if (liczba == 5) {
-            System.out.println(listaGraczyStraigh);
             if (listaGraczyStraigh.isEmpty()) {
                 System.out.println("Strit. Wygrał " + gracz + " z kartami:" + listaPomocnicza);
             } else {
@@ -420,7 +415,6 @@ public class Sprawdzenie {
                 }
             }
         } else if (liczba == 4) {
-            System.out.println(listaGraczyThreeOfKind);
             if (listaGraczyThreeOfKind.isEmpty()) {
                 System.out.println("Trójka. Wygrał " + gracz + " z kartami:" + listaPomocnicza);
             } else {
@@ -431,7 +425,6 @@ public class Sprawdzenie {
                 }
             }
         } else if (liczba == 3) {
-            System.out.println(listaGraczyTwoPairs);
             if (listaGraczyTwoPairs.isEmpty()) {
                 System.out.println("Dwie pary. Wygrał " + gracz + " z kartami:" + listaPomocnicza);
             } else {
@@ -442,7 +435,6 @@ public class Sprawdzenie {
                 }
             }
         } else if (liczba == 2) {
-            System.out.println(listaGraczyOnePair);
             if (listaGraczyOnePair.isEmpty()) {
                 System.out.println("Jedna para. Wygrał " + gracz + " z kartami:" + listaPomocnicza);
             } else {

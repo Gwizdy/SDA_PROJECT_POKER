@@ -1,6 +1,7 @@
 package com.taliakart;
 
 import com.okna.OknoStol;
+import com.rozgrywka.Rozgrywka;
 import com.sprawdzanie.RoyalFlush;
 import com.sprawdzanie.Sprawdzenie;
 
@@ -56,13 +57,13 @@ public class GUITalia {
 
         listaKart();
 
-        losowanieKart(iloscGraczy);
+//        losowanieKart(iloscGraczy);
+//
+//        rozdajFlop(talia);
+//
+//        rozdajTurnOrRiver(talia);
 
-        rozdajFlop(talia);
-
-        rozdajTurnOrRiver(talia);
-
-        new Sprawdzenie(me);
+        new Rozgrywka(me);
 
     }
 
@@ -219,7 +220,7 @@ public class GUITalia {
         usunZTalii(talia, rOut);
         usunZTalii(listaObrazkow, rOut);
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 1; i++) {
 
             rTurnOrRiver = rand.nextInt(list.size());
 
