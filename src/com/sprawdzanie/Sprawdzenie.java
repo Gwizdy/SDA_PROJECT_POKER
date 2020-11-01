@@ -1,5 +1,6 @@
 package com.sprawdzanie;
 
+import com.rozgrywka.Gracz;
 import com.taliakart.GUITalia;
 import com.taliakart.Karta;
 
@@ -49,6 +50,8 @@ public class Sprawdzenie {
     private List<List<Karta>> listalistKartyOnePair;
     private List<List<Karta>> listalistKartyHighCards;
 
+    private List<Gracz> testGracze;
+
     private int liczba;
     private int liczbaPomocnicza;
     private String gracz;
@@ -59,6 +62,8 @@ public class Sprawdzenie {
         this.guiTalia = guiTalia;
 
         liczba = 0;
+
+        testGracze = new ArrayList<Gracz>(guiTalia.getListaRekaGraczy());
 
         listaPomocnicza = new ArrayList<Karta>();
 
@@ -86,7 +91,7 @@ public class Sprawdzenie {
 
         for (int i = 0; i < guiTalia.getIloscGraczy(); i++) {
 
-            kartyRekaPlusStol(guiTalia.getListPlayerCards(), guiTalia.getListaFlop(), guiTalia.getListaTurnOrRiver());
+            kartyRekaPlusStol(guiTalia.getListaRekaGraczy(), guiTalia.getListaFlop(), guiTalia.getListaTurnOrRiver());
 
             if (royalFlush.sprawdzanieRoyalFlush(handPlusTableCards) == 10) {
                 liczbaPomocnicza = 10;
@@ -320,22 +325,20 @@ public class Sprawdzenie {
         ogloszenieWyniku(liczba);
     }
 
-    public List<Karta> kartyRekaPlusStol(List<List<Karta>> listaGraczy, List<Karta> listaKartyFlop, List<Karta> listaKartyTurnOrRiver) {
+    public List<Karta> kartyRekaPlusStol(List<Gracz> listaGraczy, List<Karta> listaKartyFlop, List<Karta> listaKartyTurnOrRiver) {
 
-        List<Karta> gracz = listaGraczy.get(0);
 
         handPlusTableCards = new ArrayList<Karta>();
+        handPlusTableCards.addAll(testGracze.get(0).getKartyReka());
+        testGracze.remove(0);
 
-        for (int i = 0; i < gracz.size(); i++) {
-            handPlusTableCards.add(gracz.get(i));
-        }
-
-        listaGraczy.remove(0);
 
         handPlusTableCards.addAll(listaKartyFlop);
         handPlusTableCards.addAll(listaKartyTurnOrRiver);
 
         Collections.sort(handPlusTableCards);
+
+        System.out.println(handPlusTableCards);
 
         return handPlusTableCards;
     }

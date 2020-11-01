@@ -1,5 +1,7 @@
 package com.taliakart;
 
+import com.rozgrywka.Gracz;
+
 import java.util.*;
 
 public class ukladKart {
@@ -24,7 +26,16 @@ public class ukladKart {
 
 
     private List<Karta> TESTOWATALIA;
+    private List<Karta> TESTOWATALIA2;
+    private List<Karta> TESTOWATALIA3;
+    private List<Karta> TESTOWATALIA4;
     private List<Karta> tempList;
+
+    private List<Gracz> listaRekaGraczy = new ArrayList<Gracz>();
+    private Gracz gracz = new Gracz();
+    private Gracz gracz2 = new Gracz();
+    private Gracz gracz3 = new Gracz();
+    private Gracz gracz4 = new Gracz();
 
     private List<List<Karta>> listaRakPlusStol; //deklaracja listy listy
 
@@ -49,14 +60,36 @@ public class ukladKart {
         listOfHighestFive = new ArrayList<Karta>();
         tempStraightList = new ArrayList<Karta>();
         TESTOWATALIA = new ArrayList<Karta>();
+        TESTOWATALIA2 = new ArrayList<Karta>();
+        TESTOWATALIA3 = new ArrayList<Karta>();
+        TESTOWATALIA4 = new ArrayList<Karta>();
         TESTOWATALIA.add(new Karta(Kolor.KIER, Figura.AS));
         TESTOWATALIA.add(new Karta(Kolor.TREFL, Figura.SIODEMKA));
-        TESTOWATALIA.add(new Karta(Kolor.KIER, Figura.DWOJKA));
-        TESTOWATALIA.add(new Karta(Kolor.KARO, Figura.WALET));
-//        TESTOWATALIA.add(new Karta(Kolor.KARO, Figura.SZOSTKA));
-        TESTOWATALIA.add(new Karta(Kolor.KIER, Figura.PIATKA));
-        TESTOWATALIA.add(new Karta(Kolor.PIK, Figura.CZWORKA));
-        TESTOWATALIA.add(new Karta(Kolor.TREFL, Figura.TROJKA));
+        TESTOWATALIA2.add(new Karta(Kolor.KIER, Figura.DWOJKA));
+        TESTOWATALIA2.add(new Karta(Kolor.KARO, Figura.WALET));
+        TESTOWATALIA3.add(new Karta(Kolor.KARO, Figura.SZOSTKA));
+        TESTOWATALIA3.add(new Karta(Kolor.KIER, Figura.PIATKA));
+        TESTOWATALIA4.add(new Karta(Kolor.PIK, Figura.CZWORKA));
+        TESTOWATALIA4.add(new Karta(Kolor.TREFL, Figura.TROJKA));
+
+        gracz.setKartyReka(TESTOWATALIA);
+        gracz2.setKartyReka(TESTOWATALIA2);
+        gracz3.setKartyReka(TESTOWATALIA3);
+        gracz4.setKartyReka(TESTOWATALIA4);
+
+        listaRekaGraczy.add(gracz);
+        listaRekaGraczy.add(gracz2);
+        listaRekaGraczy.add(gracz3);
+        listaRekaGraczy.add(gracz4);
+
+        tempList = new ArrayList<Karta>();
+//        for (int i = 0 ; i < listaRekaGraczy.size(); i++)
+
+//            System.out.println(listaRekaGraczy.get(i).getKartyReka());
+
+        tempList.addAll(listaRekaGraczy.get(3).getKartyReka());
+
+        System.out.println("TEST LISTY GRACZY" + tempList);
 
         listaRakPlusStol = new ArrayList<List<Karta>>(); // inicjacja listy list
 
@@ -86,13 +119,6 @@ public class ukladKart {
 
         Collections.sort(rekaPlusStol);
         System.out.println("potasowana reka " + rekaPlusStol);
-
-        Collections.sort(TESTOWATALIA);
-        System.out.println(TESTOWATALIA);
-
-        if(getFiveCardsHighCard(TESTOWATALIA) != null)
-            System.out.println("HIGH CARDS" + tempListOfHighCard);
-
 
         System.out.println("PIK " + listPIK.size() + "TREFL " + listTREFL.size() + "KARO " + listKARO.size() + "KIER " + listKIER.size());
 

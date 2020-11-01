@@ -1,12 +1,15 @@
 package com.taliakart;
 
 import com.okna.OknoStol;
+import com.rozgrywka.Gracz;
 import com.rozgrywka.Rozgrywka;
+import com.rozgrywka.RozgrywkaTest;
 import com.sprawdzanie.RoyalFlush;
 import com.sprawdzanie.Sprawdzenie;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -27,6 +30,18 @@ public class GUITalia {
     private List<Karta> listaPlayer6 = new ArrayList<Karta>();
     private List<Karta> listaPlayer7 = new ArrayList<Karta>();
     private List<Karta> listaPlayer8 = new ArrayList<Karta>();
+
+    private Gracz gracz1 = new Gracz();
+    private Gracz gracz2 = new Gracz();
+    private Gracz gracz3 = new Gracz();
+    private Gracz gracz4 = new Gracz();
+    private Gracz gracz5 = new Gracz();
+    private Gracz gracz6 = new Gracz();
+    private Gracz gracz7 = new Gracz();
+    private Gracz gracz8 = new Gracz();
+
+
+    private List<Gracz> listaRekaGraczy = new ArrayList<Gracz>();
 
     private List<List<Karta>> listPlayerCards = new ArrayList<List<Karta>>();
 
@@ -50,6 +65,7 @@ public class GUITalia {
         this.oknoStol = oknoStol;
         me = this;
 
+        listaTurnOrRiver = new ArrayList<Karta>();
         iloscGraczy = oknoStol.getGracze();
 
         taliaGUI = new Talia();
@@ -63,7 +79,7 @@ public class GUITalia {
 //
 //        rozdajTurnOrRiver(talia);
 
-        new Rozgrywka(me);
+        new RozgrywkaTest(me);
 
     }
 
@@ -132,22 +148,33 @@ public class GUITalia {
                         k1_2 += 200;
                         if (j == 0) {
                             listaPlayer1.add(talia.get(r));
-                            listPlayerCards.add(listaPlayer1);
+                            gracz1.setKartyReka(listaPlayer1);
+                            listaRekaGraczy.add(gracz1);
+                            System.out.println("GRACZ 1" + (gracz1.getKartyReka()));
                         }
                         if (j == 1) {
                             listaPlayer2.add(talia.get(r));
-                            listPlayerCards.add(listaPlayer2);
+                            gracz2.setKartyReka(listaPlayer2);
+                            listaRekaGraczy.add(gracz2);
+                            System.out.println("GRACZ 2" + (gracz2.getKartyReka()));
+
                         }
                         if (j == 2) {
                             listaPlayer3.add(talia.get(r));
-                            listPlayerCards.add(listaPlayer3);
+                            gracz3.setKartyReka(listaPlayer3);
+                            listaRekaGraczy.add(gracz3);
+                            System.out.println("GRACZ 3" + (gracz3.getKartyReka()));
+
                         }
                     }
                     if (j == 3) {
                         karty.setBounds(80, 230, 41, 63);
                         if (j == 3) {
                             listaPlayer4.add(talia.get(r));
-                            listPlayerCards.add(listaPlayer4);
+                            gracz4.setKartyReka(listaPlayer4);
+                            listaRekaGraczy.add(gracz4);
+                            System.out.println("GRACZ 4" + (gracz4.getKartyReka()));
+
                         }
                     }
                     if (j > 3 && j < 7) {
@@ -155,22 +182,34 @@ public class GUITalia {
                         k2_2 += 200;
                         if (j == 4) {
                             listaPlayer5.add(talia.get(r));
-                            listPlayerCards.add(listaPlayer5);
+                            gracz5.setKartyReka(listaPlayer5);
+                            listaRekaGraczy.add(gracz5);
+                            System.out.println("GRACZ 5" + (gracz5.getKartyReka()));
+
                         }
                         if (j == 5) {
                             listaPlayer6.add(talia.get(r));
-                            listPlayerCards.add(listaPlayer6);
+                            gracz6.setKartyReka(listaPlayer6);
+                            listaRekaGraczy.add(gracz6);
+                            System.out.println("GRACZ 6" + (gracz6.getKartyReka()));
+
                         }
                         if (j == 6) {
                             listaPlayer7.add(talia.get(r));
-                            listPlayerCards.add(listaPlayer7);
+                            gracz7.setKartyReka(listaPlayer7);
+                            listaRekaGraczy.add(gracz7);
+                            System.out.println("GRACZ 7" + (gracz7.getKartyReka()));
+
                         }
                     }
                     if (j == 7) {
                         karty.setBounds(890, 230, 41, 63);
                         if (j == 7) {
                             listaPlayer8.add(talia.get(r));
-                            listPlayerCards.add(listaPlayer8);
+                            gracz8.setKartyReka(listaPlayer8);
+                            listaRekaGraczy.add(gracz8);
+                            System.out.println("GRACZ 8" + gracz8.getKartyReka());
+
                         }
                     }
                 }
@@ -180,6 +219,8 @@ public class GUITalia {
                 oknoStol.getPanelGame().add(karty);
             }
         }
+
+
     }
 
     public void rozdajFlop(List list) {
@@ -213,7 +254,7 @@ public class GUITalia {
 
     public void rozdajTurnOrRiver(List list) {
 
-        listaTurnOrRiver = new ArrayList<Karta>();
+//        listaTurnOrRiver = new ArrayList<Karta>();
 
         rOut = rand.nextInt(list.size());
 
@@ -295,4 +336,40 @@ public class GUITalia {
     public void setListPlayerCards(List<List<Karta>> listPlayerCards) {
         this.listPlayerCards = listPlayerCards;
     }
+
+    public Gracz getGracz1() { return gracz1; }
+
+    public void setGracz1(Gracz gracz1) { this.gracz1 = gracz1; }
+
+    public Gracz getGracz2() { return gracz2; }
+
+    public void setGracz2(Gracz gracz2) { this.gracz2 = gracz2; }
+
+    public Gracz getGracz3() { return gracz3; }
+
+    public void setGracz3(Gracz gracz3) { this.gracz3 = gracz3; }
+
+    public Gracz getGracz4() { return gracz4; }
+
+    public void setGracz4(Gracz gracz4) { this.gracz4 = gracz4; }
+
+    public Gracz getGracz5() { return gracz5; }
+
+    public void setGracz5(Gracz gracz5) { this.gracz5 = gracz5; }
+
+    public Gracz getGracz6() { return gracz6; }
+
+    public void setGracz6(Gracz gracz6) { this.gracz6 = gracz6; }
+
+    public Gracz getGracz7() { return gracz7; }
+
+    public void setGracz7(Gracz gracz7) { this.gracz7 = gracz7; }
+
+    public Gracz getGracz8() { return gracz8; }
+
+    public void setGracz8(Gracz gracz8) { this.gracz8 = gracz8; }
+
+    public List<Gracz> getListaRekaGraczy() { return listaRekaGraczy; }
+
+    public void setListaRekaGraczy(List<Gracz> listaRekaGraczy) { this.listaRekaGraczy = listaRekaGraczy; }
 }
