@@ -1,7 +1,6 @@
 package com.rozgrywka;
 
 import com.taliakart.Figura;
-import com.taliakart.GUITalia;
 import com.taliakart.Karta;
 import com.taliakart.Kolor;
 
@@ -16,9 +15,13 @@ import java.util.List;
 
 public class OknoKartGracza {
 
-    private GUITalia guiTalia;
+    private RozgrywkaTest rozgrywkaTest;
 
     private List<String> listaObrazkow;
+
+    private List<Gracz> listaGraczy;
+
+    private List<Karta> handCards = new ArrayList<Karta>();
 
     private JFrame window;
 
@@ -36,11 +39,14 @@ public class OknoKartGracza {
 
     private JLabel kartygracza;
 
-    private List<Karta> handCards;
+    private int pomoc;
 
-    public OknoKartGracza() {
+    public OknoKartGracza(RozgrywkaTest rozgrywkaTest) {
+        this.rozgrywkaTest = rozgrywkaTest;
 
-        listaKart();
+        listaGraczy = new ArrayList<Gracz>(rozgrywkaTest.getListaGraczy());
+
+        pomoc = 0;
 
         dodanieOkna();
 
@@ -83,7 +89,7 @@ public class OknoKartGracza {
 
         setWyswietlaczZetonow("1000");
 
-        wyswietlenieKartGracza(0);
+        wyswietlenieKartGracza(rozgrywkaTest.getListaGraczy());
 
         panel.add(wyswietlaczZetonow);
         panel.add(bet);
@@ -93,7 +99,6 @@ public class OknoKartGracza {
         panel.add(raiseField);
         panel.add(check);
         panel.add(allIn);
-        panel.add(kartygracza);
     }
 
     public void dodanieWyswietlaczaZetonow() {
@@ -120,10 +125,16 @@ public class OknoKartGracza {
         bet.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                System.out.println(rozgrywkaTest.getIloscGraczy());
+                System.out.println(pomoc);
+                if (pomoc < rozgrywkaTest.getIloscGraczy()) {
+                    window.dispose();
+                    dodanieOkna();
+                    window.revalidate();
+                } else
+                    window.dispose();
             }
         });
-
     }
 
     public void dodaniePrzyciskuFold() {
@@ -224,34 +235,32 @@ public class OknoKartGracza {
         });
     }
 
-    public void listaKart() {
+    public void wyswietlenieKartGracza(List<Gracz> listaGraczy) {
 
-        listaObrazkow = new ArrayList<String>(); //lista z filepath
+        int pozycja = 0;
+        int przesuniecie = 0;
+
+        listaObrazkow = new ArrayList<String>();
+
+        handCards.addAll(listaGraczy.get(pomoc).getKartyReka());
 
         for (Kolor k : Kolor.values()) {
             for (Figura f : Figura.values()) {
-                listaObrazkow.add("images\\" + f.getFigura() + "_" + k.getWartosc() + ".jpg");
+                listaObrazkow.add("imagesHandView\\" + f.getFigura() + "_" + k.getWartosc() + ".jpg");
+                for (int i = 0; i < 2; i++)
+                    if ((handCards.get(i).getFigura() == f.getFigura()) && (handCards.get(i).getKolor().getWartosc() == k.getWartosc())) {
+                        kartygracza = new JLabel();
+                        kartygracza.setLayout(null);
+                        kartygracza.setIcon(new ImageIcon(listaObrazkow.get(pozycja)));
+                        kartygracza.setBounds(100 + przesuniecie, 100, 90, 137);
+                        przesuniecie += 130;
+                        panel.add(kartygracza);
+                    }
+                pozycja += 1;
             }
         }
-    }
-
-    public void wyswietlenieKartGracza(int numerGracza) {
-
-        kartygracza = new JLabel();
-
-        List<Karta> testoweKarty = new ArrayList<Karta>();
-        testoweKarty.add(new Karta(Kolor.KIER, Figura.AS));
-        testoweKarty.add(new Karta(Kolor.TREFL, Figura.KROL));
-
-        handCards = new ArrayList<Karta>(testoweKarty);
-        //handCards = new ArrayList<Karta>(guiTalia.getListPlayerCards().get(numerGracza));
-
-        kartygracza.setBounds(100, 100, 100, 100);
-        kartygracza.setIcon(new ImageIcon(listaObrazkow.get(1)));
-        kartygracza.setLayout(null);
-
-        System.out.println(handCards);
-
+        handCards.removeAll(handCards);
+        pomoc += 1;
     }
 
     public JTextField getWyswietlaczZetonow() {

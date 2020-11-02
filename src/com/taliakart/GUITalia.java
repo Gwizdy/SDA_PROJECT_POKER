@@ -79,8 +79,6 @@ public class GUITalia {
 //
 //        rozdajTurnOrRiver(talia);
 
-        new RozgrywkaTest(me);
-
     }
 
     public void usunZTalii(List list, int liczba) {
@@ -107,7 +105,7 @@ public class GUITalia {
                 r = rand.nextInt(talia.size());
 
                 karty = new JLabel();
-                karty.setIcon(new ImageIcon(listaObrazkow.get(r)));
+                karty.setIcon(new ImageIcon("Red_Back.jpg"));
                 karty.setLayout(null);
 
                 if (i == 0) {
@@ -219,8 +217,6 @@ public class GUITalia {
                 oknoStol.getPanelGame().add(karty);
             }
         }
-
-
     }
 
     public void rozdajFlop(List list) {

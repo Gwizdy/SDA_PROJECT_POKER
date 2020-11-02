@@ -1,5 +1,6 @@
 package com.okna;
 
+import com.rozgrywka.RozgrywkaTest;
 import com.taliakart.GUITalia;
 import javax.swing.*;
 import java.awt.*;
@@ -156,7 +157,7 @@ public class OknoStol {
 
     public void rozdanieKart() {
 
-        new GUITalia(me);
+        new RozgrywkaTest(me);
 
     }
 

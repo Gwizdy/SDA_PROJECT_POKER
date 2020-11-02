@@ -1,6 +1,8 @@
 package com.sprawdzanie;
 
 import com.rozgrywka.Gracz;
+import com.rozgrywka.Rozgrywka;
+import com.rozgrywka.RozgrywkaTest;
 import com.taliakart.GUITalia;
 import com.taliakart.Karta;
 
@@ -10,7 +12,7 @@ import java.util.List;
 
 public class Sprawdzenie {
 
-    private GUITalia guiTalia;
+    private RozgrywkaTest rozgrywkaTest;
 
     private RoyalFlush royalFlush = new RoyalFlush();
     private StraightFlush straightFlush = new StraightFlush();
@@ -58,12 +60,12 @@ public class Sprawdzenie {
     private String gracz1;
 
 
-    public Sprawdzenie(GUITalia guiTalia) {
-        this.guiTalia = guiTalia;
+    public Sprawdzenie(RozgrywkaTest rozgrywkaTest) {
+        this.rozgrywkaTest = rozgrywkaTest;
 
         liczba = 0;
 
-        testGracze = new ArrayList<Gracz>(guiTalia.getListaRekaGraczy());
+        testGracze = new ArrayList<Gracz>(rozgrywkaTest.getListaRekaGraczy());
 
         listaPomocnicza = new ArrayList<Karta>();
 
@@ -89,9 +91,9 @@ public class Sprawdzenie {
         listalistKartyOnePair = new ArrayList<List<Karta>>();
         listalistKartyHighCards = new ArrayList<List<Karta>>();
 
-        for (int i = 0; i < guiTalia.getIloscGraczy(); i++) {
+        for (int i = 0; i < rozgrywkaTest.getIloscGraczy(); i++) {
 
-            kartyRekaPlusStol(guiTalia.getListaRekaGraczy(), guiTalia.getListaFlop(), guiTalia.getListaTurnOrRiver());
+            kartyRekaPlusStol(rozgrywkaTest.getListaRekaGraczy(), rozgrywkaTest.getListaFlop(), rozgrywkaTest.getListaTurnOrRiver());
 
             if (royalFlush.sprawdzanieRoyalFlush(handPlusTableCards) == 10) {
                 liczbaPomocnicza = 10;
@@ -337,8 +339,6 @@ public class Sprawdzenie {
         handPlusTableCards.addAll(listaKartyTurnOrRiver);
 
         Collections.sort(handPlusTableCards);
-
-        System.out.println(handPlusTableCards);
 
         return handPlusTableCards;
     }

@@ -38,7 +38,7 @@ public class Rozgrywka {
 
         // czwarta runda licytacji i sprawdzenie
 
-        new Sprawdzenie(guiTalia);
+        //new Sprawdzenie(me);
 
     }
 }
