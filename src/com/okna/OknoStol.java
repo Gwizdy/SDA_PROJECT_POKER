@@ -1,7 +1,6 @@
 package com.okna;
 
 import com.rozgrywka.Gracz;
-import com.rozgrywka.RozgrywkaTest;
 import com.taliakart.Figura;
 import com.taliakart.Karta;
 import com.taliakart.Kolor;
@@ -31,6 +30,7 @@ public class OknoStol {
     private JButton przyciskBetRaise;
     private JButton przyciskCheckCall;
     private JButton przyciskFold;
+    private JButton przyciskPokazKarty;
 
     private JTextField wyswietlaczZetonow;
     private JTextField raiseField;
@@ -129,7 +129,7 @@ public class OknoStol {
         przyciskStart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelStart.removeAll();
+                windowGame.remove(panelStart);
 
                 dodaniePanelaGame();
 
@@ -147,6 +147,36 @@ public class OknoStol {
         panelGame = new BackgroundPanelGame();
         panelGame.setLayout(null);
 
+        dodaniePrzyciskuPokazKarty();
+
+        panelGame.add(przyciskPokazKarty);
+    }
+
+    public void dodaniePrzyciskuPokazKarty() {
+
+        przyciskPokazKarty = new JButton("POKAŻ KARTY");
+
+        przyciskPokazKarty.setFont(new Font("Arial", Font.BOLD, 16));
+        przyciskPokazKarty.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
+        przyciskPokazKarty.setBounds(780, 670, 150, 50);
+        przyciskPokazKarty.setBorderPainted(true);
+        przyciskPokazKarty.setContentAreaFilled(false);
+        przyciskPokazKarty.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                przyciskPokazKarty.setVisible(false);
+
+                dodaniePrzyciskowGracza();
+
+                panelGame.repaint();
+                windowGame.revalidate();
+            }
+        });
+    }
+
+    public void dodaniePrzyciskowGracza() {
+
         dodaniePrzyciskuBetRaise();
 
         dodaniePrzyciskuCheckCall();
@@ -162,7 +192,9 @@ public class OknoStol {
         panelGame.add(przyciskFold);
         panelGame.add(wyswietlaczZetonow);
         panelGame.add(raiseField);
+
     }
+
 
     public void dodaniePrzyciskuBetRaise() {
 
@@ -202,7 +234,7 @@ public class OknoStol {
 
     public void dodanieWyswietlaczaZetonow() {
 
-        wyswietlaczZetonow = new JTextField("1000");
+        wyswietlaczZetonow = new JTextField();
 
         wyswietlaczZetonow.setBounds(1200, 440, 170, 50);
         wyswietlaczZetonow.setEditable(false);
@@ -258,7 +290,7 @@ public class OknoStol {
 
     public void listaKart() {
 
-        listaObrazkow = new ArrayList<String>(); //lista z filepath
+        listaObrazkow = new ArrayList<String>();
 
         for (Kolor k : Kolor.values()) {
             for (Figura f : Figura.values()) {
