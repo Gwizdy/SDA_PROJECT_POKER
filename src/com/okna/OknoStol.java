@@ -40,6 +40,7 @@ public class OknoStol {
     private Talia taliaGUI;
 
     private List<String> listaObrazkow;
+    private List<String> listaObrazkow2;
     private List<Karta> talia;
 
     private Random rand = new Random();
@@ -47,6 +48,8 @@ public class OknoStol {
     private JLabel karty;
     private JLabel kartyFlop;
     private JLabel kartyTurnOrRiver;
+    private JLabel kartygracza1;
+    private JLabel kartygracza2;
 
     private int k1_1, k1_2, k2_1, k2_2;
     private int r, r1, rOut, rTurnOrRiver;
@@ -60,6 +63,8 @@ public class OknoStol {
     private List<Karta> listaPlayer6 = new ArrayList<Karta>();
     private List<Karta> listaPlayer7 = new ArrayList<Karta>();
     private List<Karta> listaPlayer8 = new ArrayList<Karta>();
+
+    private List<Karta> handCards = new ArrayList<Karta>();
 
     private Gracz gracz1 = new Gracz();
     private Gracz gracz2 = new Gracz();
@@ -76,6 +81,8 @@ public class OknoStol {
 
     private List<Karta> listaFlop;
     private List<Karta> listaTurnOrRiver;
+
+    private int pomoc;
 
 
     public OknoStol(OknoGracze oknoGracze) {
@@ -168,6 +175,9 @@ public class OknoStol {
                 przyciskPokazKarty.setVisible(false);
 
                 dodaniePrzyciskowGracza();
+                wyswietlenieKartGracza(listaRekaGraczy);
+                kartygracza1.setVisible(true);
+                kartygracza2.setVisible(true);
 
                 panelGame.repaint();
                 windowGame.revalidate();
@@ -229,6 +239,34 @@ public class OknoStol {
         przyciskFold.setBounds(1200, 510, 170, 50);
         przyciskFold.setBorderPainted(true);
         przyciskFold.setContentAreaFilled(false);
+        przyciskFold.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println(gracze);
+                System.out.println(pomoc);
+
+                if (pomoc < gracze) {
+
+                    przyciskBetRaise.setVisible(false);
+                    przyciskCheckCall.setVisible(false);
+                    przyciskFold.setVisible(false);
+                    wyswietlaczZetonow.setVisible(false);
+                    raiseField.setVisible(false);
+                    kartygracza1.setVisible(false);
+                    kartygracza2.setVisible(false);
+
+//                    dodaniePrzyciskuPokazKarty();
+                    przyciskPokazKarty.setVisible(true);
+
+                    panelGame.repaint();
+                    windowGame.revalidate();
+
+                }else{
+                    System.out.println("to był ostatni gracz");
+                }
+
+            }
+        });
 
     }
 
@@ -487,6 +525,48 @@ public class OknoStol {
 
         //new RozgrywkaTest(me);
 
+    }
+
+    public void wyswietlenieKartGracza(List<Gracz> listaGraczy) {
+
+        int pozycja = 0;
+        int przesuniecie = 0;
+
+        listaObrazkow2 = new ArrayList<String>();
+
+        handCards.addAll(listaGraczy.get(pomoc).getKartyReka());
+
+        for (Kolor k : Kolor.values()) {
+            for (Figura f : Figura.values()) {
+                listaObrazkow2.add("imagesHandView\\" + f.getFigura() + "_" + k.getWartosc() + ".jpg");
+                if ((handCards.get(0).getFigura() == f.getFigura()) && (handCards.get(0).getKolor().getWartosc() == k.getWartosc())) {
+                    kartygracza1 = new JLabel();
+                    kartygracza1.setLayout(null);
+                    kartygracza1.setIcon(new ImageIcon(listaObrazkow2.get(pozycja)));
+                    kartygracza1.setBounds(100 + przesuniecie, 100, 90, 137);
+                    przesuniecie += 95;
+                    panelGame.add(kartygracza1);
+                    }
+                pozycja += 1;
+            }
+        }
+
+        for (Kolor k : Kolor.values()) {
+            for (Figura f : Figura.values()) {
+                listaObrazkow2.add("imagesHandView\\" + f.getFigura() + "_" + k.getWartosc() + ".jpg");
+                if ((handCards.get(1).getFigura() == f.getFigura()) && (handCards.get(1).getKolor().getWartosc() == k.getWartosc())) {
+                    kartygracza2 = new JLabel();
+                    kartygracza2.setLayout(null);
+                    kartygracza2.setIcon(new ImageIcon(listaObrazkow2.get(pozycja)));
+                    kartygracza2.setBounds(100 + przesuniecie, 100, 90, 137);
+                    panelGame.add(kartygracza2);
+                }
+                pozycja += 1;
+            }
+        }
+        handCards.removeAll(handCards);
+        pomoc += 1;
+        windowGame.revalidate();
     }
 
     public JFrame getWindowGame() {
