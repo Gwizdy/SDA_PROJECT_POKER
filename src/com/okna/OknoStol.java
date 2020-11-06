@@ -1,6 +1,8 @@
 package com.okna;
 
 import com.rozgrywka.Gracz;
+import com.rozgrywka.RozgrywkaTest;
+import com.sprawdzanie.Sprawdzenie;
 import com.taliakart.Figura;
 import com.taliakart.Karta;
 import com.taliakart.Kolor;
@@ -31,6 +33,10 @@ public class OknoStol {
     private JButton przyciskCheckCall;
     private JButton przyciskFold;
     private JButton przyciskPokazKarty;
+    private JButton przyciskRozdajFlop;
+    private JButton przyciskRozdajTurn;
+    private JButton przyciskRozdajRiver;
+    private JButton przyciskSprawdzam;
 
     private JTextField wyswietlaczZetonow;
     private JTextField raiseField;
@@ -85,6 +91,7 @@ public class OknoStol {
     private List<Karta> listaTurnOrRiver;
 
     private int pomoc;
+    private int rozdanieNaStole;
 
 
     public OknoStol(OknoGracze oknoGracze) {
@@ -150,6 +157,8 @@ public class OknoStol {
             }
         });
     }
+
+
 
     public void dodaniePanelaGame() {
 
@@ -265,17 +274,7 @@ public class OknoStol {
 
                 if (pomoc < gracze) {
 
-                    przyciskBetRaise.setVisible(false);
-                    przyciskCheckCall.setVisible(false);
-                    przyciskFold.setVisible(false);
-                    wyswietlaczZetonow.setVisible(false);
-                    raiseField.setVisible(false);
-
-                    panelGame.remove(kartygracza1);
-                    panelGame.remove(kartygracza2);
-
-                    listakarty.get(pomoc - 1).setVisible(true);
-                    listakarty.get(pomoc + gracze - 1).setVisible(true);
+                    usunPrzyciskiPokazRewers();
 
                     dodaniePrzyciskuPokazKarty();
 
@@ -285,31 +284,61 @@ public class OknoStol {
 
                 } else if (pomoc == gracze) {
 
-                    przyciskBetRaise.setVisible(false);
-                    przyciskCheckCall.setVisible(false);
-                    przyciskFold.setVisible(false);
-                    wyswietlaczZetonow.setVisible(false);
-                    raiseField.setVisible(false);
+                    if(rozdanieNaStole == 0) {
 
-                    panelGame.remove(kartygracza1);
-                    panelGame.remove(kartygracza2);
+                        System.out.println(pomoc + " fuck :)" + rozdanieNaStole);
 
-                    panelGame.repaint();
-                    panelGame.revalidate();
+                        usunPrzyciskiPokazRewers();
 
-                    System.out.println(pomoc + " fuck :)");
-                    listakarty.get(pomoc - 1).setVisible(true);
-                    listakarty.get(pomoc + gracze - 1).setVisible(true);
+                        dodaniePrzyciskuRozdajFlop();
+                        panelGame.add(przyciskRozdajFlop);
 
-                    rozdajFlop(talia);
+                        pomoc = 0;
 
-                    panelGame.repaint();
+                        panelGame.repaint();
+                        rozdanieNaStole += 1;
+                    }
+                    else if(rozdanieNaStole == 1) {
 
-                    pomoc = 0;
+                        System.out.println(pomoc + "turn" + rozdanieNaStole);
 
+                        usunPrzyciskiPokazRewers();
+
+                        dodaniePrzyciskuRozdajTurn();
+                        panelGame.add(przyciskRozdajTurn);
+
+                        pomoc = 0;
+
+                        panelGame.repaint();
+                        rozdanieNaStole += 1;
+                    }
+                    else if(rozdanieNaStole == 2){
+
+                        System.out.println(pomoc + "river" + rozdanieNaStole);
+
+                        usunPrzyciskiPokazRewers();
+
+                        dodaniePrzyciskuRozdajRiver();
+                        panelGame.add(przyciskRozdajRiver);
+
+                        pomoc = 0;
+
+                        panelGame.repaint();
+                        rozdanieNaStole += 1;
+                    }
+
+                    else{
+
+                        usunPrzyciskiPokazRewers();
+                        dodaniePrzyciskuSprawdzam();
+
+                        panelGame.add(przyciskSprawdzam);
+
+                        pomoc = 0;
+
+                        panelGame.repaint();
+                    }
                 } else {
-
-
 
                     panelGame.revalidate();
                     System.out.println("to był ostatni gracz");
@@ -369,6 +398,123 @@ public class OknoStol {
 
             }
         });
+    }
+
+    public void dodaniePrzyciskuRozdajFlop() {
+
+        przyciskRozdajFlop = new JButton("ROZDAJ FLOP");
+        przyciskRozdajFlop.setFont(new Font("Arial", Font.BOLD, 16));
+        przyciskRozdajFlop.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
+        przyciskRozdajFlop.setBounds(1200, 650, 170, 50);
+        przyciskRozdajFlop.setBorderPainted(true);
+        przyciskRozdajFlop.setContentAreaFilled(false);
+        przyciskRozdajFlop.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                rozdajFlop(talia);
+
+                panelGame.remove(przyciskRozdajFlop);
+
+                dodaniePrzyciskuPokazKarty();
+
+                panelGame.add(przyciskPokazKarty);
+
+                panelGame.repaint();
+
+            }
+        });
+    }
+
+    public void dodaniePrzyciskuRozdajTurn() {
+
+        przyciskRozdajTurn = new JButton("ROZDAJ TURN");
+        przyciskRozdajTurn.setFont(new Font("Arial", Font.BOLD, 16));
+        przyciskRozdajTurn.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
+        przyciskRozdajTurn.setBounds(1200, 650, 170, 50);
+        przyciskRozdajTurn.setBorderPainted(true);
+        przyciskRozdajTurn.setContentAreaFilled(false);
+        przyciskRozdajTurn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                rozdajTurnOrRiver(talia);
+
+                panelGame.remove(przyciskRozdajTurn);
+
+                dodaniePrzyciskuPokazKarty();
+
+                panelGame.add(przyciskPokazKarty);
+
+                panelGame.repaint();
+
+            }
+        });
+    }
+
+    public void dodaniePrzyciskuRozdajRiver() {
+
+        przyciskRozdajRiver = new JButton("ROZDAJ RIVER");
+        przyciskRozdajRiver.setFont(new Font("Arial", Font.BOLD, 16));
+        przyciskRozdajRiver.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
+        przyciskRozdajRiver.setBounds(1200, 650, 170, 50);
+        przyciskRozdajRiver.setBorderPainted(true);
+        przyciskRozdajRiver.setContentAreaFilled(false);
+        przyciskRozdajRiver.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                rozdajTurnOrRiver(talia);
+
+                panelGame.remove(przyciskRozdajRiver);
+
+                dodaniePrzyciskuPokazKarty();
+
+                panelGame.add(przyciskPokazKarty);
+
+                panelGame.repaint();
+
+            }
+        });
+    }
+
+    public void dodaniePrzyciskuSprawdzam() {
+
+        przyciskSprawdzam = new JButton("SPRAWDZ KARTY");
+        przyciskSprawdzam.setFont(new Font("Arial", Font.BOLD, 16));
+        przyciskSprawdzam.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
+        przyciskSprawdzam.setBounds(1200, 650, 170, 50);
+        przyciskSprawdzam.setBorderPainted(true);
+        przyciskSprawdzam.setContentAreaFilled(false);
+        przyciskSprawdzam.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                System.out.println("tutaj sprawdz karty");
+
+//                dodaniePrzyciskuPokazKarty();
+//
+//                panelGame.add(przyciskPokazKarty);
+
+                panelGame.repaint();
+
+            }
+        });
+    }
+
+    public void usunPrzyciskiPokazRewers(){
+        przyciskBetRaise.setVisible(false);
+        przyciskCheckCall.setVisible(false);
+        przyciskFold.setVisible(false);
+        wyswietlaczZetonow.setVisible(false);
+        raiseField.setVisible(false);
+
+        panelGame.remove(kartygracza1);
+        panelGame.remove(kartygracza2);
+
+        listakarty.get(pomoc - 1).setVisible(true);
+        listakarty.get(pomoc + gracze - 1).setVisible(true);
+
     }
 
     public void usunZTalii(List list, int liczba) {
@@ -635,9 +781,9 @@ public class OknoStol {
             kartyFlop = new JLabel();
             kartyFlop.setIcon(new ImageIcon(listaObrazkow.get(r1)));
             kartyFlop.setLayout(null);
-            kartyFlop.setBounds(380 + f, 231, 90, 137);
+            kartyFlop.setBounds(390 + f, 290, 90, 137);
 
-            f += 50;
+            f += 100;
 
             listaFlop.add(talia.get(r1));
 
@@ -663,9 +809,9 @@ public class OknoStol {
             kartyTurnOrRiver = new JLabel();
             kartyTurnOrRiver.setIcon(new ImageIcon(listaObrazkow.get(rTurnOrRiver)));
             kartyTurnOrRiver.setLayout(null);
-            kartyTurnOrRiver.setBounds(380 + f, 231, 90, 137);
+            kartyTurnOrRiver.setBounds(390 + f, 290, 90, 137);
 
-            f += 50;
+            f += 100;
 
             listaTurnOrRiver.add(talia.get(rTurnOrRiver));
 
