@@ -494,6 +494,16 @@ public class OknoStol {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                pomoc = 0;
+
+                for (int i = 0 ; i < gracze; i++){
+                    listakarty.get(pomoc).setVisible(false);
+                    listakarty.get(pomoc + gracze).setVisible(false);
+
+                    wyswietlenieKartGracza(listaRekaGraczy);
+
+                }
+
                 new Sprawdzenie(me);
 
                 panelGame.repaint();
