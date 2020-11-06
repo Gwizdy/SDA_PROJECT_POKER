@@ -1,9 +1,7 @@
 package com.sprawdzanie;
 
+import com.okna.OknoStol;
 import com.rozgrywka.Gracz;
-import com.rozgrywka.Rozgrywka;
-import com.rozgrywka.RozgrywkaTest;
-import com.taliakart.GUITalia;
 import com.taliakart.Karta;
 
 import java.util.ArrayList;
@@ -12,7 +10,7 @@ import java.util.List;
 
 public class Sprawdzenie {
 
-    private RozgrywkaTest rozgrywkaTest;
+    private OknoStol oknoStol;
 
     private RoyalFlush royalFlush = new RoyalFlush();
     private StraightFlush straightFlush = new StraightFlush();
@@ -60,12 +58,12 @@ public class Sprawdzenie {
     private String gracz1;
 
 
-    public Sprawdzenie(RozgrywkaTest rozgrywkaTest) {
-        this.rozgrywkaTest = rozgrywkaTest;
+    public Sprawdzenie(OknoStol oknoStol) {
+        this.oknoStol = oknoStol;
 
         liczba = 0;
 
-        testGracze = new ArrayList<Gracz>(rozgrywkaTest.getListaRekaGraczy());
+        testGracze = new ArrayList<Gracz>(oknoStol.getListaRekaGraczy());
 
         listaPomocnicza = new ArrayList<Karta>();
 
@@ -91,9 +89,9 @@ public class Sprawdzenie {
         listalistKartyOnePair = new ArrayList<List<Karta>>();
         listalistKartyHighCards = new ArrayList<List<Karta>>();
 
-        for (int i = 0; i < rozgrywkaTest.getIloscGraczy(); i++) {
+        for (int i = 0; i < oknoStol.getGracze(); i++) {
 
-            kartyRekaPlusStol(rozgrywkaTest.getListaRekaGraczy(), rozgrywkaTest.getListaFlop(), rozgrywkaTest.getListaTurnOrRiver());
+            kartyRekaPlusStol(oknoStol.getListaRekaGraczy(), oknoStol.getListaFlop(), oknoStol.getListaTurnOrRiver());
 
             if (royalFlush.sprawdzanieRoyalFlush(handPlusTableCards) == 10) {
                 liczbaPomocnicza = 10;

@@ -4,7 +4,6 @@ package com.taliakart;
 
 
 import com.okna.Ramka;
-import com.rozgrywka.OknoKartGracza;
 
 
 public class Main {

@@ -1,7 +1,6 @@
 package com.okna;
 
 import com.rozgrywka.Gracz;
-import com.rozgrywka.RozgrywkaTest;
 import com.sprawdzanie.Sprawdzenie;
 import com.taliakart.Figura;
 import com.taliakart.Karta;
@@ -24,6 +23,8 @@ public class OknoStol {
 
     private OknoStol me;
 
+    private Talia taliaGUI;
+
     private JFrame windowGame;
     private JPanel panelStart;
     private JPanel panelGame;
@@ -41,10 +42,6 @@ public class OknoStol {
     private JTextField wyswietlaczZetonow;
     private JTextField raiseField;
 
-    private int gracze;
-
-    private Talia taliaGUI;
-
     private List<String> listaObrazkow;
     private List<String> listaObrazkow2;
     private List<Karta> talia;
@@ -52,16 +49,12 @@ public class OknoStol {
     private Random rand = new Random();
 
     private List<JLabel> listakarty;
-    private JLabel karty;
 
+    private JLabel karty;
     private JLabel kartyFlop;
     private JLabel kartyTurnOrRiver;
     private JLabel kartygracza1;
     private JLabel kartygracza2;
-
-    private int k1_1, k1_2, k2_1, k2_2;
-    private int r, r1, rOut, rTurnOrRiver;
-    private int f;
 
     private List<Karta> listaPlayer1 = new ArrayList<Karta>();
     private List<Karta> listaPlayer2 = new ArrayList<Karta>();
@@ -72,7 +65,7 @@ public class OknoStol {
     private List<Karta> listaPlayer7 = new ArrayList<Karta>();
     private List<Karta> listaPlayer8 = new ArrayList<Karta>();
 
-    private List<Karta> handCards = new ArrayList<Karta>();
+    private List<List<Karta>> listPlayerCards = new ArrayList<List<Karta>>();
 
     private Gracz gracz1 = new Gracz();
     private Gracz gracz2 = new Gracz();
@@ -85,14 +78,16 @@ public class OknoStol {
 
     private List<Gracz> listaRekaGraczy = new ArrayList<Gracz>();
 
-    private List<List<Karta>> listPlayerCards = new ArrayList<List<Karta>>();
-
     private List<Karta> listaFlop;
     private List<Karta> listaTurnOrRiver;
+    private List<Karta> handCards = new ArrayList<Karta>();
 
     private int pomoc;
     private int rozdanieNaStole;
-
+    private int gracze;
+    private int k1_1, k1_2, k2_1, k2_2;
+    private int r, r1, rOut, rTurnOrRiver;
+    private int f;
 
     public OknoStol(OknoGracze oknoGracze) {
         this.oknoGracze = oknoGracze;
@@ -157,7 +152,6 @@ public class OknoStol {
             }
         });
     }
-
 
 
     public void dodaniePanelaGame() {
@@ -284,63 +278,70 @@ public class OknoStol {
 
                 } else if (pomoc == gracze) {
 
-                    if(rozdanieNaStole == 0) {
+                    if (rozdanieNaStole == 0) {
 
                         System.out.println(pomoc + " fuck :)" + rozdanieNaStole);
 
                         usunPrzyciskiPokazRewers();
 
                         dodaniePrzyciskuRozdajFlop();
+
                         panelGame.add(przyciskRozdajFlop);
 
                         pomoc = 0;
 
                         panelGame.repaint();
+
                         rozdanieNaStole += 1;
-                    }
-                    else if(rozdanieNaStole == 1) {
+
+                    } else if (rozdanieNaStole == 1) {
 
                         System.out.println(pomoc + "turn" + rozdanieNaStole);
 
                         usunPrzyciskiPokazRewers();
 
                         dodaniePrzyciskuRozdajTurn();
+
                         panelGame.add(przyciskRozdajTurn);
+
+                        panelGame.repaint();
+
+                        rozdanieNaStole += 1;
 
                         pomoc = 0;
 
-                        panelGame.repaint();
-                        rozdanieNaStole += 1;
-                    }
-                    else if(rozdanieNaStole == 2){
+                    } else if (rozdanieNaStole == 2) {
 
                         System.out.println(pomoc + "river" + rozdanieNaStole);
 
                         usunPrzyciskiPokazRewers();
 
                         dodaniePrzyciskuRozdajRiver();
+
                         panelGame.add(przyciskRozdajRiver);
+
+                        panelGame.repaint();
+
+                        rozdanieNaStole += 1;
 
                         pomoc = 0;
 
-                        panelGame.repaint();
-                        rozdanieNaStole += 1;
-                    }
-
-                    else{
+                    } else {
 
                         usunPrzyciskiPokazRewers();
+
                         dodaniePrzyciskuSprawdzam();
 
                         panelGame.add(przyciskSprawdzam);
 
-                        pomoc = 0;
-
                         panelGame.repaint();
+
+                        pomoc = 0;
                     }
                 } else {
 
                     panelGame.revalidate();
+
                     System.out.println("to był ostatni gracz");
                 }
 
@@ -429,6 +430,7 @@ public class OknoStol {
     public void dodaniePrzyciskuRozdajTurn() {
 
         przyciskRozdajTurn = new JButton("ROZDAJ TURN");
+
         przyciskRozdajTurn.setFont(new Font("Arial", Font.BOLD, 16));
         przyciskRozdajTurn.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
         przyciskRozdajTurn.setBounds(1200, 650, 170, 50);
@@ -455,6 +457,7 @@ public class OknoStol {
     public void dodaniePrzyciskuRozdajRiver() {
 
         przyciskRozdajRiver = new JButton("ROZDAJ RIVER");
+
         przyciskRozdajRiver.setFont(new Font("Arial", Font.BOLD, 16));
         przyciskRozdajRiver.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
         przyciskRozdajRiver.setBounds(1200, 650, 170, 50);
@@ -480,7 +483,8 @@ public class OknoStol {
 
     public void dodaniePrzyciskuSprawdzam() {
 
-        przyciskSprawdzam = new JButton("SPRAWDZ KARTY");
+        przyciskSprawdzam = new JButton("SPRAWDŹ KARTY");
+
         przyciskSprawdzam.setFont(new Font("Arial", Font.BOLD, 16));
         przyciskSprawdzam.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
         przyciskSprawdzam.setBounds(1200, 650, 170, 50);
@@ -490,11 +494,7 @@ public class OknoStol {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                System.out.println("tutaj sprawdz karty");
-
-//                dodaniePrzyciskuPokazKarty();
-//
-//                panelGame.add(przyciskPokazKarty);
+                new Sprawdzenie(me);
 
                 panelGame.repaint();
 
@@ -502,7 +502,8 @@ public class OknoStol {
         });
     }
 
-    public void usunPrzyciskiPokazRewers(){
+    public void usunPrzyciskiPokazRewers() {
+
         przyciskBetRaise.setVisible(false);
         przyciskCheckCall.setVisible(false);
         przyciskFold.setVisible(false);
@@ -822,12 +823,12 @@ public class OknoStol {
         }
     }
 
-    public JFrame getWindowGame() {
-        return windowGame;
+    public List<Gracz> getListaRekaGraczy() {
+        return listaRekaGraczy;
     }
 
-    public void setWindowGame(JFrame windowGame) {
-        this.windowGame = windowGame;
+    public void setListaRekaGraczy(List<Gracz> listaRekaGraczy) {
+        this.listaRekaGraczy = listaRekaGraczy;
     }
 
     public int getGracze() {
@@ -838,19 +839,19 @@ public class OknoStol {
         this.gracze = gracze;
     }
 
-    public JPanel getPanelStart() {
-        return panelStart;
+    public List<Karta> getListaFlop() {
+        return listaFlop;
     }
 
-    public void setPanelStart(JPanel panelStart) {
-        this.panelStart = panelStart;
+    public void setListaFlop(List<Karta> listaFlop) {
+        this.listaFlop = listaFlop;
     }
 
-    public JPanel getPanelGame() {
-        return panelGame;
+    public List<Karta> getListaTurnOrRiver() {
+        return listaTurnOrRiver;
     }
 
-    public void setPanelGame(JPanel panelGame) {
-        this.panelGame = panelGame;
+    public void setListaTurnOrRiver(List<Karta> listaTurnOrRiver) {
+        this.listaTurnOrRiver = listaTurnOrRiver;
     }
 }
