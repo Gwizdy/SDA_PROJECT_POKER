@@ -38,6 +38,7 @@ public class OknoStol {
     private JButton przyciskRozdajTurn;
     private JButton przyciskRozdajRiver;
     private JButton przyciskSprawdzam;
+    private JButton przyciskRozdajPonownie;
 
     private JTextField wyswietlaczZetonow;
     private JTextField raiseField;
@@ -48,7 +49,7 @@ public class OknoStol {
 
     private Random rand = new Random();
 
-    private List<JLabel> listakarty;
+    private List<JLabel> listaKarty;
 
     private JLabel karty;
     private JLabel kartyFlop;
@@ -64,8 +65,6 @@ public class OknoStol {
     private List<Karta> listaPlayer6 = new ArrayList<Karta>();
     private List<Karta> listaPlayer7 = new ArrayList<Karta>();
     private List<Karta> listaPlayer8 = new ArrayList<Karta>();
-
-    private List<List<Karta>> listPlayerCards = new ArrayList<List<Karta>>();
 
     private Gracz gracz1 = new Gracz();
     private Gracz gracz2 = new Gracz();
@@ -215,8 +214,8 @@ public class OknoStol {
 
                 panelGame.remove(przyciskPokazKarty);
 
-                listakarty.get(pomoc).setVisible(false);
-                listakarty.get(pomoc + gracze).setVisible(false);
+                listaKarty.get(pomoc).setVisible(false);
+                listaKarty.get(pomoc + gracze).setVisible(false);
 
                 dodaniePrzyciskowGracza();
 
@@ -280,19 +279,17 @@ public class OknoStol {
 
                     if (rozdanieNaStole == 0) {
 
-                        System.out.println(pomoc + " fuck :)" + rozdanieNaStole);
-
                         usunPrzyciskiPokazRewers();
 
                         dodaniePrzyciskuRozdajFlop();
 
                         panelGame.add(przyciskRozdajFlop);
 
-                        pomoc = 0;
-
                         panelGame.repaint();
 
                         rozdanieNaStole += 1;
+
+                        pomoc = 0;
 
                     } else if (rozdanieNaStole == 1) {
 
@@ -341,6 +338,8 @@ public class OknoStol {
                 } else {
 
                     panelGame.revalidate();
+
+                    pomoc = 0;
 
                     System.out.println("to był ostatni gracz");
                 }
@@ -494,15 +493,21 @@ public class OknoStol {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                panelGame.remove(przyciskSprawdzam);
+
                 pomoc = 0;
 
-                for (int i = 0 ; i < gracze; i++){
-                    listakarty.get(pomoc).setVisible(false);
-                    listakarty.get(pomoc + gracze).setVisible(false);
+                for (int i = 0; i < gracze; i++) {
+                    listaKarty.get(pomoc).setVisible(false);
+                    listaKarty.get(pomoc + gracze).setVisible(false);
 
                     wyswietlenieKartGracza(listaRekaGraczy);
 
                 }
+
+                dodaniePrzyciskuRozdajPonownie();
+
+                panelGame.add(przyciskRozdajPonownie);
 
                 new Sprawdzenie(me);
 
@@ -510,6 +515,59 @@ public class OknoStol {
 
             }
         });
+    }
+
+    public void dodaniePrzyciskuRozdajPonownie() {
+
+        przyciskRozdajPonownie = new JButton("ROZDAJ KARTY");
+
+        przyciskRozdajPonownie.setFont(new Font("Arial", Font.BOLD, 16));
+        przyciskRozdajPonownie.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
+        przyciskRozdajPonownie.setBounds(1200, 650, 170, 50);
+        przyciskRozdajPonownie.setBorderPainted(true);
+        przyciskRozdajPonownie.setContentAreaFilled(false);
+        przyciskRozdajPonownie.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                listaObrazkow.removeAll(listaObrazkow);
+                listaObrazkow2.removeAll(listaObrazkow2);
+                listaFlop.removeAll(listaFlop);
+                listaTurnOrRiver.removeAll(listaTurnOrRiver);
+                listaPlayer1.removeAll(listaPlayer1);
+                listaPlayer2.removeAll(listaPlayer2);
+                listaPlayer3.removeAll(listaPlayer3);
+                listaPlayer4.removeAll(listaPlayer4);
+                listaPlayer5.removeAll(listaPlayer5);
+                listaPlayer6.removeAll(listaPlayer6);
+                listaPlayer7.removeAll(listaPlayer7);
+                listaPlayer8.removeAll(listaPlayer8);
+                listaKarty.removeAll(listaKarty);
+                listaRekaGraczy.removeAll(listaRekaGraczy);
+                talia.removeAll(talia);
+
+                pomoc = 0;
+
+                rozdanieNaStole = 0;
+
+                f = 0;
+
+                panelGame.removeAll();
+                panelGame.repaint();
+
+                taliaGUI = new Talia();
+                talia = taliaGUI.getTalia();
+
+                rozdanieKart();
+
+                dodaniePrzyciskuPokazKarty();
+
+                panelGame.add(przyciskPokazKarty);
+                panelGame.repaint();
+
+            }
+        });
+
     }
 
     public void usunPrzyciskiPokazRewers() {
@@ -523,8 +581,8 @@ public class OknoStol {
         panelGame.remove(kartygracza1);
         panelGame.remove(kartygracza2);
 
-        listakarty.get(pomoc - 1).setVisible(true);
-        listakarty.get(pomoc + gracze - 1).setVisible(true);
+        listaKarty.get(pomoc - 1).setVisible(true);
+        listaKarty.get(pomoc + gracze - 1).setVisible(true);
 
     }
 
@@ -546,7 +604,7 @@ public class OknoStol {
 
     public void losowanieKart(int liczbaGraczy) {
 
-        listakarty = new ArrayList<JLabel>();
+        listaKarty = new ArrayList<JLabel>();
 
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < liczbaGraczy; j++) {
@@ -563,22 +621,22 @@ public class OknoStol {
                         k1_1 += 210;
                         if (j == 0) {
                             listaPlayer1.add(talia.get(r));
-                            listakarty.add(karty);
+                            listaKarty.add(karty);
                         }
                         if (j == 1) {
                             listaPlayer2.add(talia.get(r));
-                            listakarty.add(karty);
+                            listaKarty.add(karty);
                         }
                         if (j == 2) {
                             listaPlayer3.add(talia.get(r));
-                            listakarty.add(karty);
+                            listaKarty.add(karty);
                         }
                     }
                     if (j == 3) {
                         karty.setBounds(140, 295, 90, 137);
                         if (j == 3) {
                             listaPlayer4.add(talia.get(r));
-                            listakarty.add(karty);
+                            listaKarty.add(karty);
                         }
                     }
                     if (j > 3 && j < 7) {
@@ -586,22 +644,22 @@ public class OknoStol {
                         k2_1 += 210;
                         if (j == 4) {
                             listaPlayer5.add(talia.get(r));
-                            listakarty.add(karty);
+                            listaKarty.add(karty);
                         }
                         if (j == 5) {
                             listaPlayer6.add(talia.get(r));
-                            listakarty.add(karty);
+                            listaKarty.add(karty);
                         }
                         if (j == 6) {
                             listaPlayer7.add(talia.get(r));
-                            listakarty.add(karty);
+                            listaKarty.add(karty);
                         }
                     }
                     if (j == 7) {
                         karty.setBounds(1005, 295, 90, 137);
                         if (j == 7) {
                             listaPlayer8.add(talia.get(r));
-                            listakarty.add(karty);
+                            listaKarty.add(karty);
                         }
                     }
                 }
@@ -613,14 +671,14 @@ public class OknoStol {
                             listaPlayer1.add(talia.get(r));
                             gracz1.setKartyReka(listaPlayer1);
                             listaRekaGraczy.add(gracz1);
-                            listakarty.add(karty);
+                            listaKarty.add(karty);
                             System.out.println("GRACZ 1" + (gracz1.getKartyReka()));
                         }
                         if (j == 1) {
                             listaPlayer2.add(talia.get(r));
                             gracz2.setKartyReka(listaPlayer2);
                             listaRekaGraczy.add(gracz2);
-                            listakarty.add(karty);
+                            listaKarty.add(karty);
                             System.out.println("GRACZ 2" + (gracz2.getKartyReka()));
 
                         }
@@ -628,7 +686,7 @@ public class OknoStol {
                             listaPlayer3.add(talia.get(r));
                             gracz3.setKartyReka(listaPlayer3);
                             listaRekaGraczy.add(gracz3);
-                            listakarty.add(karty);
+                            listaKarty.add(karty);
                             System.out.println("GRACZ 3" + (gracz3.getKartyReka()));
 
                         }
@@ -639,7 +697,7 @@ public class OknoStol {
                             listaPlayer4.add(talia.get(r));
                             gracz4.setKartyReka(listaPlayer4);
                             listaRekaGraczy.add(gracz4);
-                            listakarty.add(karty);
+                            listaKarty.add(karty);
                             System.out.println("GRACZ 4" + (gracz4.getKartyReka()));
 
                         }
@@ -651,7 +709,7 @@ public class OknoStol {
                             listaPlayer5.add(talia.get(r));
                             gracz5.setKartyReka(listaPlayer5);
                             listaRekaGraczy.add(gracz5);
-                            listakarty.add(karty);
+                            listaKarty.add(karty);
                             System.out.println("GRACZ 5" + (gracz5.getKartyReka()));
 
                         }
@@ -659,7 +717,7 @@ public class OknoStol {
                             listaPlayer6.add(talia.get(r));
                             gracz6.setKartyReka(listaPlayer6);
                             listaRekaGraczy.add(gracz6);
-                            listakarty.add(karty);
+                            listaKarty.add(karty);
                             System.out.println("GRACZ 6" + (gracz6.getKartyReka()));
 
                         }
@@ -667,7 +725,7 @@ public class OknoStol {
                             listaPlayer7.add(talia.get(r));
                             gracz7.setKartyReka(listaPlayer7);
                             listaRekaGraczy.add(gracz7);
-                            listakarty.add(karty);
+                            listaKarty.add(karty);
                             System.out.println("GRACZ 7" + (gracz7.getKartyReka()));
 
                         }
@@ -678,7 +736,7 @@ public class OknoStol {
                             listaPlayer8.add(talia.get(r));
                             gracz8.setKartyReka(listaPlayer8);
                             listaRekaGraczy.add(gracz8);
-                            listakarty.add(karty);
+                            listaKarty.add(karty);
                             System.out.println("GRACZ 8" + gracz8.getKartyReka());
 
                         }
@@ -690,7 +748,10 @@ public class OknoStol {
                 panelGame.add(karty);
             }
         }
-
+        k1_1 = 0;
+        k1_2 = 0;
+        k2_1 = 0;
+        k2_2 = 0;
     }
 
     public void rozdanieKart() {
@@ -773,7 +834,7 @@ public class OknoStol {
 
         handCards.removeAll(handCards);
         pomoc += 1;
-
+        System.out.println(pomoc);
     }
 
     public void rozdajFlop(List list) {
