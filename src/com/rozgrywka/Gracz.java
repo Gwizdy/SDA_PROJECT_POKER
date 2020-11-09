@@ -8,6 +8,7 @@ public class Gracz {
 
     private int zetonyWGrze;
     private int zetonyPosiadane;
+    private int zetonyStawkaGracza;
 
     private List<Karta> kartyReka;
 
@@ -37,5 +38,13 @@ public class Gracz {
 
     public void setKartyReka(List<Karta> kartyReka) {
         this.kartyReka = kartyReka;
+    }
+
+    public int getZetonyStawkaGracza() {
+        return zetonyStawkaGracza;
+    }
+
+    public void setZetonyStawkaGracza(int zetonyStawkaGracza) {
+        this.zetonyStawkaGracza = zetonyStawkaGracza;
     }
 }

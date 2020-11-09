@@ -26,6 +26,7 @@ public class OknoStol {
     private Talia taliaGUI;
 
     private JFrame windowGame;
+
     private JPanel panelStart;
     private JPanel panelGame;
 
@@ -42,6 +43,10 @@ public class OknoStol {
 
     private JTextField wyswietlaczZetonow;
     private JTextField raiseField;
+    private JTextField zetonyGracza;
+    private JTextField poleZetonyWGrze;
+
+    private List<JTextField> wyswietlaczZetonowGracza;
 
     private List<String> listaObrazkow;
     private List<String> listaObrazkow2;
@@ -88,6 +93,7 @@ public class OknoStol {
     private int k1_1, k1_2, k2_1, k2_2;
     private int r, r1, rOut, rTurnOrRiver;
     private int f;
+    private int z1, z2, z3;
 
     public OknoStol(OknoGracze oknoGracze) {
         this.oknoGracze = oknoGracze;
@@ -163,6 +169,10 @@ public class OknoStol {
 
         dodaniePrzyciskuPokazKarty();
 
+        dodaniePolaZetonow();
+
+        dodaniePolaZetonowWGrze();
+
         panelGame.add(przyciskPokazKarty);
     }
 
@@ -230,6 +240,56 @@ public class OknoStol {
         });
     }
 
+    public void dodaniePolaZetonow() {
+
+        z1 = 0;
+        z2 = 0;
+        z3 = 0;
+
+        wyswietlaczZetonowGracza = new ArrayList<JTextField>();
+
+        for (int i = 0; i < gracze; i++) {
+
+            zetonyGracza = new JTextField();
+            zetonyGracza.setEditable(false);
+            zetonyGracza.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
+            zetonyGracza.setFont(new Font("Arial", Font.BOLD, 16));
+            zetonyGracza.setHorizontalAlignment(SwingConstants.CENTER);
+
+            if (i < 3) {
+                zetonyGracza.setText(String.valueOf(listaZetonowGraczy.get(i).getZetonyPosiadane()));
+                zetonyGracza.setBounds(805 - z1, 490, 100, 30);
+                z1 += 210;
+
+            } else if (i == 3 || i == 7) {
+                zetonyGracza.setText(String.valueOf(listaZetonowGraczy.get(i).getZetonyPosiadane()));
+                zetonyGracza.setBounds(165 + z2, 260, 100, 30);
+                z2 += 860;
+
+            } else if (i > 3 && i < 7) {
+                zetonyGracza.setText(String.valueOf(listaZetonowGraczy.get(i).getZetonyPosiadane()));
+                zetonyGracza.setBounds(395 + z3, 210, 100, 30);
+                z3 += 210;
+
+            }
+            wyswietlaczZetonowGracza.add(zetonyGracza);
+
+            panelGame.add(zetonyGracza);
+        }
+
+    }
+
+    public void dodaniePolaZetonowWGrze() {
+
+        poleZetonyWGrze = new JTextField();
+        poleZetonyWGrze.setEditable(false);
+        poleZetonyWGrze.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
+        poleZetonyWGrze.setFont(new Font("Arial", Font.BOLD, 16));
+        poleZetonyWGrze.setHorizontalAlignment(SwingConstants.CENTER);
+        poleZetonyWGrze.setBounds(630, 345, 100, 30);
+
+        panelGame.add(poleZetonyWGrze);
+    }
 
     public void dodaniePrzyciskuBetRaise() {
 
@@ -243,6 +303,14 @@ public class OknoStol {
         przyciskBetRaise.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                listaZetonowGraczy.get(pomoc - 1).setZetonyPosiadane(listaZetonowGraczy.get(pomoc - 1).getZetonyPosiadane() - Integer.parseInt(raiseField.getText()));
+
+                listaZetonowGraczy.get(0).setZetonyWGrze(listaZetonowGraczy.get(0).getZetonyWGrze() + Integer.parseInt(raiseField.getText()));
+
+                wyswietlaczZetonowGracza.get(pomoc - 1).setText(String.valueOf(listaZetonowGraczy.get(pomoc - 1).getZetonyPosiadane()));
+
+                poleZetonyWGrze.setText(String.valueOf(listaZetonowGraczy.get(0).getZetonyWGrze()));
 
                 mechanizmRozgrywki();
 
@@ -300,6 +368,24 @@ public class OknoStol {
         wyswietlaczZetonow.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
         wyswietlaczZetonow.setFont(new Font("Arial", Font.BOLD, 16));
         wyswietlaczZetonow.setHorizontalAlignment(SwingConstants.CENTER);
+
+        if (pomoc == 0) {
+            wyswietlaczZetonow.setText(String.valueOf(listaZetonowGraczy.get(0).getZetonyPosiadane()));
+        } else if (pomoc == 1) {
+            wyswietlaczZetonow.setText(String.valueOf(listaZetonowGraczy.get(1).getZetonyPosiadane()));
+        } else if (pomoc == 2) {
+            wyswietlaczZetonow.setText(String.valueOf(listaZetonowGraczy.get(2).getZetonyPosiadane()));
+        } else if (pomoc == 3) {
+            wyswietlaczZetonow.setText(String.valueOf(listaZetonowGraczy.get(3).getZetonyPosiadane()));
+        } else if (pomoc == 4) {
+            wyswietlaczZetonow.setText(String.valueOf(listaZetonowGraczy.get(4).getZetonyPosiadane()));
+        } else if (pomoc == 5) {
+            wyswietlaczZetonow.setText(String.valueOf(listaZetonowGraczy.get(5).getZetonyPosiadane()));
+        } else if (pomoc == 6) {
+            wyswietlaczZetonow.setText(String.valueOf(listaZetonowGraczy.get(6).getZetonyPosiadane()));
+        } else if (pomoc == 7) {
+            wyswietlaczZetonow.setText(String.valueOf(listaZetonowGraczy.get(7).getZetonyPosiadane()));
+        }
 
     }
 
@@ -440,6 +526,7 @@ public class OknoStol {
                 pomoc = 0;
 
                 for (int i = 0; i < gracze; i++) {
+
                     listaKarty.get(pomoc).setVisible(false);
                     listaKarty.get(pomoc + gracze).setVisible(false);
 
@@ -489,6 +576,7 @@ public class OknoStol {
                 talia.removeAll(talia);
 
                 pomoc = 0;
+
                 przejsciePoGraczach = 0;
 
                 rozdanieNaStole = 0;
@@ -505,6 +593,11 @@ public class OknoStol {
 
                 dodaniePrzyciskuPokazKarty();
 
+                dodaniePolaZetonowWGrze();
+
+                dodaniePolaZetonow();
+
+                panelGame.add(poleZetonyWGrze);
                 panelGame.add(przyciskPokazKarty);
                 panelGame.repaint();
 
@@ -529,8 +622,7 @@ public class OknoStol {
 
     }
 
-    public void mechanizmRozgrywki(){
-
+    public void mechanizmRozgrywki() {
 
         if (przejsciePoGraczach < gracze) {
 
@@ -540,15 +632,11 @@ public class OknoStol {
 
             panelGame.add(przyciskPokazKarty);
 
-            if (pomoc == gracze){
-                pomoc =0;
+            if (pomoc == gracze) {
+                pomoc = 0;
             }
 
             panelGame.repaint();
-
-            System.out.println("ZETONY POSIADANE" + listaZetonowGraczy.get(pomoc).getZetonyPosiadane());
-            System.out.println("ZETONY W GRZE" + listaZetonowGraczy.get(pomoc).getZetonyWGrze());
-            System.out.println("Przejscie po graczach" + przejsciePoGraczach);
 
         } else if (przejsciePoGraczach == gracze) {
 
@@ -565,11 +653,8 @@ public class OknoStol {
                 rozdanieNaStole += 1;
 
                 pomoc = 0;
-                przejsciePoGraczach = 0;
 
-                System.out.println("ZETONY POSIADANE" + listaZetonowGraczy.get(pomoc).getZetonyPosiadane());
-                System.out.println("ZETONY W GRZE" + listaZetonowGraczy.get(pomoc).getZetonyWGrze());
-                System.out.println("Przejscie po graczach" + przejsciePoGraczach);
+                przejsciePoGraczach = 0;
 
             } else if (rozdanieNaStole == 1) {
 
@@ -586,12 +671,8 @@ public class OknoStol {
                 rozdanieNaStole += 1;
 
                 pomoc = 0;
+
                 przejsciePoGraczach = 0;
-
-
-                System.out.println("ZETONY POSIADANE" + listaZetonowGraczy.get(pomoc).getZetonyPosiadane());
-                System.out.println("ZETONY W GRZE" + listaZetonowGraczy.get(pomoc).getZetonyWGrze());
-                System.out.println("Przejscie po graczach" + przejsciePoGraczach);
 
             } else if (rozdanieNaStole == 2) {
 
@@ -608,12 +689,8 @@ public class OknoStol {
                 rozdanieNaStole += 1;
 
                 pomoc = 0;
+
                 przejsciePoGraczach = 0;
-
-
-                System.out.println("ZETONY POSIADANE" + listaZetonowGraczy.get(pomoc).getZetonyPosiadane());
-                System.out.println("ZETONY W GRZE" + listaZetonowGraczy.get(pomoc).getZetonyWGrze());
-                System.out.println("Przejscie po graczach" + przejsciePoGraczach);
 
             } else {
 
@@ -626,11 +703,9 @@ public class OknoStol {
                 panelGame.repaint();
 
                 pomoc = 0;
+
                 przejsciePoGraczach = 0;
 
-                System.out.println("ZETONY POSIADANE" + listaZetonowGraczy.get(pomoc).getZetonyPosiadane());
-                System.out.println("ZETONY W GRZE" + listaZetonowGraczy.get(pomoc).getZetonyWGrze());
-                System.out.println("Przejscie po graczach" + przejsciePoGraczach);
             }
         } else {
 
@@ -642,7 +717,7 @@ public class OknoStol {
         }
     }
 
-    public void listaGraczeZetonyNaStart(List<Gracz> listaGraczyZetonyNaStart){
+    public void listaGraczeZetonyNaStart(List<Gracz> listaGraczyZetonyNaStart) {
 
         listaGraczyZetonyNaStart.add(gracz1);
         listaGraczyZetonyNaStart.add(gracz2);
@@ -653,11 +728,10 @@ public class OknoStol {
         listaGraczyZetonyNaStart.add(gracz7);
         listaGraczyZetonyNaStart.add(gracz8);
 
-        for (int i = 0 ; i < listaGraczyZetonyNaStart.size() ; i++){
+        for (int i = 0; i < listaGraczyZetonyNaStart.size(); i++) {
             listaGraczyZetonyNaStart.get(i).setZetonyPosiadane(1000);
         }
     }
-
 
     public void usunZTalii(List list, int liczba) {
 
@@ -907,7 +981,7 @@ public class OknoStol {
 
         handCards.removeAll(handCards);
         pomoc += 1;
-        przejsciePoGraczach +=1;
+        przejsciePoGraczach += 1;
         System.out.println(pomoc);
     }
 
@@ -927,7 +1001,7 @@ public class OknoStol {
             kartyFlop = new JLabel();
             kartyFlop.setIcon(new ImageIcon(listaObrazkow.get(r1)));
             kartyFlop.setLayout(null);
-            kartyFlop.setBounds(390 + f, 290, 90, 137);
+            kartyFlop.setBounds(320 + f, 290, 90, 137);
 
             f += 100;
 
@@ -955,7 +1029,7 @@ public class OknoStol {
             kartyTurnOrRiver = new JLabel();
             kartyTurnOrRiver.setIcon(new ImageIcon(listaObrazkow.get(rTurnOrRiver)));
             kartyTurnOrRiver.setLayout(null);
-            kartyTurnOrRiver.setBounds(390 + f, 290, 90, 137);
+            kartyTurnOrRiver.setBounds(450 + f, 290, 90, 137);
 
             f += 100;
 
