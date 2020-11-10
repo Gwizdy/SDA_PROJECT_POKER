@@ -121,7 +121,6 @@ public class OknoGracze {
                 for (int i = 0; i < gracze; i++) {
                     if (player[i].getText().equals("")) {
                         dobrePuste = false;
-                        new OknoOstrzezenieGracz();
                     } else
                         dobrePuste = true;
                 }
@@ -130,16 +129,30 @@ public class OknoGracze {
                         for (int j = i + 1; j < ramka.getLiczbaGraczy(); j++) {
                             if (player[i].getText().equals(player[j].getText())) {
                                 dobreNazwa = false;
-                                new OknoOstrzezenieNazwa();
                             } else
                                 dobreNazwa = true;
                         }
                     }
                 }
+                try {
+                    if (dobrePuste == true && dobreNazwa == true) {
 
-                if (dobrePuste == true && dobreNazwa == true)
-                    ramka.getWindow().dispose();
-                new OknoStol(me);
+                        ramka.getWindow().dispose();
+
+                        new OknoStol(me);
+
+                    } else {
+                        dobrePuste = false;
+                        dobreNazwa = false;
+
+                        new OknoOstrzezenieGracz();
+                    }
+                } catch (Exception ex) {
+                    dobrePuste = false;
+                    dobreNazwa = false;
+
+                    new OknoOstrzezenieGracz();
+                }
             }
         });
     }

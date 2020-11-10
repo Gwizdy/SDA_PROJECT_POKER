@@ -60,13 +60,27 @@ public class Ramka {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (textField.getText().equals("") || textField.getText().charAt(0) < 50 || textField.getText().charAt(0) > 56 || textField.getText().length() > 1)
+                try {
+                    System.out.println(textField.getText().charAt(0));
+                    if (!textField.getText().equals("") && Integer.parseInt(textField.getText()) > 1 && Integer.parseInt(textField.getText()) < 9 && textField.getText().length() == 1) {
+
+                        setLiczbaGraczy(liczbaGraczy = Integer.parseInt(textField.getText()));
+
+                        panel.removeAll();
+
+                        new OknoGracze(me);
+
+                        window.revalidate();
+
+                    } else {
+
+                        new OknoOstrzezenie();
+
+                    }
+                } catch (NumberFormatException ex) {
+
                     new OknoOstrzezenie();
-                else {
-                    setLiczbaGraczy(liczbaGraczy = Integer.parseInt(textField.getText()));
-                    panel.removeAll();
-                    new OknoGracze(me);
-                    window.revalidate();
+
                 }
             }
         });

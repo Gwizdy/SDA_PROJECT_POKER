@@ -8,6 +8,6 @@ public class OknoOstrzezenieGracz {
 
     public OknoOstrzezenieGracz() {
         window = new JFrame();
-        JOptionPane.showMessageDialog(window, "Pola nie mogą być puste", "Alert", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(window, "Pola nie mogą być puste oraz nazwy muszą się różnić", "Alert", JOptionPane.WARNING_MESSAGE);
     }
 }

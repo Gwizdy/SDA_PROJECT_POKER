@@ -42,11 +42,13 @@ public class OknoStol {
     private JButton przyciskRozdajPonownie;
 
     private JTextField wyswietlaczZetonow;
+    private JTextField stawkaGracza;
     private JTextField raiseField;
     private JTextField zetonyGracza;
     private JTextField poleZetonyWGrze;
 
     private List<JTextField> wyswietlaczZetonowGracza;
+    private List<JTextField> wyswietlaczStawkiGracza;
 
     private List<String> listaObrazkow;
     private List<String> listaObrazkow2;
@@ -94,6 +96,7 @@ public class OknoStol {
     private int r, r1, rOut, rTurnOrRiver;
     private int f;
     private int z1, z2, z3;
+    private int s1, s2, s3;
 
     public OknoStol(OknoGracze oknoGracze) {
         this.oknoGracze = oknoGracze;
@@ -171,6 +174,8 @@ public class OknoStol {
 
         dodaniePolaZetonow();
 
+        dodaniePolaStawkiGracza();
+
         dodaniePolaZetonowWGrze();
 
         panelGame.add(przyciskPokazKarty);
@@ -240,12 +245,53 @@ public class OknoStol {
         });
     }
 
+    public void dodaniePolaStawkiGracza() {
+
+        s1 = 0;
+        s2 = 0;
+        s3 = 0;
+
+        stawkaGracza = new JTextField();
+        wyswietlaczStawkiGracza = new ArrayList<JTextField>();
+
+        for (int i = 0; i < gracze; i++) {
+
+            stawkaGracza = new JTextField();
+            stawkaGracza.setEditable(false);
+            stawkaGracza.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
+            stawkaGracza.setFont(new Font("Arial", Font.BOLD, 8));
+            stawkaGracza.setHorizontalAlignment(SwingConstants.CENTER);
+
+            if (i < 3) {
+                stawkaGracza.setText(String.valueOf(listaZetonowGraczy.get(i).getZetonyStawkaGracza()));
+                stawkaGracza.setBounds(820 - s1, 465, 70, 20);
+                s1 += 210;
+
+            } else if (i == 3 || i == 7) {
+                stawkaGracza.setText(String.valueOf(listaZetonowGraczy.get(i).getZetonyStawkaGracza()));
+                stawkaGracza.setBounds(180 + s2, 235, 70, 20);
+                s2 += 860;
+
+            } else if (i > 3 && i < 7) {
+                stawkaGracza.setText(String.valueOf(listaZetonowGraczy.get(i).getZetonyStawkaGracza()));
+                stawkaGracza.setBounds(410 + s3, 245, 70, 20);
+                s3 += 210;
+
+            }
+            wyswietlaczStawkiGracza.add(stawkaGracza);
+
+            panelGame.add(stawkaGracza);
+        }
+
+    }
+
     public void dodaniePolaZetonow() {
 
         z1 = 0;
         z2 = 0;
         z3 = 0;
 
+        wyswietlaczZetonow = new JTextField();
         wyswietlaczZetonowGracza = new ArrayList<JTextField>();
 
         for (int i = 0; i < gracze; i++) {
@@ -303,17 +349,31 @@ public class OknoStol {
         przyciskBetRaise.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    if (!raiseField.getText().isEmpty() && Integer.parseInt(raiseField.getText()) != 0 && (Integer.parseInt(raiseField.getText()) < listaZetonowGraczy.get(pomoc - 1).getZetonyPosiadane())) {
 
-                listaZetonowGraczy.get(pomoc - 1).setZetonyPosiadane(listaZetonowGraczy.get(pomoc - 1).getZetonyPosiadane() - Integer.parseInt(raiseField.getText()));
+                        listaZetonowGraczy.get(pomoc - 1).setZetonyPosiadane(listaZetonowGraczy.get(pomoc - 1).getZetonyPosiadane() - Integer.parseInt(raiseField.getText()));
 
-                listaZetonowGraczy.get(0).setZetonyWGrze(listaZetonowGraczy.get(0).getZetonyWGrze() + Integer.parseInt(raiseField.getText()));
+                        listaZetonowGraczy.get(0).setZetonyWGrze(listaZetonowGraczy.get(0).getZetonyWGrze() + Integer.parseInt(raiseField.getText()));
 
-                wyswietlaczZetonowGracza.get(pomoc - 1).setText(String.valueOf(listaZetonowGraczy.get(pomoc - 1).getZetonyPosiadane()));
+                        wyswietlaczZetonowGracza.get(pomoc - 1).setText(String.valueOf(listaZetonowGraczy.get(pomoc - 1).getZetonyPosiadane()));
 
-                poleZetonyWGrze.setText(String.valueOf(listaZetonowGraczy.get(0).getZetonyWGrze()));
+                        poleZetonyWGrze.setText(String.valueOf(listaZetonowGraczy.get(0).getZetonyWGrze()));
 
-                mechanizmRozgrywki();
+                        listaZetonowGraczy.get(pomoc - 1).setZetonyStawkaGracza(listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza() + Integer.parseInt(raiseField.getText()));
 
+                        wyswietlaczStawkiGracza.get(pomoc - 1).setText(String.valueOf(listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza()));
+
+                        mechanizmRozgrywki();
+
+                    } else
+                        new OknoOstrzezenieBetRaise();
+
+                } catch (NumberFormatException ex) {
+
+                    new OknoOstrzezenieBetRaise();
+
+                }
             }
         });
 
