@@ -10,6 +10,9 @@ public class Gracz {
     private int zetonyPosiadane;
     private int zetonyStawkaGracza;
 
+    private boolean foldCheck;
+    private boolean allInCheck;
+
     private List<Karta> kartyReka;
 
     public Gracz() {
@@ -47,4 +50,12 @@ public class Gracz {
     public void setZetonyStawkaGracza(int zetonyStawkaGracza) {
         this.zetonyStawkaGracza = zetonyStawkaGracza;
     }
+
+    public boolean getFoldCheck() { return foldCheck; }
+
+    public void setFoldCheck(boolean foldCheck) { this.foldCheck = foldCheck; }
+
+    public boolean getAllInCheck() { return allInCheck; }
+
+    public void setAllInCheck(boolean allInCheck) { this.allInCheck = allInCheck; }
 }

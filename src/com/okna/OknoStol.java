@@ -84,6 +84,7 @@ public class OknoStol {
 
     private List<Gracz> listaRekaGraczy = new ArrayList<Gracz>();
     private List<Gracz> listaZetonowGraczy = new ArrayList<Gracz>();
+    private List<Gracz> listaFoldOrAllIn = new ArrayList<Gracz>();
 
     private List<Karta> listaFlop;
     private List<Karta> listaTurnOrRiver;
@@ -98,6 +99,8 @@ public class OknoStol {
     private int z1, z2, z3;
     private int s1, s2, s3;
 
+    private boolean rozdanieSkonczone;
+
     public OknoStol(OknoGracze oknoGracze) {
         this.oknoGracze = oknoGracze;
         me = this;
@@ -109,6 +112,7 @@ public class OknoStol {
         talia = taliaGUI.getTalia();
 
         listaGraczeZetonyNaStart(listaZetonowGraczy);
+        listaGraczeFoldOrAllin(listaFoldOrAllIn); // na poczatku rozgrywki Fold i AllIn na 0
 
         //new BazaGracze(me);
 
@@ -141,6 +145,8 @@ public class OknoStol {
     }
 
     public void dodaniePrzyciskuStart() {
+
+        rozdanieSkonczone = false;
 
         przyciskStart = new JButton("ROZDAJ KARTY");
         przyciskStart.setFont(new Font("Arial", Font.BOLD, 16));
@@ -203,6 +209,10 @@ public class OknoStol {
 
     public void dodaniePrzyciskuPokazKarty() {
 
+        while(listaFoldOrAllIn.get(pomoc).getFoldCheck() && pomoc < gracze){
+            pomoc+=1;
+            przejsciePoGraczach+=1;
+        }
         przyciskPokazKarty = new JButton("POKAŻ KARTY");
 
         przyciskPokazKarty.setFont(new Font("Arial", Font.BOLD, 16));
@@ -349,6 +359,9 @@ public class OknoStol {
         przyciskBetRaise.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                usunPrzyciskiPokazRewers();
+
                 try {
                     if (!raiseField.getText().isEmpty() && Integer.parseInt(raiseField.getText()) != 0 && (Integer.parseInt(raiseField.getText()) < listaZetonowGraczy.get(pomoc - 1).getZetonyPosiadane())) {
 
@@ -392,6 +405,7 @@ public class OknoStol {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                usunPrzyciskiPokazRewers();
                 mechanizmRozgrywki();
 
             }
@@ -412,6 +426,9 @@ public class OknoStol {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                usunPrzyciskiPokazRewers();
+
+                listaFoldOrAllIn.get(pomoc-1).setFoldCheck(true);
                 mechanizmRozgrywki();
 
             }
@@ -598,6 +615,10 @@ public class OknoStol {
 
                 panelGame.add(przyciskRozdajPonownie);
 
+                for (int i = 0 ; i <gracze; i++){
+                    System.out.println(i + " " + listaFoldOrAllIn.get(i).getFoldCheck());
+                }
+
                 new Sprawdzenie(me);
 
                 panelGame.repaint();
@@ -635,6 +656,14 @@ public class OknoStol {
                 listaRekaGraczy.removeAll(listaRekaGraczy);
                 talia.removeAll(talia);
 
+                for (int i = 0; i < listaFoldOrAllIn.size(); i++) {
+                    listaFoldOrAllIn.get(i).setFoldCheck(false);
+                }
+
+                for (int i = 0; i < listaFoldOrAllIn.size(); i++) {
+                    listaFoldOrAllIn.get(i).setAllInCheck(false);
+                }
+
                 pomoc = 0;
 
                 przejsciePoGraczach = 0;
@@ -642,6 +671,8 @@ public class OknoStol {
                 rozdanieNaStole = 0;
 
                 f = 0;
+
+                rozdanieSkonczone = false;
 
                 panelGame.removeAll();
                 panelGame.repaint();
@@ -684,96 +715,135 @@ public class OknoStol {
 
     public void mechanizmRozgrywki() {
 
-        if (przejsciePoGraczach < gracze) {
+        while(listaFoldOrAllIn.get(pomoc).getFoldCheck() && przejsciePoGraczach<gracze){
 
-            usunPrzyciskiPokazRewers();
+            pomoc += 1;
+            przejsciePoGraczach +=1;
 
-            dodaniePrzyciskuPokazKarty();
-
-            panelGame.add(przyciskPokazKarty);
-
-            if (pomoc == gracze) {
-                pomoc = 0;
-            }
-
-            panelGame.repaint();
-
-        } else if (przejsciePoGraczach == gracze) {
-
-            if (rozdanieNaStole == 0) {
-
-                usunPrzyciskiPokazRewers();
-
-                dodaniePrzyciskuRozdajFlop();
-
-                panelGame.add(przyciskRozdajFlop);
-
-                panelGame.repaint();
-
-                rozdanieNaStole += 1;
-
-                pomoc = 0;
-
-                przejsciePoGraczach = 0;
-
-            } else if (rozdanieNaStole == 1) {
-
-                System.out.println(pomoc + "turn" + rozdanieNaStole);
-
-                usunPrzyciskiPokazRewers();
-
-                dodaniePrzyciskuRozdajTurn();
-
-                panelGame.add(przyciskRozdajTurn);
-
-                panelGame.repaint();
-
-                rozdanieNaStole += 1;
-
-                pomoc = 0;
-
-                przejsciePoGraczach = 0;
-
-            } else if (rozdanieNaStole == 2) {
-
-                System.out.println(pomoc + "river" + rozdanieNaStole);
-
-                usunPrzyciskiPokazRewers();
-
-                dodaniePrzyciskuRozdajRiver();
-
-                panelGame.add(przyciskRozdajRiver);
-
-                panelGame.repaint();
-
-                rozdanieNaStole += 1;
-
-                pomoc = 0;
-
-                przejsciePoGraczach = 0;
-
-            } else {
+            if(rozdanieNaStole == 3 && przejsciePoGraczach == gracze){
 
                 usunPrzyciskiPokazRewers();
 
                 dodaniePrzyciskuSprawdzam();
 
+                rozdanieSkonczone = true;
+
                 panelGame.add(przyciskSprawdzam);
 
                 panelGame.repaint();
 
-                pomoc = 0;
-
-                przejsciePoGraczach = 0;
-
             }
-        } else {
 
-//            panelGame.revalidate();
-//
-//            pomoc = 0;
-//
-//            System.out.println("to był ostatni gracz");
+            if (pomoc == gracze) {
+                pomoc = 1;
+            }
+        }
+
+        if(!listaFoldOrAllIn.get(pomoc).getFoldCheck() && !rozdanieSkonczone){
+            if (przejsciePoGraczach < gracze) {
+
+//                usunPrzyciskiPokazRewers();
+
+                dodaniePrzyciskuPokazKarty();
+
+                panelGame.add(przyciskPokazKarty);
+
+                if (pomoc == gracze) {
+                    pomoc = 0;
+                }
+
+                panelGame.repaint();
+
+            } else if (przejsciePoGraczach == gracze) {
+
+                if (rozdanieNaStole == 0) {
+
+                    usunPrzyciskiPokazRewers();
+
+                    dodaniePrzyciskuRozdajFlop();
+
+                    panelGame.add(przyciskRozdajFlop);
+
+                    panelGame.repaint();
+
+                    rozdanieNaStole += 1;
+
+                    pomoc = 0;
+
+                    przejsciePoGraczach = 0;
+
+                } else if (rozdanieNaStole == 1) {
+
+                    System.out.println(pomoc + "turn" + rozdanieNaStole);
+
+                    usunPrzyciskiPokazRewers();
+
+                    dodaniePrzyciskuRozdajTurn();
+
+                    panelGame.add(przyciskRozdajTurn);
+
+                    panelGame.repaint();
+
+                    rozdanieNaStole += 1;
+
+                    pomoc = 0;
+
+                    przejsciePoGraczach = 0;
+
+                } else if (rozdanieNaStole == 2) {
+
+                    System.out.println(pomoc + "river" + rozdanieNaStole);
+
+                    usunPrzyciskiPokazRewers();
+
+                    dodaniePrzyciskuRozdajRiver();
+
+                    panelGame.add(przyciskRozdajRiver);
+
+                    panelGame.repaint();
+
+                    rozdanieNaStole += 1;
+
+                    pomoc = 0;
+
+                    przejsciePoGraczach = 0;
+
+                } else {
+
+                    usunPrzyciskiPokazRewers();
+
+                    dodaniePrzyciskuSprawdzam();
+
+                    panelGame.add(przyciskSprawdzam);
+
+                    panelGame.repaint();
+
+                    pomoc = 0;
+
+                    przejsciePoGraczach = 0;
+
+                }
+            }
+        }
+    }
+
+    public void listaGraczeFoldOrAllin(List<Gracz> listaGraczyFoldOrAllIn) {
+
+        listaFoldOrAllIn.add(gracz1);
+        listaFoldOrAllIn.add(gracz2);
+        listaFoldOrAllIn.add(gracz3);
+        listaFoldOrAllIn.add(gracz4);
+        listaFoldOrAllIn.add(gracz5);
+        listaFoldOrAllIn.add(gracz6);
+        listaFoldOrAllIn.add(gracz7);
+        listaFoldOrAllIn.add(gracz8);
+
+        for (int i = 0; i < listaGraczyFoldOrAllIn.size(); i++) {
+            listaFoldOrAllIn.get(i).setFoldCheck(false);
+        }
+
+        for (int i = 0; i < listaGraczyFoldOrAllIn.size(); i++) {
+            listaFoldOrAllIn.get(i).setAllInCheck(false);
         }
     }
 
