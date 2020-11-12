@@ -61,7 +61,6 @@ public class Ramka {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    System.out.println(textField.getText().charAt(0));
                     if (!textField.getText().equals("") && Integer.parseInt(textField.getText()) > 1 && Integer.parseInt(textField.getText()) < 9 && textField.getText().length() == 1) {
 
                         setLiczbaGraczy(liczbaGraczy = Integer.parseInt(textField.getText()));
