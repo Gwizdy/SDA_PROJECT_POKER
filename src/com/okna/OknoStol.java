@@ -222,16 +222,11 @@ public class OknoStol {
 
     public void dodaniePrzyciskuPokazKarty() {
 
-        for (int i = pomoc; i < listaFoldow.size(); i++) {
-            if (listaFoldow.get(i).getFoldGracza() == true) {
-                pomoc = i;
-                przejsciePoGraczach = i;
+        while(!listaFoldow.get(pomoc).getFoldGracza()){
+            pomoc += 1;
+            przejsciePoGraczach += 1;
+            if(pomoc==gracze){
                 break;
-            } else {
-                if (listaFoldow.get(i).getFoldGracza() == false) {
-                    pomoc = i;
-                    przejsciePoGraczach = i;
-                }
             }
         }
 
@@ -408,7 +403,9 @@ public class OknoStol {
                     new OknoOstrzezenieBetRaise();
 
                 }
+//                usunPrzyciskiPokazRewers(); // dodany tutaj bo jesli nastepny gracz mial fold to nie pokazywalo rewersu
             }
+
         });
 
     }
@@ -426,6 +423,7 @@ public class OknoStol {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+//                usunPrzyciskiPokazRewers(); // dodany tutaj bo jesli nastepny gracz mial fold to nie pokazywalo rewersu
                 mechanizmRozgrywki();
 
             }
@@ -446,7 +444,9 @@ public class OknoStol {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                listaFoldow.get(pomoc - 1).setFoldGracza(false);
+//                usunPrzyciskiPokazRewers(); // dodany tutaj bo jesli nastepny gracz mial fold to nie pokazywalo rewersu
+
+                listaFoldow.get(pomoc-1).setFoldGracza(false);
 
                 for (int i = 0; i < gracze; i++) {
                     System.out.println(listaFoldow.get(i).getFoldGracza());
@@ -725,13 +725,24 @@ public class OknoStol {
         panelGame.remove(kartygracza1);
         panelGame.remove(kartygracza2);
 
-        listaKarty.get(pomoc - 1).setVisible(true);
-        listaKarty.get(pomoc + gracze - 1).setVisible(true);
+        listaKarty.get(pomoc-1).setVisible(true);
+        listaKarty.get(pomoc + gracze-1).setVisible(true);
 
     }
 
     public void mechanizmRozgrywki() {
 
+        if(pomoc < gracze){
+            System.out.println(pomoc);
+            while(!listaFoldow.get(pomoc).getFoldGracza()){
+                usunPrzyciskiPokazRewers();
+                pomoc += 1;
+                przejsciePoGraczach += 1;
+                if(pomoc==gracze){
+                    break;
+                }
+            }
+        }
         if (przejsciePoGraczach < gracze) {
 
             usunPrzyciskiPokazRewers();
@@ -740,7 +751,7 @@ public class OknoStol {
 
             panelGame.add(przyciskPokazKarty);
 
-            if (pomoc == gracze) {
+            if (pomoc == gracze){
                 pomoc = 0;
             }
 
@@ -1086,10 +1097,9 @@ public class OknoStol {
                 pozycja += 1;
             }
         }
-
-        handCards.removeAll(handCards);
         pomoc += 1;
         przejsciePoGraczach += 1;
+        handCards.removeAll(handCards);
 //        System.out.println(pomoc);
     }
 
