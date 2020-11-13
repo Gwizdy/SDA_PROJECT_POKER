@@ -54,12 +54,21 @@ public class Sprawdzenie {
 
     private int liczba;
     private int liczbaPomocnicza;
+    private int numerGraczyDoSprawdzenia;
     private String gracz;
     private String gracz1;
 
 
     public Sprawdzenie(OknoStol oknoStol) {
         this.oknoStol = oknoStol;
+
+        deklaracja();
+
+        sprawdzanieWyniku();
+
+    }
+
+    public void deklaracja() {
 
         liczba = 0;
 
@@ -89,7 +98,15 @@ public class Sprawdzenie {
         listalistKartyOnePair = new ArrayList<List<Karta>>();
         listalistKartyHighCards = new ArrayList<List<Karta>>();
 
+    }
+
+    public void sprawdzanieWyniku() {
+
         for (int i = 0; i < oknoStol.getGracze(); i++) {
+
+            if (oknoStol.getListaFoldow().get(i).isFoldGracza() || oknoStol.getListaFoldow().get(i).isFoldGracza() && (oknoStol.getListaZetonowGraczy().get(i).getZetonyPosiadane() != 0 ||
+                    oknoStol.getListaZetonowGraczy().get(i).getZetonyStawkaGracza() != 0)) {
+                numerGraczyDoSprawdzenia = i;
 
                 kartyRekaPlusStol(oknoStol.getListaRekaGraczy(), oknoStol.getListaFlop(), oknoStol.getListaTurnOrRiver());
 
@@ -321,16 +338,15 @@ public class Sprawdzenie {
                     }
                 }
             }
-            ogloszenieWyniku(liczba);
+        }
+        ogloszenieWyniku(liczba);
+
     }
 
     public List<Karta> kartyRekaPlusStol(List<Gracz> listaGraczy, List<Karta> listaKartyFlop, List<Karta> listaKartyTurnOrRiver) {
 
-
         handPlusTableCards = new ArrayList<Karta>();
-        handPlusTableCards.addAll(testGracze.get(0).getKartyReka());
-        testGracze.remove(0);
-
+        handPlusTableCards.addAll(testGracze.get(numerGraczyDoSprawdzenia).getKartyReka());
 
         handPlusTableCards.addAll(listaKartyFlop);
         handPlusTableCards.addAll(listaKartyTurnOrRiver);
