@@ -10,6 +10,7 @@ public class Gracz {
     private int zetonyPosiadane;
     private int zetonyStawkaGracza;
     private boolean foldGracza;
+    private boolean allInGracza;
 
     private List<Karta> kartyReka;
 
@@ -49,11 +50,19 @@ public class Gracz {
         this.zetonyStawkaGracza = zetonyStawkaGracza;
     }
 
-    public boolean getFoldGracza() {
+    public boolean isFoldGracza() {
         return foldGracza;
     }
 
     public void setFoldGracza(boolean foldGracza) {
         this.foldGracza = foldGracza;
+    }
+
+    public boolean isAllInGracza() {
+        return allInGracza;
+    }
+
+    public void setAllInGracza(boolean allInGracza) {
+        this.allInGracza = allInGracza;
     }
 }

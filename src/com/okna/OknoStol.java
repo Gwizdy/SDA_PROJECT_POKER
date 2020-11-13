@@ -40,6 +40,7 @@ public class OknoStol {
     private JButton przyciskRozdajRiver;
     private JButton przyciskSprawdzam;
     private JButton przyciskRozdajPonownie;
+    private JButton przyciskAllIn;
 
     private JTextField wyswietlaczZetonow;
     private JTextField stawkaGracza;
@@ -85,6 +86,7 @@ public class OknoStol {
     private List<Gracz> listaRekaGraczy = new ArrayList<Gracz>();
     private List<Gracz> listaZetonowGraczy = new ArrayList<Gracz>();
     private List<Gracz> listaFoldow = new ArrayList<Gracz>();
+    private List<Gracz> listaAllIn = new ArrayList<Gracz>();
 
     private List<Karta> listaFlop;
     private List<Karta> listaTurnOrRiver;
@@ -113,26 +115,12 @@ public class OknoStol {
 
         ustawienieFoldowGraczy(listaFoldow);
 
+        ustawienieAllInGraczy(listaAllIn);
+
         //new BazaGracze(me);
 
         nowaRamka();
 
-    }
-
-    public void ustawienieFoldowGraczy(List<Gracz> listaFoldow) {
-
-        listaFoldow.add(gracz1);
-        listaFoldow.add(gracz2);
-        listaFoldow.add(gracz3);
-        listaFoldow.add(gracz4);
-        listaFoldow.add(gracz5);
-        listaFoldow.add(gracz6);
-        listaFoldow.add(gracz7);
-        listaFoldow.add(gracz8);
-
-        for (int i = 0; i < listaFoldow.size(); i++) {
-            listaFoldow.get(i).setFoldGracza(true);
-        }
     }
 
     public void nowaRamka() {
@@ -183,7 +171,6 @@ public class OknoStol {
         });
     }
 
-
     public void dodaniePanelaGame() {
 
         panelGame = new BackgroundPanelGame();
@@ -204,6 +191,8 @@ public class OknoStol {
 
         dodaniePrzyciskuBetRaise();
 
+        dodaniePrzyciskuAllIn();
+
         dodaniePrzyciskuCheckCall();
 
         dodaniePrzyciskuFold();
@@ -213,6 +202,7 @@ public class OknoStol {
         dodaniePolaStawkiRaise();
 
         panelGame.add(przyciskBetRaise);
+        panelGame.add(przyciskAllIn);
         panelGame.add(przyciskCheckCall);
         panelGame.add(przyciskFold);
         panelGame.add(wyswietlaczZetonow);
@@ -222,19 +212,25 @@ public class OknoStol {
 
     public void dodaniePrzyciskuPokazKarty() {
 
-        while(!listaFoldow.get(pomoc).getFoldGracza()){
+        while (!listaFoldow.get(pomoc).isFoldGracza() || !listaAllIn.get(pomoc).isAllInGracza()) {
+
             pomoc += 1;
+
             przejsciePoGraczach += 1;
-            if(pomoc==gracze){
+
+            if (pomoc == gracze) {
+
                 break;
             }
         }
 
         if (przejsciePoGraczach < gracze) {
+
             przyciskPokazKarty = new JButton("POKAŻ KARTY");
 
             przyciskPokazKarty.setFont(new Font("Arial", Font.BOLD, 16));
             przyciskPokazKarty.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
+
             if (pomoc == 0) {
                 przyciskPokazKarty.setBounds(780, 670, 150, 50);
             } else if (pomoc == 1) {
@@ -403,9 +399,40 @@ public class OknoStol {
                     new OknoOstrzezenieBetRaise();
 
                 }
-//                usunPrzyciskiPokazRewers(); // dodany tutaj bo jesli nastepny gracz mial fold to nie pokazywalo rewersu
             }
+        });
+    }
 
+    public void dodaniePrzyciskuAllIn() {
+
+        przyciskAllIn = new JButton("ALL IN");
+
+        przyciskAllIn.setFont(new Font("Arial", Font.BOLD, 16));
+        przyciskAllIn.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
+        przyciskAllIn.setBounds(1200, 580, 170, 50);
+        przyciskAllIn.setBorderPainted(true);
+        przyciskAllIn.setContentAreaFilled(false);
+        przyciskAllIn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                listaZetonowGraczy.get(0).setZetonyWGrze(listaZetonowGraczy.get(0).getZetonyWGrze() + listaZetonowGraczy.get(pomoc - 1).getZetonyPosiadane());
+
+                poleZetonyWGrze.setText(String.valueOf(listaZetonowGraczy.get(0).getZetonyWGrze()));
+
+                listaZetonowGraczy.get(pomoc - 1).setZetonyStawkaGracza(listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza() + listaZetonowGraczy.get(pomoc - 1).getZetonyPosiadane());
+
+                wyswietlaczStawkiGracza.get(pomoc - 1).setText(String.valueOf(listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza()));
+
+                listaZetonowGraczy.get(pomoc - 1).setZetonyPosiadane(0);
+
+                wyswietlaczZetonowGracza.get(pomoc - 1).setText(String.valueOf(listaZetonowGraczy.get(pomoc - 1).getZetonyPosiadane()));
+
+                listaAllIn.get(pomoc - 1).setAllInGracza(false);
+
+                mechanizmRozgrywki();
+
+            }
         });
 
     }
@@ -416,19 +443,17 @@ public class OknoStol {
 
         przyciskCheckCall.setFont(new Font("Arial", Font.BOLD, 16));
         przyciskCheckCall.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
-        przyciskCheckCall.setBounds(1200, 580, 170, 50);
+        przyciskCheckCall.setBounds(1200, 510, 170, 50);
         przyciskCheckCall.setBorderPainted(true);
         przyciskCheckCall.setContentAreaFilled(false);
         przyciskCheckCall.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-//                usunPrzyciskiPokazRewers(); // dodany tutaj bo jesli nastepny gracz mial fold to nie pokazywalo rewersu
                 mechanizmRozgrywki();
 
             }
         });
-
     }
 
     public void dodaniePrzyciskuFold() {
@@ -437,34 +462,26 @@ public class OknoStol {
 
         przyciskFold.setFont(new Font("Arial", Font.BOLD, 16));
         przyciskFold.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
-        przyciskFold.setBounds(1200, 510, 170, 50);
+        przyciskFold.setBounds(1200, 440, 170, 50);
         przyciskFold.setBorderPainted(true);
         przyciskFold.setContentAreaFilled(false);
         przyciskFold.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-//                usunPrzyciskiPokazRewers(); // dodany tutaj bo jesli nastepny gracz mial fold to nie pokazywalo rewersu
-
-                listaFoldow.get(pomoc-1).setFoldGracza(false);
-
-                for (int i = 0; i < gracze; i++) {
-                    System.out.println(listaFoldow.get(i).getFoldGracza());
-                }
-
+                listaFoldow.get(pomoc - 1).setFoldGracza(false);
 
                 mechanizmRozgrywki();
 
             }
         });
-
     }
 
     public void dodanieWyswietlaczaZetonow() {
 
         wyswietlaczZetonow = new JTextField();
 
-        wyswietlaczZetonow.setBounds(1200, 440, 170, 50);
+        wyswietlaczZetonow.setBounds(1200, 370, 170, 50);
         wyswietlaczZetonow.setEditable(false);
         wyswietlaczZetonow.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
         wyswietlaczZetonow.setFont(new Font("Arial", Font.BOLD, 16));
@@ -627,7 +644,7 @@ public class OknoStol {
                 pomoc = 0;
 
                 for (int i = 0; i < gracze; i++) {
-                    if (listaFoldow.get(i).getFoldGracza() == true) {
+                    if (listaFoldow.get(i).isFoldGracza() == true) {
                         listaFoldow.get(i).setFoldGracza(false);
                         pomoc = i;
 
@@ -681,6 +698,7 @@ public class OknoStol {
 
                 for (int i = 0; i < listaFoldow.size(); i++) {
                     listaFoldow.get(i).setFoldGracza(true);
+                    listaZetonowGraczy.get(i).setZetonyStawkaGracza(0);
                 }
 
                 pomoc = 0;
@@ -705,6 +723,8 @@ public class OknoStol {
 
                 dodaniePolaZetonow();
 
+                dodaniePolaStawkiGracza();
+
                 panelGame.add(poleZetonyWGrze);
                 panelGame.add(przyciskPokazKarty);
                 panelGame.repaint();
@@ -717,6 +737,7 @@ public class OknoStol {
     public void usunPrzyciskiPokazRewers() {
 
         przyciskBetRaise.setVisible(false);
+        przyciskAllIn.setVisible(false);
         przyciskCheckCall.setVisible(false);
         przyciskFold.setVisible(false);
         wyswietlaczZetonow.setVisible(false);
@@ -725,20 +746,24 @@ public class OknoStol {
         panelGame.remove(kartygracza1);
         panelGame.remove(kartygracza2);
 
-        listaKarty.get(pomoc-1).setVisible(true);
-        listaKarty.get(pomoc + gracze-1).setVisible(true);
+        listaKarty.get(pomoc - 1).setVisible(true);
+        listaKarty.get(pomoc + gracze - 1).setVisible(true);
 
     }
 
     public void mechanizmRozgrywki() {
 
-        if(pomoc < gracze){
-            System.out.println(pomoc);
-            while(!listaFoldow.get(pomoc).getFoldGracza()){
+        if (pomoc < gracze) {
+            while (!listaFoldow.get(pomoc).isFoldGracza() || !listaAllIn.get(pomoc).isAllInGracza()) {
+
                 usunPrzyciskiPokazRewers();
+
                 pomoc += 1;
+
                 przejsciePoGraczach += 1;
-                if(pomoc==gracze){
+
+                if (pomoc == gracze) {
+
                     break;
                 }
             }
@@ -751,7 +776,7 @@ public class OknoStol {
 
             panelGame.add(przyciskPokazKarty);
 
-            if (pomoc == gracze){
+            if (pomoc == gracze) {
                 pomoc = 0;
             }
 
@@ -836,6 +861,38 @@ public class OknoStol {
         }
     }
 
+    public void ustawienieFoldowGraczy(List<Gracz> listaFoldow) {
+
+        listaFoldow.add(gracz1);
+        listaFoldow.add(gracz2);
+        listaFoldow.add(gracz3);
+        listaFoldow.add(gracz4);
+        listaFoldow.add(gracz5);
+        listaFoldow.add(gracz6);
+        listaFoldow.add(gracz7);
+        listaFoldow.add(gracz8);
+
+        for (int i = 0; i < listaFoldow.size(); i++) {
+            listaFoldow.get(i).setFoldGracza(true);
+        }
+    }
+
+    public void ustawienieAllInGraczy(List<Gracz> listaAllIn) {
+
+        listaAllIn.add(gracz1);
+        listaAllIn.add(gracz2);
+        listaAllIn.add(gracz3);
+        listaAllIn.add(gracz4);
+        listaAllIn.add(gracz5);
+        listaAllIn.add(gracz6);
+        listaAllIn.add(gracz7);
+        listaAllIn.add(gracz8);
+
+        for (int i = 0; i < listaAllIn.size(); i++) {
+            listaAllIn.get(i).setAllInGracza(true);
+        }
+    }
+
     public void listaGraczeZetonyNaStart(List<Gracz> listaGraczyZetonyNaStart) {
 
         listaGraczyZetonyNaStart.add(gracz1);
@@ -872,146 +929,150 @@ public class OknoStol {
 
         listaKarty = new ArrayList<JLabel>();
 
+
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < liczbaGraczy; j++) {
 
-                r = rand.nextInt(talia.size());
+                if (listaZetonowGraczy.get(j).getZetonyPosiadane() != 0) {
 
-                karty = new JLabel();
-                karty.setIcon(new ImageIcon("Red_Back2.jpg"));
-                karty.setLayout(null);
+                    r = rand.nextInt(talia.size());
 
-                if (i == 0) {
-                    if (j < 3) {
-                        karty.setBounds(780 - k1_1, 530, 90, 137);
-                        k1_1 += 210;
-                        if (j == 0) {
-                            listaPlayer1.add(talia.get(r));
-                            listaKarty.add(karty);
+                    karty = new JLabel();
+                    karty.setIcon(new ImageIcon("Red_Back2.jpg"));
+                    karty.setLayout(null);
+
+                    if (i == 0) {
+                        if (j < 3) {
+                            karty.setBounds(780 - k1_1, 530, 90, 137);
+                            k1_1 += 210;
+                            if (j == 0) {
+                                listaPlayer1.add(talia.get(r));
+                                listaKarty.add(karty);
+                            }
+                            if (j == 1) {
+                                listaPlayer2.add(talia.get(r));
+                                listaKarty.add(karty);
+                            }
+                            if (j == 2) {
+                                listaPlayer3.add(talia.get(r));
+                                listaKarty.add(karty);
+                            }
                         }
-                        if (j == 1) {
-                            listaPlayer2.add(talia.get(r));
-                            listaKarty.add(karty);
-                        }
-                        if (j == 2) {
-                            listaPlayer3.add(talia.get(r));
-                            listaKarty.add(karty);
-                        }
-                    }
-                    if (j == 3) {
-                        karty.setBounds(140, 295, 90, 137);
                         if (j == 3) {
-                            listaPlayer4.add(talia.get(r));
-                            listaKarty.add(karty);
+                            karty.setBounds(140, 295, 90, 137);
+                            if (j == 3) {
+                                listaPlayer4.add(talia.get(r));
+                                listaKarty.add(karty);
+                            }
                         }
-                    }
-                    if (j > 3 && j < 7) {
-                        karty.setBounds(365 + k2_1, 65, 90, 137);
-                        k2_1 += 210;
-                        if (j == 4) {
-                            listaPlayer5.add(talia.get(r));
-                            listaKarty.add(karty);
+                        if (j > 3 && j < 7) {
+                            karty.setBounds(365 + k2_1, 65, 90, 137);
+                            k2_1 += 210;
+                            if (j == 4) {
+                                listaPlayer5.add(talia.get(r));
+                                listaKarty.add(karty);
+                            }
+                            if (j == 5) {
+                                listaPlayer6.add(talia.get(r));
+                                listaKarty.add(karty);
+                            }
+                            if (j == 6) {
+                                listaPlayer7.add(talia.get(r));
+                                listaKarty.add(karty);
+                            }
                         }
-                        if (j == 5) {
-                            listaPlayer6.add(talia.get(r));
-                            listaKarty.add(karty);
-                        }
-                        if (j == 6) {
-                            listaPlayer7.add(talia.get(r));
-                            listaKarty.add(karty);
-                        }
-                    }
-                    if (j == 7) {
-                        karty.setBounds(1005, 295, 90, 137);
                         if (j == 7) {
-                            listaPlayer8.add(talia.get(r));
-                            listaKarty.add(karty);
+                            karty.setBounds(1005, 295, 90, 137);
+                            if (j == 7) {
+                                listaPlayer8.add(talia.get(r));
+                                listaKarty.add(karty);
+                            }
                         }
                     }
-                }
-                if (i == 1) {
-                    if (j < 3) {
-                        karty.setBounds(840 - k1_2, 530, 90, 137);
-                        k1_2 += 210;
-                        if (j == 0) {
-                            listaPlayer1.add(talia.get(r));
-                            gracz1.setKartyReka(listaPlayer1);
-                            listaRekaGraczy.add(gracz1);
-                            listaKarty.add(karty);
-                            System.out.println("GRACZ 1" + (gracz1.getKartyReka()));
-                        }
-                        if (j == 1) {
-                            listaPlayer2.add(talia.get(r));
-                            gracz2.setKartyReka(listaPlayer2);
-                            listaRekaGraczy.add(gracz2);
-                            listaKarty.add(karty);
-                            System.out.println("GRACZ 2" + (gracz2.getKartyReka()));
+                    if (i == 1) {
+                        if (j < 3) {
+                            karty.setBounds(840 - k1_2, 530, 90, 137);
+                            k1_2 += 210;
+                            if (j == 0) {
+                                listaPlayer1.add(talia.get(r));
+                                gracz1.setKartyReka(listaPlayer1);
+                                listaRekaGraczy.add(gracz1);
+                                listaKarty.add(karty);
+                                System.out.println("GRACZ 1" + (gracz1.getKartyReka()));
+                            }
+                            if (j == 1) {
+                                listaPlayer2.add(talia.get(r));
+                                gracz2.setKartyReka(listaPlayer2);
+                                listaRekaGraczy.add(gracz2);
+                                listaKarty.add(karty);
+                                System.out.println("GRACZ 2" + (gracz2.getKartyReka()));
 
-                        }
-                        if (j == 2) {
-                            listaPlayer3.add(talia.get(r));
-                            gracz3.setKartyReka(listaPlayer3);
-                            listaRekaGraczy.add(gracz3);
-                            listaKarty.add(karty);
-                            System.out.println("GRACZ 3" + (gracz3.getKartyReka()));
+                            }
+                            if (j == 2) {
+                                listaPlayer3.add(talia.get(r));
+                                gracz3.setKartyReka(listaPlayer3);
+                                listaRekaGraczy.add(gracz3);
+                                listaKarty.add(karty);
+                                System.out.println("GRACZ 3" + (gracz3.getKartyReka()));
 
+                            }
                         }
-                    }
-                    if (j == 3) {
-                        karty.setBounds(200, 295, 90, 137);
                         if (j == 3) {
-                            listaPlayer4.add(talia.get(r));
-                            gracz4.setKartyReka(listaPlayer4);
-                            listaRekaGraczy.add(gracz4);
-                            listaKarty.add(karty);
-                            System.out.println("GRACZ 4" + (gracz4.getKartyReka()));
+                            karty.setBounds(200, 295, 90, 137);
+                            if (j == 3) {
+                                listaPlayer4.add(talia.get(r));
+                                gracz4.setKartyReka(listaPlayer4);
+                                listaRekaGraczy.add(gracz4);
+                                listaKarty.add(karty);
+                                System.out.println("GRACZ 4" + (gracz4.getKartyReka()));
 
+                            }
                         }
-                    }
-                    if (j > 3 && j < 7) {
-                        karty.setBounds(425 + k2_2, 65, 90, 137);
-                        k2_2 += 210;
-                        if (j == 4) {
-                            listaPlayer5.add(talia.get(r));
-                            gracz5.setKartyReka(listaPlayer5);
-                            listaRekaGraczy.add(gracz5);
-                            listaKarty.add(karty);
-                            System.out.println("GRACZ 5" + (gracz5.getKartyReka()));
+                        if (j > 3 && j < 7) {
+                            karty.setBounds(425 + k2_2, 65, 90, 137);
+                            k2_2 += 210;
+                            if (j == 4) {
+                                listaPlayer5.add(talia.get(r));
+                                gracz5.setKartyReka(listaPlayer5);
+                                listaRekaGraczy.add(gracz5);
+                                listaKarty.add(karty);
+                                System.out.println("GRACZ 5" + (gracz5.getKartyReka()));
 
-                        }
-                        if (j == 5) {
-                            listaPlayer6.add(talia.get(r));
-                            gracz6.setKartyReka(listaPlayer6);
-                            listaRekaGraczy.add(gracz6);
-                            listaKarty.add(karty);
-                            System.out.println("GRACZ 6" + (gracz6.getKartyReka()));
+                            }
+                            if (j == 5) {
+                                listaPlayer6.add(talia.get(r));
+                                gracz6.setKartyReka(listaPlayer6);
+                                listaRekaGraczy.add(gracz6);
+                                listaKarty.add(karty);
+                                System.out.println("GRACZ 6" + (gracz6.getKartyReka()));
 
-                        }
-                        if (j == 6) {
-                            listaPlayer7.add(talia.get(r));
-                            gracz7.setKartyReka(listaPlayer7);
-                            listaRekaGraczy.add(gracz7);
-                            listaKarty.add(karty);
-                            System.out.println("GRACZ 7" + (gracz7.getKartyReka()));
+                            }
+                            if (j == 6) {
+                                listaPlayer7.add(talia.get(r));
+                                gracz7.setKartyReka(listaPlayer7);
+                                listaRekaGraczy.add(gracz7);
+                                listaKarty.add(karty);
+                                System.out.println("GRACZ 7" + (gracz7.getKartyReka()));
 
+                            }
                         }
-                    }
-                    if (j == 7) {
-                        karty.setBounds(1065, 295, 90, 137);
                         if (j == 7) {
-                            listaPlayer8.add(talia.get(r));
-                            gracz8.setKartyReka(listaPlayer8);
-                            listaRekaGraczy.add(gracz8);
-                            listaKarty.add(karty);
-                            System.out.println("GRACZ 8" + gracz8.getKartyReka());
+                            karty.setBounds(1065, 295, 90, 137);
+                            if (j == 7) {
+                                listaPlayer8.add(talia.get(r));
+                                gracz8.setKartyReka(listaPlayer8);
+                                listaRekaGraczy.add(gracz8);
+                                listaKarty.add(karty);
+                                System.out.println("GRACZ 8" + gracz8.getKartyReka());
 
+                            }
                         }
                     }
-                }
-                usunZTalii(talia, r);
-                usunZTalii(listaObrazkow, r);
+                    usunZTalii(talia, r);
+                    usunZTalii(listaObrazkow, r);
 
-                panelGame.add(karty);
+                    panelGame.add(karty);
+                }
             }
         }
         k1_1 = 0;
