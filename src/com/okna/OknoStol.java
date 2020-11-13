@@ -1252,4 +1252,20 @@ public class OknoStol {
     public void setListaTurnOrRiver(List<Karta> listaTurnOrRiver) {
         this.listaTurnOrRiver = listaTurnOrRiver;
     }
+
+    public List<Gracz> getListaFoldow() {
+        return listaFoldow;
+    }
+
+    public void setListaFoldow(List<Gracz> listaFoldow) {
+        this.listaFoldow = listaFoldow;
+    }
+
+    public List<Gracz> getListaZetonowGraczy() {
+        return listaZetonowGraczy;
+    }
+
+    public void setListaZetonowGraczy(List<Gracz> listaZetonowGraczy) {
+        this.listaZetonowGraczy = listaZetonowGraczy;
+    }
 }

@@ -91,238 +91,237 @@ public class Sprawdzenie {
 
         for (int i = 0; i < oknoStol.getGracze(); i++) {
 
-            kartyRekaPlusStol(oknoStol.getListaRekaGraczy(), oknoStol.getListaFlop(), oknoStol.getListaTurnOrRiver());
+                kartyRekaPlusStol(oknoStol.getListaRekaGraczy(), oknoStol.getListaFlop(), oknoStol.getListaTurnOrRiver());
 
-            if (royalFlush.sprawdzanieRoyalFlush(handPlusTableCards) == 10) {
-                liczbaPomocnicza = 10;
-                royalFlush.getFiveCardsRoyalFlush(handPlusTableCards);
-            } else if (straightFlush.sprawdzanieIfStraightFlush(handPlusTableCards) == 9) {
-                liczbaPomocnicza = 9;
-                straightFlush.getFiveCardsStraightFlush(handPlusTableCards);
-            } else if (fourOfKind.sprawdzanieFourOfKind(handPlusTableCards) == 8) {
-                liczbaPomocnicza = 8;
-                fourOfKind.getFiveCardsFourOfKind(handPlusTableCards);
-            } else if (fullHouse.sprawdzanieFullHouse(handPlusTableCards) == 7) {
-                liczbaPomocnicza = 7;
-                fullHouse.getFiveCardsFullHouse(handPlusTableCards);
-            } else if (flush.sprawdzanieFlush(handPlusTableCards) == 6) {
-                liczbaPomocnicza = 6;
-                flush.getFiveCardsFlush(handPlusTableCards);
-            } else if (streigh.sprawdzanieIfStreigh(handPlusTableCards) == 5) {
-                liczbaPomocnicza = 5;
-                streigh.getFiveCardsStreigh(handPlusTableCards);
-            } else if (threeOfAKind.sprawdzanieThreeOfAKind(handPlusTableCards) == 4) {
-                liczbaPomocnicza = 4;
-                threeOfAKind.getFiveCardsThreeOfKind(handPlusTableCards);
-            } else if (twoPairs.sprawdzanieTwoPairs(handPlusTableCards) == 3) {
-                liczbaPomocnicza = 3;
-                twoPairs.getFiveCardsTwoPairs(handPlusTableCards);
-            } else if (onePair.sprawdzanieOnePair(handPlusTableCards) == 2) {
-                liczbaPomocnicza = 2;
-                onePair.getFiveCardsOnePair(handPlusTableCards);
-            } else if (hightCard.sprawdzanieHighCard(handPlusTableCards) == 1) {
-                liczbaPomocnicza = 1;
-                hightCard.getFiveCardsHighCard(handPlusTableCards);
-            }
-            if (liczba < liczbaPomocnicza) {
-
-                liczba = liczbaPomocnicza;
-
-                gracz = "Player " + (i + 1);
-
-                listaPomocnicza.removeAll(listaPomocnicza);
-
-                if (liczbaPomocnicza == 10) {
-                    listaPomocnicza.addAll(royalFlush.getTempListOfRoyalFlush());
-                } else if (liczbaPomocnicza == 9) {
-                    listaPomocnicza.addAll(straightFlush.getTempListOfStraightFlush());
-                } else if (liczbaPomocnicza == 8) {
-                    listaPomocnicza.addAll(fourOfKind.getTempListOfFourOfKind());
-                } else if (liczbaPomocnicza == 7) {
-                    listaPomocnicza.addAll(fullHouse.getTempListOfFullHouse());
-                } else if (liczbaPomocnicza == 6) {
-                    listaPomocnicza.addAll(flush.getTempListOfFlush());
-                } else if (liczbaPomocnicza == 5) {
-                    listaPomocnicza.addAll(streigh.getTempListOfStreigh());
-                } else if (liczbaPomocnicza == 4) {
-                    listaPomocnicza.addAll(threeOfAKind.getTempListOfThreeOfKind());
-                } else if (liczbaPomocnicza == 3) {
-                    listaPomocnicza.addAll(twoPairs.getTempListOfTwoPairs());
-                } else if (liczbaPomocnicza == 2) {
-                    listaPomocnicza.addAll(onePair.getTempListOfOnePair());
-                } else if (liczbaPomocnicza == 1) {
-                    listaPomocnicza.addAll(hightCard.getTempListOfHighCard());
+                if (royalFlush.sprawdzanieRoyalFlush(handPlusTableCards) == 10) {
+                    liczbaPomocnicza = 10;
+                    royalFlush.getFiveCardsRoyalFlush(handPlusTableCards);
+                } else if (straightFlush.sprawdzanieIfStraightFlush(handPlusTableCards) == 9) {
+                    liczbaPomocnicza = 9;
+                    straightFlush.getFiveCardsStraightFlush(handPlusTableCards);
+                } else if (fourOfKind.sprawdzanieFourOfKind(handPlusTableCards) == 8) {
+                    liczbaPomocnicza = 8;
+                    fourOfKind.getFiveCardsFourOfKind(handPlusTableCards);
+                } else if (fullHouse.sprawdzanieFullHouse(handPlusTableCards) == 7) {
+                    liczbaPomocnicza = 7;
+                    fullHouse.getFiveCardsFullHouse(handPlusTableCards);
+                } else if (flush.sprawdzanieFlush(handPlusTableCards) == 6) {
+                    liczbaPomocnicza = 6;
+                    flush.getFiveCardsFlush(handPlusTableCards);
+                } else if (streigh.sprawdzanieIfStreigh(handPlusTableCards) == 5) {
+                    liczbaPomocnicza = 5;
+                    streigh.getFiveCardsStreigh(handPlusTableCards);
+                } else if (threeOfAKind.sprawdzanieThreeOfAKind(handPlusTableCards) == 4) {
+                    liczbaPomocnicza = 4;
+                    threeOfAKind.getFiveCardsThreeOfKind(handPlusTableCards);
+                } else if (twoPairs.sprawdzanieTwoPairs(handPlusTableCards) == 3) {
+                    liczbaPomocnicza = 3;
+                    twoPairs.getFiveCardsTwoPairs(handPlusTableCards);
+                } else if (onePair.sprawdzanieOnePair(handPlusTableCards) == 2) {
+                    liczbaPomocnicza = 2;
+                    onePair.getFiveCardsOnePair(handPlusTableCards);
+                } else if (hightCard.sprawdzanieHighCard(handPlusTableCards) == 1) {
+                    liczbaPomocnicza = 1;
+                    hightCard.getFiveCardsHighCard(handPlusTableCards);
                 }
-            } else if (liczba == liczbaPomocnicza) {
+                if (liczba < liczbaPomocnicza) {
 
-                gracz1 = "Player " + (i + 1);
+                    liczba = liczbaPomocnicza;
 
-                if (liczbaPomocnicza == 10) {
-                    if (compareCards(royalFlush.getTempListOfRoyalFlush(), listaPomocnicza) == 2) {
+                    gracz = "Player " + (i + 1);
 
-                        listaGraczyRoyalFlush.removeAll(listaGraczyRoyalFlush);
-                        listalistKartyRoyalFlush.removeAll(listalistKartyRoyalFlush);
+                    listaPomocnicza.removeAll(listaPomocnicza);
 
-                        listaPomocnicza.removeAll(listaPomocnicza);
+                    if (liczbaPomocnicza == 10) {
                         listaPomocnicza.addAll(royalFlush.getTempListOfRoyalFlush());
-
-                        gracz = gracz1;
-
-                    } else if (compareCards(royalFlush.getTempListOfRoyalFlush(), listaPomocnicza) == 0) {
-
-                        listaGraczyRoyalFlush.add(gracz1);
-                        listalistKartyRoyalFlush.add(royalFlush.getTempListOfRoyalFlush());
-                    }
-                } else if (liczbaPomocnicza == 9) {
-                    if (compareCards(straightFlush.getTempListOfStraightFlush(), listaPomocnicza) == 2) {
-
-                        listaGraczyStraightFlush.removeAll(listaGraczyStraightFlush);
-                        listalistKartyStraightFlush.removeAll(listalistKartyStraightFlush);
-
-                        listaPomocnicza.removeAll(listaPomocnicza);
+                    } else if (liczbaPomocnicza == 9) {
                         listaPomocnicza.addAll(straightFlush.getTempListOfStraightFlush());
-
-                        gracz = gracz1;
-
-                    } else if (compareCards(straightFlush.getTempListOfStraightFlush(), listaPomocnicza) == 0) {
-
-                        listaGraczyStraightFlush.add(gracz1);
-                        listalistKartyStraightFlush.add(straightFlush.getTempListOfStraightFlush());
-                    }
-                } else if (liczbaPomocnicza == 8) {
-                    if (compareCards(fourOfKind.getTempListOfFourOfKind(), listaPomocnicza) == 2) {
-
-                        listaGraczyFourOfKind.removeAll(listaGraczyFourOfKind);
-                        listalistKartyFourOfKind.removeAll(listalistKartyFourOfKind);
-
-                        listaPomocnicza.removeAll(listaPomocnicza);
+                    } else if (liczbaPomocnicza == 8) {
                         listaPomocnicza.addAll(fourOfKind.getTempListOfFourOfKind());
-
-                        gracz = gracz1;
-
-                    } else if (compareCards(fourOfKind.getTempListOfFourOfKind(), listaPomocnicza) == 0) {
-
-                        listaGraczyFourOfKind.add(gracz1);
-                        listalistKartyFourOfKind.add(fourOfKind.getTempListOfFourOfKind());
-                    }
-                } else if (liczbaPomocnicza == 7) {
-                    if (compareCards(fullHouse.getTempListOfFullHouse(), listaPomocnicza) == 2) {
-
-                        listaGraczyFullHouse.removeAll(listaGraczyFullHouse);
-                        listalistKartyFullHouse.removeAll(listalistKartyFullHouse);
-
-                        listaPomocnicza.removeAll(listaPomocnicza);
+                    } else if (liczbaPomocnicza == 7) {
                         listaPomocnicza.addAll(fullHouse.getTempListOfFullHouse());
-
-                        gracz = gracz1;
-
-                    } else if (compareCards(fullHouse.getTempListOfFullHouse(), listaPomocnicza) == 0) {
-
-                        listaGraczyFullHouse.add(gracz1);
-                        listalistKartyFullHouse.add(fullHouse.getTempListOfFullHouse());
-                    }
-                } else if (liczbaPomocnicza == 6) {
-                    if (compareCards(flush.getTempListOfFlush(), listaPomocnicza) == 2) {
-
-                        listaGraczyFlush.removeAll(listaGraczyFlush);
-                        listalistKartyFlush.removeAll(listalistKartyFlush);
-
-                        listaPomocnicza.removeAll(listaPomocnicza);
+                    } else if (liczbaPomocnicza == 6) {
                         listaPomocnicza.addAll(flush.getTempListOfFlush());
-
-                        gracz = gracz1;
-
-                    } else if (compareCards(flush.getTempListOfFlush(), listaPomocnicza) == 0) {
-
-                        listaGraczyFlush.add(gracz1);
-                        listalistKartyFlush.add(flush.getTempListOfFlush());
-                    }
-                } else if (liczbaPomocnicza == 5) {
-
-                    if (compareCards(streigh.getTempListOfStreigh(), listaPomocnicza) == 2) {
-
-                        listaGraczyStraigh.removeAll(listaGraczyStraigh);
-                        listalistKartyStraigh.removeAll(listalistKartyStraigh);
-
-                        listaPomocnicza.removeAll(listaPomocnicza);
+                    } else if (liczbaPomocnicza == 5) {
                         listaPomocnicza.addAll(streigh.getTempListOfStreigh());
-
-                        gracz = gracz1;
-
-                    } else if (compareCards(streigh.getTempListOfStreigh(), listaPomocnicza) == 0) {
-
-                        listaGraczyStraigh.add(gracz1);
-                        listalistKartyStraigh.add(streigh.getTempListOfStreigh());
-                    }
-                } else if (liczbaPomocnicza == 4) {
-                    if (compareCards(threeOfAKind.getTempListOfThreeOfKind(), listaPomocnicza) == 2) {
-
-                        listaGraczyThreeOfKind.removeAll(listaGraczyThreeOfKind);
-                        listalistKartyThreeOfKind.removeAll(listalistKartyThreeOfKind);
-
-                        listaPomocnicza.removeAll(listaPomocnicza);
+                    } else if (liczbaPomocnicza == 4) {
                         listaPomocnicza.addAll(threeOfAKind.getTempListOfThreeOfKind());
-
-                        gracz = gracz1;
-
-                    } else if (compareCards(threeOfAKind.getTempListOfThreeOfKind(), listaPomocnicza) == 0) {
-
-                        listaGraczyThreeOfKind.add(gracz1);
-                        listalistKartyThreeOfKind.add(threeOfAKind.getTempListOfThreeOfKind());
-                    }
-                } else if (liczbaPomocnicza == 3) {
-                    if (compareCards(twoPairs.getTempListOfTwoPairs(), listaPomocnicza) == 2) {
-
-                        listaGraczyTwoPairs.removeAll(listaGraczyTwoPairs);
-                        listalistKartyTwoPairs.removeAll(listalistKartyTwoPairs);
-
-                        listaPomocnicza.removeAll(listaPomocnicza);
+                    } else if (liczbaPomocnicza == 3) {
                         listaPomocnicza.addAll(twoPairs.getTempListOfTwoPairs());
-
-                        gracz = gracz1;
-
-                    } else if (compareCards(twoPairs.getTempListOfTwoPairs(), listaPomocnicza) == 0) {
-
-                        listaGraczyTwoPairs.add(gracz1);
-                        listalistKartyTwoPairs.add(twoPairs.getTempListOfTwoPairs());
-                    }
-                } else if (liczbaPomocnicza == 2) {
-                    if (compareCards(onePair.getTempListOfOnePair(), listaPomocnicza) == 2) {
-
-                        listaGraczyOnePair.removeAll(listaGraczyOnePair);
-                        listalistKartyOnePair.removeAll(listalistKartyOnePair);
-
-                        listaPomocnicza.removeAll(listaPomocnicza);
+                    } else if (liczbaPomocnicza == 2) {
                         listaPomocnicza.addAll(onePair.getTempListOfOnePair());
-
-                        gracz = gracz1;
-
-                    } else if (compareCards(onePair.getTempListOfOnePair(), listaPomocnicza) == 0) {
-
-                        listaGraczyOnePair.add(gracz1);
-                        listalistKartyOnePair.add(onePair.getTempListOfOnePair());
-                    }
-                } else if (liczbaPomocnicza == 1) {
-                    if (compareCards(hightCard.getTempListOfHighCard(), listaPomocnicza) == 2) {
-
-                        listaGraczyHighCards.removeAll(listaGraczyHighCards);
-                        listalistKartyHighCards.removeAll(listalistKartyHighCards);
-
-                        listaPomocnicza.removeAll(listaPomocnicza);
+                    } else if (liczbaPomocnicza == 1) {
                         listaPomocnicza.addAll(hightCard.getTempListOfHighCard());
+                    }
+                } else if (liczba == liczbaPomocnicza) {
 
-                        gracz = gracz1;
+                    gracz1 = "Player " + (i + 1);
 
-                    } else if (compareCards(hightCard.getTempListOfHighCard(), listaPomocnicza) == 0) {
+                    if (liczbaPomocnicza == 10) {
+                        if (compareCards(royalFlush.getTempListOfRoyalFlush(), listaPomocnicza) == 2) {
 
-                        listaGraczyHighCards.add(gracz1);
-                        listalistKartyHighCards.add(hightCard.getTempListOfHighCard());
+                            listaGraczyRoyalFlush.removeAll(listaGraczyRoyalFlush);
+                            listalistKartyRoyalFlush.removeAll(listalistKartyRoyalFlush);
+
+                            listaPomocnicza.removeAll(listaPomocnicza);
+                            listaPomocnicza.addAll(royalFlush.getTempListOfRoyalFlush());
+
+                            gracz = gracz1;
+
+                        } else if (compareCards(royalFlush.getTempListOfRoyalFlush(), listaPomocnicza) == 0) {
+
+                            listaGraczyRoyalFlush.add(gracz1);
+                            listalistKartyRoyalFlush.add(royalFlush.getTempListOfRoyalFlush());
+                        }
+                    } else if (liczbaPomocnicza == 9) {
+                        if (compareCards(straightFlush.getTempListOfStraightFlush(), listaPomocnicza) == 2) {
+
+                            listaGraczyStraightFlush.removeAll(listaGraczyStraightFlush);
+                            listalistKartyStraightFlush.removeAll(listalistKartyStraightFlush);
+
+                            listaPomocnicza.removeAll(listaPomocnicza);
+                            listaPomocnicza.addAll(straightFlush.getTempListOfStraightFlush());
+
+                            gracz = gracz1;
+
+                        } else if (compareCards(straightFlush.getTempListOfStraightFlush(), listaPomocnicza) == 0) {
+
+                            listaGraczyStraightFlush.add(gracz1);
+                            listalistKartyStraightFlush.add(straightFlush.getTempListOfStraightFlush());
+                        }
+                    } else if (liczbaPomocnicza == 8) {
+                        if (compareCards(fourOfKind.getTempListOfFourOfKind(), listaPomocnicza) == 2) {
+
+                            listaGraczyFourOfKind.removeAll(listaGraczyFourOfKind);
+                            listalistKartyFourOfKind.removeAll(listalistKartyFourOfKind);
+
+                            listaPomocnicza.removeAll(listaPomocnicza);
+                            listaPomocnicza.addAll(fourOfKind.getTempListOfFourOfKind());
+
+                            gracz = gracz1;
+
+                        } else if (compareCards(fourOfKind.getTempListOfFourOfKind(), listaPomocnicza) == 0) {
+
+                            listaGraczyFourOfKind.add(gracz1);
+                            listalistKartyFourOfKind.add(fourOfKind.getTempListOfFourOfKind());
+                        }
+                    } else if (liczbaPomocnicza == 7) {
+                        if (compareCards(fullHouse.getTempListOfFullHouse(), listaPomocnicza) == 2) {
+
+                            listaGraczyFullHouse.removeAll(listaGraczyFullHouse);
+                            listalistKartyFullHouse.removeAll(listalistKartyFullHouse);
+
+                            listaPomocnicza.removeAll(listaPomocnicza);
+                            listaPomocnicza.addAll(fullHouse.getTempListOfFullHouse());
+
+                            gracz = gracz1;
+
+                        } else if (compareCards(fullHouse.getTempListOfFullHouse(), listaPomocnicza) == 0) {
+
+                            listaGraczyFullHouse.add(gracz1);
+                            listalistKartyFullHouse.add(fullHouse.getTempListOfFullHouse());
+                        }
+                    } else if (liczbaPomocnicza == 6) {
+                        if (compareCards(flush.getTempListOfFlush(), listaPomocnicza) == 2) {
+
+                            listaGraczyFlush.removeAll(listaGraczyFlush);
+                            listalistKartyFlush.removeAll(listalistKartyFlush);
+
+                            listaPomocnicza.removeAll(listaPomocnicza);
+                            listaPomocnicza.addAll(flush.getTempListOfFlush());
+
+                            gracz = gracz1;
+
+                        } else if (compareCards(flush.getTempListOfFlush(), listaPomocnicza) == 0) {
+
+                            listaGraczyFlush.add(gracz1);
+                            listalistKartyFlush.add(flush.getTempListOfFlush());
+                        }
+                    } else if (liczbaPomocnicza == 5) {
+
+                        if (compareCards(streigh.getTempListOfStreigh(), listaPomocnicza) == 2) {
+
+                            listaGraczyStraigh.removeAll(listaGraczyStraigh);
+                            listalistKartyStraigh.removeAll(listalistKartyStraigh);
+
+                            listaPomocnicza.removeAll(listaPomocnicza);
+                            listaPomocnicza.addAll(streigh.getTempListOfStreigh());
+
+                            gracz = gracz1;
+
+                        } else if (compareCards(streigh.getTempListOfStreigh(), listaPomocnicza) == 0) {
+
+                            listaGraczyStraigh.add(gracz1);
+                            listalistKartyStraigh.add(streigh.getTempListOfStreigh());
+                        }
+                    } else if (liczbaPomocnicza == 4) {
+                        if (compareCards(threeOfAKind.getTempListOfThreeOfKind(), listaPomocnicza) == 2) {
+
+                            listaGraczyThreeOfKind.removeAll(listaGraczyThreeOfKind);
+                            listalistKartyThreeOfKind.removeAll(listalistKartyThreeOfKind);
+
+                            listaPomocnicza.removeAll(listaPomocnicza);
+                            listaPomocnicza.addAll(threeOfAKind.getTempListOfThreeOfKind());
+
+                            gracz = gracz1;
+
+                        } else if (compareCards(threeOfAKind.getTempListOfThreeOfKind(), listaPomocnicza) == 0) {
+
+                            listaGraczyThreeOfKind.add(gracz1);
+                            listalistKartyThreeOfKind.add(threeOfAKind.getTempListOfThreeOfKind());
+                        }
+                    } else if (liczbaPomocnicza == 3) {
+                        if (compareCards(twoPairs.getTempListOfTwoPairs(), listaPomocnicza) == 2) {
+
+                            listaGraczyTwoPairs.removeAll(listaGraczyTwoPairs);
+                            listalistKartyTwoPairs.removeAll(listalistKartyTwoPairs);
+
+                            listaPomocnicza.removeAll(listaPomocnicza);
+                            listaPomocnicza.addAll(twoPairs.getTempListOfTwoPairs());
+
+                            gracz = gracz1;
+
+                        } else if (compareCards(twoPairs.getTempListOfTwoPairs(), listaPomocnicza) == 0) {
+
+                            listaGraczyTwoPairs.add(gracz1);
+                            listalistKartyTwoPairs.add(twoPairs.getTempListOfTwoPairs());
+                        }
+                    } else if (liczbaPomocnicza == 2) {
+                        if (compareCards(onePair.getTempListOfOnePair(), listaPomocnicza) == 2) {
+
+                            listaGraczyOnePair.removeAll(listaGraczyOnePair);
+                            listalistKartyOnePair.removeAll(listalistKartyOnePair);
+
+                            listaPomocnicza.removeAll(listaPomocnicza);
+                            listaPomocnicza.addAll(onePair.getTempListOfOnePair());
+
+                            gracz = gracz1;
+
+                        } else if (compareCards(onePair.getTempListOfOnePair(), listaPomocnicza) == 0) {
+
+                            listaGraczyOnePair.add(gracz1);
+                            listalistKartyOnePair.add(onePair.getTempListOfOnePair());
+                        }
+                    } else if (liczbaPomocnicza == 1) {
+                        if (compareCards(hightCard.getTempListOfHighCard(), listaPomocnicza) == 2) {
+
+                            listaGraczyHighCards.removeAll(listaGraczyHighCards);
+                            listalistKartyHighCards.removeAll(listalistKartyHighCards);
+
+                            listaPomocnicza.removeAll(listaPomocnicza);
+                            listaPomocnicza.addAll(hightCard.getTempListOfHighCard());
+
+                            gracz = gracz1;
+
+                        } else if (compareCards(hightCard.getTempListOfHighCard(), listaPomocnicza) == 0) {
+
+                            listaGraczyHighCards.add(gracz1);
+                            listalistKartyHighCards.add(hightCard.getTempListOfHighCard());
+                        }
                     }
                 }
             }
-        }
-
-        ogloszenieWyniku(liczba);
+            ogloszenieWyniku(liczba);
     }
 
     public List<Karta> kartyRekaPlusStol(List<Gracz> listaGraczy, List<Karta> listaKartyFlop, List<Karta> listaKartyTurnOrRiver) {
