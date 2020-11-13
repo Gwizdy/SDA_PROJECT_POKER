@@ -64,6 +64,7 @@ public class OknoStol {
     private JLabel kartyTurnOrRiver;
     private JLabel kartygracza1;
     private JLabel kartygracza2;
+    private JLabel kartyNull;
 
     private List<Karta> listaPlayer1 = new ArrayList<Karta>();
     private List<Karta> listaPlayer2 = new ArrayList<Karta>();
@@ -87,6 +88,8 @@ public class OknoStol {
     private List<Gracz> listaZetonowGraczy = new ArrayList<Gracz>();
     private List<Gracz> listaFoldow = new ArrayList<Gracz>();
     private List<Gracz> listaAllIn = new ArrayList<Gracz>();
+    private List<Gracz> listaCzyWGrze = new ArrayList<Gracz>();
+
 
     private List<Karta> listaFlop;
     private List<Karta> listaTurnOrRiver;
@@ -112,6 +115,8 @@ public class OknoStol {
         talia = taliaGUI.getTalia();
 
         listaGraczeZetonyNaStart(listaZetonowGraczy);
+
+        listaGraczeCzyWGrze(listaCzyWGrze);
 
         ustawienieFoldowGraczy(listaFoldow);
 
@@ -253,6 +258,9 @@ public class OknoStol {
             przyciskPokazKarty.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+
+                    System.out.println("pomoc" + pomoc);
+                    System.out.println(("gracze" + gracze));
 
                     panelGame.remove(przyciskPokazKarty);
 
@@ -661,6 +669,12 @@ public class OknoStol {
 
                 new Sprawdzenie(me);
 
+                for(int i = 0 ; i <gracze; i++){
+                    if (listaZetonowGraczy.get(i).getZetonyPosiadane() == 0 && listaCzyWGrze.get(i).isCzyWGrze()){
+                        listaCzyWGrze.get(i).setCzyWGrze(false);
+                    }
+                }
+
                 panelGame.repaint();
 
             }
@@ -699,6 +713,17 @@ public class OknoStol {
                 for (int i = 0; i < listaFoldow.size(); i++) {
                     listaFoldow.get(i).setFoldGracza(true);
                     listaZetonowGraczy.get(i).setZetonyStawkaGracza(0);
+                    listaAllIn.get(i).setAllInGracza(true);
+                }
+
+                for(int i = 0 ; i <gracze; i++){
+                    if (!listaCzyWGrze.get(i).isCzyWGrze()){
+                        listaCzyWGrze.get(i).setCzyWGrze(false);
+                        listaFoldow.get(i).setFoldGracza(false);
+                        listaZetonowGraczy.get(i).setZetonyStawkaGracza(0);
+//                        listaKarty.get(i).setVisible(false);
+//                        listaKarty.get(i + gracze).setVisible(false);
+                    }
                 }
 
                 pomoc = 0;
@@ -747,7 +772,7 @@ public class OknoStol {
         panelGame.remove(kartygracza2);
 
         listaKarty.get(pomoc - 1).setVisible(true);
-        listaKarty.get(pomoc + gracze - 1).setVisible(true);
+        listaKarty.get(pomoc + gracze - 1 ).setVisible(true);
 
     }
 
@@ -909,6 +934,22 @@ public class OknoStol {
         }
     }
 
+    public void listaGraczeCzyWGrze(List<Gracz> listaGraczyCzyWGrze) {
+
+        listaGraczyCzyWGrze.add(gracz1);
+        listaGraczyCzyWGrze.add(gracz2);
+        listaGraczyCzyWGrze.add(gracz3);
+        listaGraczyCzyWGrze.add(gracz4);
+        listaGraczyCzyWGrze.add(gracz5);
+        listaGraczyCzyWGrze.add(gracz6);
+        listaGraczyCzyWGrze.add(gracz7);
+        listaGraczyCzyWGrze.add(gracz8);
+
+        for (int i = 0; i < listaGraczyCzyWGrze.size(); i++) {
+            listaGraczyCzyWGrze.get(i).setCzyWGrze(true);
+        }
+    }
+
     public void usunZTalii(List list, int liczba) {
 
         list.remove(list.get(liczba));
@@ -926,21 +967,17 @@ public class OknoStol {
     }
 
     public void losowanieKart(int liczbaGraczy) {
-
         listaKarty = new ArrayList<JLabel>();
-
-
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < liczbaGraczy; j++) {
 
-                if (listaZetonowGraczy.get(j).getZetonyPosiadane() != 0) {
-
+                if (listaCzyWGrze.get(j).isCzyWGrze()) {
                     r = rand.nextInt(talia.size());
-
                     karty = new JLabel();
+                    kartyNull = new JLabel();
                     karty.setIcon(new ImageIcon("Red_Back2.jpg"));
                     karty.setLayout(null);
-
+                    kartyNull.setLayout(null);
                     if (i == 0) {
                         if (j < 3) {
                             karty.setBounds(780 - k1_1, 530, 90, 137);
@@ -1006,7 +1043,6 @@ public class OknoStol {
                                 listaRekaGraczy.add(gracz2);
                                 listaKarty.add(karty);
                                 System.out.println("GRACZ 2" + (gracz2.getKartyReka()));
-
                             }
                             if (j == 2) {
                                 listaPlayer3.add(talia.get(r));
@@ -1014,7 +1050,6 @@ public class OknoStol {
                                 listaRekaGraczy.add(gracz3);
                                 listaKarty.add(karty);
                                 System.out.println("GRACZ 3" + (gracz3.getKartyReka()));
-
                             }
                         }
                         if (j == 3) {
@@ -1025,7 +1060,6 @@ public class OknoStol {
                                 listaRekaGraczy.add(gracz4);
                                 listaKarty.add(karty);
                                 System.out.println("GRACZ 4" + (gracz4.getKartyReka()));
-
                             }
                         }
                         if (j > 3 && j < 7) {
@@ -1037,7 +1071,6 @@ public class OknoStol {
                                 listaRekaGraczy.add(gracz5);
                                 listaKarty.add(karty);
                                 System.out.println("GRACZ 5" + (gracz5.getKartyReka()));
-
                             }
                             if (j == 5) {
                                 listaPlayer6.add(talia.get(r));
@@ -1045,7 +1078,6 @@ public class OknoStol {
                                 listaRekaGraczy.add(gracz6);
                                 listaKarty.add(karty);
                                 System.out.println("GRACZ 6" + (gracz6.getKartyReka()));
-
                             }
                             if (j == 6) {
                                 listaPlayer7.add(talia.get(r));
@@ -1053,7 +1085,6 @@ public class OknoStol {
                                 listaRekaGraczy.add(gracz7);
                                 listaKarty.add(karty);
                                 System.out.println("GRACZ 7" + (gracz7.getKartyReka()));
-
                             }
                         }
                         if (j == 7) {
@@ -1064,14 +1095,144 @@ public class OknoStol {
                                 listaRekaGraczy.add(gracz8);
                                 listaKarty.add(karty);
                                 System.out.println("GRACZ 8" + gracz8.getKartyReka());
-
                             }
                         }
                     }
                     usunZTalii(talia, r);
                     usunZTalii(listaObrazkow, r);
-
                     panelGame.add(karty);
+                }
+                else {
+                    if (!listaCzyWGrze.get(j).isCzyWGrze()) {
+                        r = rand.nextInt(talia.size());
+                        karty = new JLabel();
+                        kartyNull = new JLabel();
+                        karty.setIcon(new ImageIcon("Red_Back2.jpg"));
+                        karty.setLayout(null);
+                        kartyNull.setLayout(null);
+                        if (i == 0) {
+                            if (j < 3) {
+                                karty.setBounds(780 - k1_1, 530, 90, 137);
+                                k1_1 += 210;
+                                if (j == 0) {
+                                    listaPlayer1.add(null);
+                                    listaKarty.add(kartyNull);
+                                }
+                                if (j == 1) {
+                                    listaPlayer2.add(null);
+                                    listaKarty.add(kartyNull);
+                                }
+                                if (j == 2) {
+                                    listaPlayer3.add(null);
+                                    listaKarty.add(kartyNull);
+                                }
+                            }
+                            if (j == 3) {
+                                karty.setBounds(140, 295, 90, 137);
+                                if (j == 3) {
+                                    listaPlayer4.add(null);
+                                    listaKarty.add(kartyNull);
+                                }
+                            }
+                            if (j > 3 && j < 7) {
+                                karty.setBounds(365 + k2_1, 65, 90, 137);
+                                k2_1 += 210;
+                                if (j == 4) {
+                                    listaPlayer5.add(null);
+                                    listaKarty.add(kartyNull);
+                                }
+                                if (j == 5) {
+                                    listaPlayer6.add(null);
+                                    listaKarty.add(kartyNull);
+                                }
+                                if (j == 6) {
+                                    listaPlayer7.add(null);
+                                    listaKarty.add(kartyNull);
+                                }
+                            }
+                            if (j == 7) {
+                                karty.setBounds(1005, 295, 90, 137);
+                                if (j == 7) {
+                                    listaPlayer8.add(talia.get(r));
+                                    listaKarty.add(kartyNull);
+                                }
+                            }
+                        }
+                        if (i == 1) {
+                            if (j < 3) {
+                                karty.setBounds(840 - k1_2, 530, 90, 137);
+                                k1_2 += 210;
+                                if (j == 0) {
+                                    listaPlayer1.add(null);
+                                    gracz1.setKartyReka(listaPlayer1);
+                                    listaRekaGraczy.add(gracz1);
+                                    listaKarty.add(kartyNull);
+                                    System.out.println("GRACZ 1" + (gracz1.getKartyReka()));
+                                }
+                                if (j == 1) {
+                                    listaPlayer2.add(null);
+                                    gracz2.setKartyReka(listaPlayer2);
+                                    listaRekaGraczy.add(gracz2);
+                                    listaKarty.add(kartyNull);
+                                    System.out.println("GRACZ 2" + (gracz2.getKartyReka()));
+                                }
+                                if (j == 2) {
+                                    listaPlayer3.add(null);
+                                    gracz3.setKartyReka(listaPlayer3);
+                                    listaRekaGraczy.add(gracz3);
+                                    listaKarty.add(kartyNull);
+                                    System.out.println("GRACZ 3" + (gracz3.getKartyReka()));
+                                }
+                            }
+                            if (j == 3) {
+                                karty.setBounds(200, 295, 90, 137);
+                                if (j == 3) {
+                                    listaPlayer4.add(null);
+                                    gracz4.setKartyReka(listaPlayer4);
+                                    listaRekaGraczy.add(gracz4);
+                                    listaKarty.add(kartyNull);
+                                    System.out.println("GRACZ 4" + (gracz4.getKartyReka()));
+                                }
+                            }
+                            if (j > 3 && j < 7) {
+                                karty.setBounds(425 + k2_2, 65, 90, 137);
+                                k2_2 += 210;
+                                if (j == 4) {
+                                    listaPlayer5.add(null);
+                                    gracz5.setKartyReka(listaPlayer5);
+                                    listaRekaGraczy.add(gracz5);
+                                    listaKarty.add(kartyNull);
+                                    System.out.println("GRACZ 5" + (gracz5.getKartyReka()));
+                                }
+                                if (j == 5) {
+                                    listaPlayer6.add(null);
+                                    gracz6.setKartyReka(listaPlayer6);
+                                    listaRekaGraczy.add(gracz6);
+                                    listaKarty.add(kartyNull);
+                                    System.out.println("GRACZ 6" + (gracz6.getKartyReka()));
+                                }
+                                if (j == 6) {
+                                    listaPlayer7.add(null);
+                                    gracz7.setKartyReka(listaPlayer7);
+                                    listaRekaGraczy.add(gracz7);
+                                    listaKarty.add(kartyNull);
+                                    System.out.println("GRACZ 7" + (gracz7.getKartyReka()));
+                                }
+                            }
+                            if (j == 7) {
+                                karty.setBounds(1065, 295, 90, 137);
+                                if (j == 7) {
+                                    listaPlayer8.add(null);
+                                    gracz8.setKartyReka(listaPlayer8);
+                                    listaRekaGraczy.add(gracz8);
+                                    listaKarty.add(kartyNull);
+                                    System.out.println("GRACZ 8" + gracz8.getKartyReka());
+                                }
+                            }
+                        }
+                        panelGame.add(kartyNull);
+                    }
+
                 }
             }
         }
@@ -1096,6 +1257,7 @@ public class OknoStol {
         listaObrazkow2 = new ArrayList<String>();
 
         handCards.addAll(listaGraczy.get(pomoc).getKartyReka());
+
 
         for (Kolor k : Kolor.values()) {
             for (Figura f : Figura.values()) {
@@ -1127,7 +1289,9 @@ public class OknoStol {
             }
         }
 
+
         pozycja = 0;
+
 
         for (Kolor k : Kolor.values()) {
             for (Figura f : Figura.values()) {

@@ -11,6 +11,7 @@ public class Gracz {
     private int zetonyStawkaGracza;
     private boolean foldGracza;
     private boolean allInGracza;
+    private boolean czyWGrze;
 
     private List<Karta> kartyReka;
 
@@ -64,5 +65,13 @@ public class Gracz {
 
     public void setAllInGracza(boolean allInGracza) {
         this.allInGracza = allInGracza;
+    }
+
+    public boolean isCzyWGrze() {
+        return czyWGrze;
+    }
+
+    public void setCzyWGrze(boolean czyWGrze) {
+        this.czyWGrze = czyWGrze;
     }
 }
