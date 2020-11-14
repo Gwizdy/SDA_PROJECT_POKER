@@ -259,9 +259,6 @@ public class OknoStol {
                 @Override
                 public void actionPerformed(ActionEvent e) {
 
-                    System.out.println("pomoc" + pomoc);
-                    System.out.println(("gracze" + gracze));
-
                     panelGame.remove(przyciskPokazKarty);
 
                     listaKarty.get(pomoc).setVisible(false);
@@ -653,7 +650,7 @@ public class OknoStol {
 
                 for (int i = 0; i < gracze; i++) {
                     if (listaFoldow.get(i).isFoldGracza() == true) {
-                        listaFoldow.get(i).setFoldGracza(false);
+
                         pomoc = i;
 
                         listaKarty.get(pomoc).setVisible(false);
@@ -669,8 +666,8 @@ public class OknoStol {
 
                 new Sprawdzenie(me);
 
-                for(int i = 0 ; i <gracze; i++){
-                    if (listaZetonowGraczy.get(i).getZetonyPosiadane() == 0 && listaCzyWGrze.get(i).isCzyWGrze()){
+                for (int i = 0; i < gracze; i++) {
+                    if (listaZetonowGraczy.get(i).getZetonyPosiadane() == 0 && listaCzyWGrze.get(i).isCzyWGrze()) {
                         listaCzyWGrze.get(i).setCzyWGrze(false);
                     }
                 }
@@ -716,8 +713,8 @@ public class OknoStol {
                     listaAllIn.get(i).setAllInGracza(true);
                 }
 
-                for(int i = 0 ; i <gracze; i++){
-                    if (!listaCzyWGrze.get(i).isCzyWGrze()){
+                for (int i = 0; i < gracze; i++) {
+                    if (!listaCzyWGrze.get(i).isCzyWGrze()) {
                         listaCzyWGrze.get(i).setCzyWGrze(false);
                         listaFoldow.get(i).setFoldGracza(false);
                         listaZetonowGraczy.get(i).setZetonyStawkaGracza(0);
@@ -772,7 +769,7 @@ public class OknoStol {
         panelGame.remove(kartygracza2);
 
         listaKarty.get(pomoc - 1).setVisible(true);
-        listaKarty.get(pomoc + gracze - 1 ).setVisible(true);
+        listaKarty.get(pomoc + gracze - 1).setVisible(true);
 
     }
 
@@ -827,8 +824,6 @@ public class OknoStol {
 
             } else if (rozdanieNaStole == 1) {
 
-//                System.out.println(pomoc + "turn" + rozdanieNaStole);
-
                 usunPrzyciskiPokazRewers();
 
                 dodaniePrzyciskuRozdajTurn();
@@ -844,8 +839,6 @@ public class OknoStol {
                 przejsciePoGraczach = 0;
 
             } else if (rozdanieNaStole == 2) {
-
-//                System.out.println(pomoc + "river" + rozdanieNaStole);
 
                 usunPrzyciskiPokazRewers();
 
@@ -972,12 +965,14 @@ public class OknoStol {
             for (int j = 0; j < liczbaGraczy; j++) {
 
                 if (listaCzyWGrze.get(j).isCzyWGrze()) {
+
                     r = rand.nextInt(talia.size());
+
                     karty = new JLabel();
-                    kartyNull = new JLabel();
+
                     karty.setIcon(new ImageIcon("Red_Back2.jpg"));
                     karty.setLayout(null);
-                    kartyNull.setLayout(null);
+
                     if (i == 0) {
                         if (j < 3) {
                             karty.setBounds(780 - k1_1, 530, 90, 137);
@@ -1100,16 +1095,21 @@ public class OknoStol {
                     }
                     usunZTalii(talia, r);
                     usunZTalii(listaObrazkow, r);
+
                     panelGame.add(karty);
-                }
-                else {
+
+                } else {
                     if (!listaCzyWGrze.get(j).isCzyWGrze()) {
-                        r = rand.nextInt(talia.size());
+
                         karty = new JLabel();
+
                         kartyNull = new JLabel();
+
                         karty.setIcon(new ImageIcon("Red_Back2.jpg"));
                         karty.setLayout(null);
+
                         kartyNull.setLayout(null);
+
                         if (i == 0) {
                             if (j < 3) {
                                 karty.setBounds(780 - k1_1, 530, 90, 137);
@@ -1325,7 +1325,7 @@ public class OknoStol {
         pomoc += 1;
         przejsciePoGraczach += 1;
         handCards.removeAll(handCards);
-//        System.out.println(pomoc);
+
     }
 
     public void rozdajFlop(List list) {
