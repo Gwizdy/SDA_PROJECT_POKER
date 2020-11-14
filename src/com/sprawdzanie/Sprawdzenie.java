@@ -27,16 +27,16 @@ public class Sprawdzenie {
 
     private List<Karta> listaPomocnicza;
 
-    private List<String> listaGraczyRoyalFlush;
-    private List<String> listaGraczyStraightFlush;
-    private List<String> listaGraczyFourOfKind;
-    private List<String> listaGraczyFullHouse;
-    private List<String> listaGraczyFlush;
-    private List<String> listaGraczyStraigh;
-    private List<String> listaGraczyThreeOfKind;
-    private List<String> listaGraczyTwoPairs;
-    private List<String> listaGraczyOnePair;
-    private List<String> listaGraczyHighCards;
+    private List<Integer> listaGraczyRoyalFlush;
+    private List<Integer> listaGraczyStraightFlush;
+    private List<Integer> listaGraczyFourOfKind;
+    private List<Integer> listaGraczyFullHouse;
+    private List<Integer> listaGraczyFlush;
+    private List<Integer> listaGraczyStraigh;
+    private List<Integer> listaGraczyThreeOfKind;
+    private List<Integer> listaGraczyTwoPairs;
+    private List<Integer> listaGraczyOnePair;
+    private List<Integer> listaGraczyHighCards;
 
 
     private List<List<Karta>> listalistKartyRoyalFlush;
@@ -55,8 +55,8 @@ public class Sprawdzenie {
     private int liczba;
     private int liczbaPomocnicza;
     private int numerGraczyDoSprawdzenia;
-    private String gracz;
-    private String gracz1;
+    private int gracz;
+    private int gracz1;
 
 
     public Sprawdzenie(OknoStol oknoStol) {
@@ -76,16 +76,16 @@ public class Sprawdzenie {
 
         listaPomocnicza = new ArrayList<Karta>();
 
-        listaGraczyRoyalFlush = new ArrayList<String>();
-        listaGraczyStraightFlush = new ArrayList<String>();
-        listaGraczyFourOfKind = new ArrayList<String>();
-        listaGraczyFullHouse = new ArrayList<String>();
-        listaGraczyFlush = new ArrayList<String>();
-        listaGraczyStraigh = new ArrayList<String>();
-        listaGraczyThreeOfKind = new ArrayList<String>();
-        listaGraczyTwoPairs = new ArrayList<String>();
-        listaGraczyOnePair = new ArrayList<String>();
-        listaGraczyHighCards = new ArrayList<String>();
+        listaGraczyRoyalFlush = new ArrayList<Integer>();
+        listaGraczyStraightFlush = new ArrayList<Integer>();
+        listaGraczyFourOfKind = new ArrayList<Integer>();
+        listaGraczyFullHouse = new ArrayList<Integer>();
+        listaGraczyFlush = new ArrayList<Integer>();
+        listaGraczyStraigh = new ArrayList<Integer>();
+        listaGraczyThreeOfKind = new ArrayList<Integer>();
+        listaGraczyTwoPairs = new ArrayList<Integer>();
+        listaGraczyOnePair = new ArrayList<Integer>();
+        listaGraczyHighCards = new ArrayList<Integer>();
 
         listalistKartyRoyalFlush = new ArrayList<List<Karta>>();
         listalistKartyStraightFlush = new ArrayList<List<Karta>>();
@@ -145,7 +145,7 @@ public class Sprawdzenie {
 
                     liczba = liczbaPomocnicza;
 
-                    gracz = "Player " + (i + 1);
+                    gracz = i + 1;
 
                     listaPomocnicza.removeAll(listaPomocnicza);
 
@@ -172,7 +172,7 @@ public class Sprawdzenie {
                     }
                 } else if (liczba == liczbaPomocnicza) {
 
-                    gracz1 = "Player " + (i + 1);
+                    gracz1 = i + 1;
 
                     if (liczbaPomocnicza == 10) {
                         if (compareCards(royalFlush.getTempListOfRoyalFlush(), listaPomocnicza) == 2) {
@@ -372,104 +372,114 @@ public class Sprawdzenie {
 
         if (liczba == 10) {
             if (listaGraczyRoyalFlush.isEmpty()) {
-                System.out.println("Poker Królewski. Wygrał " + gracz + " z kartami:" + listaPomocnicza);
+                System.out.println("Poker Królewski. Wygrał gracz " + gracz + " z kartami:" + listaPomocnicza);
             } else {
-                System.out.println("Poker Królewski. Remis. Gracze: ");
-                System.out.println(gracz + " z kartami " + listaPomocnicza);
+                System.out.println("Poker Królewski. Remis.");
+                System.out.println("Gracz " + gracz + " z kartami " + listaPomocnicza);
                 for (int i = 0; i < listaGraczyRoyalFlush.size(); i++) {
                     System.out.println(listaGraczyRoyalFlush.get(i) + " z kartami " + listalistKartyRoyalFlush.get(i));
                 }
             }
         } else if (liczba == 9) {
             if (listaGraczyStraightFlush.isEmpty()) {
-                System.out.println("Poker. Wygrał " + gracz + " z kartami:" + listaPomocnicza);
+                System.out.println("Poker. Wygrał gracz " + gracz + " z kartami:" + listaPomocnicza);
             } else {
                 System.out.println("Poker. Remis. Gracze: ");
-                System.out.println(gracz + " z kartami " + listaPomocnicza);
+                System.out.println("Gracz " + gracz + " z kartami " + listaPomocnicza);
                 for (int i = 0; i < listaGraczyStraightFlush.size(); i++) {
                     System.out.println(listaGraczyStraightFlush.get(i) + " z kartami " + listalistKartyStraightFlush.get(i));
                 }
             }
         } else if (liczba == 8) {
             if (listaGraczyFourOfKind.isEmpty()) {
-                System.out.println("Kareta. Wygrał " + gracz + " z kartami:" + listaPomocnicza);
+                System.out.println("Kareta. Wygrał gracz " + gracz + " z kartami:" + listaPomocnicza);
             } else {
                 System.out.println("Kareta. Remis. Gracze: ");
-                System.out.println(gracz + " z kartami " + listaPomocnicza);
+                System.out.println("Gracz " + gracz + " z kartami " + listaPomocnicza);
                 for (int i = 0; i < listaGraczyFourOfKind.size(); i++) {
                     System.out.println(listaGraczyFourOfKind.get(i) + " z kartami " + listalistKartyFourOfKind.get(i));
                 }
             }
         } else if (liczba == 7) {
             if (listaGraczyFullHouse.isEmpty()) {
-                System.out.println("Full. Wygrał " + gracz + " z kartami:" + listaPomocnicza);
+                System.out.println("Full. Wygrał gracz " + gracz + " z kartami:" + listaPomocnicza);
             } else {
                 System.out.println("Full. Remis. Gracze: ");
-                System.out.println(gracz + " z kartami " + listaPomocnicza);
+                System.out.println("Gracz " + gracz + " z kartami " + listaPomocnicza);
                 for (int i = 0; i < listaGraczyFullHouse.size(); i++) {
                     System.out.println(listaGraczyFullHouse.get(i) + " z kartami " + listalistKartyFullHouse.get(i));
                 }
             }
         } else if (liczba == 6) {
             if (listaGraczyFlush.isEmpty()) {
-                System.out.println("Kolor. Wygrał " + gracz + " z kartami:" + listaPomocnicza);
+                System.out.println("Kolor. Wygrał gracz " + gracz + " z kartami:" + listaPomocnicza);
             } else {
                 System.out.println("Kolor. Remis. Gracze: ");
-                System.out.println(gracz + " z kartami " + listaPomocnicza);
+                System.out.println("Gracz " + gracz + " z kartami " + listaPomocnicza);
                 for (int i = 0; i < listaGraczyFlush.size(); i++) {
                     System.out.println(listaGraczyFlush.get(i) + " z kartami " + listalistKartyFlush.get(i));
                 }
             }
         } else if (liczba == 5) {
             if (listaGraczyStraigh.isEmpty()) {
-                System.out.println("Strit. Wygrał " + gracz + " z kartami:" + listaPomocnicza);
+                System.out.println("Strit. Wygrał gracz " + gracz + " z kartami:" + listaPomocnicza);
             } else {
                 System.out.println("Strit. Remis. Gracze: ");
-                System.out.println(gracz + " z kartami " + listaPomocnicza);
+                System.out.println("Gracz " + gracz + " z kartami " + listaPomocnicza);
                 for (int i = 0; i < listaGraczyStraigh.size(); i++) {
                     System.out.println(listaGraczyStraigh.get(i) + " z kartami " + listalistKartyStraigh.get(i));
                 }
             }
         } else if (liczba == 4) {
             if (listaGraczyThreeOfKind.isEmpty()) {
-                System.out.println("Trójka. Wygrał " + gracz + " z kartami:" + listaPomocnicza);
+                System.out.println("Trójka. Wygrał gracz " + gracz + " z kartami:" + listaPomocnicza);
             } else {
                 System.out.println("Trójka. Remis. Gracze: ");
-                System.out.println(gracz + " z kartami " + listaPomocnicza);
+                System.out.println("Gracz " + gracz + " z kartami " + listaPomocnicza);
                 for (int i = 0; i < listaGraczyThreeOfKind.size(); i++) {
                     System.out.println(listaGraczyThreeOfKind.get(i) + " z kartami " + listalistKartyThreeOfKind.get(i));
                 }
             }
         } else if (liczba == 3) {
             if (listaGraczyTwoPairs.isEmpty()) {
-                System.out.println("Dwie pary. Wygrał " + gracz + " z kartami:" + listaPomocnicza);
+                System.out.println("Dwie pary. Wygrał gracz " + gracz + " z kartami:" + listaPomocnicza);
             } else {
                 System.out.println("Dwie pary. Remis. Gracze: ");
-                System.out.println(gracz + " z kartami " + listaPomocnicza);
+                System.out.println("Gracz " + gracz + " z kartami " + listaPomocnicza);
                 for (int i = 0; i < listaGraczyTwoPairs.size(); i++) {
                     System.out.println(listaGraczyTwoPairs.get(i) + " z kartami " + listalistKartyTwoPairs.get(i));
                 }
             }
         } else if (liczba == 2) {
             if (listaGraczyOnePair.isEmpty()) {
-                System.out.println("Jedna para. Wygrał " + gracz + " z kartami:" + listaPomocnicza);
+                System.out.println("Jedna para. Wygrał gracz " + gracz + " z kartami:" + listaPomocnicza);
             } else {
                 System.out.println("Jedna para. Remis. Gracze: ");
-                System.out.println(gracz + " z kartami " + listaPomocnicza);
+                System.out.println("Gracz " + gracz + " z kartami " + listaPomocnicza);
                 for (int i = 0; i < listaGraczyOnePair.size(); i++) {
                     System.out.println(listaGraczyOnePair.get(i) + " z kartami " + listalistKartyOnePair.get(i));
                 }
             }
         } else if (liczba == 1) {
             if (listaGraczyHighCards.isEmpty()) {
-                System.out.println("Wysoka karta. Wygrał " + gracz + " z kartami:" + listaPomocnicza);
+                System.out.println("Wysoka karta. Wygrał gracz " + gracz + " z kartami:" + listaPomocnicza);
             } else {
                 System.out.println("Wysoka karta. Remis. Gracze: ");
-                System.out.println(gracz + " z kartami " + listaPomocnicza);
+                System.out.println("Gracz " + gracz + " z kartami " + listaPomocnicza);
                 for (int i = 0; i < listaGraczyHighCards.size(); i++) {
                     System.out.println(listaGraczyHighCards.get(i) + " z kartami " + listalistKartyHighCards.get(i));
                 }
             }
         }
+
+        przypisanieWygranej(gracz);
     }
+
+    public void przypisanieWygranej(int gracz) {
+
+        oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze());
+
+        oknoStol.getListaZetonowGraczy().get(0).setZetonyWGrze(0);
+    }
+
 }
