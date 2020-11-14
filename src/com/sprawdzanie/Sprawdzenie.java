@@ -471,10 +471,10 @@ public class Sprawdzenie {
             }
         }
 
-        przypisanieWygranej(gracz);
+        przypisanieWygranej();
     }
 
-    public void przypisanieWygranej(int gracz) {
+    public void przypisanieWygranej() {
 
         if (liczba == 10) {
             if (listaGraczyRoyalFlush.isEmpty()) {
