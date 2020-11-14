@@ -384,7 +384,7 @@ public class Sprawdzenie {
             if (listaGraczyStraightFlush.isEmpty()) {
                 System.out.println("Poker. Wygrał gracz " + gracz + " z kartami:" + listaPomocnicza);
             } else {
-                System.out.println("Poker. Remis. Gracze: ");
+                System.out.println("Poker. Remis.");
                 System.out.println("Gracz " + gracz + " z kartami " + listaPomocnicza);
                 for (int i = 0; i < listaGraczyStraightFlush.size(); i++) {
                     System.out.println(listaGraczyStraightFlush.get(i) + " z kartami " + listalistKartyStraightFlush.get(i));
@@ -394,7 +394,7 @@ public class Sprawdzenie {
             if (listaGraczyFourOfKind.isEmpty()) {
                 System.out.println("Kareta. Wygrał gracz " + gracz + " z kartami:" + listaPomocnicza);
             } else {
-                System.out.println("Kareta. Remis. Gracze: ");
+                System.out.println("Kareta. Remis.");
                 System.out.println("Gracz " + gracz + " z kartami " + listaPomocnicza);
                 for (int i = 0; i < listaGraczyFourOfKind.size(); i++) {
                     System.out.println(listaGraczyFourOfKind.get(i) + " z kartami " + listalistKartyFourOfKind.get(i));
@@ -404,7 +404,7 @@ public class Sprawdzenie {
             if (listaGraczyFullHouse.isEmpty()) {
                 System.out.println("Full. Wygrał gracz " + gracz + " z kartami:" + listaPomocnicza);
             } else {
-                System.out.println("Full. Remis. Gracze: ");
+                System.out.println("Full. Remis.");
                 System.out.println("Gracz " + gracz + " z kartami " + listaPomocnicza);
                 for (int i = 0; i < listaGraczyFullHouse.size(); i++) {
                     System.out.println(listaGraczyFullHouse.get(i) + " z kartami " + listalistKartyFullHouse.get(i));
@@ -414,7 +414,7 @@ public class Sprawdzenie {
             if (listaGraczyFlush.isEmpty()) {
                 System.out.println("Kolor. Wygrał gracz " + gracz + " z kartami:" + listaPomocnicza);
             } else {
-                System.out.println("Kolor. Remis. Gracze: ");
+                System.out.println("Kolor. Remis.");
                 System.out.println("Gracz " + gracz + " z kartami " + listaPomocnicza);
                 for (int i = 0; i < listaGraczyFlush.size(); i++) {
                     System.out.println(listaGraczyFlush.get(i) + " z kartami " + listalistKartyFlush.get(i));
@@ -424,7 +424,7 @@ public class Sprawdzenie {
             if (listaGraczyStraigh.isEmpty()) {
                 System.out.println("Strit. Wygrał gracz " + gracz + " z kartami:" + listaPomocnicza);
             } else {
-                System.out.println("Strit. Remis. Gracze: ");
+                System.out.println("Strit. Remis.");
                 System.out.println("Gracz " + gracz + " z kartami " + listaPomocnicza);
                 for (int i = 0; i < listaGraczyStraigh.size(); i++) {
                     System.out.println(listaGraczyStraigh.get(i) + " z kartami " + listalistKartyStraigh.get(i));
@@ -434,7 +434,7 @@ public class Sprawdzenie {
             if (listaGraczyThreeOfKind.isEmpty()) {
                 System.out.println("Trójka. Wygrał gracz " + gracz + " z kartami:" + listaPomocnicza);
             } else {
-                System.out.println("Trójka. Remis. Gracze: ");
+                System.out.println("Trójka. Remis.");
                 System.out.println("Gracz " + gracz + " z kartami " + listaPomocnicza);
                 for (int i = 0; i < listaGraczyThreeOfKind.size(); i++) {
                     System.out.println(listaGraczyThreeOfKind.get(i) + " z kartami " + listalistKartyThreeOfKind.get(i));
@@ -444,7 +444,7 @@ public class Sprawdzenie {
             if (listaGraczyTwoPairs.isEmpty()) {
                 System.out.println("Dwie pary. Wygrał gracz " + gracz + " z kartami:" + listaPomocnicza);
             } else {
-                System.out.println("Dwie pary. Remis. Gracze: ");
+                System.out.println("Dwie pary. Remis.");
                 System.out.println("Gracz " + gracz + " z kartami " + listaPomocnicza);
                 for (int i = 0; i < listaGraczyTwoPairs.size(); i++) {
                     System.out.println(listaGraczyTwoPairs.get(i) + " z kartami " + listalistKartyTwoPairs.get(i));
@@ -454,7 +454,7 @@ public class Sprawdzenie {
             if (listaGraczyOnePair.isEmpty()) {
                 System.out.println("Jedna para. Wygrał gracz " + gracz + " z kartami:" + listaPomocnicza);
             } else {
-                System.out.println("Jedna para. Remis. Gracze: ");
+                System.out.println("Jedna para. Remis.");
                 System.out.println("Gracz " + gracz + " z kartami " + listaPomocnicza);
                 for (int i = 0; i < listaGraczyOnePair.size(); i++) {
                     System.out.println(listaGraczyOnePair.get(i) + " z kartami " + listalistKartyOnePair.get(i));
@@ -464,7 +464,7 @@ public class Sprawdzenie {
             if (listaGraczyHighCards.isEmpty()) {
                 System.out.println("Wysoka karta. Wygrał gracz " + gracz + " z kartami:" + listaPomocnicza);
             } else {
-                System.out.println("Wysoka karta. Remis. Gracze: ");
+                System.out.println("Wysoka karta. Remis.");
                 System.out.println("Gracz " + gracz + " z kartami " + listaPomocnicza);
                 for (int i = 0; i < listaGraczyHighCards.size(); i++) {
                     System.out.println(listaGraczyHighCards.get(i) + " z kartami " + listalistKartyHighCards.get(i));
