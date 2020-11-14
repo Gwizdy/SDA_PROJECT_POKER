@@ -58,7 +58,6 @@ public class Sprawdzenie {
     private int gracz;
     private int gracz1;
 
-
     public Sprawdzenie(OknoStol oknoStol) {
         this.oknoStol = oknoStol;
 
@@ -477,7 +476,157 @@ public class Sprawdzenie {
 
     public void przypisanieWygranej(int gracz) {
 
-        oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze());
+        if (liczba == 10) {
+            if (listaGraczyRoyalFlush.isEmpty()) {
+
+                oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze());
+
+            } else {
+
+                int ilosc = listaGraczyRoyalFlush.size() + 1;
+
+                oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / ilosc));
+
+                for (int i = 0; i < listaGraczyRoyalFlush.size(); i++) {
+                    oknoStol.getListaZetonowGraczy().get(listaGraczyRoyalFlush.get(i) - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(listaGraczyRoyalFlush.get(i) - 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / ilosc));
+                }
+            }
+        } else if (liczba == 9) {
+            if (listaGraczyStraightFlush.isEmpty()) {
+
+                oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze());
+
+            } else {
+
+                int ilosc = listaGraczyStraightFlush.size() + 1;
+
+                oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / ilosc));
+
+                for (int i = 0; i < listaGraczyStraightFlush.size(); i++) {
+                    oknoStol.getListaZetonowGraczy().get(listaGraczyStraightFlush.get(i) - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(listaGraczyStraightFlush.get(i) - 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / ilosc));
+                }
+            }
+        } else if (liczba == 8) {
+            if (listaGraczyFourOfKind.isEmpty()) {
+
+                oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze());
+
+            } else {
+
+                int ilosc = listaGraczyFourOfKind.size() + 1;
+
+                oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / ilosc));
+
+                for (int i = 0; i < listaGraczyFourOfKind.size(); i++) {
+                    oknoStol.getListaZetonowGraczy().get(listaGraczyFourOfKind.get(i) - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(listaGraczyFourOfKind.get(i) - 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / ilosc));
+                }
+            }
+        } else if (liczba == 7) {
+            if (listaGraczyFullHouse.isEmpty()) {
+
+                oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze());
+
+            } else {
+
+                int ilosc = listaGraczyFullHouse.size() + 1;
+
+                oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / ilosc));
+
+                for (int i = 0; i < listaGraczyFullHouse.size(); i++) {
+                    oknoStol.getListaZetonowGraczy().get(listaGraczyFullHouse.get(i) - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(listaGraczyFullHouse.get(i) - 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / ilosc));
+                }
+            }
+        } else if (liczba == 6) {
+            if (listaGraczyFlush.isEmpty()) {
+
+                oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze());
+
+            } else {
+
+                int ilosc = listaGraczyFlush.size() + 1;
+
+                oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / ilosc));
+
+                for (int i = 0; i < listaGraczyFlush.size(); i++) {
+                    oknoStol.getListaZetonowGraczy().get(listaGraczyFlush.get(i) - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(listaGraczyFlush.get(i) - 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / ilosc));
+                }
+            }
+        } else if (liczba == 5) {
+            if (listaGraczyStraigh.isEmpty()) {
+
+                oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze());
+
+            } else {
+
+                int ilosc = listaGraczyStraigh.size() + 1;
+
+                oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / ilosc));
+
+                for (int i = 0; i < listaGraczyStraigh.size(); i++) {
+                    oknoStol.getListaZetonowGraczy().get(listaGraczyStraigh.get(i) - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(listaGraczyStraigh.get(i) - 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / ilosc));
+                }
+            }
+        } else if (liczba == 4) {
+            if (listaGraczyThreeOfKind.isEmpty()) {
+
+                oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze());
+
+            } else {
+
+                int ilosc = listaGraczyThreeOfKind.size() + 1;
+
+                oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / ilosc));
+
+                for (int i = 0; i < listaGraczyThreeOfKind.size(); i++) {
+                    oknoStol.getListaZetonowGraczy().get(listaGraczyThreeOfKind.get(i) - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(listaGraczyThreeOfKind.get(i) - 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / ilosc));
+                }
+            }
+        } else if (liczba == 3) {
+            if (listaGraczyTwoPairs.isEmpty()) {
+
+                oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze());
+
+            } else {
+
+                int ilosc = listaGraczyTwoPairs.size() + 1;
+
+                oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / ilosc));
+
+                for (int i = 0; i < listaGraczyTwoPairs.size(); i++) {
+                    oknoStol.getListaZetonowGraczy().get(listaGraczyTwoPairs.get(i) - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(listaGraczyTwoPairs.get(i) - 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / ilosc));
+                }
+            }
+        } else if (liczba == 2) {
+            if (listaGraczyOnePair.isEmpty()) {
+
+                oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze());
+
+            } else {
+
+                int ilosc = listaGraczyOnePair.size() + 1;
+
+                oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / ilosc));
+
+                for (int i = 0; i < listaGraczyOnePair.size(); i++) {
+                    oknoStol.getListaZetonowGraczy().get(listaGraczyOnePair.get(i) - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(listaGraczyOnePair.get(i) - 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / ilosc));
+                }
+            }
+        } else if (liczba == 1) {
+            if (listaGraczyHighCards.isEmpty()) {
+
+                oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze());
+
+            } else {
+
+                int ilosc = listaGraczyHighCards.size() + 1;
+
+                oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / ilosc));
+
+                for (int i = 0; i < listaGraczyHighCards.size(); i++) {
+                    oknoStol.getListaZetonowGraczy().get(listaGraczyHighCards.get(i) - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(listaGraczyHighCards.get(i) - 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / ilosc));
+                }
+            }
+        }
 
         oknoStol.getListaZetonowGraczy().get(0).setZetonyWGrze(0);
     }
