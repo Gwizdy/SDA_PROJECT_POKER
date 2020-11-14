@@ -224,7 +224,7 @@ public class OknoStol {
             przejsciePoGraczach += 1;
 
             if (pomoc == gracze) {
-
+                pomoc=0;
                 break;
             }
         }
@@ -265,7 +265,7 @@ public class OknoStol {
                     listaKarty.get(pomoc + gracze).setVisible(false);
 
                     dodaniePrzyciskowGracza();
-
+                    System.out.println("pomoc" + pomoc);
                     wyswietlenieKartGracza(listaRekaGraczy);
 
                     panelGame.repaint();
@@ -393,6 +393,8 @@ public class OknoStol {
                         listaZetonowGraczy.get(pomoc - 1).setZetonyStawkaGracza(listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza() + Integer.parseInt(raiseField.getText()));
 
                         wyswietlaczStawkiGracza.get(pomoc - 1).setText(String.valueOf(listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza()));
+
+                        przejsciePoGraczach=1;
 
                         mechanizmRozgrywki();
 
@@ -718,8 +720,6 @@ public class OknoStol {
                         listaCzyWGrze.get(i).setCzyWGrze(false);
                         listaFoldow.get(i).setFoldGracza(false);
                         listaZetonowGraczy.get(i).setZetonyStawkaGracza(0);
-//                        listaKarty.get(i).setVisible(false);
-//                        listaKarty.get(i + gracze).setVisible(false);
                     }
                 }
 
@@ -785,7 +785,6 @@ public class OknoStol {
                 przejsciePoGraczach += 1;
 
                 if (pomoc == gracze) {
-
                     break;
                 }
             }
@@ -794,13 +793,14 @@ public class OknoStol {
 
             usunPrzyciskiPokazRewers();
 
+            if(pomoc == gracze){
+                pomoc = 0;
+            }
+
             dodaniePrzyciskuPokazKarty();
 
             panelGame.add(przyciskPokazKarty);
 
-            if (pomoc == gracze) {
-                pomoc = 0;
-            }
 
             panelGame.repaint();
 
@@ -809,6 +809,10 @@ public class OknoStol {
             if (rozdanieNaStole == 0) {
 
                 usunPrzyciskiPokazRewers();
+
+                if(pomoc == gracze){
+                    pomoc = 0;
+                }
 
                 dodaniePrzyciskuRozdajFlop();
 
@@ -826,6 +830,10 @@ public class OknoStol {
 
                 usunPrzyciskiPokazRewers();
 
+                if(pomoc == gracze){
+                    pomoc = 0;
+                }
+
                 dodaniePrzyciskuRozdajTurn();
 
                 panelGame.add(przyciskRozdajTurn);
@@ -842,6 +850,10 @@ public class OknoStol {
 
                 usunPrzyciskiPokazRewers();
 
+                if(pomoc == gracze){
+                    pomoc = 0;
+                }
+
                 dodaniePrzyciskuRozdajRiver();
 
                 panelGame.add(przyciskRozdajRiver);
@@ -857,6 +869,10 @@ public class OknoStol {
             } else {
 
                 usunPrzyciskiPokazRewers();
+
+                if(pomoc == gracze){
+                    pomoc = 0;
+                }
 
                 dodaniePrzyciskuSprawdzam();
 
