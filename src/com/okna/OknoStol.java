@@ -95,7 +95,7 @@ public class OknoStol {
     private List<Karta> listaTurnOrRiver;
     private List<Karta> handCards = new ArrayList<Karta>();
 
-    private int pomoc, przejsciePoGraczach;
+    private int pomoc, przejsciePoGraczach, minStawka;
     private int rozdanieNaStole;
     private int gracze;
     private int k1_1, k1_2, k2_1, k2_2;
@@ -371,6 +371,9 @@ public class OknoStol {
 
         przyciskBetRaise = new JButton("BET/RAISE");
 
+        System.out.println(minStawka);
+        System.out.println(pomoc);
+
         przyciskBetRaise.setFont(new Font("Arial", Font.BOLD, 16));
         przyciskBetRaise.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
         przyciskBetRaise.setBounds(1200, 650, 170, 50);
@@ -380,8 +383,11 @@ public class OknoStol {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if (!raiseField.getText().isEmpty() && Integer.parseInt(raiseField.getText()) != 0 && (Integer.parseInt(raiseField.getText()) < listaZetonowGraczy.get(pomoc - 1).getZetonyPosiadane())) {
-
+                    if (!raiseField.getText().isEmpty() && Integer.parseInt(raiseField.getText()) != 0 &&
+                           (Integer.parseInt(raiseField.getText()) < listaZetonowGraczy.get(pomoc - 1).getZetonyPosiadane()) &&
+                           (Integer.parseInt(raiseField.getText()) + listaZetonowGraczy.get(pomoc -1).getZetonyStawkaGracza()) > minStawka &&
+                           (Integer.parseInt(raiseField.getText())) <  (listaZetonowGraczy.get(pomoc - 1).getZetonyPosiadane() + listaZetonowGraczy.get(pomoc -1).getZetonyStawkaGracza()))
+                        {
                         listaZetonowGraczy.get(pomoc - 1).setZetonyPosiadane(listaZetonowGraczy.get(pomoc - 1).getZetonyPosiadane() - Integer.parseInt(raiseField.getText()));
 
                         listaZetonowGraczy.get(0).setZetonyWGrze(listaZetonowGraczy.get(0).getZetonyWGrze() + Integer.parseInt(raiseField.getText()));
@@ -393,6 +399,8 @@ public class OknoStol {
                         listaZetonowGraczy.get(pomoc - 1).setZetonyStawkaGracza(listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza() + Integer.parseInt(raiseField.getText()));
 
                         wyswietlaczStawkiGracza.get(pomoc - 1).setText(String.valueOf(listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza()));
+
+                        minStawka = listaZetonowGraczy.get(pomoc -1).getZetonyStawkaGracza();
 
                         przejsciePoGraczach=1;
 
@@ -435,6 +443,11 @@ public class OknoStol {
 
                 wyswietlaczZetonowGracza.get(pomoc - 1).setText(String.valueOf(listaZetonowGraczy.get(pomoc - 1).getZetonyPosiadane()));
 
+                if (listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza() > minStawka){
+                    minStawka = listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza();
+                    przejsciePoGraczach = 1;
+                }
+
                 listaAllIn.get(pomoc - 1).setAllInGracza(false);
 
                 mechanizmRozgrywki();
@@ -456,9 +469,35 @@ public class OknoStol {
         przyciskCheckCall.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (listaZetonowGraczy.get(pomoc -1).getZetonyStawkaGracza() == minStawka){
+                    mechanizmRozgrywki();
+                }else{
+                    try{
+                        if(listaZetonowGraczy.get(pomoc - 1).getZetonyPosiadane() + listaZetonowGraczy.get(pomoc -1).getZetonyStawkaGracza() > minStawka) {
 
-                mechanizmRozgrywki();
+                            listaZetonowGraczy.get(pomoc - 1).setZetonyPosiadane(listaZetonowGraczy.get(pomoc - 1).getZetonyPosiadane() - (minStawka - listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza()));
 
+                            listaZetonowGraczy.get(0).setZetonyWGrze(listaZetonowGraczy.get(0).getZetonyWGrze() + (minStawka - listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza()));
+
+                            wyswietlaczZetonowGracza.get(pomoc - 1).setText(String.valueOf(listaZetonowGraczy.get(pomoc - 1).getZetonyPosiadane()));
+
+                            poleZetonyWGrze.setText(String.valueOf(listaZetonowGraczy.get(0).getZetonyWGrze()));
+
+                            listaZetonowGraczy.get(pomoc - 1).setZetonyStawkaGracza(listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza() + (minStawka - listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza()));
+
+                            wyswietlaczStawkiGracza.get(pomoc - 1).setText(String.valueOf(listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza()));
+
+                            mechanizmRozgrywki();
+
+                        }
+                        else
+                            new OknoOstrzezenieCheckCall();
+                    }catch (NumberFormatException ex) {
+
+                        new OknoOstrzezenieCheckCall();
+
+                    }
+                }
             }
         });
     }
@@ -730,6 +769,8 @@ public class OknoStol {
                 rozdanieNaStole = 0;
 
                 f = 0;
+
+                minStawka = 0;
 
                 panelGame.removeAll();
                 panelGame.repaint();
