@@ -223,34 +223,36 @@ public class OknoStol {
 
             przejsciePoGraczach += 1;
 
-            if (pomoc == gracze) {
-                pomoc = 0;
+            if (przejsciePoGraczach == gracze) {
                 break;
+
             }
         }
 
-        if (przejsciePoGraczach < gracze) {
+        if (przejsciePoGraczach == gracze){
+            mechanizmRozgrywki();
+        }else if (przejsciePoGraczach < gracze) {
 
             przyciskPokazKarty = new JButton("POKAŻ KARTY");
 
             przyciskPokazKarty.setFont(new Font("Arial", Font.BOLD, 16));
             przyciskPokazKarty.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
 
-            if (pomoc == 0) {
+            if (pomoc == 0 && listaFoldow.get(pomoc).isFoldGracza() && listaAllIn.get(pomoc).isAllInGracza()) {
                 przyciskPokazKarty.setBounds(780, 670, 150, 50);
-            } else if (pomoc == 1) {
+            } else if (pomoc == 1 && listaFoldow.get(pomoc).isFoldGracza() && listaAllIn.get(pomoc).isAllInGracza()) {
                 przyciskPokazKarty.setBounds(570, 670, 150, 50);
-            } else if (pomoc == 2) {
+            } else if (pomoc == 2 && listaFoldow.get(pomoc).isFoldGracza() && listaAllIn.get(pomoc).isAllInGracza()) {
                 przyciskPokazKarty.setBounds(360, 670, 150, 50);
-            } else if (pomoc == 3) {
+            } else if (pomoc == 3 && listaFoldow.get(pomoc).isFoldGracza() && listaAllIn.get(pomoc).isAllInGracza()) {
                 przyciskPokazKarty.setBounds(140, 435, 150, 50);
-            } else if (pomoc == 4) {
+            } else if (pomoc == 4 && listaFoldow.get(pomoc).isFoldGracza() && listaAllIn.get(pomoc).isAllInGracza()) {
                 przyciskPokazKarty.setBounds(365, 7, 150, 50);
-            } else if (pomoc == 5) {
+            } else if (pomoc == 5 && listaFoldow.get(pomoc).isFoldGracza() && listaAllIn.get(pomoc).isAllInGracza()) {
                 przyciskPokazKarty.setBounds(575, 7, 150, 50);
-            } else if (pomoc == 6) {
+            } else if (pomoc == 6 && listaFoldow.get(pomoc).isFoldGracza() && listaAllIn.get(pomoc).isAllInGracza()) {
                 przyciskPokazKarty.setBounds(785, 7, 150, 50);
-            } else if (pomoc == 7) {
+            } else if (pomoc == 7 && listaFoldow.get(pomoc).isFoldGracza() && listaAllIn.get(pomoc).isAllInGracza()) {
                 przyciskPokazKarty.setBounds(1005, 435, 150, 50);
             }
             przyciskPokazKarty.setBorderPainted(true);
@@ -439,6 +441,7 @@ public class OknoStol {
 
                 wyswietlaczZetonowGracza.get(pomoc - 1).setText(String.valueOf(listaZetonowGraczy.get(pomoc - 1).getZetonyPosiadane()));
 
+
                 if (listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza() > minStawka) {
                     minStawka = listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza();
                     przejsciePoGraczach = 1;
@@ -605,7 +608,16 @@ public class OknoStol {
 
                 dodaniePrzyciskuPokazKarty();
 
-                panelGame.add(przyciskPokazKarty);
+                int tempPokazywanieKart = 0;
+
+                for(int i = 0; i < gracze; i++){
+                    if (listaFoldow.get(i).isFoldGracza() && listaAllIn.get(i).isAllInGracza() && listaCzyWGrze.get(i).isCzyWGrze()){
+                        tempPokazywanieKart++;
+                    }
+                }
+                if (tempPokazywanieKart > 0) {
+                    panelGame.add(przyciskPokazKarty);
+                }
 
                 panelGame.repaint();
 
@@ -632,7 +644,16 @@ public class OknoStol {
 
                 dodaniePrzyciskuPokazKarty();
 
-                panelGame.add(przyciskPokazKarty);
+                int tempPokazywanieKart = 0;
+
+                for(int i = 0; i < gracze; i++){
+                    if (listaFoldow.get(i).isFoldGracza() && listaAllIn.get(i).isAllInGracza() && listaCzyWGrze.get(i).isCzyWGrze()){
+                        tempPokazywanieKart++;
+                    }
+                }
+                if (tempPokazywanieKart > 0) {
+                    panelGame.add(przyciskPokazKarty);
+                }
 
                 panelGame.repaint();
 
@@ -659,7 +680,17 @@ public class OknoStol {
 
                 dodaniePrzyciskuPokazKarty();
 
-                panelGame.add(przyciskPokazKarty);
+                int tempPokazywanieKart = 0;
+
+                for(int i = 0; i < gracze; i++){
+                    if (listaFoldow.get(i).isFoldGracza() && listaAllIn.get(i).isAllInGracza() && listaCzyWGrze.get(i).isCzyWGrze()){
+                        tempPokazywanieKart++;
+                    }
+                }
+                if (tempPokazywanieKart > 0) {
+                    panelGame.add(przyciskPokazKarty);
+                }
+
 
                 panelGame.repaint();
 
@@ -826,7 +857,7 @@ public class OknoStol {
 
     public void mechanizmRozgrywki() {
 
-        if (pomoc < gracze) {
+        if (przejsciePoGraczach < gracze) {
             while (!listaFoldow.get(pomoc).isFoldGracza() || !listaAllIn.get(pomoc).isAllInGracza()) {
 
                 usunPrzyciskiPokazRewers();
@@ -835,8 +866,10 @@ public class OknoStol {
 
                 przejsciePoGraczach += 1;
 
-                if (pomoc == gracze) {
+                if (przejsciePoGraczach == gracze) {
+                    System.out.println(1);
                     break;
+
                 }
             }
         }
@@ -850,7 +883,19 @@ public class OknoStol {
 
             dodaniePrzyciskuPokazKarty();
 
-            panelGame.add(przyciskPokazKarty);
+//            sprawdzenie aby nie pokazywalo przycisku pokaz karty jak nie bedzie zadnego gracza decyzyjnego
+            int tempPokazywanieKart = 0;
+
+            for(int i = 0; i < gracze; i++){
+                if (listaFoldow.get(i).isFoldGracza() && listaAllIn.get(i).isAllInGracza() && listaCzyWGrze.get(i).isCzyWGrze()){
+                    tempPokazywanieKart++;
+                }
+            }
+            if (tempPokazywanieKart > 0) {
+                panelGame.add(przyciskPokazKarty);
+            }
+
+//            panelGame.add(przyciskPokazKarty);
 
 
             panelGame.repaint();
