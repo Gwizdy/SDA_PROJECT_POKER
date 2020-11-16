@@ -229,9 +229,9 @@ public class OknoStol {
             }
         }
 
-        if (przejsciePoGraczach == gracze){
+        if (przejsciePoGraczach == gracze) {
             mechanizmRozgrywki();
-        }else if (przejsciePoGraczach < gracze) {
+        } else if (przejsciePoGraczach < gracze) {
 
             przyciskPokazKarty = new JButton("POKAŻ KARTY");
 
@@ -610,8 +610,8 @@ public class OknoStol {
 
                 int tempPokazywanieKart = 0;
 
-                for(int i = 0; i < gracze; i++){
-                    if (listaFoldow.get(i).isFoldGracza() && listaAllIn.get(i).isAllInGracza() && listaCzyWGrze.get(i).isCzyWGrze()){
+                for (int i = 0; i < gracze; i++) {
+                    if (listaFoldow.get(i).isFoldGracza() && listaAllIn.get(i).isAllInGracza() && listaCzyWGrze.get(i).isCzyWGrze()) {
                         tempPokazywanieKart++;
                     }
                 }
@@ -646,8 +646,8 @@ public class OknoStol {
 
                 int tempPokazywanieKart = 0;
 
-                for(int i = 0; i < gracze; i++){
-                    if (listaFoldow.get(i).isFoldGracza() && listaAllIn.get(i).isAllInGracza() && listaCzyWGrze.get(i).isCzyWGrze()){
+                for (int i = 0; i < gracze; i++) {
+                    if (listaFoldow.get(i).isFoldGracza() && listaAllIn.get(i).isAllInGracza() && listaCzyWGrze.get(i).isCzyWGrze()) {
                         tempPokazywanieKart++;
                     }
                 }
@@ -682,8 +682,8 @@ public class OknoStol {
 
                 int tempPokazywanieKart = 0;
 
-                for(int i = 0; i < gracze; i++){
-                    if (listaFoldow.get(i).isFoldGracza() && listaAllIn.get(i).isAllInGracza() && listaCzyWGrze.get(i).isCzyWGrze()){
+                for (int i = 0; i < gracze; i++) {
+                    if (listaFoldow.get(i).isFoldGracza() && listaAllIn.get(i).isAllInGracza() && listaCzyWGrze.get(i).isCzyWGrze()) {
                         tempPokazywanieKart++;
                     }
                 }
@@ -727,7 +727,7 @@ public class OknoStol {
                     }
                 }
 
-                new Sprawdzenie(me) ;
+                new Sprawdzenie(me);
 
                 panelGame.repaint();
 
@@ -754,6 +754,8 @@ public class OknoStol {
                     panelGame.repaint();
 
                 } else {
+
+                    new OknoZakonczeniaGry(me);
                     System.out.println("Gra zakończona - został jeden gracz");
                 }
             }
@@ -886,8 +888,8 @@ public class OknoStol {
 //            sprawdzenie aby nie pokazywalo przycisku pokaz karty jak nie bedzie zadnego gracza decyzyjnego
             int tempPokazywanieKart = 0;
 
-            for(int i = 0; i < gracze; i++){
-                if (listaFoldow.get(i).isFoldGracza() && listaAllIn.get(i).isAllInGracza() && listaCzyWGrze.get(i).isCzyWGrze()){
+            for (int i = 0; i < gracze; i++) {
+                if (listaFoldow.get(i).isFoldGracza() && listaAllIn.get(i).isAllInGracza() && listaCzyWGrze.get(i).isCzyWGrze()) {
                     tempPokazywanieKart++;
                 }
             }
@@ -1369,7 +1371,6 @@ public class OknoStol {
         listaObrazkow2 = new ArrayList<String>();
 
         handCards.addAll(listaGraczy.get(pomoc).getKartyReka());
-
 
         for (Kolor k : Kolor.values()) {
             for (Figura f : Figura.values()) {
