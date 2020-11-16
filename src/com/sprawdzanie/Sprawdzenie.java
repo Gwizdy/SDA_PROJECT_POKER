@@ -1,6 +1,7 @@
 package com.sprawdzanie;
 
 import com.okna.OknoStol;
+import com.okna.OknoZakonczeniaGry;
 import com.rozgrywka.Gracz;
 import com.taliakart.Karta;
 
@@ -11,6 +12,7 @@ import java.util.List;
 public class Sprawdzenie {
 
     private OknoStol oknoStol;
+    private Sprawdzenie me;
 
     private RoyalFlush royalFlush = new RoyalFlush();
     private StraightFlush straightFlush = new StraightFlush();
@@ -60,10 +62,11 @@ public class Sprawdzenie {
 
     public Sprawdzenie(OknoStol oknoStol) {
         this.oknoStol = oknoStol;
+        me = this;
 
-        deklaracja();
+            deklaracja();
 
-        sprawdzanieWyniku();
+            sprawdzanieWyniku();
 
     }
 
@@ -338,7 +341,17 @@ public class Sprawdzenie {
                 }
             }
         }
-        ogloszenieWyniku(liczba);
+
+
+        if (oknoStol.getLicznik() >= oknoStol.getGracze() - 1) {
+
+            new OknoZakonczeniaGry(me);
+
+        } else {
+
+            ogloszenieWyniku(liczba);
+
+        }
 
     }
 
@@ -624,5 +637,13 @@ public class Sprawdzenie {
 
             }
         }
+    }
+
+    public int getGracz() {
+        return gracz;
+    }
+
+    public void setGracz(int gracz) {
+        this.gracz = gracz;
     }
 }
