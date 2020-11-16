@@ -103,6 +103,7 @@ public class OknoStol {
     private int f;
     private int z1, z2, z3;
     private int s1, s2, s3;
+    private int licznik;
 
     public OknoStol(OknoGracze oknoGracze) {
         this.oknoGracze = oknoGracze;
@@ -296,17 +297,17 @@ public class OknoStol {
 
             if (i < 3) {
                 stawkaGracza.setText(String.valueOf(listaZetonowGraczy.get(i).getZetonyStawkaGracza()));
-                stawkaGracza.setBounds(820 - s1, 465, 70, 20);
+                stawkaGracza.setBounds(820 - s1, 450, 70, 20);
                 s1 += 210;
 
             } else if (i == 3 || i == 7) {
                 stawkaGracza.setText(String.valueOf(listaZetonowGraczy.get(i).getZetonyStawkaGracza()));
-                stawkaGracza.setBounds(180 + s2, 235, 70, 20);
+                stawkaGracza.setBounds(180 + s2, 220, 70, 20);
                 s2 += 860;
 
             } else if (i > 3 && i < 7) {
                 stawkaGracza.setText(String.valueOf(listaZetonowGraczy.get(i).getZetonyStawkaGracza()));
-                stawkaGracza.setBounds(410 + s3, 245, 70, 20);
+                stawkaGracza.setBounds(410 + s3, 260, 70, 20);
                 s3 += 210;
 
             }
@@ -336,17 +337,17 @@ public class OknoStol {
 
             if (i < 3) {
                 zetonyGracza.setText(String.valueOf(listaZetonowGraczy.get(i).getZetonyPosiadane()));
-                zetonyGracza.setBounds(805 - z1, 490, 100, 30);
+                zetonyGracza.setBounds(805 - z1, 472, 100, 30);
                 z1 += 210;
 
             } else if (i == 3 || i == 7) {
                 zetonyGracza.setText(String.valueOf(listaZetonowGraczy.get(i).getZetonyPosiadane()));
-                zetonyGracza.setBounds(165 + z2, 260, 100, 30);
+                zetonyGracza.setBounds(165 + z2, 242, 100, 30);
                 z2 += 860;
 
             } else if (i > 3 && i < 7) {
                 zetonyGracza.setText(String.valueOf(listaZetonowGraczy.get(i).getZetonyPosiadane()));
-                zetonyGracza.setBounds(395 + z3, 210, 100, 30);
+                zetonyGracza.setBounds(395 + z3, 228, 100, 30);
                 z3 += 210;
 
             }
@@ -731,7 +732,7 @@ public class OknoStol {
 
                 panelGame.repaint();
 
-                int licznik = 0;
+                licznik = 0;
 
                 for (int i = 0; i < gracze; i++) {
                     if (listaZetonowGraczy.get(i).getZetonyPosiadane() == 0) {
@@ -755,7 +756,7 @@ public class OknoStol {
 
                 } else {
 
-                    new OknoZakonczeniaGry(me);
+                    new Sprawdzenie(me);
                     System.out.println("Gra zakończona - został jeden gracz");
                 }
             }
@@ -1112,7 +1113,7 @@ public class OknoStol {
                             }
                         }
                         if (j > 3 && j < 7) {
-                            karty.setBounds(365 + k2_1, 65, 90, 137);
+                            karty.setBounds(365 + k2_1, 60, 90, 137);
                             k2_1 += 210;
                             if (j == 4) {
                                 listaPlayer5.add(talia.get(r));
@@ -1172,7 +1173,7 @@ public class OknoStol {
                             }
                         }
                         if (j > 3 && j < 7) {
-                            karty.setBounds(425 + k2_2, 65, 90, 137);
+                            karty.setBounds(425 + k2_2, 60, 90, 137);
                             k2_2 += 210;
                             if (j == 4) {
                                 listaPlayer5.add(talia.get(r));
@@ -1249,7 +1250,7 @@ public class OknoStol {
                                 }
                             }
                             if (j > 3 && j < 7) {
-                                karty.setBounds(365 + k2_1, 65, 90, 137);
+                                karty.setBounds(365 + k2_1, 60, 90, 137);
                                 k2_1 += 210;
                                 if (j == 4) {
                                     listaPlayer5.add(null);
@@ -1309,7 +1310,7 @@ public class OknoStol {
                                 }
                             }
                             if (j > 3 && j < 7) {
-                                karty.setBounds(425 + k2_2, 65, 90, 137);
+                                karty.setBounds(425 + k2_2, 60, 90, 137);
                                 k2_2 += 210;
                                 if (j == 4) {
                                     listaPlayer5.add(null);
@@ -1544,5 +1545,13 @@ public class OknoStol {
 
     public void setListaZetonowGraczy(List<Gracz> listaZetonowGraczy) {
         this.listaZetonowGraczy = listaZetonowGraczy;
+    }
+
+    public int getLicznik() {
+        return licznik;
+    }
+
+    public void setLicznik(int licznik) {
+        this.licznik = licznik;
     }
 }

@@ -1,5 +1,7 @@
 package com.okna;
 
+import com.sprawdzanie.Sprawdzenie;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,12 +9,14 @@ public class OknoZakonczeniaGry {
 
     private OknoStol oknoStol;
 
+    private Sprawdzenie sprawdzenie;
+
     private JFrame window;
     private JPanel panel;
     private JTextArea tekstArea;
 
-    public OknoZakonczeniaGry(OknoStol oknoStolsc) {
-        this.oknoStol = oknoStol;
+    public OknoZakonczeniaGry(Sprawdzenie sprawdzenie) {
+        this.sprawdzenie = sprawdzenie;
 
         dodanieOkna();
 
@@ -51,8 +55,8 @@ public class OknoZakonczeniaGry {
         tekstArea.setBorder(BorderFactory.createEmptyBorder());
         tekstArea.setEditable(false);
         tekstArea.setOpaque(false);
-        tekstArea.setText("GRATULACJE!!!\r\n Wygrał gracz");
-        tekstArea.setBounds(150, 100, 250, 200);
+        tekstArea.setText("GRATULACJE!!!\r\n Wygrał gracz " + sprawdzenie.getGracz());
+        tekstArea.setBounds(190, 50, 250, 200);
 
 
     }
