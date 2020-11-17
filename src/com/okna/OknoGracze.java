@@ -155,7 +155,6 @@ public class OknoGracze {
         });
     }
 
-
     public int getGracze() {
         return gracze;
     }
@@ -171,4 +170,5 @@ public class OknoGracze {
     public void setPlayer(JTextField[] player) {
         this.player = player;
     }
+
 }

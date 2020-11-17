@@ -47,6 +47,7 @@ public class OknoStol {
     private JTextField raiseField;
     private JTextField zetonyGracza;
     private JTextField poleZetonyWGrze;
+    private JTextField imionaGraczy;
 
     private List<JTextField> wyswietlaczZetonowGracza;
     private List<JTextField> wyswietlaczStawkiGracza;
@@ -103,6 +104,7 @@ public class OknoStol {
     private int f;
     private int z1, z2, z3;
     private int s1, s2, s3;
+    private int p1, p2, p3;
     private int licznik;
 
     public OknoStol(OknoGracze oknoGracze) {
@@ -190,6 +192,8 @@ public class OknoStol {
 
         dodaniePolaZetonowWGrze();
 
+        dodanieWyswietleniaImionGraczy();
+
         panelGame.add(przyciskPokazKarty);
     }
 
@@ -225,13 +229,15 @@ public class OknoStol {
             przejsciePoGraczach += 1;
 
             if (przejsciePoGraczach == gracze) {
-                break;
 
+                break;
             }
         }
 
         if (przejsciePoGraczach == gracze) {
+
             mechanizmRozgrywki();
+
         } else if (przejsciePoGraczach < gracze) {
 
             przyciskPokazKarty = new JButton("POKAŻ KARTY");
@@ -278,13 +284,52 @@ public class OknoStol {
         }
     }
 
+    public void dodanieWyswietleniaImionGraczy() {
+
+        p1 = 0;
+        p2 = 0;
+        p3 = 0;
+
+        for (int i = 0; i < gracze; i++) {
+
+            imionaGraczy = new JTextField();
+            imionaGraczy.setVisible(true);
+            imionaGraczy.setForeground(Color.white);
+         //   imionaGraczy.setBorder(BorderFactory.createEmptyBorder());
+            imionaGraczy.setFont(new Font("Arial", Font.BOLD, 16));
+            imionaGraczy.setHorizontalAlignment(SwingConstants.CENTER);
+            imionaGraczy.setOpaque(false);
+
+            if (i < 3) {
+                imionaGraczy.setText(oknoGracze.getPlayer()[i].getText());
+                imionaGraczy.setBounds(780 - p1, 505, 150, 20);
+                p1 += 210;
+
+            } else if (i == 3 || i == 7) {
+                imionaGraczy.setText(oknoGracze.getPlayer()[i].getText());
+                imionaGraczy.setBounds(140 + p2, 270, 150, 20);
+                p2 += 865;
+
+            } else if (i > 3 && i < 7) {
+                imionaGraczy.setText(oknoGracze.getPlayer()[i].getText());
+                imionaGraczy.setBounds(365 + p3, 205, 150, 20);
+                p3 += 210;
+
+            }
+
+            panelGame.add(imionaGraczy);
+        }
+
+
+    }
+
+
     public void dodaniePolaStawkiGracza() {
 
         s1 = 0;
         s2 = 0;
         s3 = 0;
 
-        stawkaGracza = new JTextField();
         wyswietlaczStawkiGracza = new ArrayList<JTextField>();
 
         for (int i = 0; i < gracze; i++) {
@@ -302,7 +347,7 @@ public class OknoStol {
 
             } else if (i == 3 || i == 7) {
                 stawkaGracza.setText(String.valueOf(listaZetonowGraczy.get(i).getZetonyStawkaGracza()));
-                stawkaGracza.setBounds(180 + s2, 220, 70, 20);
+                stawkaGracza.setBounds(180 + s2, 215, 70, 20);
                 s2 += 860;
 
             } else if (i > 3 && i < 7) {
@@ -325,6 +370,7 @@ public class OknoStol {
         z3 = 0;
 
         wyswietlaczZetonow = new JTextField();
+
         wyswietlaczZetonowGracza = new ArrayList<JTextField>();
 
         for (int i = 0; i < gracze; i++) {
@@ -342,7 +388,7 @@ public class OknoStol {
 
             } else if (i == 3 || i == 7) {
                 zetonyGracza.setText(String.valueOf(listaZetonowGraczy.get(i).getZetonyPosiadane()));
-                zetonyGracza.setBounds(165 + z2, 242, 100, 30);
+                zetonyGracza.setBounds(165 + z2, 237, 100, 30);
                 z2 += 860;
 
             } else if (i > 3 && i < 7) {
