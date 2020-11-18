@@ -523,15 +523,23 @@ public class Sprawdzenie {
 
         for (int i = 0; i < listaWygrywajaca.size(); i++) {
 
-            oknoStol.getListaZetonowGraczy().get(i).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(i).getZetonyPosiadane() + oknoStol.getListaZetonowGraczy().get(i).getZetonyWGrze());
-            oknoStol.getListaZetonowGraczy().get(0).setZetonyWGrze(oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() - oknoStol.getListaZetonowGraczy().get(i).getZetonyStawkaGracza());
-            oknoStol.getListaZetonowGraczy().get(i).setZetonyStawkaGracza(0);
+            oknoStol.getListaZetonowGraczy().get(i + 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(i + 1).getZetonyPosiadane() + oknoStol.getListaZetonowGraczy().get(i + 1).getZetonyStawkaGracza());
+            oknoStol.getListaZetonowGraczy().get(0).setZetonyWGrze(oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() - oknoStol.getListaZetonowGraczy().get(i + 1).getZetonyStawkaGracza());
+            oknoStol.getListaZetonowGraczy().get(i + 1).setZetonyStawkaGracza(0);
         }
+        System.out.println(oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze());
 
-        oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / iloscGraczyWygrywajacych));
-
+        if (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() > 0) {
+            oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / iloscGraczyWygrywajacych));
+        } else {
+            oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane());
+        }
         for (int i = 0; i < listaWygrywajaca.size(); i++) {
-            oknoStol.getListaZetonowGraczy().get(i).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(i).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / iloscGraczyWygrywajacych));
+            if (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() > 0) {
+                oknoStol.getListaZetonowGraczy().get(i + 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(i + 1).getZetonyPosiadane() + (oknoStol.getListaZetonowGraczy().get(0).getZetonyWGrze() / iloscGraczyWygrywajacych));
+            } else {
+                oknoStol.getListaZetonowGraczy().get(i + 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(i + 1).getZetonyPosiadane());
+            }
         }
     }
 
