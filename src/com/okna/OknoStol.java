@@ -222,11 +222,17 @@ public class OknoStol {
 
     public void dodaniePrzyciskuPokazKarty() {
 
-        while (!listaFoldow.get(pomoc).isFoldGracza() || !listaAllIn.get(pomoc).isAllInGracza()) {
+        while (!listaFoldow.get(pomoc).isFoldGracza() || !listaAllIn.get(pomoc).isAllInGracza() || !listaCzyWGrze.get(pomoc).isCzyWGrze()) {
+
+            System.out.println("CO SIE TU WYPRAWIA POMOC PRZED" + pomoc);
+            System.out.println("CO SIE TU WYPRAWIA PRZEJSCIEPOGRACZACH PRZED" + przejsciePoGraczach);
 
             pomoc += 1;
 
             przejsciePoGraczach += 1;
+
+            System.out.println("CO SIE TU WYPRAWIA POMOC PO" + pomoc);
+            System.out.println("CO SIE TU WYPRAWIA PRZEJSCIEPOGRACZACH PO" + przejsciePoGraczach);
 
             if (przejsciePoGraczach == gracze) {
 
@@ -957,6 +963,7 @@ public class OknoStol {
             if (pomoc == gracze) {
                 pomoc = 0;
             }
+
             System.out.println("wejscie do przycisku pokaz karty");
             dodaniePrzyciskuPokazKarty();
 
@@ -970,7 +977,7 @@ public class OknoStol {
                     tempPokazywanieKart++;
                 }
             }
-            if (tempPokazywanieKart > 0) {
+            if (tempPokazywanieKart > 0 && przejsciePoGraczach != 0) {
                 System.out.println("TEST" + przejsciePoGraczach);
                 panelGame.add(przyciskPokazKarty);
             }
