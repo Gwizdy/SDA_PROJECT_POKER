@@ -84,6 +84,7 @@ public class OknoStol {
     private Gracz gracz6 = new Gracz();
     private Gracz gracz7 = new Gracz();
     private Gracz gracz8 = new Gracz();
+    private Gracz graczWidmo = new Gracz();
 
     private List<Gracz> listaRekaGraczy = new ArrayList<Gracz>();
     private List<Gracz> listaZetonowGraczy = new ArrayList<Gracz>();
@@ -96,7 +97,7 @@ public class OknoStol {
     private List<Karta> listaTurnOrRiver;
     private List<Karta> handCards = new ArrayList<Karta>();
 
-    private int pomoc, przejsciePoGraczach, minStawka;
+    private int pomoc, przejsciePoGraczach, minStawka, graczDealer, graczSmallBlind, graczBigBlind, blindValue, iloscGraczyWGrze, liczbaRund;
     private int rozdanieNaStole;
     private int gracze;
     private int k1_1, k1_2, k2_1, k2_2;
@@ -116,6 +117,9 @@ public class OknoStol {
         listaTurnOrRiver = new ArrayList<Karta>();
         taliaGUI = new Talia();
         talia = taliaGUI.getTalia();
+
+        iloscGraczyWGrze = gracze;
+        blindValue = 20;
 
         listaGraczeZetonyNaStart(listaZetonowGraczy);
 
@@ -184,7 +188,7 @@ public class OknoStol {
         panelGame = new BackgroundPanelGame();
         panelGame.setLayout(null);
 
-        dodaniePrzyciskuPokazKarty();
+//        dodaniePrzyciskuPokazKarty();
 
         dodaniePolaZetonow();
 
@@ -194,7 +198,7 @@ public class OknoStol {
 
         dodanieWyswietleniaImionGraczy();
 
-        panelGame.add(przyciskPokazKarty);
+//        panelGame.add(przyciskPokazKarty);
     }
 
     public void dodaniePrzyciskowGracza() {
@@ -233,6 +237,7 @@ public class OknoStol {
 
             System.out.println("CO SIE TU WYPRAWIA POMOC PO" + pomoc);
             System.out.println("CO SIE TU WYPRAWIA PRZEJSCIEPOGRACZACH PO" + przejsciePoGraczach);
+            System.out.println("--------------------");
 
             if (przejsciePoGraczach == gracze) {
 
@@ -503,6 +508,9 @@ public class OknoStol {
 
                 listaAllIn.get(pomoc - 1).setAllInGracza(false);
                 System.out.println("mechanizm 3");
+                for (int i = 0 ; i <gracze ; i++){
+                    System.out.println(listaAllIn.get(i).isAllInGracza());
+                }
 
                 mechanizmRozgrywki();
 
@@ -671,6 +679,11 @@ public class OknoStol {
                 panelGame.remove(przyciskRozdajFlop);
 
                 dodaniePrzyciskuPokazKarty();
+                System.out.println("przejscie po graczach" + przejsciePoGraczach);
+                System.out.println("gracze" + gracze);
+                for (int i = 0 ; i <gracze ; i++){
+                    System.out.println(listaAllIn.get(i).isAllInGracza());
+                }
                 System.out.println("przycisk Flop");
 
                 int tempPokazywanieKart = 0;
@@ -681,7 +694,6 @@ public class OknoStol {
                     }
                 }
                 if (tempPokazywanieKart > 0) {
-
                     panelGame.add(przyciskPokazKarty);
                 } else {
                     panelGame.remove(przyciskPokazKarty);
@@ -783,7 +795,7 @@ public class OknoStol {
 
                 panelGame.remove(przyciskSprawdzam);
 
-                pomoc = 0;
+//                pomoc = 0;
 
                 for (int i = 0; i < gracze; i++) {
                     if (listaFoldow.get(i).isFoldGracza() == true) {
@@ -818,6 +830,7 @@ public class OknoStol {
                     for (int i = 0; i < gracze; i++) {
                         if (listaZetonowGraczy.get(i).getZetonyPosiadane() == 0 && listaCzyWGrze.get(i).isCzyWGrze()) {
                             listaCzyWGrze.get(i).setCzyWGrze(false);
+                            iloscGraczyWGrze-=1;
                         }
                     }
 
@@ -875,11 +888,13 @@ public class OknoStol {
                     }
                 }
 
-                pomoc = 0;
+//                pomoc = 0;
 
                 przejsciePoGraczach = 0;
 
                 rozdanieNaStole = 0;
+
+                graczDealer+=1;
 
                 f = 0;
 
@@ -890,6 +905,12 @@ public class OknoStol {
 
                 taliaGUI = new Talia();
                 talia = taliaGUI.getTalia();
+
+                liczbaRund+=1;
+                if(liczbaRund==2){
+                    minStawka=minStawka*2;
+                    liczbaRund=0;
+                }
 
                 rozdanieKart();
 
@@ -928,26 +949,16 @@ public class OknoStol {
     }
 
     public void mechanizmRozgrywki() {
-        System.out.println("mechanizm 7");
 
-        System.out.println(przejsciePoGraczach);
-        System.out.println(gracze);
-        System.out.println(pomoc);
-        System.out.println("Rozdanie na stole " + rozdanieNaStole);
         if (przejsciePoGraczach < gracze) {
-            System.out.println(listaFoldow.get(pomoc).isFoldGracza());
-            System.out.println(listaAllIn.get(pomoc).isAllInGracza());
-            System.out.println(listaCzyWGrze.get(pomoc).isCzyWGrze());
             while (!listaFoldow.get(pomoc).isFoldGracza() || !listaAllIn.get(pomoc).isAllInGracza() || !listaCzyWGrze.get(pomoc).isCzyWGrze()) {
-                System.out.println("przejscie po graczach nr 1 " + przejsciePoGraczach);
 
                 usunPrzyciskiPokazRewers();
 
                 pomoc += 1;
 
                 przejsciePoGraczach += 1;
-
-                System.out.println("przejscie " + przejsciePoGraczach);
+;
                 System.out.println();
                 if (przejsciePoGraczach == gracze) {
                     System.out.println(1);
@@ -955,7 +966,6 @@ public class OknoStol {
                 }
             }
         }
-        System.out.println("przejscie prze ifem bez while " + przejsciePoGraczach);
         if (przejsciePoGraczach < gracze) {
 
             usunPrzyciskiPokazRewers();
@@ -964,14 +974,12 @@ public class OknoStol {
                 pomoc = 0;
             }
 
-            System.out.println("wejscie do przycisku pokaz karty");
+
             dodaniePrzyciskuPokazKarty();
 
 //            sprawdzenie aby nie pokazywalo przycisku pokaz karty jak nie bedzie zadnego gracza decyzyjnego
             int tempPokazywanieKart = 0;
 
-            System.out.println("przejscie po graczach przed pętlą " + przejsciePoGraczach);
-            System.out.println("gracze przed pętlą " + gracze);
             for (int i = 0; i < gracze; i++) {
                 if (listaFoldow.get(i).isFoldGracza() && listaAllIn.get(i).isAllInGracza() && listaCzyWGrze.get(i).isCzyWGrze()) {
                     tempPokazywanieKart++;
@@ -1005,7 +1013,7 @@ public class OknoStol {
 
                 rozdanieNaStole += 1;
 
-                pomoc = 0;
+                pomoc = graczDealer+1;
                 System.out.println("Resetowanie przejsciaPoGraczach rozdanie na stole 0");
                 przejsciePoGraczach = 0;
 
@@ -1025,7 +1033,8 @@ public class OknoStol {
 
                 rozdanieNaStole += 1;
 
-                pomoc = 0;
+                pomoc = graczDealer+1;
+
 
                 przejsciePoGraczach = 0;
 
@@ -1045,7 +1054,8 @@ public class OknoStol {
 
                 rozdanieNaStole += 1;
 
-                pomoc = 0;
+                pomoc = graczDealer+1;
+
 
                 przejsciePoGraczach = 0;
 
@@ -1082,6 +1092,7 @@ public class OknoStol {
         listaFoldow.add(gracz6);
         listaFoldow.add(gracz7);
         listaFoldow.add(gracz8);
+        listaFoldow.add(graczWidmo);
 
         for (int i = 0; i < listaFoldow.size(); i++) {
             listaFoldow.get(i).setFoldGracza(true);
@@ -1098,6 +1109,7 @@ public class OknoStol {
         listaAllIn.add(gracz6);
         listaAllIn.add(gracz7);
         listaAllIn.add(gracz8);
+        listaAllIn.add(graczWidmo);
 
         for (int i = 0; i < listaAllIn.size(); i++) {
             listaAllIn.get(i).setAllInGracza(true);
@@ -1114,6 +1126,8 @@ public class OknoStol {
         listaGraczyZetonyNaStart.add(gracz6);
         listaGraczyZetonyNaStart.add(gracz7);
         listaGraczyZetonyNaStart.add(gracz8);
+        listaGraczyZetonyNaStart.add(graczWidmo);
+
 
         for (int i = 0; i < listaGraczyZetonyNaStart.size(); i++) {
             listaGraczyZetonyNaStart.get(i).setZetonyPosiadane(1000);
@@ -1130,6 +1144,7 @@ public class OknoStol {
         listaGraczyCzyWGrze.add(gracz6);
         listaGraczyCzyWGrze.add(gracz7);
         listaGraczyCzyWGrze.add(gracz8);
+        listaGraczyCzyWGrze.add(graczWidmo);
 
         for (int i = 0; i < listaGraczyCzyWGrze.size(); i++) {
             listaGraczyCzyWGrze.get(i).setCzyWGrze(true);
@@ -1441,6 +1456,12 @@ public class OknoStol {
 
         losowanieKart(gracze);
 
+        dealerSmallBigBlind();
+
+        dodaniePrzyciskuPokazKarty();
+
+        panelGame.add(przyciskPokazKarty);
+
     }
 
     public void wyswietlenieKartGracza(List<Gracz> listaGraczy) {
@@ -1577,6 +1598,183 @@ public class OknoStol {
             panelGame.add(kartyTurnOrRiver);
         }
     }
+
+//    public void dealer(){
+//        while (!listaCzyWGrze.get(graczDealer).isCzyWGrze()){
+//            graczDealer++;
+//        }
+//        System.out.println("Gracz" + graczDealer+1 + " jest Dealerem");
+//    }
+
+    public void dealerSmallBigBlind(){
+        if(iloscGraczyWGrze>2){
+            while (!listaCzyWGrze.get(graczDealer).isCzyWGrze()){
+                graczDealer++;
+                if (graczDealer==gracze){
+                    graczDealer=0;
+                }
+            }
+            System.out.println("Gracz" + graczDealer+1 + " jest Dealerem");
+            graczSmallBlind=graczDealer+1;
+            while(!listaCzyWGrze.get(graczSmallBlind).isCzyWGrze()){
+                graczSmallBlind++;
+                if (graczSmallBlind==gracze){
+                    graczSmallBlind=0;
+                }
+            }
+            System.out.println("Gracz" + graczSmallBlind+1 + " jest na Small Blind");
+            if(listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane() > blindValue/2){
+
+                listaZetonowGraczy.get(graczSmallBlind).setZetonyPosiadane(listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane() - blindValue/2);
+
+                wyswietlaczZetonowGracza.get(graczSmallBlind).setText(String.valueOf(listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane()));
+
+                listaZetonowGraczy.get(graczSmallBlind).setZetonyStawkaGracza(blindValue/2);
+
+                wyswietlaczStawkiGracza.get(graczSmallBlind).setText(String.valueOf(listaZetonowGraczy.get(graczSmallBlind).getZetonyStawkaGracza()));
+
+                listaZetonowGraczy.get(0).setZetonyWGrze(listaZetonowGraczy.get(0).getZetonyWGrze() + listaZetonowGraczy.get(graczSmallBlind).getZetonyStawkaGracza());
+
+                poleZetonyWGrze.setText(String.valueOf(listaZetonowGraczy.get(0).getZetonyWGrze()));
+
+            }else if (listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane() <= blindValue/2){
+
+                listaZetonowGraczy.get(graczSmallBlind).setZetonyStawkaGracza(listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane());
+
+                wyswietlaczStawkiGracza.get(graczSmallBlind).setText(String.valueOf(listaZetonowGraczy.get(graczSmallBlind).getZetonyStawkaGracza()));
+
+                listaZetonowGraczy.get(graczSmallBlind).setZetonyPosiadane(0);
+
+                wyswietlaczZetonowGracza.get(graczSmallBlind).setText(String.valueOf(listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane()));
+
+                listaZetonowGraczy.get(0).setZetonyWGrze(listaZetonowGraczy.get(0).getZetonyWGrze() + listaZetonowGraczy.get(graczSmallBlind).getZetonyStawkaGracza());
+
+                poleZetonyWGrze.setText(String.valueOf(listaZetonowGraczy.get(0).getZetonyWGrze()));
+
+                listaAllIn.get(graczSmallBlind).setAllInGracza(false);
+            }
+            graczBigBlind=graczSmallBlind+1;
+            while(!listaCzyWGrze.get(graczBigBlind).isCzyWGrze()){
+                graczBigBlind++;
+                if (graczBigBlind==gracze){
+                    graczBigBlind=0;
+                }
+            }
+            System.out.println("Gracz" + graczBigBlind+1 + " jest na Big Blind");
+            if(listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane() > blindValue){
+                listaZetonowGraczy.get(graczBigBlind).setZetonyPosiadane(listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane() - blindValue);
+                wyswietlaczZetonowGracza.get(graczBigBlind).setText(String.valueOf(listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane()));
+                listaZetonowGraczy.get(graczBigBlind).setZetonyStawkaGracza(blindValue);
+                wyswietlaczStawkiGracza.get(graczBigBlind).setText(String.valueOf(listaZetonowGraczy.get(graczBigBlind).getZetonyStawkaGracza()));
+                listaZetonowGraczy.get(0).setZetonyWGrze(listaZetonowGraczy.get(0).getZetonyWGrze() + listaZetonowGraczy.get(graczBigBlind).getZetonyStawkaGracza());
+                poleZetonyWGrze.setText(String.valueOf(listaZetonowGraczy.get(0).getZetonyWGrze()));
+            }else if (listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane() <= blindValue){
+                listaZetonowGraczy.get(graczBigBlind).setZetonyStawkaGracza(listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane());
+                wyswietlaczStawkiGracza.get(graczBigBlind).setText(String.valueOf(listaZetonowGraczy.get(graczBigBlind).getZetonyStawkaGracza()));
+                listaZetonowGraczy.get(graczBigBlind).setZetonyPosiadane(0);
+                wyswietlaczZetonowGracza.get(graczBigBlind).setText(String.valueOf(listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane()));
+                listaAllIn.get(graczBigBlind).setAllInGracza(false);
+                listaZetonowGraczy.get(0).setZetonyWGrze(listaZetonowGraczy.get(0).getZetonyWGrze() + listaZetonowGraczy.get(graczBigBlind).getZetonyStawkaGracza());
+                poleZetonyWGrze.setText(String.valueOf(listaZetonowGraczy.get(0).getZetonyWGrze()));
+            }
+            minStawka=blindValue;
+            pomoc=graczBigBlind+1;
+            while(!listaCzyWGrze.get(pomoc).isCzyWGrze()){
+                pomoc++;
+                if(pomoc==gracze){
+                    pomoc=0;
+                }
+            }
+        }
+        else if (iloscGraczyWGrze == 2){
+            while (!listaCzyWGrze.get(graczDealer).isCzyWGrze()){
+                graczDealer++;
+                if (graczDealer==gracze){
+                    graczDealer=0;
+                }
+            }
+            graczSmallBlind=graczDealer;
+            pomoc=graczDealer;
+            if(listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane() > blindValue/2){
+                listaZetonowGraczy.get(graczSmallBlind).setZetonyPosiadane(listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane() - blindValue/2);
+                wyswietlaczZetonowGracza.get(graczSmallBlind).setText(String.valueOf(listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane()));
+                listaZetonowGraczy.get(graczSmallBlind).setZetonyStawkaGracza(blindValue/2);
+                wyswietlaczStawkiGracza.get(graczSmallBlind).setText(String.valueOf(listaZetonowGraczy.get(graczSmallBlind).getZetonyStawkaGracza()));
+                listaZetonowGraczy.get(0).setZetonyWGrze(listaZetonowGraczy.get(0).getZetonyWGrze() + listaZetonowGraczy.get(graczSmallBlind).getZetonyStawkaGracza());
+                poleZetonyWGrze.setText(String.valueOf(listaZetonowGraczy.get(0).getZetonyWGrze()));
+            }else if (listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane() <= blindValue/2){
+                listaZetonowGraczy.get(graczSmallBlind).setZetonyStawkaGracza(listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane());
+                wyswietlaczStawkiGracza.get(graczSmallBlind).setText(String.valueOf(listaZetonowGraczy.get(graczSmallBlind).getZetonyStawkaGracza()));
+                listaZetonowGraczy.get(graczSmallBlind).setZetonyPosiadane(0);
+                wyswietlaczZetonowGracza.get(graczSmallBlind).setText(String.valueOf(listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane()));
+                listaAllIn.get(graczSmallBlind).setAllInGracza(false);
+                listaZetonowGraczy.get(0).setZetonyWGrze(listaZetonowGraczy.get(0).getZetonyWGrze() + listaZetonowGraczy.get(graczSmallBlind).getZetonyStawkaGracza());
+                poleZetonyWGrze.setText(String.valueOf(listaZetonowGraczy.get(0).getZetonyWGrze()));
+            }
+            while(!listaCzyWGrze.get(graczBigBlind).isCzyWGrze()){
+                graczBigBlind++;
+                if (graczBigBlind==gracze){
+                    graczBigBlind=0;
+                }
+            }
+            if(listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane() > blindValue){
+                listaZetonowGraczy.get(graczBigBlind).setZetonyPosiadane(listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane() - blindValue);
+                wyswietlaczZetonowGracza.get(graczBigBlind).setText(String.valueOf(listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane()));
+                listaZetonowGraczy.get(graczBigBlind).setZetonyStawkaGracza(blindValue);
+                wyswietlaczStawkiGracza.get(graczBigBlind).setText(String.valueOf(listaZetonowGraczy.get(graczBigBlind).getZetonyStawkaGracza()));
+                listaZetonowGraczy.get(0).setZetonyWGrze(listaZetonowGraczy.get(0).getZetonyWGrze() + listaZetonowGraczy.get(graczBigBlind).getZetonyStawkaGracza());
+                poleZetonyWGrze.setText(String.valueOf(listaZetonowGraczy.get(0).getZetonyWGrze()));
+            }else if (listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane() <= blindValue){
+                listaZetonowGraczy.get(graczBigBlind).setZetonyStawkaGracza(listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane());
+                wyswietlaczStawkiGracza.get(graczBigBlind).setText(String.valueOf(listaZetonowGraczy.get(graczBigBlind).getZetonyStawkaGracza()));
+                listaZetonowGraczy.get(graczBigBlind).setZetonyPosiadane(0);
+                wyswietlaczZetonowGracza.get(graczBigBlind).setText(String.valueOf(listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane()));
+                listaAllIn.get(graczBigBlind).setAllInGracza(false);
+                listaZetonowGraczy.get(0).setZetonyWGrze(listaZetonowGraczy.get(0).getZetonyWGrze() + listaZetonowGraczy.get(graczBigBlind).getZetonyStawkaGracza());
+                poleZetonyWGrze.setText(String.valueOf(listaZetonowGraczy.get(0).getZetonyWGrze()));
+            }
+            graczBigBlind=graczSmallBlind+1;
+            minStawka=blindValue;
+        }
+    }
+
+//    public void smallBlind(){
+//        graczSmallBlind=graczDealer+1;
+//        while(!listaCzyWGrze.get(graczSmallBlind).isCzyWGrze()){
+//            graczSmallBlind++;
+//        }
+//        if(listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane() > blindValue/2){
+//            listaZetonowGraczy.get(graczSmallBlind).setZetonyPosiadane(listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane() - blindValue/2);
+//            wyswietlaczZetonowGracza.get(graczSmallBlind).setText(String.valueOf(listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane()));
+//            listaZetonowGraczy.get(graczSmallBlind).setZetonyStawkaGracza(blindValue/2);
+//            wyswietlaczStawkiGracza.get(graczSmallBlind).setText(String.valueOf(listaZetonowGraczy.get(graczSmallBlind).getZetonyStawkaGracza()));
+//        }else if (listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane() <= blindValue/2){
+//            listaZetonowGraczy.get(graczSmallBlind).setZetonyStawkaGracza(listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane());
+//            wyswietlaczStawkiGracza.get(graczSmallBlind).setText(String.valueOf(listaZetonowGraczy.get(graczSmallBlind).getZetonyStawkaGracza()));
+//            listaZetonowGraczy.get(graczSmallBlind).setZetonyPosiadane(0);
+//            wyswietlaczZetonowGracza.get(graczSmallBlind).setText(String.valueOf(listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane()));
+//            listaAllIn.get(graczSmallBlind).setAllInGracza(false);
+//        }
+//    }
+
+//    public void bigBlind(){
+//        graczBigBlind=graczSmallBlind+1;
+//            while(!listaCzyWGrze.get(graczBigBlind).isCzyWGrze()){
+//                graczBigBlind++;
+//            }
+//            if(listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane() > blindValue){
+//                listaZetonowGraczy.get(graczBigBlind).setZetonyPosiadane(listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane() - blindValue);
+//                wyswietlaczZetonowGracza.get(graczBigBlind).setText(String.valueOf(listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane()));
+//                listaZetonowGraczy.get(graczBigBlind).setZetonyStawkaGracza(blindValue);
+//                wyswietlaczStawkiGracza.get(graczBigBlind).setText(String.valueOf(listaZetonowGraczy.get(graczBigBlind).getZetonyStawkaGracza()));
+//            }else if (listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane() <= blindValue){
+//                listaZetonowGraczy.get(graczBigBlind).setZetonyStawkaGracza(listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane());
+//                wyswietlaczStawkiGracza.get(graczBigBlind).setText(String.valueOf(listaZetonowGraczy.get(graczBigBlind).getZetonyStawkaGracza()));
+//                listaZetonowGraczy.get(graczBigBlind).setZetonyPosiadane(0);
+//            wyswietlaczZetonowGracza.get(graczBigBlind).setText(String.valueOf(listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane()));
+//            listaAllIn.get(graczBigBlind).setAllInGracza(false);
+//        }
+//    }
 
     public List<Gracz> getListaRekaGraczy() {
         return listaRekaGraczy;
