@@ -1,5 +1,6 @@
 package com.sprawdzanie;
 
+import com.baza.BazaWygrane;
 import com.okna.OknoStol;
 import com.okna.OknoZakonczeniaGry;
 import com.rozgrywka.Gracz;
@@ -59,14 +60,15 @@ public class Sprawdzenie {
     private int numerGraczyDoSprawdzenia;
     private int gracz;
     private int gracz1;
+    private int wygranaJedenGracz;
 
     public Sprawdzenie(OknoStol oknoStol) {
         this.oknoStol = oknoStol;
         me = this;
 
-            deklaracja();
+        deklaracja();
 
-            sprawdzanieWyniku();
+        sprawdzanieWyniku();
 
     }
 
@@ -485,6 +487,8 @@ public class Sprawdzenie {
         }
 
         przypisanieWygranej();
+
+        new BazaWygrane(me);
     }
 
     public void obliczeniaWygranejJedenGracz() {
@@ -508,6 +512,9 @@ public class Sprawdzenie {
             }
         }
         oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyPosiadane(oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyPosiadane() + oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyStawkaGracza());
+
+        wygranaJedenGracz = oknoStol.getListaZetonowGraczy().get(gracz - 1).getZetonyStawkaGracza();
+
         oknoStol.getListaZetonowGraczy().get(gracz - 1).setZetonyStawkaGracza(0);
         oknoStol.getListaZetonowGraczy().get(0).setZetonyWGrze(0);
 
@@ -653,5 +660,9 @@ public class Sprawdzenie {
 
     public void setGracz(int gracz) {
         this.gracz = gracz;
+    }
+
+    public int getWygranaJedenGracz() {
+        return wygranaJedenGracz;
     }
 }

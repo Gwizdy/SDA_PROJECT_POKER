@@ -1,12 +1,12 @@
 package com.baza;
 
-import com.okna.OknoGracze;
+import com.sprawdzanie.Sprawdzenie;
 
 import java.sql.*;
 
-public class BazaGracze {
+public class BazaWygrane {
 
-    private OknoGracze oknoGracze;
+    private Sprawdzenie sprawdzenie;
 
     private static final String JDBC_DRIVER = "org.postgresql.Driver";
     private static final String URL = "jdbc:postgresql://localhost/Poker";
@@ -17,14 +17,14 @@ public class BazaGracze {
     private Statement stmt;
     Connection conn;
 
-    public BazaGracze(OknoGracze oknoGracze) {
-        this.oknoGracze = oknoGracze;
+    public BazaWygrane(Sprawdzenie sprawdzenie) {
+        this.sprawdzenie = sprawdzenie;
 
         try {
             connectToDb();
             addRecordToDb();
             disconnectDB();
-            showTable("gracze");
+            showTable("wygrana");
         } catch (ClassNotFoundException e) {
             System.err.println("Driver error " + e.getMessage());
         } catch (SQLException e) {
@@ -34,23 +34,20 @@ public class BazaGracze {
 
     private void addRecordToDb() throws SQLException {
 
-        for (int k = 0; k < oknoGracze.getGracze(); k++) {
+        String query = "select count(*) from wygrana";
+        ResultSet rs = stmt.executeQuery(query);
+        rs.next();
 
-            String query = "select count(*) from gracze";
-            ResultSet rs = stmt.executeQuery(query);
-            rs.next();
+        int i = rs.getInt("count");
 
-            int i = rs.getInt("count");
+        String record = "insert into wygrana (id_wygrana, wygrana)" +
+                "values (?, ?)";
+        PreparedStatement preparedStatement = conn.prepareStatement(record);
 
-            String record = "insert into gracze (id_gracze, nick)" +
-                    "values (?, ?)";
-            PreparedStatement preparedStatement = conn.prepareStatement(record);
+        preparedStatement.setInt(1, ++i);
+        preparedStatement.setInt(2, sprawdzenie.getWygranaJedenGracz());
 
-            preparedStatement.setInt(1, ++i);
-            preparedStatement.setString(2, oknoGracze.getPlayer()[k].getText());
-
-            preparedStatement.executeUpdate();
-        }
+        preparedStatement.executeUpdate();
     }
 
     private void showTable(String tableName) {
