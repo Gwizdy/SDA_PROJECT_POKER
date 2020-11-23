@@ -177,8 +177,6 @@ public class OknoStol {
 
                 rozdanieKart();
 
-//                new BazaGracze(me);
-
                 windowGame.add(panelGame);
                 windowGame.revalidate();
             }

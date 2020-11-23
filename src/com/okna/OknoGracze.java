@@ -1,5 +1,7 @@
 package com.okna;
 
+import com.baza.BazaGracze;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -139,6 +141,8 @@ public class OknoGracze {
 
                         new OknoStol(me);
 
+                        new BazaGracze(me);
+
                     } else {
                         dobrePuste = true;
                         dobreNazwa = true;
@@ -150,6 +154,7 @@ public class OknoGracze {
                     dobreNazwa = true;
 
                     new OknoOstrzezenieGracz();
+
                 }
             }
         });
