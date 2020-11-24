@@ -62,8 +62,8 @@ public class OknoZakonczeniaGry {
         tekstArea.setBorder(BorderFactory.createEmptyBorder());
         tekstArea.setEditable(false);
         tekstArea.setOpaque(false);
-        tekstArea.setText("GRATULACJE!!!\r\n Wygrał gracz " + sprawdzenie.getGracz());
-        tekstArea.setBounds(190, 50, 250, 200);
+        tekstArea.setText("GRATULACJE!!!\r\n Wygrał gracz " + sprawdzenie.getGraczWygywajacyGre());
+        tekstArea.setBounds(100, 50, 350, 200);
 
     }
 

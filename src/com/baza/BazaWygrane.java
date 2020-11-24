@@ -34,20 +34,46 @@ public class BazaWygrane {
 
     private void addRecordToDb() throws SQLException {
 
-        String query = "select count(*) from wygrana";
-        ResultSet rs = stmt.executeQuery(query);
-        rs.next();
+        for (int k = 0; k < sprawdzenie.getListaWygranychWRozdaniu().size(); k++) {
 
-        int i = rs.getInt("count");
+            String query = "select count(*) from wygrana";
+            ResultSet rs = stmt.executeQuery(query);
+            rs.next();
 
-        String record = "insert into wygrana (id_wygrana, wygrana)" +
-                "values (?, ?)";
-        PreparedStatement preparedStatement = conn.prepareStatement(record);
+            int i = rs.getInt("count");
 
-        preparedStatement.setInt(1, ++i);
-        preparedStatement.setInt(2, sprawdzenie.getWygranaJedenGracz());
+            String record = "insert into wygrana (id_wygrana, wygrana, uklad_kart)" +
+                    "values (?, ?, ?)";
 
-        preparedStatement.executeUpdate();
+            PreparedStatement preparedStatement = conn.prepareStatement(record);
+
+            preparedStatement.setInt(1, ++i);
+            preparedStatement.setInt(2, sprawdzenie.getListaWygranychWRozdaniu().get(k));
+
+            if (sprawdzenie.getLiczba() == 10) {
+                preparedStatement.setString(3, "Poker Królewski");
+            } else if (sprawdzenie.getLiczba() == 9) {
+                preparedStatement.setString(3, "Poker");
+            } else if (sprawdzenie.getLiczba() == 8) {
+                preparedStatement.setString(3, "Kareta");
+            } else if (sprawdzenie.getLiczba() == 7) {
+                preparedStatement.setString(3, "Full");
+            } else if (sprawdzenie.getLiczba() == 6) {
+                preparedStatement.setString(3, "Kolor");
+            } else if (sprawdzenie.getLiczba() == 5) {
+                preparedStatement.setString(3, "Strit");
+            } else if (sprawdzenie.getLiczba() == 4) {
+                preparedStatement.setString(3, "Trójka");
+            } else if (sprawdzenie.getLiczba() == 3) {
+                preparedStatement.setString(3, "Dwie Pary");
+            } else if (sprawdzenie.getLiczba() == 2) {
+                preparedStatement.setString(3, "Para");
+            } else if (sprawdzenie.getLiczba() == 1) {
+                preparedStatement.setString(3, "Wysoka karta");
+            }
+
+            preparedStatement.executeUpdate();
+        }
     }
 
     private void showTable(String tableName) {

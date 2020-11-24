@@ -10,12 +10,13 @@ create table gracze (
 create table wygrana (
 	id_wygrana int not null,
 	wygrana int not null,
+	uklad_kart varchar(20) not null,
 	primary key (id_wygrana)
 );
 
 insert into gracze (id_gracze, nick) values
 ;
 
-insert into wygrana (id_wygrana, wygrana) values
+insert into wygrana (id_wygrana, wygrana, uklad_kart) values
 ;
 

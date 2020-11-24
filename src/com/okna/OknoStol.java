@@ -94,6 +94,7 @@ public class OknoStol {
     private List<Gracz> listaAllIn = new ArrayList<Gracz>();
     private List<Gracz> listaCzyWGrze = new ArrayList<Gracz>();
 
+    private List<String> listaImionGraczy;
 
     private List<Karta> listaFlop;
     private List<Karta> listaTurnOrRiver;
@@ -341,6 +342,8 @@ public class OknoStol {
         p2 = 0;
         p3 = 0;
 
+        listaImionGraczy = new ArrayList<String>();
+
         for (int i = 0; i < gracze; i++) {
 
             imionaGraczy = new JTextField();
@@ -355,16 +358,19 @@ public class OknoStol {
                 imionaGraczy.setText(oknoGracze.getPlayer()[i].getText());
                 imionaGraczy.setBounds(780 - p1, 505, 150, 20);
                 p1 += 210;
+                listaImionGraczy.add(oknoGracze.getPlayer()[i].getText());
 
             } else if (i == 3 || i == 7) {
                 imionaGraczy.setText(oknoGracze.getPlayer()[i].getText());
                 imionaGraczy.setBounds(140 + p2, 270, 150, 20);
                 p2 += 865;
+                listaImionGraczy.add(oknoGracze.getPlayer()[i].getText());
 
             } else if (i > 3 && i < 7) {
                 imionaGraczy.setText(oknoGracze.getPlayer()[i].getText());
                 imionaGraczy.setBounds(365 + p3, 205, 150, 20);
                 p3 += 210;
+                listaImionGraczy.add(oknoGracze.getPlayer()[i].getText());
 
             }
 
@@ -1919,5 +1925,9 @@ public class OknoStol {
 
     public void setImionaGraczy(JTextField imionaGraczy) {
         this.imionaGraczy = imionaGraczy;
+    }
+
+    public List<String> getListaImionGraczy() {
+        return listaImionGraczy;
     }
 }
