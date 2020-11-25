@@ -1,5 +1,6 @@
 package com.okna;
 
+import com.baza.BazaOdczyt;
 import com.rozgrywka.Gracz;
 import com.sprawdzanie.Sprawdzenie;
 import com.taliakart.Figura;
@@ -20,6 +21,8 @@ import java.util.Random;
 public class OknoStol {
 
     private OknoGracze oknoGracze;
+
+    private BazaOdczyt bazaOdczyt;
 
     private OknoStol me;
 
@@ -67,8 +70,6 @@ public class OknoStol {
     private JLabel kartygracza2;
     private JLabel kartyNull;
     private JLabel dealer;
-
-    private JTable tabela;
 
     private List<Karta> listaPlayer1 = new ArrayList<Karta>();
     private List<Karta> listaPlayer2 = new ArrayList<Karta>();
@@ -153,16 +154,10 @@ public class OknoStol {
 
     public void dodanieTabeliZWYnikami() {
 
-        String[][] dane = {{"Andrzej", "2000", "Strit"}};
+         bazaOdczyt = new BazaOdczyt();
 
-        String[] nazwaKolumny = {"Nick", "Wygrana", "Układ"};
-
-        tabela = new JTable(dane, nazwaKolumny);
-
-        tabela.setBounds(1150, 20, 200, 300);
-        tabela.setOpaque(false);
-
-    }
+        panelGame.add(bazaOdczyt.getTabela());
+   }
 
     public void dodaniePanelaStartowego() {
 
@@ -216,8 +211,6 @@ public class OknoStol {
         dodanieDealera();
 
         dodanieTabeliZWYnikami();
-
-        panelGame.add(tabela);
 
 //        panelGame.add(przyciskPokazKarty);
     }
@@ -989,6 +982,8 @@ public class OknoStol {
                 dodaniePolaZetonow();
 
                 dodaniePolaStawkiGracza();
+
+                dodanieTabeliZWYnikami();
 
                 panelGame.add(dealer);
                 panelGame.add(poleZetonyWGrze);

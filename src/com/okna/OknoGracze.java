@@ -1,7 +1,5 @@
 package com.okna;
 
-import com.baza.BazaGracze;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -140,8 +138,6 @@ public class OknoGracze {
                         ramka.getWindow().dispose();
 
                         new OknoStol(me);
-
-                   //     new BazaGracze(me);
 
                     } else {
                         dobrePuste = true;

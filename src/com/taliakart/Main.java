@@ -3,7 +3,6 @@ package com.taliakart;
 //Main do sprawdzania czy wszystko działa jak należy
 
 
-import com.baza.BazaGracze;
 import com.okna.Ramka;
 
 

@@ -42,7 +42,7 @@ public class BazaWygrane {
 
             int i = rs.getInt("count");
 
-            String record = "insert into wygrana (id_wygrana, nick, wygrana, uklad_kart)" +
+            String record = "insert into wygrana (id_wygrana, imie, wygrana, uklad_kart)" +
                     "values (?, ?, ?, ?)";
 
             PreparedStatement preparedStatement = conn.prepareStatement(record);
