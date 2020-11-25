@@ -1,6 +1,5 @@
 package com.okna;
 
-import com.baza.BazaGracze;
 import com.rozgrywka.Gracz;
 import com.sprawdzanie.Sprawdzenie;
 import com.taliakart.Figura;
@@ -68,6 +67,8 @@ public class OknoStol {
     private JLabel kartygracza2;
     private JLabel kartyNull;
     private JLabel dealer;
+
+    private JTable tabela;
 
     private List<Karta> listaPlayer1 = new ArrayList<Karta>();
     private List<Karta> listaPlayer2 = new ArrayList<Karta>();
@@ -150,6 +151,19 @@ public class OknoStol {
 
     }
 
+    public void dodanieTabeliZWYnikami() {
+
+        String[][] dane = {{"Andrzej", "2000", "Strit"}};
+
+        String[] nazwaKolumny = {"Nick", "Wygrana", "Układ"};
+
+        tabela = new JTable(dane, nazwaKolumny);
+
+        tabela.setBounds(1150, 20, 200, 300);
+        tabela.setOpaque(false);
+
+    }
+
     public void dodaniePanelaStartowego() {
 
         panelStart = new BackgroundPanelGame();
@@ -200,6 +214,10 @@ public class OknoStol {
         dodanieWyswietleniaImionGraczy();
 
         dodanieDealera();
+
+        dodanieTabeliZWYnikami();
+
+        panelGame.add(tabela);
 
 //        panelGame.add(przyciskPokazKarty);
     }
@@ -1824,44 +1842,6 @@ public class OknoStol {
             minStawka = blindValue;
         }
     }
-
-//    public void smallBlind(){
-//        graczSmallBlind=graczDealer+1;
-//        while(!listaCzyWGrze.get(graczSmallBlind).isCzyWGrze()){
-//            graczSmallBlind++;
-//        }
-//        if(listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane() > blindValue/2){
-//            listaZetonowGraczy.get(graczSmallBlind).setZetonyPosiadane(listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane() - blindValue/2);
-//            wyswietlaczZetonowGracza.get(graczSmallBlind).setText(String.valueOf(listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane()));
-//            listaZetonowGraczy.get(graczSmallBlind).setZetonyStawkaGracza(blindValue/2);
-//            wyswietlaczStawkiGracza.get(graczSmallBlind).setText(String.valueOf(listaZetonowGraczy.get(graczSmallBlind).getZetonyStawkaGracza()));
-//        }else if (listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane() <= blindValue/2){
-//            listaZetonowGraczy.get(graczSmallBlind).setZetonyStawkaGracza(listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane());
-//            wyswietlaczStawkiGracza.get(graczSmallBlind).setText(String.valueOf(listaZetonowGraczy.get(graczSmallBlind).getZetonyStawkaGracza()));
-//            listaZetonowGraczy.get(graczSmallBlind).setZetonyPosiadane(0);
-//            wyswietlaczZetonowGracza.get(graczSmallBlind).setText(String.valueOf(listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane()));
-//            listaAllIn.get(graczSmallBlind).setAllInGracza(false);
-//        }
-//    }
-
-//    public void bigBlind(){
-//        graczBigBlind=graczSmallBlind+1;
-//            while(!listaCzyWGrze.get(graczBigBlind).isCzyWGrze()){
-//                graczBigBlind++;
-//            }
-//            if(listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane() > blindValue){
-//                listaZetonowGraczy.get(graczBigBlind).setZetonyPosiadane(listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane() - blindValue);
-//                wyswietlaczZetonowGracza.get(graczBigBlind).setText(String.valueOf(listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane()));
-//                listaZetonowGraczy.get(graczBigBlind).setZetonyStawkaGracza(blindValue);
-//                wyswietlaczStawkiGracza.get(graczBigBlind).setText(String.valueOf(listaZetonowGraczy.get(graczBigBlind).getZetonyStawkaGracza()));
-//            }else if (listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane() <= blindValue){
-//                listaZetonowGraczy.get(graczBigBlind).setZetonyStawkaGracza(listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane());
-//                wyswietlaczStawkiGracza.get(graczBigBlind).setText(String.valueOf(listaZetonowGraczy.get(graczBigBlind).getZetonyStawkaGracza()));
-//                listaZetonowGraczy.get(graczBigBlind).setZetonyPosiadane(0);
-//            wyswietlaczZetonowGracza.get(graczBigBlind).setText(String.valueOf(listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane()));
-//            listaAllIn.get(graczBigBlind).setAllInGracza(false);
-//        }
-//    }
 
     public List<Gracz> getListaRekaGraczy() {
         return listaRekaGraczy;
