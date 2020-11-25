@@ -41,6 +41,7 @@ public class Sprawdzenie {
     private List<Integer> listaGraczyOnePair;
     private List<Integer> listaGraczyHighCards;
     private List<Integer> listaWygranychWRozdaniu;
+    private List<String> listaImionGraczy;
 
     private List<List<Karta>> listalistKartyRoyalFlush;
     private List<List<Karta>> listalistKartyStraightFlush;
@@ -92,6 +93,7 @@ public class Sprawdzenie {
         listaGraczyHighCards = new ArrayList<Integer>();
 
         listaWygranychWRozdaniu = new ArrayList<Integer>();
+        listaImionGraczy = new ArrayList<String>();
 
         listalistKartyRoyalFlush = new ArrayList<List<Karta>>();
         listalistKartyStraightFlush = new ArrayList<List<Karta>>();
@@ -391,101 +393,131 @@ public class Sprawdzenie {
         if (liczba == 10) {
             if (listaGraczyRoyalFlush.isEmpty()) {
                 System.out.println("Poker Królewski. Wygrał " + oknoStol.getListaImionGraczy().get(gracz - 1) + " z kartami:" + listaPomocnicza);
+                listaImionGraczy.add(oknoStol.getListaImionGraczy().get(gracz - 1));
             } else {
                 System.out.println("Poker Królewski. Remis.");
                 System.out.println("Gracz " + oknoStol.getListaImionGraczy().get(gracz - 1) + " z kartami " + listaPomocnicza);
+                listaImionGraczy.add(oknoStol.getListaImionGraczy().get(gracz - 1));
                 for (int i = 0; i < listaGraczyRoyalFlush.size(); i++) {
                     System.out.println(oknoStol.getListaImionGraczy().get(listaGraczyRoyalFlush.get(i) - 1) + " z kartami " + listalistKartyRoyalFlush.get(i));
+                    listaImionGraczy.add(oknoStol.getListaImionGraczy().get(listaGraczyRoyalFlush.get(i) - 1));
                 }
             }
         } else if (liczba == 9) {
             if (listaGraczyStraightFlush.isEmpty()) {
                 System.out.println("Poker. Wygrał " + oknoStol.getListaImionGraczy().get(gracz - 1) + " z kartami:" + listaPomocnicza);
+                listaImionGraczy.add(oknoStol.getListaImionGraczy().get(gracz - 1));
             } else {
                 System.out.println("Poker. Remis.");
                 System.out.println("Gracz " + oknoStol.getListaImionGraczy().get(gracz - 1) + " z kartami " + listaPomocnicza);
+                listaImionGraczy.add(oknoStol.getListaImionGraczy().get(gracz - 1));
                 for (int i = 0; i < listaGraczyStraightFlush.size(); i++) {
                     System.out.println(oknoStol.getListaImionGraczy().get(listaGraczyStraightFlush.get(i) - 1) + " z kartami " + listalistKartyStraightFlush.get(i));
+                    listaImionGraczy.add(oknoStol.getListaImionGraczy().get(listaGraczyStraightFlush.get(i) - 1));
                 }
             }
         } else if (liczba == 8) {
             if (listaGraczyFourOfKind.isEmpty()) {
                 System.out.println("Kareta. Wygrał " + oknoStol.getListaImionGraczy().get(gracz - 1) + " z kartami:" + listaPomocnicza);
+                listaImionGraczy.add(oknoStol.getListaImionGraczy().get(gracz - 1));
             } else {
                 System.out.println("Kareta. Remis.");
                 System.out.println("Gracz " + oknoStol.getListaImionGraczy().get(gracz - 1) + " z kartami " + listaPomocnicza);
+                listaImionGraczy.add(oknoStol.getListaImionGraczy().get(gracz - 1));
                 for (int i = 0; i < listaGraczyFourOfKind.size(); i++) {
                     System.out.println(oknoStol.getListaImionGraczy().get(listaGraczyFourOfKind.get(i) - 1) + " z kartami " + listalistKartyFourOfKind.get(i));
+                    listaImionGraczy.add(oknoStol.getListaImionGraczy().get(listaGraczyFourOfKind.get(i) - 1));
                 }
             }
         } else if (liczba == 7) {
             if (listaGraczyFullHouse.isEmpty()) {
                 System.out.println("Full. Wygrał " + oknoStol.getListaImionGraczy().get(gracz - 1) + " z kartami:" + listaPomocnicza);
+                listaImionGraczy.add(oknoStol.getListaImionGraczy().get(gracz - 1));
             } else {
                 System.out.println("Full. Remis.");
                 System.out.println("Gracz " + oknoStol.getListaImionGraczy().get(gracz - 1) + " z kartami " + listaPomocnicza);
+                listaImionGraczy.add(oknoStol.getListaImionGraczy().get(gracz - 1));
                 for (int i = 0; i < listaGraczyFullHouse.size(); i++) {
                     System.out.println(oknoStol.getListaImionGraczy().get(listaGraczyFullHouse.get(i) - 1) + " z kartami " + listalistKartyFullHouse.get(i));
+                    listaImionGraczy.add(oknoStol.getListaImionGraczy().get(listaGraczyFullHouse.get(i) - 1));
                 }
             }
         } else if (liczba == 6) {
             if (listaGraczyFlush.isEmpty()) {
                 System.out.println("Kolor. Wygrał " + oknoStol.getListaImionGraczy().get(gracz - 1) + " z kartami:" + listaPomocnicza);
+                listaImionGraczy.add(oknoStol.getListaImionGraczy().get(gracz - 1));
             } else {
                 System.out.println("Kolor. Remis.");
                 System.out.println("Gracz " + oknoStol.getListaImionGraczy().get(gracz - 1) + " z kartami " + listaPomocnicza);
+                listaImionGraczy.add(oknoStol.getListaImionGraczy().get(gracz - 1));
                 for (int i = 0; i < listaGraczyFlush.size(); i++) {
                     System.out.println(oknoStol.getListaImionGraczy().get(listaGraczyFlush.get(i) - 1) + " z kartami " + listalistKartyFlush.get(i));
+                    listaImionGraczy.add(oknoStol.getListaImionGraczy().get(listaGraczyFlush.get(i) - 1));
                 }
             }
         } else if (liczba == 5) {
             if (listaGraczyStraigh.isEmpty()) {
                 System.out.println("Strit. Wygrał " + oknoStol.getListaImionGraczy().get(gracz - 1) + " z kartami:" + listaPomocnicza);
+                listaImionGraczy.add(oknoStol.getListaImionGraczy().get(gracz - 1));
             } else {
                 System.out.println("Strit. Remis.");
                 System.out.println("Gracz " + oknoStol.getListaImionGraczy().get(gracz - 1) + " z kartami " + listaPomocnicza);
+                listaImionGraczy.add(oknoStol.getListaImionGraczy().get(gracz - 1));
                 for (int i = 0; i < listaGraczyStraigh.size(); i++) {
                     System.out.println(oknoStol.getListaImionGraczy().get(listaGraczyStraigh.get(i) - 1) + " z kartami " + listalistKartyStraigh.get(i));
+                    listaImionGraczy.add(oknoStol.getListaImionGraczy().get(listaGraczyStraigh.get(i) - 1));
                 }
             }
         } else if (liczba == 4) {
             if (listaGraczyThreeOfKind.isEmpty()) {
                 System.out.println("Trójka. Wygrał " + oknoStol.getListaImionGraczy().get(gracz - 1) + " z kartami:" + listaPomocnicza);
+                listaImionGraczy.add(oknoStol.getListaImionGraczy().get(gracz - 1));
             } else {
                 System.out.println("Trójka. Remis.");
                 System.out.println("Gracz " + oknoStol.getListaImionGraczy().get(gracz - 1) + " z kartami " + listaPomocnicza);
+                listaImionGraczy.add(oknoStol.getListaImionGraczy().get(gracz - 1));
                 for (int i = 0; i < listaGraczyThreeOfKind.size(); i++) {
                     System.out.println(oknoStol.getListaImionGraczy().get(listaGraczyThreeOfKind.get(i) - 1) + " z kartami " + listalistKartyThreeOfKind.get(i));
+                    listaImionGraczy.add(oknoStol.getListaImionGraczy().get(listaGraczyThreeOfKind.get(i) - 1));
                 }
             }
         } else if (liczba == 3) {
             if (listaGraczyTwoPairs.isEmpty()) {
                 System.out.println("Dwie pary. Wygrał " + oknoStol.getListaImionGraczy().get(gracz - 1) + " z kartami:" + listaPomocnicza);
+                listaImionGraczy.add(oknoStol.getListaImionGraczy().get(gracz - 1));
             } else {
                 System.out.println("Dwie pary. Remis.");
                 System.out.println("Gracz " + oknoStol.getListaImionGraczy().get(gracz - 1) + " z kartami " + listaPomocnicza);
+                listaImionGraczy.add(oknoStol.getListaImionGraczy().get(gracz - 1));
                 for (int i = 0; i < listaGraczyTwoPairs.size(); i++) {
                     System.out.println(oknoStol.getListaImionGraczy().get(listaGraczyTwoPairs.get(i) - 1) + " z kartami " + listalistKartyTwoPairs.get(i));
+                    listaImionGraczy.add(oknoStol.getListaImionGraczy().get(listaGraczyTwoPairs.get(i) - 1));
                 }
             }
         } else if (liczba == 2) {
             if (listaGraczyOnePair.isEmpty()) {
                 System.out.println("Jedna para. Wygrał " + oknoStol.getListaImionGraczy().get(gracz - 1) + " z kartami:" + listaPomocnicza);
+                listaImionGraczy.add(oknoStol.getListaImionGraczy().get(gracz - 1));
             } else {
                 System.out.println("Jedna para. Remis.");
                 System.out.println("Gracz " + oknoStol.getListaImionGraczy().get(gracz - 1) + " z kartami " + listaPomocnicza);
+                listaImionGraczy.add(oknoStol.getListaImionGraczy().get(gracz - 1));
                 for (int i = 0; i < listaGraczyOnePair.size(); i++) {
                     System.out.println(oknoStol.getListaImionGraczy().get(listaGraczyOnePair.get(i) - 1) + " z kartami " + listalistKartyOnePair.get(i));
+                    listaImionGraczy.add(oknoStol.getListaImionGraczy().get(listaGraczyOnePair.get(i) - 1));
                 }
             }
         } else if (liczba == 1) {
             if (listaGraczyHighCards.isEmpty()) {
                 System.out.println("Wysoka karta. Wygrał " + oknoStol.getListaImionGraczy().get(gracz - 1) + " z kartami:" + listaPomocnicza);
+                listaImionGraczy.add(oknoStol.getListaImionGraczy().get(gracz - 1));
             } else {
                 System.out.println("Wysoka karta. Remis.");
                 System.out.println("Gracz " + oknoStol.getListaImionGraczy().get(gracz - 1) + " z kartami " + listaPomocnicza);
+                listaImionGraczy.add(oknoStol.getListaImionGraczy().get(gracz - 1));
                 for (int i = 0; i < listaGraczyHighCards.size(); i++) {
                     System.out.println(oknoStol.getListaImionGraczy().get(listaGraczyHighCards.get(i) - 1) + " z kartami " + listalistKartyHighCards.get(i));
+                    listaImionGraczy.add(oknoStol.getListaImionGraczy().get(listaGraczyHighCards.get(i) - 1));
                 }
             }
         }
@@ -493,8 +525,9 @@ public class Sprawdzenie {
         przypisanieWygranej();
 
         new BazaWygrane(me);
-
+        System.out.println(listaImionGraczy.get(0));
         listaWygranychWRozdaniu.removeAll(listaWygranychWRozdaniu);
+        listaImionGraczy.removeAll(listaImionGraczy);
     }
 
     public void obliczeniaWygranejJedenGracz() {
@@ -678,5 +711,9 @@ public class Sprawdzenie {
 
     public int getLiczba() {
         return liczba;
+    }
+
+    public List<String> getListaImionGraczy() {
+        return listaImionGraczy;
     }
 }

@@ -141,7 +141,7 @@ public class OknoGracze {
 
                         new OknoStol(me);
 
-                        new BazaGracze(me);
+                   //     new BazaGracze(me);
 
                     } else {
                         dobrePuste = true;
