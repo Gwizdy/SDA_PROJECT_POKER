@@ -102,7 +102,4 @@ public class FullHouse {
         return tempListOfFullHouse;
     }
 
-    public void setTempListOfFullHouse(List<Karta> tempListOfFullHouse) {
-        this.tempListOfFullHouse = tempListOfFullHouse;
-    }
 }

@@ -119,7 +119,7 @@ public class OknoGracze {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (int i = 0; i < gracze; i++) {
-                    if (player[i].getText().equals("")) {
+                    if (player[i].getText().equals("") || player[i].getText().length() > 20) {
                         dobrePuste = false;
                     }
                 }
@@ -160,16 +160,7 @@ public class OknoGracze {
         return gracze;
     }
 
-    public void setGracze(int gracze) {
-        this.gracze = gracze;
-    }
-
     public JTextField[] getPlayer() {
         return player;
     }
-
-    public void setPlayer(JTextField[] player) {
-        this.player = player;
-    }
-
 }

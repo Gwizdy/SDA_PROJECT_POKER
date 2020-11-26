@@ -122,34 +122,6 @@ public class Ramka {
         return window;
     }
 
-    public void setWindow(JFrame window) {
-        this.window = window;
-    }
-
-    public JPanel getPanel() {
-        return panel;
-    }
-
-    public void setPanel(JPanel panel) {
-        this.panel = panel;
-    }
-
-    public JButton getButton() {
-        return button;
-    }
-
-    public void setButton(JButton button) {
-        this.button = button;
-    }
-
-    public JTextField getTextField() {
-        return textField;
-    }
-
-    public void setTextField(JTextField textField) {
-        this.textField = textField;
-    }
-
     public int getLiczbaGraczy() {
         return liczbaGraczy;
     }

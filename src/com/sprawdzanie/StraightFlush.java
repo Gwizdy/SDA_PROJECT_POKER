@@ -236,7 +236,4 @@ public class StraightFlush {
         return tempListOfStraightFlush;
     }
 
-    public void setTempListOfStraightFlush(List<Karta> tempListOfStraightFlush) {
-        this.tempListOfStraightFlush = tempListOfStraightFlush;
-    }
 }

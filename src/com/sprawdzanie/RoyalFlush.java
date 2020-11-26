@@ -165,8 +165,5 @@ public class RoyalFlush {
         return tempListOfRoyalFlush;
     }
 
-    public void setTempListOfRoyalFlush(List<Karta> tempListOfRoyalFlush) {
-        this.tempListOfRoyalFlush = tempListOfRoyalFlush;
-    }
 }
 

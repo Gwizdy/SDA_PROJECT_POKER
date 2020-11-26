@@ -8,6 +8,6 @@ public class OknoOstrzezenieGracz {
 
     public OknoOstrzezenieGracz() {
         window = new JFrame();
-        JOptionPane.showMessageDialog(window, "Pola nie mogą być puste oraz nazwy muszą się różnić", "Alert", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(window, "Pola nie mogą być puste, nazwy muszą się różnić \n oraz nie mogą przekraczać 20 znaków", "Alert", JOptionPane.WARNING_MESSAGE);
     }
 }

@@ -1842,64 +1842,28 @@ public class OknoStol {
         return listaRekaGraczy;
     }
 
-    public void setListaRekaGraczy(List<Gracz> listaRekaGraczy) {
-        this.listaRekaGraczy = listaRekaGraczy;
-    }
-
     public int getGracze() {
         return gracze;
-    }
-
-    public void setGracze(int gracze) {
-        this.gracze = gracze;
     }
 
     public List<Karta> getListaFlop() {
         return listaFlop;
     }
 
-    public void setListaFlop(List<Karta> listaFlop) {
-        this.listaFlop = listaFlop;
-    }
-
     public List<Karta> getListaTurnOrRiver() {
         return listaTurnOrRiver;
-    }
-
-    public void setListaTurnOrRiver(List<Karta> listaTurnOrRiver) {
-        this.listaTurnOrRiver = listaTurnOrRiver;
     }
 
     public List<Gracz> getListaFoldow() {
         return listaFoldow;
     }
 
-    public void setListaFoldow(List<Gracz> listaFoldow) {
-        this.listaFoldow = listaFoldow;
-    }
-
     public List<Gracz> getListaZetonowGraczy() {
         return listaZetonowGraczy;
     }
 
-    public void setListaZetonowGraczy(List<Gracz> listaZetonowGraczy) {
-        this.listaZetonowGraczy = listaZetonowGraczy;
-    }
-
     public int getLicznik() {
         return licznik;
-    }
-
-    public void setLicznik(int licznik) {
-        this.licznik = licznik;
-    }
-
-    public JTextField getImionaGraczy() {
-        return imionaGraczy;
-    }
-
-    public void setImionaGraczy(JTextField imionaGraczy) {
-        this.imionaGraczy = imionaGraczy;
     }
 
     public List<String> getListaImionGraczy() {

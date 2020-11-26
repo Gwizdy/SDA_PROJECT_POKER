@@ -77,7 +77,4 @@ public class TwoPairs {
         return tempListOfTwoPairs;
     }
 
-    public void setTempListOfTwoPairs(List<Karta> tempListOfTwoPairs) {
-        this.tempListOfTwoPairs = tempListOfTwoPairs;
-    }
 }

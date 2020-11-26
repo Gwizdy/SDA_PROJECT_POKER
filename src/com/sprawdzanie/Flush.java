@@ -117,8 +117,4 @@ public class Flush {
     public List<Karta> getTempListOfFlush() {
         return tempListOfFlush;
     }
-
-    public void setTempListOfFlush(List<Karta> tempListOfFlush) {
-        this.tempListOfFlush = tempListOfFlush;
-    }
 }

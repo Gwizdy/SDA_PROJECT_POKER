@@ -56,8 +56,4 @@ public class HightCard {
     public List<Karta> getTempListOfHighCard() {
         return tempListOfHighCard;
     }
-
-    public void setTempListOfHighCard(List<Karta> tempListOfHighCard) {
-        this.tempListOfHighCard = tempListOfHighCard;
-    }
 }

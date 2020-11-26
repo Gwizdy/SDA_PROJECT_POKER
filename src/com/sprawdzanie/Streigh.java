@@ -118,7 +118,4 @@ public class Streigh {
         return tempListOfStreigh;
     }
 
-    public void setTempListOfStreigh(List<Karta> tempListOfStreigh) {
-        this.tempListOfStreigh = tempListOfStreigh;
-    }
 }

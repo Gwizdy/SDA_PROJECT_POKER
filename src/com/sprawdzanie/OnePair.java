@@ -68,7 +68,4 @@ public class OnePair {
         return tempListOfOnePair;
     }
 
-    public void setTempListOfOnePair(List<Karta> tempListOfOnePair) {
-        this.tempListOfOnePair = tempListOfOnePair;
-    }
 }

@@ -1,8 +1,8 @@
 package com.baza;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.sql.*;
 
@@ -19,7 +19,6 @@ public class BazaOdczyt {
 
     private JTable tabela;
 
-
     public BazaOdczyt() {
 
         showTable("wygrana");
@@ -30,9 +29,13 @@ public class BazaOdczyt {
         tabela = new JTable();
 
         tabela.setOpaque(false);
+        ((DefaultTableCellRenderer) tabela.getDefaultRenderer(Object.class)).setOpaque(false);
         tabela.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        tabela.setFont(new Font("Arial", Font.BOLD, 14));
-        tabela.setBounds(1100, 20, 270, 300);
+        tabela.setFont(new Font("Arial", Font.BOLD, 16));
+        tabela.setBounds(1030, 20, 340, 300);
+        tabela.setRowHeight(30);
+//        tabela.setShowHorizontalLines(false);
+//        tabela.setShowVerticalLines(false);
 
         String query = "SELECT imie, wygrana, uklad_kart FROM wygrana ORDER BY wygrana DESC LIMIT 5;";
 
@@ -51,8 +54,7 @@ public class BazaOdczyt {
                 defaultTableModel.addColumn(rsmd.getColumnLabel(columCounter));
             }
 
-            Object[] nazwa = new Object[]{"Nick", "Wygrana", "Układ kart"};
-
+            Object[] nazwa = new Object[]{"Nick", "Wygrana rozdania", "Układ kart"};
             defaultTableModel.addRow(nazwa);
 
             Object[] wiersz = new Object[columCounter];
@@ -66,6 +68,10 @@ public class BazaOdczyt {
             }
 
             tabela.setModel(defaultTableModel);
+
+            for (int i = 0; i < columCounter; i++) {
+                tabela.getColumnModel().getColumn(i).setCellRenderer(new TextCenter());
+            }
 
             disconnectDB();
         } catch (ClassNotFoundException e) {

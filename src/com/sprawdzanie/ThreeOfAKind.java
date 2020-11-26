@@ -68,7 +68,4 @@ public class ThreeOfAKind {
         return tempListOfThreeOfKind;
     }
 
-    public void setTempListOfThreeOfKind(List<Karta> tempListOfThreeOfKind) {
-        this.tempListOfThreeOfKind = tempListOfThreeOfKind;
-    }
 }
