@@ -3,6 +3,7 @@ package com.baza;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.sql.*;
 
@@ -30,15 +31,11 @@ public class BazaOdczyt {
 
         tabela.setOpaque(false);
         ((DefaultTableCellRenderer) tabela.getDefaultRenderer(Object.class)).setOpaque(false);
-        tabela.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         tabela.setFont(new Font("Arial", Font.BOLD, 16));
-        tabela.setBounds(1030, 20, 340, 300);
+        tabela.setBounds(1030, 20, 320, 300);
         tabela.setRowHeight(30);
-//        tabela.setShowHorizontalLines(false);
-//        tabela.setShowVerticalLines(false);
 
         String query = "SELECT imie, wygrana, uklad_kart FROM wygrana ORDER BY wygrana DESC LIMIT 5;";
-
 
         try {
             connectToDb();
@@ -48,7 +45,6 @@ public class BazaOdczyt {
 
             ResultSetMetaData rsmd = rs.getMetaData(); // klasa do przechowywania danych
             int columCounter = rsmd.getColumnCount(); // sprawdzamy liczbę kolumn
-
 
             for (int i = 1; i <= columCounter; i++) {
                 defaultTableModel.addColumn(rsmd.getColumnLabel(columCounter));
@@ -79,6 +75,10 @@ public class BazaOdczyt {
         } catch (SQLException e) {
             System.err.println("SQL error " + e.getMessage());
         }
+
+        tabela.getColumnModel().getColumn(0).setWidth(107);
+        tabela.getColumnModel().getColumn(1).setWidth(108);
+        tabela.getColumnModel().getColumn(2).setWidth(90);
     }
 
     private void connectToDb() throws ClassNotFoundException, SQLException {

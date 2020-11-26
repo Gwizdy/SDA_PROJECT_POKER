@@ -154,10 +154,11 @@ public class OknoStol {
 
     public void dodanieTabeliZWYnikami() {
 
-         bazaOdczyt = new BazaOdczyt();
+        bazaOdczyt = new BazaOdczyt();
 
         panelGame.add(bazaOdczyt.getTabela());
-   }
+
+    }
 
     public void dodaniePanelaStartowego() {
 
@@ -404,6 +405,8 @@ public class OknoStol {
             stawkaGracza.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
             stawkaGracza.setFont(new Font("Arial", Font.BOLD, 8));
             stawkaGracza.setHorizontalAlignment(SwingConstants.CENTER);
+            stawkaGracza.setOpaque(false);
+            stawkaGracza.setForeground(Color.white);
 
             if (i < 3) {
                 stawkaGracza.setText(String.valueOf(listaZetonowGraczy.get(i).getZetonyStawkaGracza()));
@@ -443,7 +446,9 @@ public class OknoStol {
             zetonyGracza.setEditable(false);
             zetonyGracza.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
             zetonyGracza.setFont(new Font("Arial", Font.BOLD, 16));
+            zetonyGracza.setForeground(Color.white);
             zetonyGracza.setHorizontalAlignment(SwingConstants.CENTER);
+            zetonyGracza.setOpaque(false);
 
             if (i < 3) {
                 zetonyGracza.setText(String.valueOf(listaZetonowGraczy.get(i).getZetonyPosiadane()));
@@ -962,6 +967,7 @@ public class OknoStol {
                 minStawka = 0;
 
                 panelGame.removeAll();
+
                 panelGame.repaint();
 
                 taliaGUI = new Talia();
@@ -972,6 +978,7 @@ public class OknoStol {
                     blindValue = blindValue * 2;
                     liczbaRund = 0;
                 }
+                dodanieTabeliZWYnikami();
 
                 rozdanieKart();
 
@@ -982,8 +989,6 @@ public class OknoStol {
                 dodaniePolaZetonow();
 
                 dodaniePolaStawkiGracza();
-
-                dodanieTabeliZWYnikami();
 
                 panelGame.add(dealer);
                 panelGame.add(poleZetonyWGrze);
