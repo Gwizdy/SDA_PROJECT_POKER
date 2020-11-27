@@ -1,6 +1,7 @@
 package com.okna;
 
 import com.baza.BazaOdczyt;
+import com.baza.BazaTruncate;
 import com.rozgrywka.Gracz;
 import com.sprawdzanie.Sprawdzenie;
 import com.taliakart.Figura;
@@ -23,6 +24,7 @@ public class OknoStol {
     private OknoGracze oknoGracze;
 
     private BazaOdczyt bazaOdczyt;
+    private BazaTruncate bazaTruncate;
 
     private OknoStol me;
 
@@ -173,6 +175,7 @@ public class OknoStol {
 
     public void dodaniePrzyciskuStart() {
 
+        bazaTruncate = new BazaTruncate();
         przyciskStart = new JButton("ROZDAJ KARTY");
         przyciskStart.setFont(new Font("Arial", Font.BOLD, 16));
         przyciskStart.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
