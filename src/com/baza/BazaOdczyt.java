@@ -13,7 +13,7 @@ public class BazaOdczyt {
     private static final String URL = "jdbc:postgresql://localhost/Poker";
 
     private static final String LOGIN = "postgres";
-    private static final String PASSWORD = "ANDpig1906!@";
+    private static final String PASSWORD = "Qparox123!";
 
     private Statement stmt;
     Connection conn;
@@ -32,7 +32,7 @@ public class BazaOdczyt {
         tabela.setOpaque(false);
         ((DefaultTableCellRenderer) tabela.getDefaultRenderer(Object.class)).setOpaque(false);
         tabela.setFont(new Font("Arial", Font.BOLD, 16));
-        tabela.setBounds(1030, 20, 320, 300);
+        tabela.setBounds(1030, 20, 322, 300);
         tabela.setRowHeight(30);
 
         String query = "SELECT imie, wygrana, uklad_kart FROM wygrana ORDER BY wygrana DESC LIMIT 5;";
@@ -42,6 +42,8 @@ public class BazaOdczyt {
 
             DefaultTableModel defaultTableModel = new DefaultTableModel();
             ResultSet rs = stmt.executeQuery(query); // wykonujemy połączenie
+
+
 
             ResultSetMetaData rsmd = rs.getMetaData(); // klasa do przechowywania danych
             int columCounter = rsmd.getColumnCount(); // sprawdzamy liczbę kolumn
@@ -69,16 +71,17 @@ public class BazaOdczyt {
                 tabela.getColumnModel().getColumn(i).setCellRenderer(new TextCenter());
             }
 
+            tabela.getColumnModel().getColumn(0).setWidth(107);
+            tabela.getColumnModel().getColumn(1).setWidth(108);
+            tabela.getColumnModel().getColumn(2).setWidth(107);
+
             disconnectDB();
         } catch (ClassNotFoundException e) {
             System.err.println("Driver error " + e.getMessage());
         } catch (SQLException e) {
             System.err.println("SQL error " + e.getMessage());
         }
-
-        tabela.getColumnModel().getColumn(0).setWidth(107);
-        tabela.getColumnModel().getColumn(1).setWidth(108);
-        tabela.getColumnModel().getColumn(2).setWidth(90);
+        
     }
 
     private void connectToDb() throws ClassNotFoundException, SQLException {
@@ -98,4 +101,5 @@ public class BazaOdczyt {
     public JTable getTabela() {
         return tabela;
     }
+
 }
