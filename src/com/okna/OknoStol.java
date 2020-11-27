@@ -176,6 +176,7 @@ public class OknoStol {
     public void dodaniePrzyciskuStart() {
 
         bazaTruncate = new BazaTruncate();
+
         przyciskStart = new JButton("ROZDAJ KARTY");
         przyciskStart.setFont(new Font("Arial", Font.BOLD, 16));
         przyciskStart.setBorder(BorderFactory.createLineBorder(Color.BLACK, 4));
@@ -993,9 +994,12 @@ public class OknoStol {
 
                 dodaniePolaStawkiGracza();
 
+                dodanieWyswietleniaImionGraczy();
+
                 panelGame.add(dealer);
                 panelGame.add(poleZetonyWGrze);
                 panelGame.add(przyciskPokazKarty);
+                panelGame.add(imionaGraczy);
                 panelGame.repaint();
 
             }
@@ -1876,5 +1880,13 @@ public class OknoStol {
 
     public List<String> getListaImionGraczy() {
         return listaImionGraczy;
+    }
+
+    public JTextField getImionaGraczy() {
+        return imionaGraczy;
+    }
+
+    public JPanel getPanelGame() {
+        return panelGame;
     }
 }

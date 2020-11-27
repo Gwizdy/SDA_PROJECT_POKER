@@ -3,7 +3,6 @@ package com.baza;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.sql.*;
 
@@ -11,9 +10,8 @@ public class BazaOdczyt {
 
     private static final String JDBC_DRIVER = "org.postgresql.Driver";
     private static final String URL = "jdbc:postgresql://localhost/Poker";
-
     private static final String LOGIN = "postgres";
-    private static final String PASSWORD = "Qparox123!";
+    private static final String PASSWORD = "ANDpig1906!@";
 
     private Statement stmt;
     Connection conn;
@@ -42,8 +40,6 @@ public class BazaOdczyt {
 
             DefaultTableModel defaultTableModel = new DefaultTableModel();
             ResultSet rs = stmt.executeQuery(query); // wykonujemy połączenie
-
-
 
             ResultSetMetaData rsmd = rs.getMetaData(); // klasa do przechowywania danych
             int columCounter = rsmd.getColumnCount(); // sprawdzamy liczbę kolumn

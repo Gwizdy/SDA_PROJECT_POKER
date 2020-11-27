@@ -6,6 +6,8 @@ import com.okna.OknoZakonczeniaGry;
 import com.rozgrywka.Gracz;
 import com.taliakart.Karta;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,6 +16,11 @@ public class Sprawdzenie {
 
     private OknoStol oknoStol;
     private Sprawdzenie me;
+
+    private JTextField poleGraczaWygrywajacego;
+    private JTextField wygrywajacyUkladKart;
+
+    private List<JTextField> listaPozycji;
 
     private RoyalFlush royalFlush = new RoyalFlush();
     private StraightFlush straightFlush = new StraightFlush();
@@ -521,13 +528,118 @@ public class Sprawdzenie {
                 }
             }
         }
+        zmianaKoloruObramowania();
+
+        nazwaWygrywajacegoUkladuKart();
 
         przypisanieWygranej();
 
         new BazaWygrane(me);
-        System.out.println(listaImionGraczy.get(0));
+
         listaWygranychWRozdaniu.removeAll(listaWygranychWRozdaniu);
         listaImionGraczy.removeAll(listaImionGraczy);
+    }
+
+    public void nazwaWygrywajacegoUkladuKart() {
+
+        wygrywajacyUkladKart = new JTextField();
+
+        wygrywajacyUkladKart.setOpaque(false);
+        wygrywajacyUkladKart.setBorder(BorderFactory.createEmptyBorder());
+        wygrywajacyUkladKart.setBounds(615, 300, 130, 30);
+        wygrywajacyUkladKart.setFont(new Font("Arial", Font.BOLD, 16));
+        wygrywajacyUkladKart.setHorizontalAlignment(SwingConstants.CENTER);
+        wygrywajacyUkladKart.setForeground(Color.RED);
+
+        if (liczba == 1) {
+            wygrywajacyUkladKart.setText("Wysoka karta");
+        } else if (liczba == 2) {
+            wygrywajacyUkladKart.setText("Jedna para");
+        } else if (liczba == 3) {
+            wygrywajacyUkladKart.setText("Dwie pary");
+        } else if (liczba == 4) {
+            wygrywajacyUkladKart.setText("Trójka");
+        } else if (liczba == 5) {
+            wygrywajacyUkladKart.setText("Strit");
+        } else if (liczba == 6) {
+            wygrywajacyUkladKart.setText("Kolor");
+        } else if (liczba == 7) {
+            wygrywajacyUkladKart.setText("Full");
+        } else if (liczba == 8) {
+            wygrywajacyUkladKart.setText("Kareta");
+        } else if (liczba == 9) {
+            wygrywajacyUkladKart.setText("Poker");
+        } else if (liczba == 10) {
+            wygrywajacyUkladKart.setText("Poker Królewski");
+        }
+        oknoStol.getPanelGame().add(wygrywajacyUkladKart);
+    }
+
+    public void zmianaKoloruObramowania() {
+
+        listaPozycji = new ArrayList<JTextField>();
+
+        poleGraczaWygrywajacego = new JTextField();
+        poleGraczaWygrywajacego.setOpaque(false);
+
+        for (int i = 0; i < listaImionGraczy.size(); i++) {
+            for (int j = 0; j < oknoStol.getListaImionGraczy().size(); j++) {
+                if (listaImionGraczy.get(i).equals(oknoStol.getListaImionGraczy().get(j))) {
+                    if (j == 0) {
+                        System.out.println("jot rowna się 0");
+                        poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
+                        poleGraczaWygrywajacego.setBounds(780, 505, 150, 20);
+                        listaPozycji.add(poleGraczaWygrywajacego);
+                    }
+                    if (j == 1) {
+                        System.out.println("jot rowna się 1");
+                        poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
+                        poleGraczaWygrywajacego.setBounds(570, 505, 150, 20);
+                        listaPozycji.add(poleGraczaWygrywajacego);
+                    }
+                    if (j == 2) {
+                        System.out.println("jot rowna się 2");
+                        poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
+                        poleGraczaWygrywajacego.setBounds(360, 505, 150, 20);
+                        listaPozycji.add(poleGraczaWygrywajacego);
+                    }
+                    if (j == 3) {
+                        System.out.println("jot rowna się 3");
+                        poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
+                        poleGraczaWygrywajacego.setBounds(140, 270, 150, 20);
+                        listaPozycji.add(poleGraczaWygrywajacego);
+                    }
+                    if (j == 4) {
+                        System.out.println("jot rowna się 4");
+                        poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
+                        poleGraczaWygrywajacego.setBounds(365, 205, 150, 20);
+                        listaPozycji.add(poleGraczaWygrywajacego);
+                    }
+                    if (j == 5) {
+                        System.out.println("jot rowna się 5");
+                        poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
+                        poleGraczaWygrywajacego.setBounds(575, 205, 150, 20);
+                        listaPozycji.add(poleGraczaWygrywajacego);
+                    }
+                    if (j == 6) {
+                        System.out.println("jot rowna się 6");
+                        poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
+                        poleGraczaWygrywajacego.setBounds(785, 205, 150, 20);
+                        listaPozycji.add(poleGraczaWygrywajacego);
+                    }
+                    if (j == 7) {
+                        System.out.println("jot rowna się 7");
+                        poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
+                        poleGraczaWygrywajacego.setBounds(1005, 270, 150, 20);
+                        listaPozycji.add(poleGraczaWygrywajacego);
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < listaPozycji.size(); i++) {
+            oknoStol.getPanelGame().add(listaPozycji.get(i));
+        }
     }
 
     public void obliczeniaWygranejJedenGracz() {
