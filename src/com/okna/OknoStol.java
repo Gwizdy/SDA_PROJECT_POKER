@@ -203,8 +203,6 @@ public class OknoStol {
         panelGame = new BackgroundPanelGame();
         panelGame.setLayout(null);
 
-//        dodaniePrzyciskuPokazKarty();
-
         dodaniePolaZetonow();
 
         dodaniePolaStawkiGracza();
@@ -217,7 +215,6 @@ public class OknoStol {
 
         dodanieTabeliZWYnikami();
 
-//        panelGame.add(przyciskPokazKarty);
     }
 
     public void dodaniePrzyciskowGracza() {
@@ -278,11 +275,7 @@ public class OknoStol {
             pomoc = 0;
         }
 
-        System.out.println("TEST CZY RAZ POKAZ PARTY ");
         while (!listaFoldow.get(pomoc).isFoldGracza() || !listaAllIn.get(pomoc).isAllInGracza() || !listaCzyWGrze.get(pomoc).isCzyWGrze()) {
-
-            System.out.println("CO SIE TU WYPRAWIA POMOC PRZED" + pomoc);
-            System.out.println("CO SIE TU WYPRAWIA PRZEJSCIEPOGRACZACH PRZED" + przejsciePoGraczach);
 
             pomoc += 1;
 
@@ -292,10 +285,6 @@ public class OknoStol {
 
             przejsciePoGraczach += 1;
 
-            System.out.println("CO SIE TU WYPRAWIA POMOC PO" + pomoc);
-            System.out.println("CO SIE TU WYPRAWIA PRZEJSCIEPOGRACZACH PO" + przejsciePoGraczach);
-            System.out.println("--------------------");
-
             if (przejsciePoGraczach == gracze) {
 
                 break;
@@ -303,7 +292,7 @@ public class OknoStol {
         }
 
         if (przejsciePoGraczach == gracze) {
-            System.out.println("mechanizm 1");
+
             mechanizmRozgrywki();
 
         } else if (przejsciePoGraczach < gracze) {
@@ -521,7 +510,6 @@ public class OknoStol {
                         minStawka = listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza();
 
                         przejsciePoGraczach = 1;
-                        System.out.println("mechanizm 2");
 
                         mechanizmRozgrywki();
 
@@ -569,10 +557,6 @@ public class OknoStol {
                 }
 
                 listaAllIn.get(pomoc - 1).setAllInGracza(false);
-                System.out.println("mechanizm 3");
-                for (int i = 0; i < gracze; i++) {
-                    System.out.println(listaAllIn.get(i).isAllInGracza());
-                }
 
                 mechanizmRozgrywki();
 
@@ -595,8 +579,6 @@ public class OknoStol {
             public void actionPerformed(ActionEvent e) {
 
                 if (listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza() == minStawka) {
-                    System.out.println("Sprawdzenie check bez wyrównania " + listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza() + " " + minStawka);
-                    System.out.println("mechanizm 4");
 
                     mechanizmRozgrywki();
 
@@ -615,9 +597,6 @@ public class OknoStol {
                             listaZetonowGraczy.get(pomoc - 1).setZetonyStawkaGracza(listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza() + (minStawka - listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza()));
 
                             wyswietlaczStawkiGracza.get(pomoc - 1).setText(String.valueOf(listaZetonowGraczy.get(pomoc - 1).getZetonyStawkaGracza()));
-
-                            System.out.println("check call przejscie po graczach" + przejsciePoGraczach);
-                            System.out.println("mechanizm 5");
 
                             mechanizmRozgrywki();
 
@@ -648,12 +627,8 @@ public class OknoStol {
 
                 listaFoldow.get(pomoc - 1).setFoldGracza(false);
 
-                System.out.println("POMOC PRZY FOLDZIE " + (pomoc - 1));
-
                 listaKarty.get(pomoc - 1).setIcon(null);
                 listaKarty.get(gracze + pomoc - 1).setIcon(null);
-
-                System.out.println("mechanizm 6");
 
                 mechanizmRozgrywki();
 
@@ -747,12 +722,6 @@ public class OknoStol {
                 panelGame.remove(przyciskRozdajFlop);
 
                 dodaniePrzyciskuPokazKarty();
-                System.out.println("przejscie po graczach" + przejsciePoGraczach);
-                System.out.println("gracze" + gracze);
-                for (int i = 0; i < gracze; i++) {
-                    System.out.println(listaAllIn.get(i).isAllInGracza());
-                }
-                System.out.println("przycisk Flop");
 
                 int tempPokazywanieKart = 0;
 
@@ -863,8 +832,6 @@ public class OknoStol {
 
                 panelGame.remove(przyciskSprawdzam);
 
-//                pomoc = 0;
-
                 for (int i = 0; i < gracze; i++) {
                     if (listaFoldow.get(i).isFoldGracza() == true) {
 
@@ -907,7 +874,6 @@ public class OknoStol {
                 } else {
 
                     new Sprawdzenie(me);
-                    System.out.println("Gra zakończona - został jeden gracz");
 
                     windowGame.dispose();
                 }
@@ -957,8 +923,6 @@ public class OknoStol {
                         listaZetonowGraczy.get(i).setZetonyStawkaGracza(0);
                     }
                 }
-
-//                pomoc = 0;
 
                 przejsciePoGraczach = 0;
 
@@ -1034,12 +998,7 @@ public class OknoStol {
                 pomoc += 1;
 
                 przejsciePoGraczach += 1;
-                ;
-                System.out.println();
-                if (przejsciePoGraczach == gracze) {
-                    System.out.println(1);
-                    break;
-                }
+
             }
         }
         if (przejsciePoGraczach < gracze) {
@@ -1053,7 +1012,6 @@ public class OknoStol {
 
             dodaniePrzyciskuPokazKarty();
 
-//            sprawdzenie aby nie pokazywalo przycisku pokaz karty jak nie bedzie zadnego gracza decyzyjnego
             int tempPokazywanieKart = 0;
 
             for (int i = 0; i < gracze; i++) {
@@ -1062,12 +1020,9 @@ public class OknoStol {
                 }
             }
             if (tempPokazywanieKart > 0 && przejsciePoGraczach != 0) {
-                System.out.println("TEST" + przejsciePoGraczach);
+
                 panelGame.add(przyciskPokazKarty);
             }
-
-//            panelGame.add(przyciskPokazKarty);
-
 
             panelGame.repaint();
 
@@ -1079,10 +1034,6 @@ public class OknoStol {
 
                 dodaniePrzyciskuRozdajFlop();
 
-//                panelGame.remove(przyciskPokazKarty);
-//
-//                panelGame.repaint();
-
                 panelGame.add(przyciskRozdajFlop);
 
                 panelGame.repaint();
@@ -1090,7 +1041,7 @@ public class OknoStol {
                 rozdanieNaStole += 1;
 
                 pomoc = graczDealer + 1;
-                System.out.println("Resetowanie przejsciaPoGraczach rozdanie na stole 0");
+
                 przejsciePoGraczach = 0;
 
             } else if (rozdanieNaStole == 1) {
@@ -1098,10 +1049,6 @@ public class OknoStol {
                 usunPrzyciskiPokazRewers();
 
                 dodaniePrzyciskuRozdajTurn();
-
-//                panelGame.remove(przyciskPokazKarty);
-//
-//                panelGame.repaint();
 
                 panelGame.add(przyciskRozdajTurn);
 
@@ -1120,10 +1067,6 @@ public class OknoStol {
 
                 dodaniePrzyciskuRozdajRiver();
 
-//                panelGame.remove(przyciskPokazKarty);
-//
-//                panelGame.repaint();
-
                 panelGame.add(przyciskRozdajRiver);
 
                 panelGame.repaint();
@@ -1141,10 +1084,6 @@ public class OknoStol {
 
                 dodaniePrzyciskuSprawdzam();
 
-//                panelGame.remove(przyciskPokazKarty);
-//
-//                panelGame.repaint();
-
                 panelGame.add(przyciskSprawdzam);
 
                 panelGame.repaint();
@@ -1155,7 +1094,6 @@ public class OknoStol {
 
             }
         }
-        System.out.println("Koniec mechanizmu");
     }
 
     public void ustawienieFoldowGraczy(List<Gracz> listaFoldow) {
@@ -1256,7 +1194,7 @@ public class OknoStol {
 
                     karty = new JLabel();
 
-                    karty.setIcon(new ImageIcon("Red_Back2.jpg"));
+                    karty.setIcon(new ImageIcon("images\\Red_Back2.jpg"));
                     karty.setLayout(null);
 
                     if (i == 0) {
@@ -1391,7 +1329,7 @@ public class OknoStol {
 
                         kartyNull = new JLabel();
 
-                        karty.setIcon(new ImageIcon("Red_Back2.jpg"));
+                        karty.setIcon(new ImageIcon("images\\Red_Back2.jpg"));
                         karty.setLayout(null);
 
                         kartyNull.setLayout(null);
@@ -1617,7 +1555,7 @@ public class OknoStol {
         }
         pomoc += 1;
         przejsciePoGraczach += 1;
-        System.out.println("przycisk pokaz karty przjescie po graczach" + przejsciePoGraczach);
+
         handCards.removeAll(handCards);
 
     }
@@ -1691,7 +1629,7 @@ public class OknoStol {
                     graczDealer = 0;
                 }
             }
-            System.out.println("Gracz" + graczDealer + " jest Dealerem");
+
             graczSmallBlind = graczDealer + 1;
             if (graczSmallBlind >= gracze) {
                 graczSmallBlind = 0;
@@ -1702,7 +1640,7 @@ public class OknoStol {
                     graczSmallBlind = 0;
                 }
             }
-            System.out.println("Gracz" + graczSmallBlind + " jest na Small Blind");
+
             if (listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane() > blindValue / 2) {
 
                 listaZetonowGraczy.get(graczSmallBlind).setZetonyPosiadane(listaZetonowGraczy.get(graczSmallBlind).getZetonyPosiadane() - blindValue / 2);
@@ -1747,7 +1685,6 @@ public class OknoStol {
                     graczBigBlind = 0;
                 }
             }
-            System.out.println("Gracz" + graczBigBlind + " jest na Big Blind");
 
             if (listaZetonowGraczy.get(graczBigBlind).getZetonyPosiadane() > blindValue) {
 
@@ -1771,8 +1708,6 @@ public class OknoStol {
 
             minStawka = blindValue;
             pomoc = graczBigBlind + 1;
-
-//            jesli bedzie blad sprawdz tutaj zerowanie pomocy od graczy
 
             while (!listaCzyWGrze.get(pomoc).isCzyWGrze()) {
                 pomoc++;

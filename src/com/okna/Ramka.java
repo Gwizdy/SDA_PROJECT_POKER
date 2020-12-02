@@ -51,7 +51,7 @@ public class Ramka {
 
     public void dodaniePrzycisku() {
 
-        button = new JButton(new ImageIcon("confirm.jpg"));
+        button = new JButton(new ImageIcon("images\\confirm.jpg"));
 
         button.setBounds(575, 350, 98, 41);
         button.setHorizontalTextPosition(SwingConstants.CENTER);

@@ -108,7 +108,7 @@ public class OknoGracze {
 
     public void dodaniePrzyciskuPotwierdzajacego() {
 
-        button = new JButton(new ImageIcon("confirmButton.jpg"));
+        button = new JButton(new ImageIcon("images\\confirmButton.jpg"));
 
         button.setBounds(550, 440, 98, 41);
         button.setHorizontalTextPosition(SwingConstants.CENTER);

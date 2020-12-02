@@ -11,7 +11,7 @@ public class BazaOdczyt {
     private static final String JDBC_DRIVER = "org.postgresql.Driver";
     private static final String URL = "jdbc:postgresql://localhost/Poker";
     private static final String LOGIN = "postgres";
-    private static final String PASSWORD = "ANDpig1906!@";
+    private static final String PASSWORD = "Qparox123!";
 
     private Statement stmt;
     Connection conn;

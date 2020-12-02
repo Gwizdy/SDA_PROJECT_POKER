@@ -576,69 +576,55 @@ public class Sprawdzenie {
     }
 
     public void zmianaKoloruObramowania() {
-
-        listaPozycji = new ArrayList<JTextField>();
-
-        poleGraczaWygrywajacego = new JTextField();
-        poleGraczaWygrywajacego.setOpaque(false);
-
         for (int i = 0; i < listaImionGraczy.size(); i++) {
             for (int j = 0; j < oknoStol.getListaImionGraczy().size(); j++) {
+                listaPozycji = new ArrayList<JTextField>();
+                poleGraczaWygrywajacego = new JTextField();
+                poleGraczaWygrywajacego.setOpaque(false);
                 if (listaImionGraczy.get(i).equals(oknoStol.getListaImionGraczy().get(j))) {
                     if (j == 0) {
                         System.out.println("jot rowna się 0");
                         poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
                         poleGraczaWygrywajacego.setBounds(780, 505, 150, 20);
-                        listaPozycji.add(poleGraczaWygrywajacego);
                     }
                     if (j == 1) {
                         System.out.println("jot rowna się 1");
                         poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
                         poleGraczaWygrywajacego.setBounds(570, 505, 150, 20);
-                        listaPozycji.add(poleGraczaWygrywajacego);
                     }
                     if (j == 2) {
                         System.out.println("jot rowna się 2");
                         poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
                         poleGraczaWygrywajacego.setBounds(360, 505, 150, 20);
-                        listaPozycji.add(poleGraczaWygrywajacego);
                     }
                     if (j == 3) {
                         System.out.println("jot rowna się 3");
                         poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
                         poleGraczaWygrywajacego.setBounds(140, 270, 150, 20);
-                        listaPozycji.add(poleGraczaWygrywajacego);
                     }
                     if (j == 4) {
                         System.out.println("jot rowna się 4");
                         poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
                         poleGraczaWygrywajacego.setBounds(365, 205, 150, 20);
-                        listaPozycji.add(poleGraczaWygrywajacego);
                     }
                     if (j == 5) {
                         System.out.println("jot rowna się 5");
                         poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
                         poleGraczaWygrywajacego.setBounds(575, 205, 150, 20);
-                        listaPozycji.add(poleGraczaWygrywajacego);
                     }
                     if (j == 6) {
                         System.out.println("jot rowna się 6");
                         poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
                         poleGraczaWygrywajacego.setBounds(785, 205, 150, 20);
-                        listaPozycji.add(poleGraczaWygrywajacego);
                     }
                     if (j == 7) {
                         System.out.println("jot rowna się 7");
                         poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
                         poleGraczaWygrywajacego.setBounds(1005, 270, 150, 20);
-                        listaPozycji.add(poleGraczaWygrywajacego);
                     }
                 }
+                oknoStol.getPanelGame().add(poleGraczaWygrywajacego);
             }
-        }
-
-        for (int i = 0; i < listaPozycji.size(); i++) {
-            oknoStol.getPanelGame().add(listaPozycji.get(i));
         }
     }
 
