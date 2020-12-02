@@ -583,42 +583,42 @@ public class Sprawdzenie {
                 poleGraczaWygrywajacego.setOpaque(false);
                 if (listaImionGraczy.get(i).equals(oknoStol.getListaImionGraczy().get(j))) {
                     if (j == 0) {
-                        System.out.println("jot rowna się 0");
+
                         poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
                         poleGraczaWygrywajacego.setBounds(780, 505, 150, 20);
                     }
                     if (j == 1) {
-                        System.out.println("jot rowna się 1");
+
                         poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
                         poleGraczaWygrywajacego.setBounds(570, 505, 150, 20);
                     }
                     if (j == 2) {
-                        System.out.println("jot rowna się 2");
+
                         poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
                         poleGraczaWygrywajacego.setBounds(360, 505, 150, 20);
                     }
                     if (j == 3) {
-                        System.out.println("jot rowna się 3");
+
                         poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
                         poleGraczaWygrywajacego.setBounds(140, 270, 150, 20);
                     }
                     if (j == 4) {
-                        System.out.println("jot rowna się 4");
+
                         poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
                         poleGraczaWygrywajacego.setBounds(365, 205, 150, 20);
                     }
                     if (j == 5) {
-                        System.out.println("jot rowna się 5");
+
                         poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
                         poleGraczaWygrywajacego.setBounds(575, 205, 150, 20);
                     }
                     if (j == 6) {
-                        System.out.println("jot rowna się 6");
+
                         poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
                         poleGraczaWygrywajacego.setBounds(785, 205, 150, 20);
                     }
                     if (j == 7) {
-                        System.out.println("jot rowna się 7");
+
                         poleGraczaWygrywajacego.setBorder(BorderFactory.createLineBorder(Color.RED, 4));
                         poleGraczaWygrywajacego.setBounds(1005, 270, 150, 20);
                     }
